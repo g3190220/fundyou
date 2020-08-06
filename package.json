@@ -1,0 +1,82 @@
+{
+  "name": "paper-kit-react",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "./",
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "antd": "^4.2.2",
+    "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
+    "classnames": "2.2.6",
+    "image-to-base64": "^2.1.0",
+    "material-table": "^1.64.0",
+    "material-ui-icons": "^1.0.0-beta.36",
+    "moment": "2.24.0",
+    "node-sass": "^4.14.1",
+    "nouislider": "13.1.5",
+    "prop-types": "^15.7.2",
+    "react": "16.8.6",
+    "react-animations": "^1.0.0",
+    "react-avatar": "^3.9.7",
+    "react-bootstrap-switch": "15.5.3",
+    "react-cookie": "^4.0.3",
+    "react-cookies": "^0.1.1",
+    "react-datetime": "2.16.3",
+    "react-dom": "16.8.6",
+    "react-fade-in": "^1.1.0",
+    "react-file-input-previews-base64": "^1.0.8",
+    "react-highcharts": "^16.1.0",
+    "react-loader-spinner": "^3.1.14",
+    "react-loading": "^2.0.3",
+    "react-lottie": "^1.2.3",
+    "react-multi-carousel": "^2.5.5",
+    "react-promise-tracker": "^2.1.0",
+    "react-router": "5.0.1",
+    "react-router-dom": "5.0.1",
+    "react-scripts": "3.0.1",
+    "reactstrap": "8.0.0",
+    "recharts": "^1.8.5",
+    "styled-components": "^5.1.1",
+    "survey-react": "^1.7.23",
+    "underscore": "^1.10.2",
+    "validate.js": "^0.13.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
+    "compile-sass": "node-sass src/assets/scss/paper-kit.scss src/assets/css/paper-kit.css",
+    "minify-sass": "node-sass src/assets/scss/paper-kit.scss src/assets/css/paper-kit.min.css --output-style compressed",
+    "map-sass": "node-sass src/assets/scss/paper-kit.scss src/assets/css/paper-kit.css --source-map true"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "optionalDependencies": {
+    "typescript": "3.5.2"
+  },
+  "guppy": {
+    "id": "8b8950b0-7d71-11ea-a415-297e2d91760d",
+    "name": "paper-kit-react",
+    "type": "create-react-app",
+    "color": "#00C853",
+    "icon": null,
+    "createdAt": 1586773721404
+  }
+}

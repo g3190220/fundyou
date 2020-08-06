@@ -1,0 +1,216 @@
+.compare-menu{
+    background-color:#F9DCC4;
+
+    .compare-title{
+        color: #e26d5c;
+        font-size: 35px;
+        margin-top: 150px;
+        display:inline-block;
+        font-weight:bold;
+        font-family:Microsoft JhengHei;
+    }
+
+    .sub-compare-gragh{
+        background-color:#F8EDEB;
+        border-radius: 15px;
+        margin-top: 30px;
+        transform: translateX(1%);
+        width: 95%;
+        padding: 20px 0px;
+
+        .compare-label{
+            width: 150px;
+            height: 45px;
+            border-radius: 10px;
+            border:#e26d5c solid 2px;
+            background-color: #e26d5c;
+            color: #F8EDEB;
+            margin-top: 10px;
+            margin-left: 75px;
+            font-weight:bold;
+            font-family:Microsoft JhengHei;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .compare-chart{
+            transform: translateX(15%);
+            width: 75%;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .compare-btn{
+            transform: translateX(30%);
+        }
+
+        #btn-net{
+            width: 90px;
+            height: 35px;
+            border:#FFB5A7 solid 2px;
+            background-color:#FFB5A7;
+            font-size: 20px;
+            margin-left: 30px;
+            outline:none;
+            color:  #F8EDEB;
+            font-weight:bold;
+            text-align:center;
+            font-family:Microsoft JhengHei;
+        }
+        #btn-performance{
+            width: 90px;
+            height: 35px;
+            border:#FFB5A7 solid 2px;
+            background-color:#FFB5A7;
+            font-size: 20px;
+            margin-top: -4px;
+            margin-left: 30px;
+            outline:none;
+            color:  #F8EDEB;
+            font-weight:bold;
+            text-align:center;
+            font-family:Microsoft JhengHei;
+        }
+        #btn-risk{
+            width: 90px;
+            height: 35px;
+            border:#FFB5A7 solid 2px;
+            background-color:#FFB5A7;
+            font-size: 20px;
+            margin-top: -4px;
+            margin-left: 30px;
+            outline:none;
+            color:  #F8EDEB;
+            font-weight:bold;
+            text-align:center;
+            font-family:Microsoft JhengHei;
+        }
+
+        .sub-btn-net{
+            width: 90px;
+            height: 35px;
+            border:#FFB5A7 solid 2px;
+            background-color:#F8EDEB;
+            margin-left: -3px;
+            outline:none;
+            color:  #FFB5A7;
+            font-weight:bold;
+            font-family:Microsoft JhengHei;
+        }
+
+        .sub-btn-performance{
+            width: 90px;
+            height: 35px;
+            border:#FFB5A7 solid 2px;
+            background-color:#F8EDEB;
+            margin-top: -4px;
+            margin-left: -3px;
+            outline:none;
+            color:  #FFB5A7;
+            font-weight:bold;
+            font-family:Microsoft JhengHei;
+        }
+
+        .sub-btn-risk{
+            width: 90px;
+            height: 35px;
+            border:#FFB5A7 solid 2px;
+            background-color:#F8EDEB;
+            margin-top: -4px;
+            margin-left: -3px;
+            outline:none;
+            color:  #FFB5A7;
+            font-weight:bold;
+            font-family:Microsoft JhengHei;
+        }
+
+        .sub-btn-net:focus {
+            background-color: #FFB5A7;
+            color: #F8EDEB;
+            border-left:#F8EDEB solid 1px;
+        }
+        .sub-btn-performance:focus {
+            background-color: #FFB5A7;
+            color: #F8EDEB;
+            border-left:#F8EDEB solid 1px;
+        }
+        .sub-btn-risk:focus {
+            background-color: #FFB5A7;
+            color: #F8EDEB;
+            border-left:#F8EDEB solid 1px;
+        }
+    }
+
+    .sub-compare-info{
+        background-color:#F8EDEB;
+        border-radius: 15px;
+        margin-top: 30px;
+        transform: translateX(1%);
+        width: 95%;
+        padding: 30px 0px;
+
+        .compare-table{
+            border: 2px #F8EDEB solid;
+            margin:0 auto;
+          //  margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .compare-table tr{
+            display: block;
+          //  margin-top: -0.5px;
+        }
+
+        .compare-table th{
+            font-size: 20px;
+            padding: 5px 5px;
+          //  width: 350px;
+            color: #F8EDEB;
+            font-weight:bold;
+            text-align:center;
+            background: #e26d5c;
+         //   display: block;
+            font-family:Microsoft JhengHei;
+            
+        }
+
+        .compare-table td{
+            font-size: 20px;
+            padding: 2px 5px;
+            color: #e26d5c;
+         //   width: 350px;
+          //  text-align:center;
+            text-align:center;
+            background: #F8EDEB;
+          //  display: block;
+            border:#e26d5c solid 1px;
+            font-family:Microsoft JhengHei;
+        }
+
+        .compare-label{
+            font-size: 20px;
+            color: #e26d5c;
+            text-align:center;
+            font-weight:bold;
+            margin-left: 25px;
+            font-family:Microsoft JhengHei;
+        }
+
+        .add-compare{
+            background-color: #e26d5c;
+            color: #F8EDEB;
+            font-weight:bold;
+            font-family:Microsoft JhengHei;
+            border:#F8EDEB dotted 2px;
+            outline:none;
+            border-radius: 20px;
+
+        }
+
+        .add-compare:focus{
+            background-color: #e24e37;
+        }
+        
+    }
+
+}

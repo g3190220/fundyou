@@ -1,0 +1,55 @@
+@import 'paper-kit/variables';
+@import 'paper-kit/mixins';
+
+// Plugins CSS
+@import "paper-kit/plugins/plugin-bootstrap-switch";
+@import "paper-kit/plugins/plugin-nouislider";
+@import "paper-kit/plugins/plugin-datepicker";
+
+// Core CSS
+@import "paper-kit/buttons";
+@import "paper-kit/inputs";
+@import "paper-kit/checkbox-radio";
+@import "paper-kit/progress-bars";
+@import "paper-kit/badges";
+@import "paper-kit/pagination";
+@import "paper-kit/typography";
+@import "paper-kit/misc";
+@import "paper-kit/labels";
+
+// components
+@import "paper-kit/nucleo-icons";
+@import "paper-kit/social-buttons";
+@import "paper-kit/tabs-navs";
+@import "paper-kit/navbars";
+@import "paper-kit/dropdown";
+@import "paper-kit/alerts";
+@import "paper-kit/images";
+@import "paper-kit/tooltips-and-popovers";
+@import "paper-kit/modal";
+@import "paper-kit/icons";
+@import "paper-kit/carousel";
+@import "paper-kit/footers";
+@import "paper-kit/headers";
+
+// Cards
+@import "paper-kit/cards";
+@import "paper-kit/cards/card-plain";
+@import "paper-kit/cards/card-register";
+@import "paper-kit/cards/card-profile";
+@import "paper-kit/cards/card-introduction";
+@import "paper-kit/_card-personalize";//新增個人化頁面
+@import "paper-kit/_allfund"; //新增基金總覽頁面
+@import "paper-kit/fundtag";//新增TAG頁面
+@import "paper-kit/compare";//新增多筆比較頁面
+
+// example pages and sections
+@import "paper-kit/examples";
+@import "paper-kit/sections";
+
+
+
+@import "paper-kit/responsive";
+
+// React Differences
+@import "react/react-differences.scss"

@@ -1,0 +1,29 @@
+.card-introduction {
+    background-color: #ffffff;
+    border-radius: 8px;
+    color: #fff;
+    max-width: 340px;
+    margin: 20px 0 50px;
+    min-height: 300px;
+    padding: 30px;
+  
+    & label {
+      margin-top: 15px;
+      color:#222222;
+    }
+    & .card-title {
+      color: #ce4f28;
+      text-align: center;
+    }
+    & .btn {
+      margin-top: 30px;
+    }
+    & .forgot {
+      text-align: center;
+    }
+  
+    .input-group-text {
+      border: 1px solid $white-color;
+    }
+  }
+  

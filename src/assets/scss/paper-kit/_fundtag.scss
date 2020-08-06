@@ -1,0 +1,176 @@
+.tag-menu{
+    background-color:#F9DCC4;
+
+    .tag-title{
+        font-size: 50px;
+        color: #e26d5c;
+        font-family: Microsoft JhengHei;
+        font-weight:bold;
+        margin-top: 120px;
+    }
+    .rank-header{
+        font-size: 30px;
+        color: #e26d5c;
+        font-family: Microsoft JhengHei;
+        font-weight:bold;
+        text-align:center;
+        border-color:#e26d5c;
+        border-style: solid;
+        height: 53px;
+        width: 50%;
+        margin: 0 auto; 
+
+    }
+    .rank-content{
+        padding:15px;
+        margin: 0 auto; 
+    }
+    .rank-vote-content{
+        padding:30px;
+        width: 70%;
+        margin: 0 auto; 
+    }
+
+    .sub-tag-table{
+         border:#e26d5c solid 1px;
+         margin-top: 40px;
+         margin-left: 30px;
+         margin-bottom: 30px;
+     }
+
+     .sub-tag-table tr{
+         display: block;
+     }
+
+     .sub-tag-table th{
+         font-size: 35px;
+         padding: 5px 15px;
+         color: #F8EDEB;
+         font-weight:bold;
+         text-align:center;
+         background: #e26d5c;
+         display: block;
+         font-family:Copperplate;    
+     }
+     .sub-tag-table td{
+         font-size: 25px;
+         padding: 5px 10px 5px 35px;
+         color: #e26d5c;
+         font-weight:bold;
+         background: #F8EDEB;
+         display: block;
+         font-family:Microsoft JhengHei;
+     }
+
+     .sub-tag-table label{
+         font-weight: 100;
+         margin-right: 40px;
+         width: 90px;
+     }
+
+     .sub-tag-table span{
+        width: 200px;
+        margin-right: 20px;
+        display: inline-block;
+    }
+
+     .sub-tag-table button{
+        width: 70px;
+        height: 35px;
+        border-radius: 30px;
+        border:#F8EDEB solid 2px;
+        background-color:#E5989B;
+        margin-top: 10px;
+        margin-left: 5px;
+        margin-bottom: 10px;
+        font-size: 12px;
+        outline:none;
+        color:  #F8EDEB;
+        font-weight:bold;
+        font-family:Comic Sans MS;
+     }
+
+    .sub-tag-table button:hover{
+        color:  #FFFFFF;
+        transition: 0.2s;
+    }
+
+     .margin{
+         color: #e26d5c;
+         //background-color: #e26d5c;
+       //  border: #e26d5c solid 1px;
+     }
+
+     .new-tag-btn{
+        width: 100px;
+        height: 40px;
+        border-radius: 20px;
+        border:#F8EDEB solid 2px;
+        background-color:#E5989B;
+        margin-top: 10px;
+        margin-left: 5px;
+        margin-bottom: 10px;
+        font-size: 20px;
+        outline:none;
+        color:  #F8EDEB;
+        font-weight:bold;
+        font-family:Comic Sans MS;
+     }
+
+     .new-tag-btn:hover{
+        background-color: #F8EDEB;
+        color: #E5989B;
+    }
+
+    .vote-table{
+        border:#e26d5c solid 1px;
+        margin-top: 40px;
+        margin-left: 30px;
+        margin-bottom: 30px;
+        width: 70%;
+        transform: translateX(20%);
+    }
+
+    .vote-table th{
+        font-size: 35px;
+        padding: 5px 15px;
+        color: #F8EDEB;
+        font-weight:bold;
+        text-align:center;
+        background: #e26d5c;
+        display: block;
+        font-family:Copperplate;    
+    }
+    .vote-table td{
+        font-size: 25px;
+        padding: 5px 10px 5px 35px;
+        color: #e26d5c;
+        font-weight:bold;
+        background: #F8EDEB;
+        display: block;
+        font-family:Microsoft JhengHei;
+    }
+    .vote-table span{
+        width: 85%;
+        text-align:center;
+        display: inline-block;   
+    }
+
+    .vote-table button{
+        width: 100px;
+        height: 40px;
+        border-radius: 20px;
+        border:#F8EDEB solid 2px;
+        background-color:#E5989B;
+        font-size: 20px;
+        outline:none;
+        color:  #F8EDEB;
+        font-weight:bold;
+        font-family:Comic Sans MS;
+     }
+     .vote-table button:hover{
+        color:  #FFFFFF;
+        transition: 0.2s;
+    }
+    
+}

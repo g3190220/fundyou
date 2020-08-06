@@ -1,0 +1,318 @@
+.landing-alert{
+    margin-bottom: 0;
+}
+.page-header{
+    background-color: #B2AFAB;
+    background-position: center center;
+    background-size: cover;
+    min-height: 100vh;
+    max-height: 999px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .filter::after{
+        background-color: rgba(0, 0, 0, 0.5);
+        content: "";
+        display: block;
+        height: 100%;
+        left: 0;
+        top: 0;
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+    }
+    &.page-header-small{
+        min-height: 65vh !important;
+        max-height: 700px;
+    }
+    &.page-header-xs{
+        min-height: 40vh !important;
+    }
+
+    &.section-dark{
+        .content-center,
+        .category-absolute{
+            z-index: 1;
+        }
+    }
+}
+.page-header .motto{
+    text-align: left;
+    z-index: 3;
+    color: #fff;
+    position: relative;
+
+}
+.landing-section{
+    padding: 100px 0;
+    z-index: 1;
+}
+.section-buttons{
+    z-index: 1;
+}
+.landing-section .btn-simple{
+    padding: 0;
+}
+.landing-section .column{
+    padding: 0 75px 0 25px;
+}
+.team-player .img-circle, .team-player .img-thumbnail{
+    display: block;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 120px;
+}
+.contact-form{
+    margin-top: 30px;
+}
+.contact-form label{
+    margin-top: 15px;
+}
+.contact-form .btn{
+    margin-top: 30px;
+}
+
+.navbar-relative{
+    position: relative;
+    z-index: 2;
+}
+// #register-navbar a{
+//     color: #FFF;
+// }
+// .register-background .container{
+//     margin-top: 11%;
+//     position: relative;
+//     z-index: 3;
+// }
+// .register-footer{
+//     bottom: 20px;
+//     position: absolute;
+//     z-index: 1;
+//     width: 100%;
+//     background: transparent;
+//     color: $white-color;
+// }
+// .register-footer .fa-heart{
+//     color: #EB5E28;
+// }
+
+// .register-card label{
+//     margin-top: 15px;
+// }
+// .register-card .title{
+//     color: #B33C12;
+//     text-align: center;
+// }
+// .register-card .btn{
+//     margin-top: 30px;
+// }
+// .register-card .forgot{
+//     text-align: center;
+// }
+
+.personalization-title{
+    
+   //text-align: center;
+   position: relative;
+   margin-top: 70px;
+   .title-size{
+       font-size: 25px;
+       //font-weight:bold;
+   }
+}
+
+.position-right{
+    float:right;
+    margin-top: -8px; 
+    position: relative;
+}
+
+.position-center{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.Personalization-page-position{
+    margin-top: 35px;
+}
+.register_avatar_upload{
+    border-width:0.8px;
+    border-style:solid;
+    border-color:white;
+    padding:8px;
+    height: 120px;
+    width:120px;
+    //position: center;
+    //width: 50%;
+    margin: 0 auto;
+}
+.upload_btn{
+    width: 100px;
+    height: 100px;
+}
+.avatar_btn_div{
+    margin-top: 6px;
+}
+.avatar_preview_div{
+    width: 113px;
+    height: 113px;
+    border-style:double;
+    margin-top: 4px;
+}
+    
+.avatar_preview{
+    width: 100%;
+    height: 100%;
+
+}
+
+.register_textfield_font{
+    font-family: 'Montserrat','Noto Sans TC', sans-serif;
+}
+.register-btn{
+    margin-top: 9px;
+    float:left
+}
+.register-title{
+    //text-align: center;
+    margin-top: 40px;
+    position: relative;
+    
+}
+.register-alert{
+    //text-align: center;
+    font-size: 14px;
+    //background-color:white;
+    color:red;
+    //font-weight: bold;
+    font-family: 'Montserrat','Noto Sans TC', sans-serif;
+    margin-left: 30px;
+    //width: 120px;
+    height: 39px;
+    text-align: center;
+    float: left;
+    margin-top: 10px;
+    line-height: 39px;
+}
+
+.profile-content{
+    position: relative;
+}
+.owner{
+    text-align: center;
+}
+.owner .avatar{
+    padding: 15px;
+    max-width: 180px;
+    margin: -85px auto 0;
+    display: inline-block;
+}
+.owner .name h4{
+    margin-top: 10px;
+}
+.profile-tabs{
+    margin: 50px 0;
+    min-height: 300px;
+}
+#following h3{
+    margin: 20px 0 40px 0;
+}
+
+#follows .follows .unfollow .checkbox{
+    margin-top: -15px;
+}
+#follows .follows h6{
+    margin-top: 15px;
+}
+.follows hr{
+    margin-top: 10px;
+}
+.alert h5{
+    margin-bottom: 10px;
+}
+.title-brand{
+    max-width: 730px;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    color: #FFFFFF;
+    display: block;
+    font-size: 22px;
+
+    .type{
+        position: absolute;
+        font-size: 20px;
+        background: #132026;
+        padding: 6px 10px;
+        border-radius: 4px;
+        top: 0;
+        font-weight: 600;
+        margin-top: 10px;
+        right: -15px;
+    }
+}
+
+.presentation-title{
+    font-size: 7em;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+    color: #FFFFFF;
+    background: #fbf8ec;
+    background: -moz-linear-gradient(top, #FFFFFF 35%, #ffc6c6 100%);
+    background: -webkit-linear-gradient(top, #FFFFFF 35%,#ffc6c6 100%);
+    background: -ms-linear-gradient(top, #FFFFFF 35%,#ffc6c6 100%);
+    background: linear-gradient(to bottom, #FFFFFF 35%,#ffc6c6 100%);
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.presentation-subtitle{
+    font-size: 1.7em;
+    color: #FFFFFF;
+}
+
+.category-absolute{
+    position: absolute;
+    text-align: center;
+    top: 100vh;
+    margin-top: -60px;
+    padding: 0 15px;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.5);
+
+    .creative-tim-logo {
+        max-width: 140px;
+        top: -2px;
+        left: 3px;
+        position: relative;
+    }
+}
+
+@keyframes cloudLoop{   0%{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
+                        100%{-webkit-transform:translate3d(-50%,0,0);
+                        transform:translate3d(-50%,0,0)}
+                    }
+.following{
+    img{
+        max-width: 70px;
+    }
+}
+
+
+.profile-content{
+    & .tab-content{
+        & .tab-pane{
+            min-height: 200px;
+        }
+        & #tweets, #connections, #media{
+            height: 100%;
+        }
+    }
+}

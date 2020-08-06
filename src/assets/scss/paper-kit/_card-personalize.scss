@@ -1,0 +1,745 @@
+//PersonalizePage和子頁面的css
+.personalize-menu {
+  background-color: #faeedc;
+  // border-radius: 5px;
+  width: 200px;
+  padding: 25px;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  position: fixed;
+
+  & label {
+    margin-top: 15px;
+    color:#222222;
+  }
+  & .card-title {
+    color: #ce4f28;
+    text-align: center;
+  }
+  & .default-photo {
+    text-align: center;
+    margin-top: -5px;
+    margin-left: 55px; 
+  }
+  & .avatar-size {
+    margin-left: -15px;
+    height: 75px;
+    width: 75px;
+  }
+  & .user-bar {
+    color: #505050;
+    background-color: #fffcf7;
+    margin-left: 0px;
+    width: 150px;
+    margin-top: 10px;
+    font-family: "微軟正黑體";
+    border-radius: 5px;
+    padding: 10px;
+  }
+  & .face-icon {
+    display: inline-block;
+    padding: 0px 10px 0px;
+  }
+  & .btn {
+    background-color: #faeedc;
+    border-color:#faeedc;
+    font-size: 14px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    letter-spacing: 3px;
+    text-align: left;
+    margin-left: -12px;
+    width: 170px;
+  }
+  & .btn:hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    // border-color: #ffcdb2;
+  }
+  & .personalize-page .btn {
+    background-color: #ffffff;
+    border-color:#ffffff;
+    font-size: 14px;
+    letter-spacing: 0px;
+    text-align: center;
+    padding: 0px;
+    padding-inline-end: 12px;
+    margin-top: 20px;
+    margin-left: 0px;
+    width: 150px;
+  }
+  & .fundu-page .btn {
+    background-color: #ffffff;
+    border-color:#ffffff;
+    font-size: 10px;
+    letter-spacing: 0px;
+    text-align: center;
+    width: 150px;
+    padding: 3px;
+    margin-top: 8px;
+    margin-left: 0px;
+  }
+  
+  & .forgot {
+    text-align: center;
+  }
+}
+
+.card-personalize {
+  min-height: 1000px;
+  
+    .card-personalize1-intro {
+      background-color: #faeedc;
+      border-radius: 8px;
+      // color: #fff;
+      width: 450px;
+      margin: -580px 80px 100px;
+      // min-height: 1000px;
+      padding: 30px;
+      top: 600px; 
+      left: 120px;
+      position: absolute;
+    
+      & label {
+        margin-top: 15px;
+        color:#222222;
+      }
+      & .card-title {
+        color: #ce4f28;
+        text-align: center;
+      }
+      & .p1-intro {
+        color: #b75d69;
+        text-align: left;
+        font-size: 20px;
+        font-family: "微軟正黑體";
+        margin-top: 30px;
+        margin-left: 30px;
+      }
+      & .btn {
+        margin-top: 30px;
+      }
+      & .forgot {
+        text-align: center;
+      }
+    } 
+    .card-personalize5-intro {
+      background-color: #faeedc;
+      border-radius: 8px;
+      // color: #fff;
+      width: 450px;
+      margin: -580px 560px 100px;
+      // min-height: 1000px;
+      padding: 30px;
+      top: 600px; 
+      left: 120px;
+      position: absolute;
+    
+      & label {
+        margin-top: 15px;
+        color:#222222;
+      }
+      & .card-title {
+        color: #ce4f28;
+        text-align: center;
+      }
+      & .p5-intro {
+        color: #b75d69;
+        text-align: left;
+        font-size: 20px;
+        font-family: "微軟正黑體";
+        margin-top: 30px;
+        margin-left: 30px;
+      }
+      & .btn {
+        margin-top: 30px;
+      }
+      & .forgot {
+        text-align: center;
+      }
+    } 
+    .card-personalize2-intro {
+      background-color: #faeedc;
+      border-radius: 8px;
+      // color: #fff;
+      width: 450px;
+      margin: -580px 80px 100px;
+      // min-height: 1000px;
+      padding: 30px;
+      top: 850px; 
+      left: 120px;
+      position: absolute;
+    
+      & label {
+        margin-top: 15px;
+        color:#222222;
+      }
+      & .card-title {
+        color: #ce4f28;
+        text-align: center;
+      }
+      & .p2-intro {
+        color: #b75d69;
+        text-align: left;
+        font-size: 20px;
+        font-family: "微軟正黑體";
+        margin-top: 30px;
+        margin-left: 30px;
+      }
+      & .btn {
+        margin-top: 30px;
+      }
+      & .forgot {
+        text-align: center;
+      }
+    }
+    .card-personalize3-intro {
+      background-color: #faeedc;
+      border-radius: 8px;
+      // color: #fff;
+      width: 450px;
+      margin: -580px 80px 100px;
+      // min-height: 1000px;
+      padding: 30px;
+      top: 1100px; 
+      left: 120px;
+      position: absolute;
+    
+      & label {
+        margin-top: 15px;
+        color:#222222;
+      }
+      & .card-title {
+        color: #ce4f28;
+        text-align: center;
+      }
+      & .p2-intro {
+        color: #b75d69;
+        text-align: left;
+        font-size: 20px;
+        font-family: "微軟正黑體";
+        margin-top: 30px;
+        margin-left: 30px;
+      }
+      & .btn {
+        margin-top: 30px;
+      }
+      & .forgot {
+        text-align: center;
+      }
+    }
+    .card-personalize4-intro {
+      background-color: #faeedc;
+      border-radius: 8px;
+      // color: #fff;
+      width: 450px;
+      margin: -580px 560px 100px;
+      // min-height: 1000px;
+      padding: 30px;
+      top: 850px; 
+      margin-bottom: 200px;
+      left: 120px;
+      position: absolute;
+    
+      & label {
+        margin-top: 15px;
+        color:#222222;
+      }
+      & .card-title {
+        color: #ce4f28;
+        text-align: center;
+      }
+      & .p2-intro {
+        color: #b75d69;
+        text-align: left;
+        font-size: 20px;
+        font-family: "微軟正黑體";
+        margin-top: 30px;
+        margin-left: 30px;
+      }
+      & .btn {
+        margin-top: 30px;
+      }
+      & .forgot {
+        text-align: center;
+      }
+    }
+}
+
+.card-personalize-myfund {
+  min-height: 1000px;
+  
+  .card-personalize1 {
+    background-color: #faeedc;
+    border-radius: 8px;
+    // color: #fff;
+    width: 800px;
+    margin: -580px 80px 100px;
+    // min-height: 1000px;
+    padding: 30px;
+    top: 600px; 
+    left: 120px;
+    position: absolute;
+  
+    & label {
+      margin-top: 15px;
+      color:#222222;
+    }
+    & .card-title {
+      color: #ce4f28;
+      text-align: center;
+    }
+    & .fund-follows {
+      color: #b75d69;
+      text-align: left;
+      font-size: 25px;
+      font-family: "微軟正黑體";
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+    & .fund-favorite{
+      color: #b75d69;
+      text-align: left;
+      font-size: 25px;
+      font-family: "微軟正黑體";
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+    & .sub-sub-all {
+      background-color:#f19c79;
+      border-radius: 8px;
+      // width: 980px;
+      // min-height: 250px; //待刪除
+      padding: 30px 10px;
+      margin-top: 20px;
+      margin-bottom: 50px;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+
+      #fund-menu{
+          border: 2px;
+          margin:0 auto;
+      }
+
+      #fund-menu a{
+          color: inherit;
+      }
+
+      #fund-menu th{
+          font-size: 15px;
+          font-family: "微軟正黑體";
+          padding: 10px 25px;
+          color: #F8EDEB;
+          font-weight:bold;
+          text-align:center;
+          background: #e26d5c;
+      }
+
+      #fund-menu tr{
+          font-size: 20px;
+          padding: 10px 25px;
+          color: #e26d5c;
+          font-weight:bold;
+          text-align:center;
+          background: #F8EDEB;
+      }
+
+    
+    }
+    & .btn {
+      margin-top: 30px;
+    }
+    & .forgot {
+      text-align: center;
+    }
+  
+    .input-group-text {
+      border: 1px solid $white-color;
+    }
+  }
+}
+
+.card-personalize-mytag {
+  min-height: 1000px;
+  
+  .card-personalize5 {
+    background-color: #faeedc;
+    border-radius: 8px;
+    // color: #fff;
+    width: 800px;
+    margin: -580px 80px 100px;
+    // min-height: 1000px;
+    padding: 30px;
+    top: 600px; 
+    left: 120px;
+    position: absolute;
+  
+    & label {
+      margin-top: 15px;
+      color:#222222;
+    }
+    & .card-title {
+      color: #ce4f28;
+      text-align: center;
+    }
+    & .week-new-tag-title {
+      color: #b75d69;
+      text-align: left;
+      font-size: 25px;
+      font-family: "微軟正黑體";
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+    & .week-new-tag {
+      background-color:#f19c79;
+      border-radius: 8px;
+      // min-height: 250px;
+      padding: 30px 10px;
+      margin-top: 20px;
+      margin-bottom: 50px;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      
+      #week-tag-table {
+        margin:0 auto;
+      }
+
+      #week-tag-table th{
+        font-size: 18px;
+        font-family: "微軟正黑體";
+        padding: 10px 25px;
+        color: #F8EDEB;
+        font-weight:bold;
+        text-align:center;
+        background: #e26d5c;
+      }
+
+      #week-tag-table tr{
+        font-size: 20px;
+        padding: 10px 25px;
+        color: #e26d5c;
+        font-weight:bold;
+        text-align:center;
+        background: #F8EDEB;
+      }
+
+      & .tag-delete-btn {
+        background-color: #fff;
+        border-color:#ffffff;
+        color:#505050;
+        border-radius: 5px;
+        font-family: "微軟正黑體";
+        font-size: 16px;
+      }
+      & .tag-delete-btn:hover {
+        background-color: #ffcdb2;
+        border-color: #ffcdb2;
+      }
+    }
+    & .history-new-tag-title {
+      color: #b75d69;
+      text-align: left;
+      font-size: 25px;
+      font-family: "微軟正黑體";
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+  }
+  
+}
+
+.card-personalize-characteranalysis {
+  min-height: 1500px;
+  
+  .card-personalize2 {
+    background-color: #faeedc;
+    border-radius: 8px;
+    // color: #fff;
+    width: 800px;
+    margin: -580px 80px 100px;
+    // min-height: 1000px;
+    padding: 30px;
+    top: 850px; 
+    left: 120px;
+    position: absolute;
+    
+  
+    & label {
+      margin-top: 15px;
+      color:#222222;
+    }
+    & .card-title {
+      color: #ce4f28;
+      text-align: center;
+    }
+    & .game-title {
+      color: #b75d69;
+      text-align: left;
+      font-size: 22px;
+      font-family: "微軟正黑體";
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+    & .btn {
+      background-color: #ffcdb2;
+      border-color:#ffcdb2;
+      font-size: 18px;
+      font-weight: 650;
+      margin-top: -90px;
+      margin-left: 470px;
+      box-shadow:4px 4px 4px rgba(0, 0, 0, 0.4);
+    }
+    & .forgot {
+      text-align: center;
+    }
+    .input-group-text {
+      border: 1px solid $white-color;
+    }
+    .survey-go-font {
+      font-size: 15px;
+      color: #4F4F4F;
+      margin-left: 450px;
+      font-family: "微軟正黑體";
+    }
+  }
+  .card-personalize2-1 {
+    background-color: #faeedc;
+    border-radius: 8px;
+    width: 800px;
+    margin: -580px 80px 100px;
+    padding: 30px;
+    top: 1140px; //1120
+    left: 120px;
+    position: absolute;
+
+    & label {
+      margin-top: 15px;
+      color:#222222;
+    }
+    & .card-title {
+      color: #ce4f28;
+      text-align: center;
+    }
+    & .game-result-title {
+      color: #b75d69;
+      text-align: left;
+      font-size: 20px;
+      font-family: "微軟正黑體";
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+    & .result-chart {
+      font-size: 18px;
+      font-weight: 600;
+      margin-left: 280px;
+      margin-top: -100px;
+    }
+    & .result-content {
+      background-color: #facdb3;
+      width: 350px;
+      height: 220px;
+      border-radius: 10px;
+      margin-top: -280px;
+      margin-left: 20px;
+
+      color: #ce4f28;
+      text-align: left;
+      font-size: 17px;
+      font-weight: 700;
+      font-family: "微軟正黑體";
+      // margin-top: 30px;
+      padding: 25px;
+      padding-top: 35px;
+    }
+  }
+}
+
+.card-personalize-pig {
+  min-height: 1000px;
+  
+  .card-personalize3 {
+    background-color: #faeedc;
+    border-radius: 8px;
+    width: 800px;
+    margin: -580px 80px 100px;
+    padding: 30px;
+    top: 600px; 
+    left: 120px;
+    position: absolute;
+    
+    & label {
+      margin-top: 15px;
+      color:#222222;
+    }
+    & .card-title {
+      color: #ce4f28;
+      text-align: center;
+    }
+    & .fund-risk-classify {
+      color: #b75d69;
+      text-align: left;
+      font-size: 25px;
+      font-family: "微軟正黑體";
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+    & .fund-time-ability {
+      color: #b75d69;
+      text-align: left;
+      font-size: 25px;
+      font-family: "微軟正黑體";
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+    & .env-index-predict{
+      color: #b75d69;
+      text-align: left;
+      font-size: 25px;
+      font-family: "微軟正黑體";
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+    & .dollor-cost-average{
+      color: #b75d69;
+      text-align: left;
+      font-size: 25px;
+      font-family: "微軟正黑體";
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+    & .dollor-cost-average-sub {
+      background-color:#ffd3af;
+      border-radius: 8px;
+      width: 600px;
+      padding: 30px 10px;
+      margin-top: 30px;
+      margin-bottom: 50px;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: "微軟正黑體";
+      
+      #dollor-table {
+        background-color:#ffffff;
+        border: 10px #ffffff solid;
+        border-collapse: separate;
+        color: #222222;
+        border-radius: 8px;
+        margin:0 auto;
+        font-size: 16px;
+        padding: 10px;
+
+        .dollor-table-btn {
+          text-align: center;
+          padding: 8px;
+        }
+        .reset-btn {
+          border-color: #ffffff;
+          text-align: center;
+          padding: 5px;
+          border-radius: 5px;
+          outline:none;
+          
+        }
+        .submit-btn {
+          border-color: #ffffff;
+          text-align: center;
+          padding: 5px;
+          border-radius: 5px;
+          outline:none;
+        }
+      }
+    }
+    & .btn {
+      background-color: #ffcdb2;
+      border-color:#ffcdb2;
+      font-size: 18px;
+      margin-top: -80px;
+      margin-left: 500px;
+      box-shadow:4px 4px 4px rgba(0, 0, 0, 0.4);
+    }
+    & .forgot {
+      text-align: center;
+    }
+    .input-group-text {
+      border: 1px solid $white-color;
+    }
+  }
+}
+
+.card-personalize-monthlyreport {
+  min-height: 1000px;
+  
+  .card-personalize4 {
+    background-color: #faeedc;
+    border-radius: 8px;
+    // color: #fff;
+    width: 800px;
+    margin: -580px 80px 100px;
+    // min-height: 1000px;
+    padding: 30px;
+    top: 600px; 
+    left: 120px;
+    position: absolute;
+    
+    & label {
+      margin-top: 15px;
+      color:#222222;
+    }
+    & .card-title {
+      color: #ce4f28;
+      text-align: center;
+    }
+    & .fund-risk-classify {
+      color: #b75d69;
+      text-align: left;
+      font-size: 25px;
+      font-family: "微軟正黑體";
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+    & .fund-time-ability {
+      color: #b75d69;
+      text-align: left;
+      font-size: 25px;
+      font-family: "微軟正黑體";
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+    & .env-index-predict{
+      color: #b75d69;
+      text-align: left;
+      font-size: 25px;
+      font-family: "微軟正黑體";
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+    & .dollor-cost-average{
+      color: #b75d69;
+      text-align: left;
+      font-size: 25px;
+      font-family: "微軟正黑體";
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+    
+    & .btn {
+      background-color: #ffcdb2;
+      border-color:#ffcdb2;
+      font-size: 18px;
+      margin-top: -80px;
+      margin-left: 500px;
+      box-shadow:4px 4px 4px rgba(0, 0, 0, 0.4);
+    }
+    & .forgot {
+      text-align: center;
+    }
+  
+    .input-group-text {
+      border: 1px solid $white-color;
+    }
+  }
+}

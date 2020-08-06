@@ -1,0 +1,83 @@
+.navigationContainer {
+    width: 100%;
+    height: 110px;
+    max-width: 1100px;
+    margin: 10px auto -70px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.navigationProgressbarImage {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 26px;
+}
+
+.navigationProgressbarImage.hidden {
+    visibility: hidden;
+}
+
+.navigationProgressbarDiv {
+    max-width: calc(100% - 32px);
+    display: inline-block;
+    overflow: hidden;
+}
+
+.navigationProgressbar {
+    padding-left: 28px;
+    padding-right: 28px;
+    display: inline-block;
+    width: max-content;
+}
+
+.navigationProgressbar li {
+    width: 138px;
+    font-size: 14px;
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    position: relative;
+    text-align: center;
+    display: inline-block;
+}
+
+.navigationProgressbar .pageTitle {
+    font-weight: bold;
+    color: black;
+}
+
+.navigationProgressbar .pageDescription {
+    color: black;
+}
+.navigationProgressbar li:before {
+    width: 24px;
+    height: 24px;
+    content: '';
+    line-height: 30px;
+    border: 3px solid #8dd9ca;
+    display: block;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    background-color: #8dd9ca;
+}
+.navigationProgressbar li:after {
+    width: 73%;
+    height: 3px;
+    content: '';
+    position: absolute;
+    background-color: #d4d4d4;
+    top: 15px;
+    left: -36.5%;
+}
+.navigationProgressbar li:first-child:after {
+    content: none;
+}
+.navigationProgressbar li.completed:before {
+    border-color: #1ab394;
+    background-color: #1ab394;
+}
+.navigationProgressbar li.completed + li:after {
+    background-color: #8dd9ca;
+}
+.navigationProgressbar li.current:before {
+    border-color: #1ab394;
+    background-color: white;
+}
