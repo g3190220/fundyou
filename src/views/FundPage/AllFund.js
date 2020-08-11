@@ -25,6 +25,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import FindInPageIcon from '@material-ui/icons/PageviewOutlined';
 import Checkbox from '@material-ui/core/Checkbox';
+import SearchIcon from '@material-ui/icons/Search';
 
 // reactstrap components
 import { Button, Card, Form, Input, Container, Row, Col} from "reactstrap";
@@ -752,7 +753,9 @@ class AllFund extends React.Component {
                 maxWidth: 120,
                 whiteSpace:'nowrap',
                 position: 'sticky', 
-                top: 0
+                top: 0,
+                fontFamily: '微軟正黑體',
+                fontWeight: '800'
               },
               cellStyle:{ 
                 width:120,
@@ -760,6 +763,8 @@ class AllFund extends React.Component {
                 //whiteSpace:'nowrap',
                 backgroundColor: '#F8EDEB',
                 color: '#e26d5c',
+                fontFamily: '微軟正黑體',
+                fontWeight: '700'
               },
               actionsCellStyle: {
                 backgroundColor: '#F8EDEB'
@@ -770,7 +775,7 @@ class AllFund extends React.Component {
               { 
                 
                 //hidden:true,
-                icon: () => <FindInPageIcon />,
+                icon: () => <SearchIcon color="action" />,
                 tooltip: 'SEEFUND',
                 onClick: (event, rowData) =>  this.props.history.push({
                
