@@ -22,9 +22,6 @@ export const compare_fund_id = (value) =>{
   cookie.save('fund_id_3',value[2])
 }
 
-export const get_compare_fund_id = () =>{
-}
-
 // 用户登出，删除cookie
 export const logout_deletecookie = () => {
     cookie.remove('member_id')

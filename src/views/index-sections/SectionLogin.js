@@ -79,8 +79,6 @@ class SectionLogin extends React.Component {
           if(jsonData.StatusCode==200){
             member_info=JSON.parse(jsonData.member_info)
             onLogin(member_info)
-            let compare_fund = ['','','']//初始設定比較基金為空
-            load_cookies(compare_fund)
             alert("登入成功")
             //跳轉頁面
             //取得member_id和member_sesiion

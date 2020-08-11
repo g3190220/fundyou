@@ -6,7 +6,7 @@ import { Button, Card, Form, Input, Container, Row, Col} from "reactstrap";
 import { TextField } from "@material-ui/core";
 import ReactHighcharts from'react-highcharts'; //基金圖表套件，參考：https://reurl.cc/0ored6
 import { red } from "@material-ui/core/colors";
-import { compare_fund_id,load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
+import {load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
 import LoadingIndicator from "views/Function/LoadingIndicator.js";
 
 var fund_net_1 = [];
@@ -758,13 +758,8 @@ class CompareFund extends React.Component{
 
     //------------新增比較基金------------------------------
     addnewFund(){
-        let fund_id = [];
         let member_id = load_cookies("member_id");
         let path = "/allfund-page/:member_id="+ member_id;
-        fund_id.push(load_cookies("fund_id_1"));
-        fund_id.push(load_cookies("fund_id_2"));
-        fund_id.push(load_cookies("fund_id_3"));
-        compare_fund_id(fund_id);
 
         this.props.history.push({
             pathname: path
