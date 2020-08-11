@@ -41,7 +41,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 
 
-//處理訊息框
+//loading page
+import LoadingIndicator from "views/Function/LoadingIndicator.js";
+import LoadingIndicator_small from "views/Function/LoadingIndicator_small.js";
 
 
 const tableIcons = {
@@ -92,7 +94,7 @@ const columns_vote=
     
 ];
 
-
+var islike_info=[]
 
                     
 
@@ -120,6 +122,7 @@ class Tag extends React.Component{
         this.getLike=this.getLike.bind(this);
         this.Vote=this.Vote.bind(this);
         this.HandleVote=this.HandleVote.bind(this);
+        this.filterlike=this.filterlike.bind(this);
         
         
         this.state = {
@@ -129,6 +132,7 @@ class Tag extends React.Component{
           data_thisWeek:[],
           data_history:[],
           data_allthisWeek:[],
+          flag:false
       }
     
     }
@@ -137,7 +141,8 @@ class Tag extends React.Component{
         window.scrollTo(0, 0)
         this.getFundName();
     }
-    //處理對話框方法
+
+    /*********************************處理對話框方法*********************************/
     handleClickOpen(){
         this.setState({
             open: true
@@ -149,8 +154,9 @@ class Tag extends React.Component{
             open: false
         });
     }
+    /*********************************處理對話框方法*********************************/
 
-    //處理訊息框方法
+    /*********************************處理訊息框方法*********************************/
     handleClickOpen_M(){
         this.setState({
             open_M: true
@@ -161,8 +167,497 @@ class Tag extends React.Component{
             open_M: false
         });
     }
+    /*********************************處理訊息框方法*********************************/
 
-    //新增tag
+    /*******************************處理setState方法********************************/
+    handleChange = name => event =>{
+        this.setState({
+          [name]: event.target.value,
+    })}
+    /*******************************處理setState方法********************************/
+
+    /*********************************關於TAG的方法*********************************/
+
+    //(1) 顯示基金名字
+    getFundName(){
+        //取得基金資料
+        let fund_info=[];
+        let id = (this.props.match.params.fundid.split('='))[1];
+        const url = "http://140.115.87.192:8090/getFundInfo";////////改url
+        fetch( url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    fld022: id,
+                })
+                
+            
+            })
+            .then((response) => {return response.json();})
+            .then((jsonData) => {
+            fund_info=JSON.parse(jsonData.fund_info)
+            if(jsonData.StatusCode==200){
+                //更新state並獲得以下資料
+                this.setState((state, props) => {
+                    return {counter: state.counter + props.step,
+                            fund_name:fund_info[0].Fund_CH_Name,//基金名字
+                            fund_fld022:fund_info[0].Fund_fld022,//基金統編
+                            fund_id:fund_info[0].FundID,//基金ID
+                            initial:true};
+                });  
+            
+            }
+            })
+        .then(()=>{this.getfilter()})
+        
+        
+    }
+
+    //(2) 取得會員對此基金有按過的tag的紀錄
+    getfilter(){
+        const url = "http://140.115.87.192:8090/getLike";
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                fundid:this.state.fund_id,
+                userid:load_cookies("member_id"),
+                tagid:-2,//取得該會員針對該筆基金，總共有按過哪些tag的讚
+            })
+            
+    })
+    .then((response) => {return response.json();})
+    .then((jsonData) => { 
+        
+        console.log(jsonData)
+        if(jsonData.StatusCode==200){
+            console.log(jsonData.info)
+            try{
+                islike_info=JSON.parse(jsonData.info)}
+            catch(e){
+                console.log("catch:還沒有按過tag讚")
+                islike_info=[{"tagID": 0, "fundID": 0, "islike": 0, "tblDate": "0", "memberID": 0}]
+            }
+    }
+    console.log("取得會員對此基金有按過的tag的紀錄")
+    console.log(islike_info)
+    
+
+    })
+    .then(()=>{this.getTagWeekRank();}) 
+    }
+
+    //(3) 將tag資料做篩選，每個row加上is_like_byuser資料
+    filterlike(filter_data){
+        console.log("islike_info")
+        console.log(filter_data)
+        console.log(islike_info)
+        console.log("長度")
+        console.log(filter_data.length)
+        for(var i = 0; i < filter_data.length; i++) { 
+            var check=0;
+            for(var j = 0;j < islike_info.length; j++){
+                if(filter_data[i].tagID == islike_info[j].tagID && check==0) {
+                    check=1;
+                    console.log(i)
+                    console.log(j)
+                    console.log(filter_data[i])
+                    switch (islike_info[j].islike) {
+                        case 0:
+                            
+                            filter_data[i].is_like_byuser=0;
+                            break;
+                        case 1:   
+                            
+                            filter_data[i].is_like_byuser=1;
+                            break;
+                        case 2:   
+                               
+                            filter_data[i].is_like_byuser=2;
+                            break;
+                        default:
+                            console.log("error no record");
+                            break;        
+                    } 
+                    break;                
+                }
+                else{
+                    continue;
+                }
+                
+            }
+            if(check==0){filter_data[i].is_like_byuser=0;}//沒有記錄過
+        }
+        console.log("將tag資料做篩選，每個row加上is_like資料")    
+        //篩選過後的資料丟到
+        console.log(filter_data)
+        return filter_data
+        
+    }
+
+    //(4) tag本周排行(weekly like - weekly unlike)
+    getTagWeekRank(){
+        let id = (this.props.match.params.fundid.split('='))[1];
+        const url = "http://140.115.87.192:8090/getTag";
+        fetch(url, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+                //取得全部fund
+                member_id: -2,
+                tag_id:-2,
+                fld022:id,
+        })
+        
+    })
+    .then((response) => {return response.json();})
+    .then((jsonData) => { 
+        console.log("tag本周排行")
+        console.log(jsonData)
+        
+    if(jsonData.StatusCode==200){
+        var tag_info = [];
+        for(var i = 0; i < jsonData.tag_info.length; i++){
+            tag_info.push(JSON.parse(jsonData.tag_info[i]))
+        }
+        
+        this.state.data_thisWeek=this.filterlike(tag_info);
+        this.setState({data_thisWeek:this.state.data_thisWeek})
+
+        console.log("本周tag資料")
+        console.log(this.state.data_thisWeek)
+    
+    }
+    else{ //statuscode=1000 >>沒有tag
+    this.state.data_thisWeek=[]
+    }
+    })
+    .then(()=>{this.getHistoryTagData()})
+    }
+
+    //(5) 歷史tag排行
+    getHistoryTagData(){
+        let id = (this.props.match.params.fundid.split('='))[1];
+        const url = "http://140.115.87.192:8090/getTag";
+        fetch(url, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+                //取得全部fund
+                member_id: -1,
+                tag_id:-1,
+                fld022:id
+        })
+        
+    })
+    .then((response) => {return response.json();})
+    .then((jsonData) => { 
+    if(jsonData.StatusCode==200){
+    var tag_info = [];
+    for(var i = 0; i < jsonData.tag_info.length; i++){
+        tag_info.push(JSON.parse(jsonData.tag_info[i]))
+    }
+    this.state.data_history=this.filterlike(tag_info)
+    console.log("歷史tag資料")
+    console.log(this.state.data_history)
+    this.setState({data_history:this.state.data_history,flag:true})
+    
+    }
+    else{
+        this.state.data_history=[]
+    }
+
+    })
+    .then(()=>{this.getNewTag()})
+    }
+
+    //(6) 展示本周新增全部的tag
+    getNewTag(){
+        let id = (this.props.match.params.fundid.split('='))[1];
+        const url = "http://140.115.87.192:8090/getNewTag";
+        fetch(url, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+                //取得全部fund
+                member_id: -1,
+                tag_id:-1,
+                fld022:id,
+        })
+        
+    })
+    .then((response) => {return response.json();})
+    .then((jsonData) => { 
+    if(jsonData.StatusCode==200){
+        var tag_info = [];
+        
+    try{
+        tag_info=JSON.parse(jsonData.Newtag_info)
+        this.state.data_allthisWeek=tag_info
+        this.setState({data_allthisWeek:this.state.data_allthisWeek})
+    }
+    
+    catch (d){
+        this.state.data_allthisWeek=[]
+        
+    }
+    }
+    else{
+    
+    this.state.data_allthisWeek=[]
+    
+    }
+
+    })
+    .then(()=>{this.setState({flag:true})})
+    .then(()=>{this.HandleVote()})
+    }
+
+    //(7) input: 按的tagID及按的是倒讚還是讚 ----> 取得每個tag的按讚紀錄
+    getLike(in_tagid,in_like){
+        var like=0;
+        var unlike=0;
+        //如果按的地方是"讚"
+        if(in_like==1){
+            like=1;
+            unlike=0
+        }
+        //如果按的地方是"倒讚"
+        else{
+            like=0;
+            unlike=1
+        }
+        const url = "http://140.115.87.192:8090/getLike";
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                fundid:this.state.fund_id,
+                userid:load_cookies("member_id"),
+                tagid:in_tagid,
+            })
+            
+    })
+    .then((response) => {return response.json();})
+    .then((jsonData) => { 
+    if(jsonData.StatusCode==200){
+        let info= [];
+        try{
+            info=JSON.parse(jsonData.info)
+            console.log(info[0].islike)
+            console.log(in_like)
+        //開始檢查是否可以按讚
+        //如果islike=0,可以按讚
+        if(info[0].islike==0){
+            this.Like(in_tagid,like,unlike,in_like)
+            
+        }
+        else{
+        //已有按讚紀錄，要取消按讚或按倒讚
+            if(in_like==info[0].islike){
+                //要取消"讚"
+                if(info[0].islike==1){
+                    console.log("取消讚")
+                    this.Like(in_tagid,-1,0,0)
+                }
+                //要取消"倒讚"
+                else if(info[0].islike==2){
+                    console.log("取消倒讚")
+                    this.Like(in_tagid,0,-1,0)
+                }
+            }
+            else{
+                alert("你要先取消你原本的設置，才能再按like或unlike。")
+            }
+        
+        }}
+        catch(e){
+            //如果按讚紀錄為null,也是可以進行按讚的
+            this.Like(in_tagid,like,unlike,in_like)
+        }
+        
+    }
+
+    else{
+        alert("HandleLike() error")
+    }
+    
+    
+    })
+    }
+
+    //(6) 更新個人按讚紀錄的問題
+    HandleLike(in_tagid,_islike){
+        const url = "http://140.115.87.192:8090/UserLikeRecord";
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                fundid:this.state.fund_id,
+                userid:load_cookies("member_id"),
+                tagID:in_tagid,
+                islike:_islike
+                //(1) is_like=0 取消(目前沒有按讚或倒讚此tag)
+                //(2) is_like=1 紀錄已按讚
+                //(3) is_like=2 紀錄已按倒讚
+                
+            })
+            
+        })
+    .then((response) => {return response.json();})
+    .then((jsonData) => { 
+        console.log(jsonData)
+        if(jsonData.StatusCode==200){
+            console.log("HandleLike() 成功更該islike")
+            console.log(_islike)
+            
+        }
+        else{
+            console.log("HandleLike() error")
+        }
+    })
+    .then(()=>{this.setState();window.location.reload(true);})
+}
+
+    //(7) 對TAG按讚
+    Like(in_tagid,like,unlike,is_like_setting){
+
+        //判斷是按讚還是倒讚
+        const url = "http://140.115.87.192:8090/UpdateTag";
+        fetch(url, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+                //取得全部fund
+                like: like,
+                unlike:unlike,
+                tagid:in_tagid,
+        })
+        
+    })
+    .then((response) => {return response.json();})
+    .then((jsonData) => { 
+        if(jsonData.StatusCode==200){
+            console.log("Like()sucess")
+        
+        }
+        else{
+        alert("按讚error")
+        }
+
+    })
+    .then(()=>{this.HandleLike(in_tagid,is_like_setting)})
+    
+    }
+
+    //(8) 處理最多只能投三票的的問題
+    HandleVote(){
+        let member_info=[];
+        const url = "http://140.115.87.192:8090/check_LoginStatus";
+        fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                        userid: load_cookies("member_id"),
+                        userSession:load_cookies("member_session")
+                })
+                
+            
+            })
+            .then((response) => {return response.json();})
+            .then((jsonData) => {
+            
+                if(jsonData.StatusCode==200){
+                
+                    member_info=JSON.parse(jsonData.member_info)
+                    //獲得以下資料
+                    
+                    if(member_info.member_vote_count>0){
+                        let _vote=member_info.member_vote_count.toString() 
+                        this.setState({vote_valid:0,vote_count:_vote})//票數還夠，可以投票
+                        
+                    }
+                    else{
+                        let _vote=member_info.member_vote_count.toString()
+                        this.setState({vote_valid:1,vote_count:_vote})//本周票數不夠了，不能投
+                        
+                    }
+                    let message ="投票成功，您本周還剩"+this.state.vote_count+"次投票機會"
+                    this.setState({message:message})
+                    
+                }
+            })
+    }
+
+    //(9) 投票
+    Vote(in_tagid){
+        const url = "http://140.115.87.192:8090/UpdateNewTag";
+        //檢查，會設定 vote_valid = TRUE or FLASE
+        if(this.state.vote_valid==0){
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                        tagid:in_tagid,
+                        memberid:load_cookies("member_id"),
+                })
+                
+            })
+            .then((response) => {return response.json();})
+            .then((jsonData) => { 
+            console.log(jsonData)
+            if(jsonData.StatusCode==200){
+                console.log("投票成功")
+            }
+            else{
+            alert("投票error")
+            }
+            })
+            .then(()=>{this.HandleVote();})
+            .then(()=>{this.handleClose();this.handleClickOpen_M()})
+            .then(()=>{window.location.reload(true);})
+        }
+        //若無法投票
+        else if(this.state.vote_valid==1){
+            //this.HandleVote()
+            this.setState({message:"您本周投票已達三票，無法再做投票！"});
+            this.handleClose()
+            this.handleClickOpen_M()
+        }
+
+    }
+
+    //(10) 新增tag
     handleSubmit(){
         let errors = {}; 
         //取消DOM的預設功能
@@ -199,7 +694,7 @@ class Tag extends React.Component{
 
             }
             else{
-            alert("handleSubmit_error")}
+            console.log("handleSubmit_error")}
             
         })}
         else {
@@ -209,424 +704,12 @@ class Tag extends React.Component{
         this.setState({errors: errors});
     }
 
-    handleChange = name => event =>{
-        this.setState({
-          [name]: event.target.value,
-    })}
-
- //(1) 顯示基金名字
- getFundName(){
-    //取得基金資料
-    let fund_info=[];
-    let id = (this.props.match.params.fundid.split('='))[1];
-    const url = "http://140.115.87.192:8090/getFundInfo";////////改url
-    fetch( url, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                fld022: id,
-            })
-            
-        
-        })
-        .then((response) => {return response.json();})
-        .then((jsonData) => {
-        fund_info=JSON.parse(jsonData.fund_info)
-        if(jsonData.StatusCode==200){
-            //更新state並獲得以下資料
-            this.setState((state, props) => {
-                return {counter: state.counter + props.step,
-                        fund_name:fund_info[0].Fund_CH_Name,//基金名字
-                        fund_fld022:fund_info[0].Fund_fld022,//基金統編
-                        fund_id:fund_info[0].FundID,//基金ID
-                        initial:true};
-            });  
-        
-        }
-        }) 
-    this.getTagWeekRank();
- }
-
- //處理是否按讚過的資料
- filterlike(data){
-     this.state.filter_getTagWeekRank=data
- }
-
- //(2) tag本周排行(weekly like - weekly unlike)
-getTagWeekRank(){
-    let id = (this.props.match.params.fundid.split('='))[1];
-    const url = "http://140.115.87.192:8090/getTag";
-    fetch(url, {
-      method: 'POST',
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-            //取得全部fund
-            member_id: -2,
-            tag_id:-2,
-            fld022:id,
-      })
-      
-})
-.then((response) => {return response.json();})
-.then((jsonData) => { 
-    
-if(jsonData.StatusCode==200){
-    var tag_info = [];
-    
-  try{
-    for(var i = 0; i < jsonData.tag_info.length; i++){
-        tag_info.push(JSON.parse(jsonData.tag_info[i]))
-    }
-    
-    this.state.data_thisWeek=tag_info
-    this.setState({data_thisWeek:this.state.data_thisWeek})
-    
-  }
-  
-  catch (d){
-    this.state.data_thisWeek=[]
-    alert("catch")
-    
-  }
-  
-}
-else{ //statuscode=1000 >>沒有tag
-  this.state.data_thisWeek=[]
-  //alert("statuscode=1000")
-  
-}
-this.getHistoryTagData()
-});
-}
-
-//(3) 歷史tag排行
-getHistoryTagData(){
-    let id = (this.props.match.params.fundid.split('='))[1];
-    const url = "http://140.115.87.192:8090/getTag";
-    fetch(url, {
-      method: 'POST',
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-            //取得全部fund
-            member_id: -1,
-            tag_id:-1,
-            fld022:id
-      })
-      
-})
-.then((response) => {return response.json();})
-.then((jsonData) => { 
-if(jsonData.StatusCode==200){
-  var tag_info = [];
-  try{
-    
-    for(var i = 0; i < jsonData.tag_info.length; i++){
-        tag_info.push(JSON.parse(jsonData.tag_info[i]))
-    }
-    this.state.data_history=tag_info
-    this.setState({data_history:this.state.data_history,flag:true})
-    
-  }
-  
-  catch (d){
-    this.state.data_history=[]
-    alert("catch")
-  }
-  
-}
-else{
-    this.state.data_history=[]
-}
-this.getNewTag()
-})}
-
-//(4) 展示本周新增全部的tag
-getNewTag(){
-    let id = (this.props.match.params.fundid.split('='))[1];
-    const url = "http://140.115.87.192:8090/getNewTag";
-    fetch(url, {
-      method: 'POST',
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-            //取得全部fund
-            member_id: -1,
-            tag_id:-1,
-            fld022:id,
-      })
-      
-})
-.then((response) => {return response.json();})
-.then((jsonData) => { 
-if(jsonData.StatusCode==200){
-    var tag_info = [];
-    
-  try{
-    tag_info=JSON.parse(jsonData.Newtag_info)
-    this.state.data_allthisWeek=tag_info
-    this.setState({data_allthisWeek:this.state.data_allthisWeek})
-  }
-  
-  catch (d){
-    this.state.data_allthisWeek=[]
-    
-  }
-}
-else{
-  
-  this.state.data_allthisWeek=[]
-  
-}
-this.HandleVote();
-})
-}
-
-//(5) 取得按讚紀錄
-getLike(in_tableid,in_tagid,in_like){
-    var like=0;
-    var unlike=0;
-    //如果按的地方是"讚"
-    if(in_like==1){
-        like=1;
-        unlike=0
-    }
-    else{
-        like=0;
-        unlike=1
-    }
-    const url = "http://140.115.87.192:8090/getLike";
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            fundid:this.state.fund_id,
-            userid:load_cookies("member_id"),
-            tagid:in_tagid,
-        })
-        
-  })
-  .then((response) => {return response.json();})
-  .then((jsonData) => { 
-  if(jsonData.StatusCode==200){
-    let info= [];
-    try{
-        info=JSON.parse(jsonData.info)
-        console.log(info[0].islike)
-        console.log(in_like)
-    //開始檢查是否可以按讚
-    //如果islike=0,可以按讚
-    if(info[0].islike==0){
-        this.Like(in_tagid,like,unlike,in_like)
-        
-    }
-    else{
-    //已有按讚紀錄，要取消按讚或按倒讚
-        if(in_like==info[0].islike){
-            //要取消"讚"
-            if(info[0].islike==1){
-                alert("取消讚")
-                this.Like(in_tagid,-1,0,0)
-            }
-            //要取消"倒讚"
-            else if(info[0].islike==2){
-                alert("取消倒讚")
-                this.Like(in_tagid,0,-1,0)
-            }
-        }
-        else{
-            alert("你要先取消你原本的設置，才能再按like或unlike。")
-        }
-    
-    }}
-    catch(e){
-        //如果data是null,也是可以進行按讚的
-        this.Like(in_tagid,like,unlike,in_like)
-    }
-    
-  }
-
-  else{
-    alert("HandleLike() error")
-  }
-  
-  
-  })
-}
-
-//(6) 處理按讚紀錄的問題
-HandleLike(in_tagid,_islike){
-    
-    const url = "http://140.115.87.192:8090/UserLikeRecord";
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            fundid:this.state.fund_id,
-            userid:load_cookies("member_id"),
-            tagID:in_tagid,
-            islike:_islike
-            //(1) is_like=0 取消(目前沒有按讚或倒讚此tag)
-            //(2) is_like=1 紀錄已按讚
-            //(3) is_like=2 紀錄已按倒讚
-              
-        })
-        
-  })
-  .then((response) => {return response.json();})
-  .then((jsonData) => { 
-  if(jsonData.StatusCode==200){
-    alert("HandleLike() 成功")
-      
-  }
-  else{
-    alert("HandleLike() error")
-  }
-  })}
-
-//(7) 按讚
-Like(in_tagid,like,unlike,is_like_setting){
-
-    //判斷是按讚還是倒讚
-    const url = "http://140.115.87.192:8090/UpdateTag";
-    fetch(url, {
-      method: 'POST',
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-            //取得全部fund
-            like: like,
-            unlike:unlike,
-            tagid:in_tagid,
-      })
-      
-})
-.then((response) => {return response.json();})
-.then((jsonData) => { 
-if(jsonData.StatusCode==200){
-    //紀錄按讚狀況
-    this.HandleLike(in_tagid,is_like_setting)
-    alert("Like()sucess")
-   
-}
-else{
-  alert("按讚error")
-}
-
-})
-.then(()=>{this.setState();window.location.reload(true);})
-}
-
-//(8) 處理最多只能投三票的的問題
-HandleVote(){
-    let member_info=[];
-    const url = "http://140.115.87.192:8090/check_LoginStatus";
-    fetch(url, {
-              method: 'POST',
-              headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                    userid: load_cookies("member_id"),
-                    userSession:load_cookies("member_session")
-              })
-              
-        
-        })
-        .then((response) => {return response.json();})
-        .then((jsonData) => {
-          
-            if(jsonData.StatusCode==200){
-              
-                member_info=JSON.parse(jsonData.member_info)
-                //獲得以下資料
-                
-                if(member_info.member_vote_count>0){
-                    let _vote=member_info.member_vote_count.toString() 
-                    this.setState({vote_valid:0,vote_count:_vote})//票數還夠，可以投票
-                    
-                }
-                else{
-                    let _vote=member_info.member_vote_count.toString()
-                    this.setState({vote_valid:1,vote_count:_vote})//本周票數不夠了，不能投
-                    
-                }
-                let message ="投票成功，您本周還剩"+this.state.vote_count+"次投票機會"
-                this.setState({message:message})
-                
-            }
-        })
-}
-
-//(9) 投票
-Vote(in_tagid){
-    const url = "http://140.115.87.192:8090/UpdateNewTag";
-    let member_id = load_cookies("member_id");
-    //檢查，會設定 vote_valid = TRUE or FLASE
-    if(this.state.vote_valid==0){
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                    tagid:in_tagid,
-                    memberid:load_cookies("member_id"),
-            })
-            
-        })
-        .then((response) => {return response.json();})
-        .then((jsonData) => { 
-        if(jsonData.StatusCode==200){
-            this.HandleVote();
-            
-            this.handleClose();
-            this.handleClickOpen_M()
-            //重新整理畫面，刷新頁面
-            setTimeout(() =>{
-                window.location.reload(true);
-            },2500)
-            
-        }
-        else{
-        alert("投票error")
-        }})
-    }
-    //若無法投票
-    else if(this.state.vote_valid==1){
-        //this.HandleVote()
-        this.setState({message:"您本周投票已達三票，無法再做投票！"});
-        this.handleClose()
-        this.handleClickOpen_M()
-    }
-
-}
-
-
 
     render(){
 
         return(
+            <div>
+            {!this.state.flag ? (<LoadingIndicator></LoadingIndicator>):(
             <div className='tag-menu'>
             <Container>
             <IndexNavbar></IndexNavbar>
@@ -679,26 +762,26 @@ Vote(in_tagid){
                             actionsColumnIndex: -1,
                             }}
                             actions={[
-                                {
-                                    icon: () => <ThumbUpIcon color="action"/>,
+                                rowData =>({
+                                    icon: () => (rowData.is_like_byuser==1)?<ThumbUpIcon color="secondary"/>:<ThumbUpIcon color="action"/>,
                                     tooltip: 'like',
                                     onClick: (event, rowData) => {
-                
-                                        this.getLike(rowData.tableData.id,rowData.tagID,1)
+                                      
+                                      this.getLike(rowData.tagID,1)
+
+                                      
+                                  }
+                                  }),
+                                rowData =>({
+                                    icon: () => (rowData.is_like_byuser==2)?<ThumbDownIcon color="primary"/>:<ThumbDownIcon color="action"/>,
+                                    tooltip: 'unlike',
+                                    onClick: (event, rowData) => {
+                                        
+                                        this.getLike(rowData.tagID,2)
 
                                         
                                     }
-                                  },
-                                  {
-                                      icon: () => <ThumbDownIcon color="action"/>,
-                                      tooltip: 'unlike',
-                                      onClick: (event, rowData) => {
-                                    
-                                        this.getLike(rowData.tableData.id,rowData.tagID,2)
-
-                                        
-                                    }
-                                    },
+                                }),
                               ]}
                             localization={{ 
                                 body:{ emptyDataSourceMessage:<h4 style={{marginTop:'6%', position:'absolute', top:'16%', textAlign:'center',color: '#e26d5c'}}>還沒有人新增TAG...</h4> },
@@ -756,22 +839,24 @@ Vote(in_tagid){
                             actionsColumnIndex: -1,
                             }}
                             actions={[
-                                {
-                                    icon: () => <ThumbUpIcon color="action"/>,
-                                    //icon: (event, rowData) => {(event, rowData)=>{(rowData.tagID>1)?<ThumbUpIcon color="action"/>:<ThumbUpIcon color="primary"/>}},
+                                rowData =>({
+                                    icon: () => (rowData.is_like_byuser==1)?<ThumbUpIcon color="secondary"/>:<ThumbUpIcon color="action"/>,
+                                    
                                     tooltip: 'like',
                                     onClick: (event, rowData) => {
-                                        this.getLike(rowData.tableData.id,rowData.tagID,1)
+                                        
+                                        this.getLike(rowData.tagID,1)
                                     }
-                                },
-                                  {
-                                      icon: () => <ThumbDownIcon color="action"/>,
-                                      tooltip: 'unlike',
-                                      onClick: (event, rowData) => {
-                                        this.getLike(rowData.tableData.id,rowData.tagID,2)
+                                }),
+                                rowData =>({
+                                    icon: () => (rowData.is_like_byuser==2)?<ThumbDownIcon color="primary"/>:<ThumbDownIcon color="action"/>,
+                                    tooltip: 'unlike',
+                                    onClick: (event, rowData) => {
+                                        
+                                        this.getLike(rowData.tagID,2)
                                     }
-                                    },
-                              ]}
+                                }),
+                            ]}
                             localization={{ 
                                 body:{ emptyDataSourceMessage:<h4 style={{marginTop:'6%', position:'absolute', top:'16%', textAlign:'center',color: '#e26d5c'}}>還沒有人新增TAG...</h4> },
                                 header: {
@@ -831,7 +916,7 @@ Vote(in_tagid){
                                 fontWeight: 'bold',
                             },
                             search: false,
-                            minBodyHeight: 500,
+                            minBodyHeight: 320,
                             cellStyle:{ 
                                 width:500,
                                 maxWidth:500,
@@ -843,7 +928,7 @@ Vote(in_tagid){
                             actionsCellStyle: {
                                 backgroundColor: '#F8EDEB'
                             },
-                            maxBodyHeight: 600,
+                            maxBodyHeight: 320,
                             actionsColumnIndex: -1,
                             }}
                             actions={[
@@ -855,6 +940,7 @@ Vote(in_tagid){
                                         this.setState({
                                             in_vote_id: rowData.tagID
                                         });
+                                        
                                         
                                     }
                                   },
@@ -908,6 +994,7 @@ Vote(in_tagid){
             </Row>
             </Container>
             </div>
+        )}</div>
         );
     }
 }

@@ -42,6 +42,8 @@ class DetailFund extends React.Component{
       this.handleClick1 = chart_performance.bind(this); //綁定事件，參考：https://reurl.cc/pdkgQ8
       this.handleClick2 = chart_risk.bind(this); //綁定事件
       this.handleClickTAG = this.tag_link.bind(this);
+      this.trackstate = this.trackstate.bind(this); //追蹤基金事件(綁定track按鈕)
+      this.togglestate = this.togglestate.bind(this);
     }
     componentDidMount() {
         //取得基金資料
@@ -89,11 +91,65 @@ class DetailFund extends React.Component{
                             initial:true};
                 });
 
-                
+                this.trackstate();
             }
             })
             .then(() => { this.getnet();})
     }
+
+    trackstate(){    //看此user有沒有追蹤過此筆基金，並改變追蹤狀態
+        let fund_info=[];
+        let id = (this.props.match.params.fundid.split('='))[1];
+        const currentState=this.state.trackstate;
+        const url = "http://140.115.87.192:8090/getTrack";
+        // alert(id)
+        // alert(load_cookies("member_id"))
+        
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userid: load_cookies("member_id"),
+                fld022: id,
+            })
+        })
+        .then((response) => {return response.json();})
+        .then((jsonData) => {
+            console.log(jsonData); 
+            try{
+            fund_info=JSON.parse(jsonData.info)
+            if(jsonData.StatusCode==200){ 
+                this.setState({trackstate:!currentState});
+                this.setState((state, props) => {
+                return {
+                  trackstate:true,
+                  userid:fund_info[0].MemberID, //userid
+                  fund_fld022_track:fund_info[0].Fund_fld022_track, //基金統編
+                  track_state:fund_info[0].Track, //追蹤狀態，1:已追蹤，0:未追蹤
+                  initial:true,
+                }
+              })
+            }}
+            //未追蹤的狀況
+            catch(e){
+                this.setState({trackstate:false})
+
+            }
+          })
+
+    }
+
+    togglestate(e){
+        const currentState=this.state.trackstate;
+        this.setState({trackstate:!currentState});
+        e.preventDefault();
+        // return this.setState(prevState => ({ time: ++prevState.time }))
+    }
+
+
 
     getnet(){
         let fund_net=[];
@@ -396,8 +452,7 @@ class DetailFund extends React.Component{
                     <label className='tag-label'>高收益</label>
                     <label className='tag-label'>新台幣</label>
                    {/* <button className='Compare-btn'><a href='#page-compare'>去比較</a></button>*/}
-                    <FollowFund></FollowFund> {/* 追蹤基金按鈕 */}
-                    {/* <button className='follow-btn'>+追蹤</button> */}
+                   <input type="button" className={this.state.trackstate ? "followBtnTrue" : "followBtnFalse"} onClick={this.togglestate} value={this.state.trackstate ? "√ 已追蹤" : "+ 追蹤"}></input>
                 </Row>   
                 <Row >
                     <label className='fund-value'>{this.state.new_net}</label> {/*從資料庫讀取基金的淨值*/}
