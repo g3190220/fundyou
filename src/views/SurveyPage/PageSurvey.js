@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import * as Survey from "survey-react";
+import * as Survey from "survey-react"; //參考網址：https://reurl.cc/KjK5Nq
 import "survey-react/survey.css";
 
 Survey.JsonObject.metaData.addProperty("itemvalue", { name: "score:number" });
@@ -13,6 +13,7 @@ class PageSurvey extends React.Component {
     this.state = { isCompleted: false };
 
     this.onCompleteComponent = this.onCompleteComponent.bind(this);
+    this.select = this.select.bind(this);
   }
 
   /*********** prettey checkbox**************** */
@@ -68,6 +69,14 @@ class PageSurvey extends React.Component {
 
   onCompleteComponent() {
     this.setState({ isCompleted: true });
+  }
+
+  select(sender, options){
+    var el = document.getElementById(options.name);
+    if (el) {
+        el.value = options.value;
+    }
+    alert(el);
   }
   render() {
     let json = {
@@ -578,18 +587,37 @@ class PageSurvey extends React.Component {
       showQuestionNumbers: "off",
       completedHtml: "<p><h4>Security Profile Results !!</h4></p>"
     };
+    var myCss = {   //暫時沒用
+      matrix: {
+          root: "table table-striped"
+      },
+      navigationButton: "button btn-lg"
+    };
+
+    var surveyValueChanged = function (result) {
+  //    var el = document.getElementById(options.name);
+    //  if (el) {
+      //    el.value = options.value;
+      //}
+
+      alert(result.data);
+  };
+
     var surveyRender = !this.state.isCompleted ? (
       <Survey.Survey
         json={json}
         showCompletedPage={false}
         onComplete={this.onCompleteComponent}
         preetycheckbox={this.preetycheckbox}
+        css={myCss}
+        onValueChanged={this.select}
         //onUpdateQuestionCssClasses={this.onUpdateQuestionCssClasses}
       />
     ) : null;
     var onCompleteComponent = this.state.isCompleted ? (
       <div>The component after onComplete event</div>
     ) : null;
+
     return (
       <div>
         {surveyRender}

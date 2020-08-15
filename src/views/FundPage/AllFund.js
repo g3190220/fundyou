@@ -826,3 +826,6 @@ class AllFund extends React.Component {
   }
   
   export default AllFund;
+
+  //如果頁面(html)不變，那就是透過state 跟 props 來做更新
+  //如果頁面(html)更改，那就透過ReactDOM來做

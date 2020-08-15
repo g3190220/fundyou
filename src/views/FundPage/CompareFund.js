@@ -1163,6 +1163,8 @@ function chart_SD() {  //顯示SD
             data: risk_SD_3//[50, 44, 3, 200, 70, 10, 60, 20]
         }],
         };
+
+        //window.scrollTo(0, 100);
     ReactDOM.render( //猜想：更新DOM的部分，參考：https://reurl.cc/0orjYb
         <ReactHighcharts config={config_SD}/>,
       document.getElementById('comparechart')

@@ -20,7 +20,11 @@ import DetailFund from "views/FundPage/DetailFund.js";
 import TAGPage from "views/TagPage/Tag.js";
 import PersonalDataPage from "views/EditPersonalData/PersonalDataPage.js";
 import ComparePage from "views/FundPage/CompareFund.js"
-import PageSurvey from "views/SurveyPage/PageSurvey.js"
+import PageSurvey from "views/SurveyPage/Survey.js"
+import PageSurvey_2 from "views/SurveyPage/Survey_2.js"
+import PageSurvey_3 from "views/SurveyPage/Survey_3.js"
+import PageSurvey_4 from "views/SurveyPage/Survey_4.js"
+import PageSurvey_5 from "views/SurveyPage/Survey_5.js"
 // others
 
 ReactDOM.render(
@@ -82,6 +86,22 @@ ReactDOM.render(
       <Route
         path="/page-survey"//性格分析問卷頁面
         render={props => <PageSurvey {...props} />} 
+      />
+      <Route
+        path="/page-survey-2"//性格分析問卷頁面_2
+        render={props => <PageSurvey_2 {...props} />} 
+      />
+      <Route
+        path="/page-survey-3"//性格分析問卷頁面_3
+        render={props => <PageSurvey_3 {...props} />} 
+      />
+      <Route
+        path="/page-survey-4"//性格分析問卷頁面_4
+        render={props => <PageSurvey_4 {...props} />} 
+      />
+      <Route
+        path="/page-survey-5"//性格分析問卷頁面_5
+        render={props => <PageSurvey_5 {...props} />} 
       />
       <Redirect to="/index" />
     </Switch>
