@@ -104,7 +104,7 @@ class DetailFund extends React.Component{
         let id = (this.props.match.params.fundid.split('='))[1];
         const url = "https://140.115.87.192:8090/getTrack";
         fetch(url, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
