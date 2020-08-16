@@ -220,7 +220,7 @@ class Tag extends React.Component{
     getfilter(){
         const url = "https://140.115.87.192:8090/getLike";
         fetch(url, {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -546,7 +546,7 @@ class Tag extends React.Component{
         //判斷是按讚還是倒讚
         const url = "https://140.115.87.192:8090/UpdateTag";
         fetch(url, {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -579,7 +579,7 @@ class Tag extends React.Component{
         let member_info=[];
         const url = "https://140.115.87.192:8090/check_LoginStatus";
         fetch(url, {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
@@ -622,7 +622,7 @@ class Tag extends React.Component{
         //檢查，會設定 vote_valid = TRUE or FLASE
         if(this.state.vote_valid==0){
             fetch(url, {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',

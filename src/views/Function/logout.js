@@ -9,7 +9,7 @@ function logout(){
     const url = "https://140.115.87.192:8090/Logout";
     //console.log(data)
     fetch(proxyurl + url, {
-          method: 'POST',
+          method: 'GET',
           headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',

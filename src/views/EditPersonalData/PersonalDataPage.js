@@ -126,7 +126,7 @@ class PersonlDataPage extends React.Component {
     const url = "https://140.115.87.192:8090/check_LoginStatus";////////改url
     //console.log(data)
     fetch(url, {
-              method: 'POST',
+              method: 'GET',
               headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
@@ -217,7 +217,7 @@ class PersonlDataPage extends React.Component {
     //const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = "https://140.115.87.192:8090/UpdateUserInfo";////////改url
     fetch(url, {
-              method: 'POST',
+              method: 'PUT',
               headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',

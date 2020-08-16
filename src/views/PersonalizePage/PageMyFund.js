@@ -95,7 +95,7 @@ class PageMyFund extends React.Component{
     getTrackData(){  //取得追蹤基金
       const url = "https://140.115.87.192:8090/getTrack";
       fetch(url, {
-          method: 'POST',
+          method: 'GET',
           headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',

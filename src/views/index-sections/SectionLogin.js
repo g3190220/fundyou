@@ -59,7 +59,7 @@ class SectionLogin extends React.Component {
         const url = "https://140.115.87.192:8090/Signin";
         //console.log(data)
         fetch( url, {
-              method: 'POST',
+              method: 'GET',
               headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',

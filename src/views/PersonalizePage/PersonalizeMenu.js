@@ -68,7 +68,7 @@ class PersonalizeMenu extends React.Component{
     const url = "https://140.115.87.192:8090/check_LoginStatus";////////改url
     //console.log(data)
     fetch(proxyurl + url, {
-              method: 'POST',
+              method: 'GET',
               headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
