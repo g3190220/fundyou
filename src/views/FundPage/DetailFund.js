@@ -44,13 +44,15 @@ class DetailFund extends React.Component{
       this.handleClickTAG = this.tag_link.bind(this);
       this.trackstate = this.trackstate.bind(this); //追蹤基金事件(綁定track按鈕)
       this.togglestate = this.togglestate.bind(this);
+      this.CreateTrack = this.CreateTrack.bind(this);
+
     }
     componentDidMount() {
         //取得基金資料
         let fund_info=[];
         console.log(this.props.match.params.fundid.split('='));
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "http://140.115.87.192:8090/getFundInfo";////////改url
+        const url = "https://140.115.87.192:8090/getFundInfo";////////改url
         //console.log(data)
         fetch( url, {
                 method: 'POST',
@@ -100,11 +102,7 @@ class DetailFund extends React.Component{
     trackstate(){    //看此user有沒有追蹤過此筆基金，並改變追蹤狀態
         let fund_info=[];
         let id = (this.props.match.params.fundid.split('='))[1];
-        const currentState=this.state.trackstate;
-        const url = "http://140.115.87.192:8090/getTrack";
-        // alert(id)
-        // alert(load_cookies("member_id"))
-        
+        const url = "https://140.115.87.192:8090/getTrack";
         fetch(url, {
             method: 'POST',
             headers: {
@@ -122,39 +120,67 @@ class DetailFund extends React.Component{
             try{
             fund_info=JSON.parse(jsonData.info)
             if(jsonData.StatusCode==200){ 
-                this.setState({trackstate:!currentState});
+                console.log(fund_info)
                 this.setState((state, props) => {
                 return {
-                  trackstate:true,
                   userid:fund_info[0].MemberID, //userid
-                  fund_fld022_track:fund_info[0].Fund_fld022_track, //基金統編
-                  track_state:fund_info[0].Track, //追蹤狀態，1:已追蹤，0:未追蹤
+                  fund_fld022_track:fund_info[0].fund_fld022_track, //基金統編
+                  track_state:fund_info[0].track, //追蹤狀態，1:已追蹤，0:未追蹤
                   initial:true,
                 }
               })
             }}
-            //未追蹤的狀況
             catch(e){
-                this.setState({trackstate:false})
+                this.setState({track_state:0})  //未追蹤的狀況
 
             }
           })
 
     }
 
-    togglestate(e){
-        const currentState=this.state.trackstate;
-        this.setState({trackstate:!currentState});
-        e.preventDefault();
-        // return this.setState(prevState => ({ time: ++prevState.time }))
+    togglestate(){  //點擊追蹤按鈕，切換狀態
+        if(this.state.track_state==1){  
+            this.setState({track_state:0})
+        }
+        else{
+            this.setState({track_state:1})
+        }
     }
+
+
+    CreateTrack(){  //建立追蹤基金
+        let id = (this.props.match.params.fundid.split('='))[1]; //抓現在頁面的id
+        const url = "https://140.115.87.192:8090/CreateTrack";
+        //console.log(data)
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userid: load_cookies("member_id"),
+                fld022: id,
+            })
+        })
+        .then((response) => {return response.json();})
+        .then((jsonData) => { 
+            if(jsonData.StatusCode==200){ 
+                console.log("成功更新追蹤狀態")
+            }
+            else{
+                console.log("error")
+            }
+        })
+        .then(()=>{this.setState();window.location.reload(true);})  //更新狀態後重新整理頁面
+      }
 
 
 
     getnet(){
         let fund_net=[];
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url2 = "http://140.115.87.192:8090/getNetWorth";////////改url
+        const url2 = "https://140.115.87.192:8090/getNetWorth";////////改url
         //console.log(data)
         fetch(url2, {
                 method: 'POST',
@@ -209,7 +235,7 @@ class DetailFund extends React.Component{
     getROI(){
         let fund_return=[];
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url2 = "http://140.115.87.192:8090/getReturn";////////改url
+        const url2 = "https://140.115.87.192:8090/getReturn";////////改url
         //console.log(data)
         fetch(url2, {
                 method: 'POST',
@@ -250,7 +276,7 @@ class DetailFund extends React.Component{
         let day = [];
         let i = 0;
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url3 = "http://140.115.87.192:8090/getNetWorth";////////改url
+        const url3 = "https://140.115.87.192:8090/getNetWorth";////////改url
         //console.log(data)
         fetch(url3, {
                 method: 'POST',
@@ -301,7 +327,7 @@ class DetailFund extends React.Component{
         let day = [];
         let i = 0;
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url4 = "http://140.115.87.192:8090/getPerformance";////////改url
+        const url4 = "https://140.115.87.192:8090/getPerformance";////////改url
         //console.log(data)
         fetch(url4, {
                 method: 'POST',
@@ -452,7 +478,7 @@ class DetailFund extends React.Component{
                     <label className='tag-label'>高收益</label>
                     <label className='tag-label'>新台幣</label>
                    {/* <button className='Compare-btn'><a href='#page-compare'>去比較</a></button>*/}
-                   <input type="button" className={this.state.trackstate ? "followBtnTrue" : "followBtnFalse"} onClick={this.togglestate} value={this.state.trackstate ? "√ 已追蹤" : "+ 追蹤"}></input>
+                   <input type="button" className={this.state.track_state==1 ? "followBtnTrue" : "followBtnFalse"} onClick={this.togglestate,this.CreateTrack} value={this.state.track_state==1 ? "√ 已追蹤" : "+ 追蹤"}></input>
                 </Row>   
                 <Row >
                     <label className='fund-value'>{this.state.new_net}</label> {/*從資料庫讀取基金的淨值*/}

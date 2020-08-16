@@ -71,7 +71,7 @@ class CompareFund extends React.Component{
         let day = [];
         let i = 0;
        // let id = (this.props.match.params.fundid.split('='))[1];
-        const url3 = "http://140.115.87.192:8090/getNetWorth";////////改url
+        const url3 = "https://140.115.87.192:8090/getNetWorth";////////改url
         //console.log(data)
         fetch(url3, {
                 method: 'POST',
@@ -120,7 +120,7 @@ class CompareFund extends React.Component{
         let net=[];
         let i = 0;
         //let id = (this.props.match.params.fundid.split('='))[1];
-        const url3 = "http://140.115.87.192:8090/getNetWorth";////////改url
+        const url3 = "https://140.115.87.192:8090/getNetWorth";////////改url
         //console.log(data)
         fetch(url3, {
                 method: 'POST',
@@ -171,7 +171,7 @@ class CompareFund extends React.Component{
             let day = [];
             let i = 0;
             //let id = (this.props.match.params.fundid.split('='))[1];
-            const url3 = "http://140.115.87.192:8090/getNetWorth";////////改url
+            const url3 = "https://140.115.87.192:8090/getNetWorth";////////改url
             //console.log(data)
             fetch(url3, {
                     method: 'POST',
@@ -211,7 +211,7 @@ class CompareFund extends React.Component{
     //------------第一家公司的名稱--------------------------
     getfundname(){
         let fund_info=[];
-        const url = "http://140.115.87.192:8090/getFundInfo";////////改url
+        const url = "https://140.115.87.192:8090/getFundInfo";////////改url
         //console.log(data)
         fetch( url, {
                 method: 'POST',
@@ -249,7 +249,7 @@ class CompareFund extends React.Component{
     //------------第二家公司的名稱--------------------------
     getfundname_2(){
         let fund_info=[];
-        const url = "http://140.115.87.192:8090/getFundInfo";////////改url
+        const url = "https://140.115.87.192:8090/getFundInfo";////////改url
         //console.log(data)
         fetch( url, {
                 method: 'POST',
@@ -289,7 +289,7 @@ class CompareFund extends React.Component{
     //------------第三家公司的名稱--------------------------
     getfundname_3(){
         let fund_info=[];
-        const url = "http://140.115.87.192:8090/getFundInfo";////////改url
+        const url = "https://140.115.87.192:8090/getFundInfo";////////改url
         //console.log(data)
         fetch( url, {
                 method: 'POST',
@@ -333,7 +333,7 @@ class CompareFund extends React.Component{
         let day = [];
         let i = 0;
         //let id = (this.props.match.params.fundid.split('='))[1];
-        const url4 = "http://140.115.87.192:8090/getPerformance";////////改url
+        const url4 = "https://140.115.87.192:8090/getPerformance";////////改url
         //console.log(data)
         fetch(url4, {
                 method: 'POST',
@@ -396,7 +396,7 @@ class CompareFund extends React.Component{
         let day = [];
         let i = 0;
         //let id = (this.props.match.params.fundid.split('='))[1];
-        const url4 = "http://140.115.87.192:8090/getPerformance";////////改url
+        const url4 = "https://140.115.87.192:8090/getPerformance";////////改url
         //console.log(data)
         fetch(url4, {
                 method: 'POST',
@@ -463,7 +463,7 @@ class CompareFund extends React.Component{
         let day = [];
         let i = 0;
         //let id = (this.props.match.params.fundid.split('='))[1];
-        const url4 = "http://140.115.87.192:8090/getPerformance";////////改url
+        const url4 = "https://140.115.87.192:8090/getPerformance";////////改url
         //console.log(data)
         fetch(url4, {
                 method: 'POST',
@@ -517,7 +517,7 @@ class CompareFund extends React.Component{
     recent_performance(){
         let fund_performance=[];
         //let id = (this.props.match.params.fundid.split('='))[1];
-        const url4 = "http://140.115.87.192:8090/getPerformance";////////改url
+        const url4 = "https://140.115.87.192:8090/getPerformance";////////改url
         //console.log(data)
         fetch(url4, {
                 method: 'POST',
@@ -558,7 +558,7 @@ class CompareFund extends React.Component{
     recent_performance_2(){
         let fund_performance=[];
         //let id = (this.props.match.params.fundid.split('='))[1];
-        const url4 = "http://140.115.87.192:8090/getPerformance";////////改url
+        const url4 = "https://140.115.87.192:8090/getPerformance";////////改url
         //console.log(data)
         fetch(url4, {
                 method: 'POST',
@@ -604,7 +604,7 @@ class CompareFund extends React.Component{
         recent_performance_3(){
             let fund_performance=[];
             //let id = (this.props.match.params.fundid.split('='))[1];
-            const url4 = "http://140.115.87.192:8090/getPerformance";////////改url
+            const url4 = "https://140.115.87.192:8090/getPerformance";////////改url
             //console.log(data)
             fetch(url4, {
                     method: 'POST',
@@ -645,7 +645,7 @@ class CompareFund extends React.Component{
     recent_ROI(){   
         let fund_return=[];
         //let id = (this.props.match.params.fundid.split('='))[1];
-        const url2 = "http://140.115.87.192:8090/getReturn";////////改url
+        const url2 = "https://140.115.87.192:8090/getReturn";////////改url
         //console.log(data)
         fetch(url2, {
                 method: 'POST',
@@ -684,7 +684,7 @@ class CompareFund extends React.Component{
     recent_ROI_2(){   
         let fund_return=[];
         //let id = (this.props.match.params.fundid.split('='))[1];
-        const url2 = "http://140.115.87.192:8090/getReturn";////////改url
+        const url2 = "https://140.115.87.192:8090/getReturn";////////改url
         //console.log(data)
         fetch(url2, {
                 method: 'POST',
@@ -723,7 +723,7 @@ class CompareFund extends React.Component{
         recent_ROI_3(){   
             let fund_return=[];
             //let id = (this.props.match.params.fundid.split('='))[1];
-            const url2 = "http://140.115.87.192:8090/getReturn";////////改url
+            const url2 = "https://140.115.87.192:8090/getReturn";////////改url
             //console.log(data)
             fetch(url2, {
                     method: 'POST',

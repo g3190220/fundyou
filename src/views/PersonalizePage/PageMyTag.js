@@ -131,7 +131,7 @@ class PageMyTag extends React.Component{
   //本周新增的tag顯示
   getNewTagData(){
         
-        const url = "http://140.115.87.192:8090/getNewTag";
+        const url = "https://140.115.87.192:8090/getNewTag";
         fetch(url, {
           method: 'POST',
           headers: {
@@ -176,7 +176,7 @@ class PageMyTag extends React.Component{
   DeleteTag(in_tagid){
     
     let tag_info=[];
-        const url = "http://140.115.87.192:8090/DeleteNewTag";
+        const url = "https://140.115.87.192:8090/DeleteNewTag";
         fetch(url, {
           method: 'POST',
           headers: {
@@ -209,7 +209,7 @@ class PageMyTag extends React.Component{
   //歷史新增tag顯示
   getHistoryTagData(){
         
-    const url = "http://140.115.87.192:8090/getTag";
+    const url = "https://140.115.87.192:8090/getTag";
     fetch(url, {
       method: 'POST',
       headers: {

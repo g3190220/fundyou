@@ -56,7 +56,7 @@ class SectionLogin extends React.Component {
 
         this.state.errors = {};
         //const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        const url = "http://140.115.87.192:8090/Signin";
+        const url = "https://140.115.87.192:8090/Signin";
         //console.log(data)
         fetch( url, {
               method: 'POST',

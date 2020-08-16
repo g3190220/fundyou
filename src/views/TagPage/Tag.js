@@ -183,7 +183,7 @@ class Tag extends React.Component{
         //取得基金資料
         let fund_info=[];
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "http://140.115.87.192:8090/getFundInfo";////////改url
+        const url = "https://140.115.87.192:8090/getFundInfo";////////改url
         fetch( url, {
                 method: 'POST',
                 headers: {
@@ -218,7 +218,7 @@ class Tag extends React.Component{
 
     //(2) 取得會員對此基金有按過的tag的紀錄
     getfilter(){
-        const url = "http://140.115.87.192:8090/getLike";
+        const url = "https://140.115.87.192:8090/getLike";
         fetch(url, {
             method: 'POST',
             headers: {
@@ -304,7 +304,7 @@ class Tag extends React.Component{
     //(4) tag本周排行(weekly like - weekly unlike)
     getTagWeekRank(){
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "http://140.115.87.192:8090/getTag";
+        const url = "https://140.115.87.192:8090/getTag";
         fetch(url, {
         method: 'POST',
         headers: {
@@ -347,7 +347,7 @@ class Tag extends React.Component{
     //(5) 歷史tag排行
     getHistoryTagData(){
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "http://140.115.87.192:8090/getTag";
+        const url = "https://140.115.87.192:8090/getTag";
         fetch(url, {
         method: 'POST',
         headers: {
@@ -386,7 +386,7 @@ class Tag extends React.Component{
     //(6) 展示本周新增全部的tag
     getNewTag(){
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "http://140.115.87.192:8090/getNewTag";
+        const url = "https://140.115.87.192:8090/getNewTag";
         fetch(url, {
         method: 'POST',
         headers: {
@@ -442,7 +442,7 @@ class Tag extends React.Component{
             like=0;
             unlike=1
         }
-        const url = "http://140.115.87.192:8090/getLike";
+        const url = "https://140.115.87.192:8090/getLike";
         fetch(url, {
             method: 'POST',
             headers: {
@@ -506,7 +506,7 @@ class Tag extends React.Component{
 
     //(6) 更新個人按讚紀錄的問題
     HandleLike(in_tagid,_islike){
-        const url = "http://140.115.87.192:8090/UserLikeRecord";
+        const url = "https://140.115.87.192:8090/UserLikeRecord";
         fetch(url, {
             method: 'POST',
             headers: {
@@ -544,7 +544,7 @@ class Tag extends React.Component{
     Like(in_tagid,like,unlike,is_like_setting){
 
         //判斷是按讚還是倒讚
-        const url = "http://140.115.87.192:8090/UpdateTag";
+        const url = "https://140.115.87.192:8090/UpdateTag";
         fetch(url, {
         method: 'POST',
         headers: {
@@ -577,7 +577,7 @@ class Tag extends React.Component{
     //(8) 處理最多只能投三票的的問題
     HandleVote(){
         let member_info=[];
-        const url = "http://140.115.87.192:8090/check_LoginStatus";
+        const url = "https://140.115.87.192:8090/check_LoginStatus";
         fetch(url, {
                 method: 'POST',
                 headers: {
@@ -618,7 +618,7 @@ class Tag extends React.Component{
 
     //(9) 投票
     Vote(in_tagid){
-        const url = "http://140.115.87.192:8090/UpdateNewTag";
+        const url = "https://140.115.87.192:8090/UpdateNewTag";
         //檢查，會設定 vote_valid = TRUE or FLASE
         if(this.state.vote_valid==0){
             fetch(url, {
@@ -665,7 +665,7 @@ class Tag extends React.Component{
         if(!isEmpty(this.state.new_tag)){
         let fund_id = (this.props.match.params.fundid.split('='))[1];
         this.setState({fund_id: this.state.in_fund_id});
-        const url = "http://140.115.87.192:8090/GenerateNewTag";////////改url
+        const url = "https://140.115.87.192:8090/GenerateNewTag";////////改url
         fetch(url, {
                 method: 'POST',
                 headers: {
