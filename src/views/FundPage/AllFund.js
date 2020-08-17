@@ -434,7 +434,7 @@ class AllFund extends React.Component {
   getAllFundData(){
     let fund_info=[];
     //除淨值的資料
-    const url = "http://140.115.87.192:8090/getFundInfo";////////改url
+    const url = "https://140.115.87.192:8090/getFundInfo";////////改url
     //console.log(data)
     fetch(url, {
               method: 'POST',
@@ -463,7 +463,7 @@ class AllFund extends React.Component {
           }
         })
       //抓取淨值資料
-      const url2 = "http://140.115.87.192:8090/getFundInfo";////////改url
+      const url2 = "https://140.115.87.192:8090/getFundInfo";////////改url
   }
   getNetWorth(){
     
@@ -484,10 +484,10 @@ class AllFund extends React.Component {
   //篩選基金顯示
   filterShow(){
     let fund_info=[];
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    const url = "http://140.115.87.192:8090/Search_Fund";////////改url
+    //const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const url = "https://140.115.87.192:8090/Search_Fund";////////改url
     //console.log(data)
-    fetch(proxyurl + url, {
+    fetch(url, {
               method: 'POST',
               headers: {
                   'Accept': 'application/json',

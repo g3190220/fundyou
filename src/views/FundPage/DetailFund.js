@@ -7,6 +7,7 @@ import ReactHighcharts from'react-highcharts'; //基金圖表套件，參考：h
 import {browserHistory} from 'react-router';
 import { load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
 import FollowFund from 'views/FundPage/FollowFund.js';
+import { TextField } from "@material-ui/core";
 
 // reactstrap components
 import { Button, Card, Form, Input, Container, Row, Col} from "reactstrap";
@@ -489,53 +490,11 @@ class DetailFund extends React.Component{
                 </Row>
                 </div>              
             </Row>
+            
             <Row>
                 <div className='sub-sub-tag'>
-                <Row>
-                    <table className='tag-table' border='0'>
-                        <tr>
-                            <th>History TAG Ranking</th>
-                        </tr>
-                        <tr>
-                            <td><label>１、</label>高收益</td>
-                        </tr>
-                        <tr>
-                            <td><label>２、</label>高報酬</td>
-                        </tr>
-                        <tr>
-                            <td><label>３、</label>TAG</td>
-                        </tr>
-                        <tr>
-                            <td><label>４、</label>TAG</td>
-                        </tr>
-                        <tr>
-                            <td><label>５、</label>TAG</td>
-                        </tr>
-                    </table>
-                    <table className='tag-table' border='0'>
-                        <tr>
-                            <th>Weekly TAG Ranking</th>
-                        </tr>
-                        <tr>
-                            <td><label>１、</label>高收益</td>
-                        </tr>
-                        <tr>
-                            <td><label>２、</label>高報酬</td>
-                        </tr>
-                        <tr>
-                            <td><label>３、</label>TAG</td>
-                        </tr>
-                        <tr>
-                            <td><label>４、</label>TAG</td>
-                        </tr>
-                        <tr>
-                            <td><label>５、</label>TAG</td>
-                        </tr>
-                    </table>
-                </Row>
-                <Row>
-                    <button className='tag-btn' onClick={this.handleClickTAG}>去看看所有TAG➥</button>
-                </Row>
+                    <button className='tag-btn' onClick={this.handleClickTAG}>新增TAG</button><div className='input-tag'><input className='input-fieled' size="8" maxlength="8"></input></div>
+                    <button className='tag-btn-hidden' onClick={this.handleClickTAG}>去看看所有TAG➥</button>   
                 </div>
             </Row>
             <Row>
