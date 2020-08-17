@@ -484,10 +484,10 @@ class AllFund extends React.Component {
   //篩選基金顯示
   filterShow(){
     let fund_info=[];
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    //const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = "https://140.115.87.192:8090/Search_Fund";////////改url
     //console.log(data)
-    fetch(proxyurl + url, {
+    fetch(url, {
               method: 'POST',
               headers: {
                   'Accept': 'application/json',
