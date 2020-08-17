@@ -359,6 +359,26 @@
             transform: translateX(12%);
             width: 80%;
             display: inline;
+            .input-tag{
+                background-color:#ffffff;
+                border-radius: 15px;
+                width: 700px;
+                height: 42px;
+                margin-left: -20px;
+                margin-top:-48px;
+                transform: translateX(30%);
+                
+            }
+            .input-fieled{
+                border-top-style: hidden;
+                border-right-style: hidden;
+                border-left-style: hidden;
+                border-bottom-style: hidden;
+                background-color:transparent;
+                outline: none;
+                margin-left: 20px;
+                margin-top: 10px;
+            }
 
             .tag-table{
                // border: 2px #F8EDEB solid;
@@ -403,15 +423,30 @@
                 width: 150px;
                 height: 40px;
                 border-radius: 20px;
+                margin-left: 20px;
+                margin-top: 15px;
+                margin-bottom: 8px;
                 border:#e26d5c solid 2px;
                 background-color:#e26d5c;
-                margin-top: 10px;
-                margin-left: 760px;
-                margin-bottom: 10px;
                 outline:none;
                 color:  #F8EDEB;
                 font-weight:bold;
                 font-family:Microsoft JhengHei;
+            }
+            .tag-btn-hidden{
+                width: 150px;
+                height: 10px;
+                border-radius: 20px;
+                margin-left: 20px;
+                margin-top: 0px;
+                margin-bottom: 19px;
+                border:0px;
+                background-color: transparent;
+                outline:none;
+                color:  #e26d5c;
+                font-weight:bold;
+                font-family:Microsoft JhengHei;
+                padding-top: 0px
             }
             .tag-btn:hover{
                 background-color: #F8EDEB;
@@ -420,6 +455,7 @@
             .tag-btn a{
                 color: inherit;
             }
+           
         }
 
         .sub-sub-basic-info{
