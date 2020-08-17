@@ -330,6 +330,9 @@
 
 .card-personalize-mytag {
   min-height: 1000px;
+  .card-personalize5-table{
+    padding: 15px;
+  }
   
   .card-personalize5 {
     background-color: #faeedc;
@@ -342,6 +345,7 @@
     top: 600px; 
     left: 120px;
     position: absolute;
+    
   
     & label {
       margin-top: 15px;

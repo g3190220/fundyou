@@ -45,7 +45,6 @@
         .sub-sub-search{
             background-color:#f19c79;
             width: 1200px;
-            min-height: 400px; //待刪除
             padding: 30px;
             position: relative;
             left: 50%;
@@ -378,6 +377,7 @@
                 outline: none;
                 margin-left: 20px;
                 margin-top: 10px;
+                width:640px;
             }
 
             .tag-table{

@@ -1,13 +1,58 @@
 .tag-menu{
     background-color:#F9DCC4;
-
+    height: 642px;
+    .button-center{
+        font-family: "微軟正黑體";
+        font-weight:bold;
+        margin: 0 auto; 
+        margin-left: 80px;
+        margin-top: 100px;
+        
+    }
     .tag-title{
         font-size: 50px;
         color: #e26d5c;
         font-family: Microsoft JhengHei;
         font-weight:bold;
         margin-top: 120px;
+        
     }
+    .tag-btn{
+            width: 150px;
+            height: 40px;
+            border-radius: 20px;
+            margin-left: 20px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            border:#e26d5c solid 2px;
+            background-color:#e26d5c;
+            outline:none;
+            color:  #F8EDEB;
+            font-weight:bold;
+            font-family:Microsoft JhengHei;
+        }
+        .tag-btn-hidden{
+            width: 150px;
+            height: 10px;
+            border-radius: 20px;
+            margin-left: 20px;
+            margin-top: 0px;
+            margin-bottom: 19px;
+            border:0px;
+            background-color: transparent;
+            outline:none;
+            color:  #e26d5c;
+            font-weight:bold;
+            font-family:Microsoft JhengHei;
+            padding-top: 0px
+        }
+        .tag-btn:hover{
+            background-color: #F8EDEB;
+            color: #e26d5c;
+        }
+        .tag-btn a{
+            color: inherit;
+        }
     .rank-header{
         font-size: 30px;
         color: #e26d5c;

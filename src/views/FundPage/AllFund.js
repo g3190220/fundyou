@@ -727,10 +727,6 @@ class AllFund extends React.Component {
             ))}
             </TextField>
             </Col>
-            
-          </Row>
-          <div><label className='search-font'>熱門TAG</label><br/></div>
-          <Row>
               
           </Row>
         </div> 

@@ -33,17 +33,22 @@ import HowToVoteIcon from '@material-ui/icons/HowToVote';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 //處理對話框
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
+// import Dialog from '@material-ui/core/Dialog';
+// import DialogActions from '@material-ui/core/DialogActions';
+// import DialogContent from '@material-ui/core/DialogContent';
+// import DialogContentText from '@material-ui/core/DialogContentText';
+// import DialogTitle from '@material-ui/core/DialogTitle';
+// import Button from '@material-ui/core/Button';
 
 
 //loading page
 import LoadingIndicator from "views/Function/LoadingIndicator.js";
 import LoadingIndicator_small from "views/Function/LoadingIndicator_small.js";
+
+//分頁
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import { makeStyles } from '@material-ui/core/styles';
 
 
 const tableIcons = {
@@ -86,6 +91,16 @@ const columns_history_rank=
     {title: '總倒讚數',field: 'History_unlike'},
     
 ];
+const columns_history_recent=
+[
+    {title: '排行', field: 'Rank' ,render: rowData => rowData.tableData.id + 1},
+    {title: 'TAG', field: 'tagContent' },
+    {title: '總按讚數',field: 'History_like'},
+    {title: '總倒讚數',field: 'History_unlike'},
+    {title: '建立時間',field: 'Create_Date'},
+    
+];
+
 const columns_vote=
 [
     {title: 'TAG', field: 'tagContent' },
@@ -94,11 +109,23 @@ const columns_vote=
     
 ];
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    },
+}));
+
+
+
 var islike_info=[]
 
                     
 
 class Tag extends React.Component{
+    
     
     state = {
     }
@@ -109,8 +136,12 @@ class Tag extends React.Component{
         this.handleClose=this.handleClose.bind(this);
         this.handleClickOpen_M=this.handleClickOpen_M.bind(this);
         this.handleClose_M=this.handleClose_M.bind(this);
-        //新增TAG
-        this.handleSubmit = this.handleSubmit.bind(this);
+        //處理分頁
+        this.handleClick_Menu=this.handleClick_Menu.bind(this);
+        this.handleClose_Menu=this.handleClose_Menu.bind(this);
+
+        //排行分頁
+        this.Change_rank = this.Change_rank.bind(this);
         //顯示
         this.getTagWeekRank = this.getTagWeekRank.bind(this);
         this.getFundName=this.getFundName.bind(this);
@@ -132,7 +163,9 @@ class Tag extends React.Component{
           data_thisWeek:[],
           data_history:[],
           data_allthisWeek:[],
-          flag:false
+          flag:false,
+          selected_data:[],
+          selected_columns:columns_history_rank
       }
     
     }
@@ -141,6 +174,20 @@ class Tag extends React.Component{
         window.scrollTo(0, 0)
         this.getFundName();
     }
+    /*********************************處理對話框方法*********************************/
+    handleClick_Menu = () =>{
+        this.setState({
+            AnchorEl: this.currentTarget
+        });
+    }
+      
+    handleClose_Menu(){
+        this.setState({
+            AnchorEl: null
+        });
+    }
+    /*********************************處理對話框方法*********************************/
+
 
     /*********************************處理對話框方法*********************************/
     handleClickOpen(){
@@ -235,18 +282,18 @@ class Tag extends React.Component{
     .then((response) => {return response.json();})
     .then((jsonData) => { 
         
-        console.log(jsonData)
+        //console.log(jsonData)
         if(jsonData.StatusCode==200){
-            console.log(jsonData.info)
+            //console.log(jsonData.info)
             try{
                 islike_info=JSON.parse(jsonData.info)}
             catch(e){
-                console.log("catch:還沒有按過tag讚")
+                //console.log("catch:還沒有按過tag讚")
                 islike_info=[{"tagID": 0, "fundID": 0, "islike": 0, "tblDate": "0", "memberID": 0}]
             }
     }
-    console.log("取得會員對此基金有按過的tag的紀錄")
-    console.log(islike_info)
+    //console.log("取得會員對此基金有按過的tag的紀錄")
+    //console.log(islike_info)
     
 
     })
@@ -255,19 +302,19 @@ class Tag extends React.Component{
 
     //(3) 將tag資料做篩選，每個row加上is_like_byuser資料
     filterlike(filter_data){
-        console.log("islike_info")
-        console.log(filter_data)
-        console.log(islike_info)
-        console.log("長度")
-        console.log(filter_data.length)
+        // console.log("islike_info")
+        // console.log(filter_data)
+        // console.log(islike_info)
+        // console.log("長度")
+        // console.log(filter_data.length)
         for(var i = 0; i < filter_data.length; i++) { 
             var check=0;
             for(var j = 0;j < islike_info.length; j++){
                 if(filter_data[i].tagID == islike_info[j].tagID && check==0) {
                     check=1;
-                    console.log(i)
-                    console.log(j)
-                    console.log(filter_data[i])
+                    // console.log(i)
+                    // console.log(j)
+                    // console.log(filter_data[i])
                     switch (islike_info[j].islike) {
                         case 0:
                             
@@ -294,9 +341,9 @@ class Tag extends React.Component{
             }
             if(check==0){filter_data[i].is_like_byuser=0;}//沒有記錄過
         }
-        console.log("將tag資料做篩選，每個row加上is_like資料")    
+        //console.log("將tag資料做篩選，每個row加上is_like資料")    
         //篩選過後的資料丟到
-        console.log(filter_data)
+        //console.log(filter_data)
         return filter_data
         
     }
@@ -321,8 +368,8 @@ class Tag extends React.Component{
     })
     .then((response) => {return response.json();})
     .then((jsonData) => { 
-        console.log("tag本周排行")
-        console.log(jsonData)
+        // console.log("tag本周排行")
+        // console.log(jsonData)
         
     if(jsonData.StatusCode==200){
         var tag_info = [];
@@ -333,8 +380,8 @@ class Tag extends React.Component{
         this.state.data_thisWeek=this.filterlike(tag_info);
         this.setState({data_thisWeek:this.state.data_thisWeek})
 
-        console.log("本周tag資料")
-        console.log(this.state.data_thisWeek)
+        // console.log("本周tag資料")
+        // console.log(this.state.data_thisWeek)
     
     }
     else{ //statuscode=1000 >>沒有tag
@@ -370,9 +417,10 @@ class Tag extends React.Component{
         tag_info.push(JSON.parse(jsonData.tag_info[i]))
     }
     this.state.data_history=this.filterlike(tag_info)
-    console.log("歷史tag資料")
-    console.log(this.state.data_history)
+    // console.log("歷史tag資料")
+    // console.log(this.state.data_history)
     this.setState({data_history:this.state.data_history,flag:true})
+    this.setState({selected_data:this.state.data_history})
     
     }
     else{
@@ -385,8 +433,9 @@ class Tag extends React.Component{
 
     //(6) 展示本周新增全部的tag
     getNewTag(){
+        console.log("getNewTag()")
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "https://140.115.87.192:8090/getNewTag";
+        const url = "https://140.115.87.192:8090/getTag";
         fetch(url, {
         method: 'POST',
         headers: {
@@ -395,37 +444,40 @@ class Tag extends React.Component{
         },
         body: JSON.stringify({
                 //取得全部fund
-                member_id: -1,
-                tag_id:-1,
+                member_id: -3,
+                tag_id:-3,
                 fld022:id,
         })
         
     })
     .then((response) => {return response.json();})
     .then((jsonData) => { 
+        
     if(jsonData.StatusCode==200){
         var tag_info = [];
         
     try{
-        tag_info=JSON.parse(jsonData.Newtag_info)
-        this.state.data_allthisWeek=tag_info
-        this.setState({data_allthisWeek:this.state.data_allthisWeek})
+        for(var i = 0; i < jsonData.tag_info.length; i++){
+            tag_info.push(JSON.parse(jsonData.tag_info[i]))
+        }
+        console.log(tag_info)
+        this.state.data_recently=this.filterlike(tag_info)
+        this.setState({data_recently:this.state.data_recently})
     }
     
     catch (d){
-        this.state.data_allthisWeek=[]
+        this.state.data_recently=[]
         
     }
     }
     else{
     
-    this.state.data_allthisWeek=[]
+    this.state.data_recently=[]
     
     }
 
     })
     .then(()=>{this.setState({flag:true})})
-    .then(()=>{this.HandleVote()})
     }
 
     //(7) input: 按的tagID及按的是倒讚還是讚 ----> 取得每個tag的按讚紀錄
@@ -462,8 +514,8 @@ class Tag extends React.Component{
         let info= [];
         try{
             info=JSON.parse(jsonData.info)
-            console.log(info[0].islike)
-            console.log(in_like)
+            //console.log(info[0].islike)
+            //console.log(in_like)
         //開始檢查是否可以按讚
         //如果islike=0,可以按讚
         if(info[0].islike==0){
@@ -475,12 +527,12 @@ class Tag extends React.Component{
             if(in_like==info[0].islike){
                 //要取消"讚"
                 if(info[0].islike==1){
-                    console.log("取消讚")
+                    //console.log("取消讚")
                     this.Like(in_tagid,-1,0,0)
                 }
                 //要取消"倒讚"
                 else if(info[0].islike==2){
-                    console.log("取消倒讚")
+                    //console.log("取消倒讚")
                     this.Like(in_tagid,0,-1,0)
                 }
             }
@@ -527,10 +579,10 @@ class Tag extends React.Component{
         })
     .then((response) => {return response.json();})
     .then((jsonData) => { 
-        console.log(jsonData)
+        //console.log(jsonData)
         if(jsonData.StatusCode==200){
             console.log("HandleLike() 成功更該islike")
-            console.log(_islike)
+            //console.log(_islike)
             
         }
         else{
@@ -657,56 +709,26 @@ class Tag extends React.Component{
 
     }
 
-    //(10) 新增tag
-    handleSubmit(){
-        let errors = {}; 
-        //取消DOM的預設功能
-        window.event.preventDefault();
-        if(!isEmpty(this.state.new_tag)){
-        let fund_id = (this.props.match.params.fundid.split('='))[1];
-        this.setState({fund_id: this.state.in_fund_id});
-        const url = "https://140.115.87.192:8090/GenerateNewTag";////////改url
-        fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                        member_id: load_cookies("member_id"),
-                        fld_022: fund_id,
-                        content:this.state.new_tag,
-                
-                
-                })
-                
+    //(10)改變分頁
+    Change_rank(selected){
+        if(selected==1){
+            this.setState({selected_data:this.state.data_history})
+            this.setState({selected_columns:columns_history_rank})
             
-            })
-        .then((response) => {return response.json();})
-        .then((jsonData) => {
-            //新增成功
-            if(jsonData.StatusCode==200){
-            alert("新增成功")
-            //重新整理畫面
-            //刷新頁面
-            this.setState();
-            window.location.reload(true);
-
-            }
-            else{
-            console.log("handleSubmit_error")}
-            
-        })}
-        else {
-            errors["tag_new_is_errors"] = true;
-            errors["tag_new"]="TAG內容不能為空白"
         }
-        this.setState({errors: errors});
+        else if(selected==2){
+            this.setState({selected_data:this.state.data_thisWeek})
+            this.setState({selected_columns:columns_week_rank})
+            
+        }
+        else if(selected==3){
+            this.setState({selected_data:this.state.data_recently})
+            this.setState({selected_columns:columns_history_recent})
+            
+        }
     }
-
-
+   
     render(){
-
         return(
             <div>
             {!this.state.flag ? (<LoadingIndicator></LoadingIndicator>):(
@@ -714,97 +736,25 @@ class Tag extends React.Component{
             <Container>
             <IndexNavbar></IndexNavbar>
             <Row>
-                <label className='tag-title'>{this.state.fund_name}</label>
+                <a className='tag-title' href="javascript:history.back()" style={{cursor: 'pointer'}}>{this.state.fund_name}</a>
             </Row>
             <Row>
-                <Col>
-                <div className="rank-header">
-                    <span>TAG歷史排行</span>
-                </div>
-                
-                <div className="rank-content">
-                        <MuiThemeProvider theme={THEME}>
-                            <MaterialTable
-                            icons={tableIcons}
-                            title="TAG歷史排行"
-                            columns={columns_history_rank}
-                            data={this.state.data_history}                         
-                            options={{
-                            
-                            paging: false,
-                            toolbar: false,
-                            headerStyle: {
-                                backgroundColor: '#e26d5c',
-                                color: '#F8EDEB',
-                                width:500,
-                                maxWidth: 500,
-                                whiteSpace:'nowrap',
-                                position: 'sticky', 
-                                top: 0,
-                                fontSize: 17,
-                                textAlign:'center',
-                                fontWeight: 'bold',
-                            },
-                            search: false,
-                            minBodyHeight: 500,
-                            cellStyle:{ 
-                                width:500,
-                                maxWidth:500,
-                                textAlign:'center',
-                                backgroundColor: '#F8EDEB',
-                                color: '#e26d5c',
-                                
-                            },
-                            actionsCellStyle: {
-                                backgroundColor: '#F8EDEB'
-                            },
-                            maxBodyHeight: 600,
-                            actionsColumnIndex: -1,
-                            }}
-                            actions={[
-                                rowData =>({
-                                    icon: () => (rowData.is_like_byuser==1)?<ThumbUpIcon color="secondary"/>:<ThumbUpIcon color="action"/>,
-                                    tooltip: 'like',
-                                    onClick: (event, rowData) => {
-                                      
-                                      this.getLike(rowData.tagID,1)
-
-                                      
-                                  }
-                                  }),
-                                rowData =>({
-                                    icon: () => (rowData.is_like_byuser==2)?<ThumbDownIcon color="primary"/>:<ThumbDownIcon color="action"/>,
-                                    tooltip: 'unlike',
-                                    onClick: (event, rowData) => {
-                                        
-                                        this.getLike(rowData.tagID,2)
-
-                                        
-                                    }
-                                }),
-                              ]}
-                            localization={{ 
-                                body:{ emptyDataSourceMessage:<h4 style={{marginTop:'6%', position:'absolute', top:'16%', textAlign:'center',color: '#e26d5c'}}>還沒有人新增TAG...</h4> },
-                                header: {
-                                    actions: ''
-                                }
-                            }}
-                        />
-                        </MuiThemeProvider>
+                <Col sm={4}>
+                    <div className='button-center'>
+                        <button className='tag-btn'  onClick={()=>this.Change_rank(1)}>歷史tag排行</button><br/>
+                        <button className='tag-btn'  onClick={()=>this.Change_rank(2)}>本週TAG排行</button><br/>
+                        <button className='tag-btn'  onClick={()=>this.Change_rank(3)}>最新TAG排行</button><br/>
                     </div>
                 </Col>
-                <Col>
-                    <div className="rank-header">
-                        <span>TAG本週即時排行</span>
-                    </div>
+                <Col sm={8}>
                     
                     <div className="rank-content">
                     <MuiThemeProvider theme={THEME}>
                         <MaterialTable
                             icons={tableIcons}
-                            title="TAG本週即時排行"
-                            columns={columns_week_rank}
-                            data={this.state.data_thisWeek}
+                            title="TAG排行"
+                            columns={this.state.selected_columns}
+                            data={this.state.selected_data}
                             options={{
                             sorting: false,
                             paging: false,
@@ -812,30 +762,33 @@ class Tag extends React.Component{
                             headerStyle: {
                                 backgroundColor: '#e26d5c',
                                 color: '#F8EDEB',
-                                width:500,
-                                maxWidth: 500,
+                                width:100,
+                                maxWidth: 100,
                                 whiteSpace:'nowrap',
                                 position: 'sticky', 
                                 top: 0,
                                 fontSize: 17,
                                 textAlign:'center',
-                                fontWeight: 'bold',
+                                fontFamily: '微軟正黑體',
+                                fontWeight: '800'
                             },
                             search: false,
-                            minBodyHeight: 500,
+                            minBodyHeight: 400,
                             cellStyle:{ 
-                                width:500,
-                                maxWidth:500,
+                                width:100,
+                                maxWidth:100,
                                 //whiteSpace:'nowrap',
                                 backgroundColor: '#F8EDEB',
                                 color: '#e26d5c',
                                 textAlign:'center',
+                                fontFamily: '微軟正黑體',
+                                fontWeight: '700'
                                 
                             },
                             actionsCellStyle: {
                                 backgroundColor: '#F8EDEB'
                             },
-                            maxBodyHeight: 600,
+                            maxBodyHeight: 400,
                             actionsColumnIndex: -1,
                             }}
                             actions={[
@@ -867,131 +820,11 @@ class Tag extends React.Component{
                         </MuiThemeProvider>
                         </div>
                 </Col>
-            </Row>
-            <Row>
-            <TextField
-                id="new_tag"
-                label="新增TAG"
-                margin="normal"
-                onChange={this.handleChange('new_tag')}
-                variant="outlined"
-                fullWidth
-                className='margin'    
-                //color="secondary"  
-                required    
-                error={this.state.errors["tag_new_is_errors"]}
-                helperText={this.state.errors["tag_new"]}  
-                inputProps={{
-                    maxLength: 8,
-                  }}                                          
-              />      
-            <button className='new-tag-btn' onClick={this.handleSubmit}>submit</button>
-            </Row>
-            <Row>
-            <div className="rank-header">
-                <span>本周新增TAG 投票區</span>
-            </div>
-            </Row>
-            <Row>   
-            <div className="rank-vote-content">
-                <MuiThemeProvider theme={THEME}>
-                    <MaterialTable
-                            icons={tableIcons}
-                            title="本周新增TAG 投票區"
-                            columns={columns_vote}
-                            data={this.state.data_allthisWeek} 
-                                 
-                            options={{
-                            toolbar: false,
-                            headerStyle: {
-                                backgroundColor: '#e26d5c',
-                                color: '#F8EDEB',
-                                width:500,
-                                maxWidth: 500,
-                                whiteSpace:'nowrap',
-                                position: 'sticky', 
-                                top: 0,
-                                fontSize: 17,
-                                textAlign:'center',
-                                fontWeight: 'bold',
-                            },
-                            search: false,
-                            minBodyHeight: 320,
-                            cellStyle:{ 
-                                width:500,
-                                maxWidth:500,
-                                textAlign:'center',
-                                backgroundColor: '#F8EDEB',
-                                color: '#e26d5c',
-                                
-                            },
-                            actionsCellStyle: {
-                                backgroundColor: '#F8EDEB'
-                            },
-                            maxBodyHeight: 320,
-                            actionsColumnIndex: -1,
-                            }}
-                            actions={[
-                                {
-                                    icon: () => <HowToVoteIcon color="action"/>,
-                                    tooltip: 'vote',
-                                    onClick: (event, rowData) => {
-                                        this.handleClickOpen()
-                                        this.setState({
-                                            in_vote_id: rowData.tagID
-                                        });
-                                        
-                                        
-                                    }
-                                  },
-                              ]}
-                            localization={{ 
-                                body:{ emptyDataSourceMessage:<h4 style={{marginTop:'6%', position:'absolute', top:'16%', textAlign:'center',color: '#e26d5c'}}>還沒有人新增TAG...</h4> },
-                                header: {
-                                    actions: ''
-                                }
-                            }}
-                />
-                </MuiThemeProvider>
-                <Dialog
-                        open={this.state.open}
-                        keepMounted
-                        onClose={this.handleClose}
-                        aria-labelledby="alert-dialog-slide-title"
-                        aria-describedby="alert-dialog-slide-description"
-                >
-                    <DialogTitle id="alert-dialog-slide-title">{"Confirm"}</DialogTitle>
-                    <DialogContent>
-                    <DialogContentText id="alert-dialog-slide-description">
-                        Are you sure to vote the tag?
-                    </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                    <Button onClick={this.handleClose} color="primary">
-                            No
-                    </Button>
-                    <Button onClick={() => this.Vote(this.state.in_vote_id)} color="primary" >
-                            Yes
-                    </Button>
-                    </DialogActions>
-                </Dialog>
-                <Dialog
-                    open={this.state.open_M}
-                    keepMounted
-                    onClose={this.handleClose_M}
-                    aria-labelledby="alert-dialog-slide-title"
-                    aria-describedby="alert-dialog-slide-description"
-                >
-                        <DialogTitle id="alert-dialog-slide-title">{"Message"}</DialogTitle>
-                        <DialogContent>
-                        <DialogContentText id="alert-dialog-slide-description">
-                            {this.state.message}
-                        </DialogContentText>
-                        </DialogContent>
-                </Dialog>
                 
-            </div> 
+                
             </Row>
+            
+            
             </Container>
             </div>
         )}</div>
