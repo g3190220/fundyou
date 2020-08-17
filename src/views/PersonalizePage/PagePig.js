@@ -13,6 +13,10 @@ import FaceIcon from '@material-ui/icons/Face';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 
+//分頁
+import Tabs from 'react-bootstrap/Tabs'
+import Tab from 'react-bootstrap/Tab'
+
 class PagePig extends React.Component{
     state = {
     }
@@ -21,7 +25,9 @@ class PagePig extends React.Component{
         console.log(props)
         this.state = {
           //fields: {},
-          errors: {}
+          errors: {},
+          key:"home",
+          setKey:'home',
       }
     this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -59,39 +65,25 @@ class PagePig extends React.Component{
             <div className="dollor-cost-average">
                 <span style={{fontWeight:"bold"}}>定期定額試算器</span>
             </div>
-
-            <div className="dollor-cost-average-sub">
-                <form>
-                    <table id="dollor-table">
-                        <tr>
-                            <th>每年投資金額</th>
-                            <th><input type="text"></input> 元</th>
-                        </tr>
-                        <tr>
-                            <th>目標投資年報酬率</th>
-                            <th><input type="text"></input> %</th>
-                        </tr>
-                        <tr>
-                            <th>投資期間</th>
-                            <th><input type="text"></input> 年</th>
-                        </tr>
-
-                        <tr>
-                            <th colspan="2">
-                                <div className="dollor-table-btn">
-                                    <input className="reset-btn" type="reset" value="重新設置" ></input> &nbsp;&nbsp;
-                                    <input className="submit-btn" type="submit" value="試算結果"></input>
-                                </div>
-                            </th>
-                        </tr>
-
-                        <tr>
-                            <th>試算結果</th>
-                            <th><input type="textarea"></input></th>
-                        </tr>
-                    </table>
-                </form>
+            <div>
+                <Tabs
+                    id="controlled-tab-example"
+                    activeKey={this.state.key}
+                    onSelect={(k) => this.setState({setKey:k})}
+                >
+                    <Tab eventKey="home" title="Home">
+                        <h1>home</h1>
+                    </Tab>
+                    <Tab eventKey="profile" title="Profile">
+                        <h1>Profile</h1>
+                    </Tab>
+                    <Tab eventKey="contact" title="Contact" disabled>
+                        <h1>contact</h1>
+                    </Tab>
+                </Tabs>
             </div>
+
+            
 
 
         </div>

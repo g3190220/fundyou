@@ -21,6 +21,7 @@
     "react-animations": "^1.0.0",
     "react-avatar": "^3.9.7",
     "react-bootstrap-switch": "15.5.3",
+    "react-bootstrap-validation": "^0.1.11",
     "react-cookie": "^4.0.3",
     "react-cookies": "^0.1.1",
     "react-datetime": "2.16.3",
