@@ -7,10 +7,15 @@ import ReactHighcharts from'react-highcharts'; //基金圖表套件，參考：h
 import {browserHistory} from 'react-router';
 import { load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
 import FollowFund from 'views/FundPage/FollowFund.js';
+import { TextField } from "@material-ui/core";
+import isEmpty from "views/Function/isEmpty.js"
 
 // reactstrap components
 import { Button, Card, Form, Input, Container, Row, Col} from "reactstrap";
 import { string } from "prop-types";
+
+//loading page
+import LoadingIndicator from "views/Function/LoadingIndicator.js";
 
 var performance_sharpe = [];
 var performance_treynor = [];
@@ -44,13 +49,18 @@ class DetailFund extends React.Component{
       this.handleClickTAG = this.tag_link.bind(this);
       this.trackstate = this.trackstate.bind(this); //追蹤基金事件(綁定track按鈕)
       this.togglestate = this.togglestate.bind(this);
+      this.CreateTrack = this.CreateTrack.bind(this);
+      this.getTag=this.getTag.bind(this);
+      this.handleChange=this.handleChange.bind(this);
+      this.handleSubmit=this.handleSubmit.bind(this);
+
     }
     componentDidMount() {
         //取得基金資料
         let fund_info=[];
         console.log(this.props.match.params.fundid.split('='));
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "http://140.115.87.192:8090/getFundInfo";////////改url
+        const url = "https://140.115.87.192:8090/getFundInfo";////////改url
         //console.log(data)
         fetch( url, {
                 method: 'POST',
@@ -88,23 +98,23 @@ class DetailFund extends React.Component{
                             manager_name:fund_info[0].Manager_Name,
                             fund_Target:fund_info[0].Fund_Target,
 
-                            initial:true};
+                            };
                 });
-
-                this.trackstate();
             }
             })
-            .then(() => { this.getnet();})
+            .then(() => { this.trackstate();})
     }
+    //處理setState的方法
+    handleChange = name => event =>{
+        console.log("enter_chanfe")
+        this.setState({
+          [name]: event.target.value,
+    })}
 
     trackstate(){    //看此user有沒有追蹤過此筆基金，並改變追蹤狀態
         let fund_info=[];
         let id = (this.props.match.params.fundid.split('='))[1];
-        const currentState=this.state.trackstate;
-        const url = "http://140.115.87.192:8090/getTrack";
-        // alert(id)
-        // alert(load_cookies("member_id"))
-        
+        const url = "https://140.115.87.192:8090/getTrack";
         fetch(url, {
             method: 'POST',
             headers: {
@@ -122,39 +132,180 @@ class DetailFund extends React.Component{
             try{
             fund_info=JSON.parse(jsonData.info)
             if(jsonData.StatusCode==200){ 
-                this.setState({trackstate:!currentState});
+                console.log(fund_info)
                 this.setState((state, props) => {
                 return {
-                  trackstate:true,
                   userid:fund_info[0].MemberID, //userid
-                  fund_fld022_track:fund_info[0].Fund_fld022_track, //基金統編
-                  track_state:fund_info[0].Track, //追蹤狀態，1:已追蹤，0:未追蹤
-                  initial:true,
+                  fund_fld022_track:fund_info[0].fund_fld022_track, //基金統編
+                  track_state:fund_info[0].track, //追蹤狀態，1:已追蹤，0:未追蹤
+                 
                 }
               })
             }}
-            //未追蹤的狀況
             catch(e){
-                this.setState({trackstate:false})
+                this.setState({track_state:0})  //未追蹤的狀況
 
             }
           })
+          .then(() => { this.getTag();})
+          
 
     }
 
-    togglestate(e){
-        const currentState=this.state.trackstate;
-        this.setState({trackstate:!currentState});
-        e.preventDefault();
-        // return this.setState(prevState => ({ time: ++prevState.time }))
+
+    togglestate(){  //點擊追蹤按鈕，切換狀態
+        if(this.state.track_state==1){  
+            this.setState({track_state:0})
+        }
+        else{
+            this.setState({track_state:1})
+        }
     }
 
+
+    CreateTrack(){  //建立追蹤基金
+        let id = (this.props.match.params.fundid.split('='))[1]; //抓現在頁面的id
+        const url = "https://140.115.87.192:8090/CreateTrack";
+        //console.log(data)
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userid: load_cookies("member_id"),
+                fld022: id,
+            })
+        })
+        .then((response) => {return response.json();})
+        .then((jsonData) => { 
+            if(jsonData.StatusCode==200){ 
+                console.log("成功更新追蹤狀態")
+            }
+            else{
+                console.log("error")
+            }
+        })
+        .then(()=>{this.setState();window.location.reload(true);})  //更新狀態後重新整理頁面
+    }
+
+    //取得會員TAG，顯示首頁(若沒有TAG，就顯示熱門的)
+    getTag(){
+        let member_id=load_cookies("member_id")
+        let id = (this.props.match.params.fundid.split('='))[1];
+        const url = "https://140.115.87.192:8090/getTag";
+        fetch(url, {
+        method: 'POST',
+        headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        body: JSON.stringify({
+                //取得全部fund
+                member_id: member_id,
+                tag_id:-1,
+                fld022:id
+        })
+            
+        })
+        .then((response) => {return response.json();})
+        .then((jsonData) => { 
+        if(jsonData.StatusCode==200){
+            var tag_info = [];
+            try{
+                tag_info=JSON.parse(jsonData.tag_info)
+                this.setState({tag1:tag_info[0].tagContent})
+                console.log(tag_info.length)
+                if(tag_info.length==1){
+                    const url = "https://140.115.87.192:8090/getTag";
+                    fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                            //取得全部fund
+                            member_id: -1,
+                            tag_id:-1,
+                            fld022:id,
+                    })
+                    
+                    })
+                    .then((response) => {return response.json();})
+                    .then((jsonData) => { 
+                        if(jsonData.StatusCode==200){
+                            var info = [];
+                            var j=0;
+                            var _break=true;
+                            for(var i = 0; i < jsonData.tag_info.length; i++){
+                                info.push(JSON.parse(jsonData.tag_info[i]))
+                            }
+                            do {
+                                if(info[j].memberID!=member_id){
+                                    this.setState({tag2:info[j].tagContent})
+                                    _break=false;
+                                }
+                                j++;
+                             } while (j<info.length&&_break==true);
+                                
+                        
+                        }
+                        else{ //statuscode=1000 >>沒有tag
+                            console.log("no tag")
+                            }
+                    })
+                }
+                else if(tag_info.length==2){
+                    this.setState({tag1:tag_info[0].tagContent})
+                    this.setState({tag2:tag_info[1].tagContent})
+                }
+            }
+            
+            catch (d){
+                let id = (this.props.match.params.fundid.split('='))[1];
+                const url = "https://140.115.87.192:8090/getTag";
+                fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                        //取得全部fund
+                        member_id: -2,
+                        tag_id:-2,
+                        fld022:id,
+                })
+                
+                })
+                .then((response) => {return response.json();})
+                .then((jsonData) => { 
+                    if(jsonData.StatusCode==200){
+                        var info = [];
+                        for(var i = 0; i < jsonData.tag_info.length; i++){
+                            info.push(JSON.parse(jsonData.tag_info[i]))
+                        }
+                            this.setState({tag1:info[0].tagContent})
+                            this.setState({tag2:info[1].tagContent})
+                    
+                    }
+                    else{ //statuscode=1000 >>沒有tag
+                        console.log("no tag")
+                        }
+                })
+            }
+        }
+        })
+        .then(() => { this.getnet();})
+}
 
 
     getnet(){
         let fund_net=[];
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url2 = "http://140.115.87.192:8090/getNetWorth";////////改url
+        const url2 = "https://140.115.87.192:8090/getNetWorth";////////改url
         //console.log(data)
         fetch(url2, {
                 method: 'POST',
@@ -199,7 +350,7 @@ class DetailFund extends React.Component{
                             new_net:(fund_net[1].History_NetWorth).toFixed(4), //參考網址：https://reurl.cc/9E2DKa
                             fund_gain:minus,
                             fund_percent:percent,
-                            initial:true};
+                            };
                 });
             }
             })
@@ -209,7 +360,7 @@ class DetailFund extends React.Component{
     getROI(){
         let fund_return=[];
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url2 = "http://140.115.87.192:8090/getReturn";////////改url
+        const url2 = "https://140.115.87.192:8090/getReturn";////////改url
         //console.log(data)
         fetch(url2, {
                 method: 'POST',
@@ -237,7 +388,7 @@ class DetailFund extends React.Component{
                             History_ROI_3M : (fund_return[1].History_ROI_3M).toFixed(2),
                             History_ROI_6M : (fund_return[1].History_ROI_6M).toFixed(2),
                             History_ROI_12M : (fund_return[1].History_ROI_12M).toFixed(2),
-                            initial:true};
+                            };
                 });
             }
             })
@@ -250,7 +401,7 @@ class DetailFund extends React.Component{
         let day = [];
         let i = 0;
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url3 = "http://140.115.87.192:8090/getNetWorth";////////改url
+        const url3 = "https://140.115.87.192:8090/getNetWorth";////////改url
         //console.log(data)
         fetch(url3, {
                 method: 'POST',
@@ -282,7 +433,7 @@ class DetailFund extends React.Component{
                     return {counter: state.counter + props.step,
                             history_net:net,
                             history_day:day,
-                            initial:true};
+                            };
                 });
 
             }
@@ -301,7 +452,7 @@ class DetailFund extends React.Component{
         let day = [];
         let i = 0;
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url4 = "http://140.115.87.192:8090/getPerformance";////////改url
+        const url4 = "https://140.115.87.192:8090/getPerformance";////////改url
         //console.log(data)
         fetch(url4, {
                 method: 'POST',
@@ -362,6 +513,50 @@ class DetailFund extends React.Component{
   })
     }
     
+    //新增TAG功能
+    handleSubmit(){
+        let errors = {}; 
+        //取消DOM的預設功能
+        window.event.preventDefault();
+        if(!isEmpty(this.state.new_tag)){
+        let fld022 = (this.props.match.params.fundid.split('='))[1];
+        const url = "https://140.115.87.192:8090/GenerateTag";
+        fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                        member_id: load_cookies("member_id"),
+                        fld022: fld022,
+                        content:this.state.new_tag,
+                })
+                
+            
+            })
+        .then((response) => {return response.json();})
+        .then((jsonData) => {
+            if(jsonData.StatusCode==200){
+                console.log(jsonData)
+                alert("新增成功")
+                //重新整理畫面,刷新頁面
+                this.setState();
+                window.location.reload(true);
+            }
+            else{
+                alert("您的TAG已達上限，請先至個人TAG管理頁面做刪除，才能再做新增！")
+                console.log("handleSubmit_error")}   
+        })}
+        else {
+            // errors["tag_new_is_errors"] = true;
+            // errors["tag_new"]="TAG內容不能為空白"
+            alert("TAG內容不能為空白")
+        }
+        //this.setState({errors: errors});
+    }
+
+
     render(){     //render的意義為何??(待查清) //猜想：render預設的渲染方式，網頁一開始執行的
         
         var config_net = {
@@ -441,7 +636,10 @@ class DetailFund extends React.Component{
 
         return(
             
-            this.state.initial && <div className='allfund-menu'> {/*initial state 預設時不讀入 */}
+            <div>
+            {!this.state.initial ? (<LoadingIndicator></LoadingIndicator>): 
+            (
+            <div className='allfund-menu'>
             <Container>
             <IndexNavbar></IndexNavbar>
             <div className='sub-menu' id='ino_parent'>
@@ -449,10 +647,10 @@ class DetailFund extends React.Component{
                 <div className='sub-sub-detail'  id='info'>
                 <Row >
                     <label className='fund-name'>{this.state.fund_name}</label>  {/*從資料庫讀取基金的名字*/}
-                    <label className='tag-label'>高收益</label>
-                    <label className='tag-label'>新台幣</label>
+                    <label className='tag-label'>{this.state.tag1}</label>
+                    <label className='tag-label'>{this.state.tag2}</label>
                    {/* <button className='Compare-btn'><a href='#page-compare'>去比較</a></button>*/}
-                   <input type="button" className={this.state.trackstate ? "followBtnTrue" : "followBtnFalse"} onClick={this.togglestate} value={this.state.trackstate ? "√ 已追蹤" : "+ 追蹤"}></input>
+                   <input type="button" className={this.state.track_state==1 ? "followBtnTrue" : "followBtnFalse"} onClick={this.togglestate,this.CreateTrack} value={this.state.track_state==1 ? "√ 已追蹤" : "+ 追蹤"}></input>
                 </Row>   
                 <Row >
                     <label className='fund-value'>{this.state.new_net}</label> {/*從資料庫讀取基金的淨值*/}
@@ -489,53 +687,11 @@ class DetailFund extends React.Component{
                 </Row>
                 </div>              
             </Row>
+            
             <Row>
                 <div className='sub-sub-tag'>
-                <Row>
-                    <table className='tag-table' border='0'>
-                        <tr>
-                            <th>History TAG Ranking</th>
-                        </tr>
-                        <tr>
-                            <td><label>１、</label>高收益</td>
-                        </tr>
-                        <tr>
-                            <td><label>２、</label>高報酬</td>
-                        </tr>
-                        <tr>
-                            <td><label>３、</label>TAG</td>
-                        </tr>
-                        <tr>
-                            <td><label>４、</label>TAG</td>
-                        </tr>
-                        <tr>
-                            <td><label>５、</label>TAG</td>
-                        </tr>
-                    </table>
-                    <table className='tag-table' border='0'>
-                        <tr>
-                            <th>Weekly TAG Ranking</th>
-                        </tr>
-                        <tr>
-                            <td><label>１、</label>高收益</td>
-                        </tr>
-                        <tr>
-                            <td><label>２、</label>高報酬</td>
-                        </tr>
-                        <tr>
-                            <td><label>３、</label>TAG</td>
-                        </tr>
-                        <tr>
-                            <td><label>４、</label>TAG</td>
-                        </tr>
-                        <tr>
-                            <td><label>５、</label>TAG</td>
-                        </tr>
-                    </table>
-                </Row>
-                <Row>
-                    <button className='tag-btn' onClick={this.handleClickTAG}>去看看所有TAG➥</button>
-                </Row>
+                    <button className='tag-btn' onClick={this.handleSubmit} >新增TAG</button><div className='input-tag'><input onChange={this.handleChange('new_tag')} className='input-fieled' size="8" maxlength="8"></input></div>
+                    <button className='tag-btn-hidden' onClick={this.handleClickTAG}>去看看所有TAG➥</button>   
                 </div>
             </Row>
             <Row>
@@ -577,8 +733,9 @@ class DetailFund extends React.Component{
             </div>
             </Container>
             </div>
-        );
-    }
+            )}
+            </div>
+        )};
 
 }    
 export default DetailFund;

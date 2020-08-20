@@ -64,10 +64,10 @@ class PersonalizeMenu extends React.Component{
   //取得個人資料
   getPDData(){
     let member_info=[];
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    const url = "http://140.115.87.192:8090/check_LoginStatus";////////改url
+    
+    const url = "https://140.115.87.192:8090/check_LoginStatus";////////改url
     //console.log(data)
-    fetch(proxyurl + url, {
+    fetch(url, {
               method: 'POST',
               headers: {
                   'Accept': 'application/json',

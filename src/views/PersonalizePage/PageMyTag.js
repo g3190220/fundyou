@@ -84,7 +84,8 @@ const column_week=[
 const column_history=[
   {title: '基金統編', field: 'fld022'},
   {title: 'TAG名稱', field: 'tagContent' },
-  {title: '累積投票數', field: 'History_like' },
+  {title: '累積讚數', field: 'History_like' },
+  {title: '累積倒讚數', field: 'History_unlike' },
   {title: '創建時間',field: 'Create_Date'},
 
 ];
@@ -98,6 +99,7 @@ class PageMyTag extends React.Component{
         this.handleClose=this.handleClose.bind(this);
         this.getNewTagData=this.getNewTagData.bind(this);
         this.getHistoryTagData=this.getHistoryTagData.bind(this);
+        this.DeleteTag=this.DeleteTag.bind(this);
 
         this.state = {
           //fields: {},
@@ -131,7 +133,7 @@ class PageMyTag extends React.Component{
   //本周新增的tag顯示
   getNewTagData(){
         
-        const url = "http://140.115.87.192:8090/getNewTag";
+        const url = "https://140.115.87.192:8090/getNewTag";
         fetch(url, {
           method: 'POST',
           headers: {
@@ -173,10 +175,8 @@ class PageMyTag extends React.Component{
   })}
 
   //本周tag刪除
-  DeleteTag(in_tagid){
-    
-    let tag_info=[];
-        const url = "http://140.115.87.192:8090/DeleteNewTag";
+  DeleteTag(in_tagid,in_fld022){
+        const url = "https://140.115.87.192:8090/DeleteTag";
         fetch(url, {
           method: 'POST',
           headers: {
@@ -187,6 +187,7 @@ class PageMyTag extends React.Component{
                 //取得全部fund
                 member_id: load_cookies("member_id"),
                 tag_id:in_tagid,
+                fld022:in_fld022
           })
           
     })
@@ -209,7 +210,7 @@ class PageMyTag extends React.Component{
   //歷史新增tag顯示
   getHistoryTagData(){
         
-    const url = "http://140.115.87.192:8090/getTag";
+    const url = "https://140.115.87.192:8090/getTag";
     fetch(url, {
       method: 'POST',
       headers: {
@@ -241,7 +242,7 @@ if(jsonData.StatusCode==200){
   
   catch (d){
     this.state.data_history=[]
-    alert("近來歷史")
+    //alert("近來歷史")
   }
   
 }
@@ -261,48 +262,42 @@ else{
     <PersonalizeMenu></PersonalizeMenu>
 
       <div className="card-personalize5">
-        <h4><font color="#E76F51" size="6" face="微軟正黑體"><b>我的TAG</b></font></h4>
-
-        <div className="week-new-tag-title">
-          <span style={{fontWeight:"bold"}}>本週新增TAG</span>
-        </div>
-
-            <div>
+        <h4><font color="#E76F51" size="6" face="微軟正黑體"><b>我的TAG管理</b></font></h4>
+        <div className="card-personalize5-table">
             <MuiThemeProvider theme={THEME}>
             <MaterialTable
             icons={tableIcons}
-            title="本週新增TAG"
-            columns={column_week}
-            data={this.state.data_thisWeek} 
-            //onChangePage={()=>this.scroll}       
-            
+            title=""
+            columns={column_history}
+            data={this.state.data_history}
             options={{
               sorting: true,
               headerStyle: {
                 backgroundColor: '#e26d5c',
                 color: '#F8EDEB',
-                width:150,
-                maxWidth: 150,
+                width:300,
+                maxWidth: 300,
                 whiteSpace:'nowrap',
                 position: 'sticky', 
                 top: 0,
                 fontSize: 17,
-                textAlign:'left',
-                fontWeight: 'bold',
+                textAlign:'center',
+                fontFamily: '微軟正黑體',
+                fontWeight: '800'
               },
-              toolbar: false,
           
               cellStyle:{ 
-                width:150,
-                maxWidth:150,
-                //whiteSpace:'nowrap',
+                width:300,
+                maxWidth:300,
                 backgroundColor: '#F8EDEB',
                 color: '#e26d5c',
-                textAlign:'left',
+                textAlign:'center',
+                fontFamily: '微軟正黑體',
+                fontWeight: '700'
                 
               },
               actionsCellStyle: {
-                backgroundColor: '#e26d5c'
+                backgroundColor: '#F8EDEB'
               },
               maxBodyHeight: '420px'
             }}
@@ -315,7 +310,8 @@ else{
                 onClick: (event, rowData) => {
                   this.handleClickOpen()
                   this.setState({
-                    in_tagid: rowData.tagID
+                    in_tagid: rowData.tagID,
+                    _fld022:rowData.fld022
                   });
                  
 
@@ -328,53 +324,6 @@ else{
                 header: {
                   actions: ''
               }
-            }}
-          />
-          </MuiThemeProvider>
-          </div>
-
-        <div className="history-new-tag-title">
-          <span style={{fontWeight:"bold"}}>歷史新增TAG</span>
-        </div>
-
-        <div>
-            <MuiThemeProvider theme={THEME}>
-            <MaterialTable
-            icons={tableIcons}
-            title="歷史新增TAG"
-            columns={column_history}
-            data={this.state.data_history} 
-            //onChangePage={()=>this.scroll}       
-            
-            options={{
-              sorting: true,
-              headerStyle: {
-                backgroundColor: '#e26d5c',
-                color: '#F8EDEB',
-                width:150,
-                maxWidth: 150,
-                whiteSpace:'nowrap',
-                position: 'sticky', 
-                top: 0,
-                fontSize: 17,
-                textAlign:'center',
-                fontWeight: 'bold',
-              },
-              toolbar: false,
-          
-              cellStyle:{ 
-                width:150,
-                maxWidth:150,
-                backgroundColor: '#F8EDEB',
-                color: '#e26d5c',
-                textAlign:'center',
-                
-              },
-
-              actionsCellStyle: {
-                backgroundColor: '#e26d5c',
-              },
-              maxBodyHeight: '420px',
             }}
           />
           </MuiThemeProvider>
@@ -395,7 +344,7 @@ else{
           <Button onClick={this.handleClose} color="primary">
             No
           </Button>
-          <Button onClick={() => this.DeleteTag(this.state.in_tagid)} color="primary" >
+          <Button onClick={() => this.DeleteTag(this.state.in_tagid,this.state.fld022)} color="primary" >
             Yes
           </Button>
         </DialogActions>

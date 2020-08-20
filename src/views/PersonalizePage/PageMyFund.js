@@ -28,6 +28,8 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import FindInPageIcon from '@material-ui/icons/PageviewOutlined';
 import SearchIcon from '@material-ui/icons/Search';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import NotesIcon from '@material-ui/icons/Notes';
 
 
 const tableIcons = {
@@ -57,7 +59,7 @@ class PageMyFund extends React.Component{
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.getTrack = this.getTrack.bind(this);
+        this.getTrackData = this.getTrackData.bind(this);
 
         console.log(props)
         this.state = {
@@ -67,12 +69,11 @@ class PageMyFund extends React.Component{
             flag:false,
             filter_content:false,
             columns:[
-            {title: '基金統編', field: 'Fund_fld022' },
+            {title: '基金統編', field: 'fund_fld022_track' },
             {title: '基金名稱', field: 'Fund_CH_Name' },
             {title: '最新淨值',field: 'History_NetWorth'},
             {title: '漲跌(%)',field: 'Ups_and_Downs'},
             {title: '三個月報酬(%)',field: 'History_ROI_3M'},
-            
             ],
             fld022: "",
             name: "",
@@ -84,82 +85,15 @@ class PageMyFund extends React.Component{
             RR: "",
       }
       
-    
     }
   
     componentDidMount() {
-      window.scrollTo(0, 0);
-      this.getAllFundData();
-      // this.getTrack();
+      window.scrollTo(0, 0);  //頁面置頂
+      this.getTrackData();
     }
 
-      getAllFundData(){
-        let fund_info=[];
-        //除淨值的資料
-        const url = "http://140.115.87.192:8090/getFundInfo";////////改url
-        //console.log(data)
-        fetch(url, {
-                  method: 'POST',
-                  headers: {
-                      'Accept': 'application/json',
-                      'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                        //取得全部fund
-                        fld022: -1,
-                  })
-                  
-            })
-            .then((response) => {return response.json();})
-            .then((jsonData) => { 
-              if(jsonData.StatusCode==200){
-                console.log(jsonData);
-                fund_info=JSON.parse(jsonData.fund_info)
-                console.log(fund_info);
-    
-                this.state.all_data=fund_info
-                this.setState({all_data:this.state.all_data,flag:true})
-            }
-              else{
-              this.state.all_data=[]
-              }
-            })
-          //抓取淨值資料
-          const url2 = "http://140.115.87.192:8090/getFundInfo";////////改url
-      }
-
-      CreateTrack(){  //建立追蹤基金
-        let id = (this.props.match.params.fundid.split('='))[1]; //抓現在頁面的id
-        const url = "http://140.115.87.192:8090/CreateTrack";
-        //console.log(data)
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                userid: load_cookies("member_id"),
-                fld022: id,
-            })
-        })
-        .then((response) => {return response.json();})
-        .then((jsonData) => { 
-          if(jsonData.StatusCode==200){
-            alert("success")  //有回傳，取得成功
-          }
-          else{ 
-            alert("error")  //無回傳，取得失敗或查無資料
-          }
-        })
-      }
-
-
-      getTrack(){  //取得追蹤基金
-      let fund_info=[];
-      let id = (this.props.match.params.fundid.split('='))[1]; //抓現在頁面的fundid
-      const url = "http://140.115.87.192:8090/getTrack";
-      //console.log(data)
+    getTrackData(){  //取得追蹤基金
+      const url = "https://140.115.87.192:8090/getTrack";
       fetch(url, {
           method: 'POST',
           headers: {
@@ -168,36 +102,44 @@ class PageMyFund extends React.Component{
           },
           body: JSON.stringify({
               userid: load_cookies("member_id"),
-              fld022: id,
+              fld022: "all",
           })
       })
       .then((response) => {return response.json();})
       .then((jsonData) => { 
-        // fund_info=JSON.parse(jsonData.fund_info)
-        if(jsonData.StatusCode==200){ 
-          var track_info = [];
-
-          try{
-            track_info=JSON.parse(jsonData.track_info)
-            this.state.fund_info=track_info
-            this.setState({track_info:this.state.fund_info})
+        console.log(jsonData)
+        if(jsonData.StatusCode==200){
+          var track_info=[];
+          var info=[]
+          track_info=JSON.parse(jsonData.info)
+          // for(var i = 0; i < jsonData.info.length; i++){
+          //     track_info.push(JSON.parse(jsonData.info[i]))
+          //   }
+          // }
+          console.log(track_info[0].track)
+          for(var i = 0; i < track_info.length; i++){
+            console.log(track_info[i])
+            if(track_info[i].track==1){
+              console.log(track_info[i])
+              info.push(track_info[i])
+            }
           }
-
-          catch (d){
-            this.state.track_info=[]
-          }
+          console.log(info)
+          this.state.all_data=info
+          this.setState({all_data:this.state.all_data,flag:true})
+          console.log(this.state.all_data)
+      }
+        else{
+          this.state.all_data=[]
         }
-        else{ 
-          this.state.track_info=[]
-        }
-
       })
-      const url2 = "http://140.115.87.192:8090/getFundInfo"
-      }
+    }
       
-      scroll(){
-        alert("scroll")
-      }
+
+    scroll(){
+      alert("scroll")
+    }
+
     //點擊去頁面
     handleSubmit(){
       this.props.history.push("/personal-data-page")
@@ -211,21 +153,22 @@ class PageMyFund extends React.Component{
     <div className="card-personalize-myfund">
 
     <PersonalizeMenu></PersonalizeMenu>
-
+      <Row>
         <div className="card-personalize1">
             <h4><font color="#E76F51" size="6" face="微軟正黑體"><b>我的基金</b></font></h4>
 
-            <div className="fund-follows">
+          
+          <div className="fund-follows">
                 <span style={{fontWeight:"bold"}}>追蹤基金</span>
             </div><br/>
 
+        <Row>
             <div className="following-funds-table">
                 <MaterialTable
                 icons={tableIcons}
                 title="Following Funds"
                 columns={this.state.columns}
                 data={this.state.all_data}
-                // data={this.state.track_info} 
                 //onChangePage={()=>this.scroll}       
                 
                 options={{
@@ -233,8 +176,8 @@ class PageMyFund extends React.Component{
                 headerStyle: {
                     backgroundColor: '#e26d5c',
                     color: '#F8EDEB',
-                    width: 100,
-                    maxWidth: 100,
+                    width: 140,
+                    maxWidth: 140,
                     whiteSpace:'nowrap',
                     position: 'sticky', 
                     top: 0,
@@ -244,11 +187,11 @@ class PageMyFund extends React.Component{
                     fontSize: 16
                 },
 
-                toolbar: false,
+                toolbar: false, //隱藏標題和搜尋欄
 
                 cellStyle:{ 
-                    width: 100,
-                    maxWidth: 100,
+                    width: 140,
+                    maxWidth: 140,
                     wordWrap:'break-word',
                     backgroundColor: '#F8EDEB',
                     color: '#e26d5c',
@@ -260,57 +203,132 @@ class PageMyFund extends React.Component{
                 actionsCellStyle: {
                     backgroundColor: '#F8EDEB',
                 },
-                maxBodyHeight: '420px'
+                maxBodyHeight: '420px',
+                actionsColumnIndex: 0,
+                
                 }}
                 actions={[
-                { 
+                  {
+                    icon: () => <FavoriteIcon color="disabled" />,
+                    tooltip: 'FAVORITE',
                     
+                    onClick: (event, rowData) =>  this.props.history.push({
+                
+                    // pathname: '/detailfund-page/fundid='+rowData.Fund_fld022,
+                    
+                    })
+                  },
+                  { 
                     //hidden:true,
                     icon: () => <SearchIcon color="action" />,
                     tooltip: 'SEEFUND',
                     onClick: (event, rowData) =>  this.props.history.push({
-                
-                    pathname: '/detailfund-page/fundid='+rowData.Fund_fld022,
-                    
+                      pathname: '/detailfund-page/fundid='+rowData.fund_fld022_track,
                     })
-                
-                }    
+                  },
+                  {
+                    icon: () => <NotesIcon color="action" />,
+                    tooltip: 'MEMO' ,
+
+                  },    
                 ]}
                 
                 localization={{
                     header: {
-                    actions: '詳細資料'
+                    actions: ''
                 }
                 }}
                 />
             </div>
-
-            <div className="fund-favorite">
+          </Row>
+            
+          <Row>
+          <div className="fund-favorite">
                 <span style={{fontWeight:"bold"}}>最愛基金</span>
+            </div><br/>
+
+            <div className="favorite-funds-table">
+                <MaterialTable
+                icons={tableIcons}
+                title="Favorite Funds"
+                columns={this.state.columns}
+                data={this.state.all_data}
+                //onChangePage={()=>this.scroll}       
+                
+                options={{
+                sorting: true,
+                headerStyle: {
+                    backgroundColor: '#e26d5c',
+                    color: '#F8EDEB',
+                    width: 140,
+                    maxWidth: 140,
+                    whiteSpace:'nowrap',
+                    position: 'sticky', 
+                    top: 0,
+                    padding: 10 ,
+                    fontFamily: '微軟正黑體',
+                    fontWeight: '800',
+                    fontSize: 16
+                },
+
+                toolbar: false, //隱藏標題和搜尋欄
+
+                cellStyle:{ 
+                    width: 140,
+                    maxWidth: 140,
+                    wordWrap:'break-word',
+                    backgroundColor: '#F8EDEB',
+                    color: '#e26d5c',
+                    fontFamily: '微軟正黑體',
+                    fontWeight: '700',
+                    fontSize: 15,
+                    padding: 10
+                },
+                actionsCellStyle: {
+                    backgroundColor: '#F8EDEB',
+                },
+                maxBodyHeight: '420px',
+                actionsColumnIndex: 0,
+                
+                }}
+                actions={[
+                  {
+                    icon: () => <FavoriteIcon color="action" />,
+                    tooltip: 'FAVORITE',
+                    
+                    // onClick: (event, rowData) =>  this.props.history.push({
+                
+                    // pathname: '/detailfund-page/fundid='+rowData.Fund_fld022,
+                    
+                    // })
+                  },
+                  { 
+                    //hidden:true,
+                    icon: () => <SearchIcon color="action" />,
+                    tooltip: 'SEEFUND',
+                    onClick: (event, rowData) =>  this.props.history.push({
+                      pathname: '/detailfund-page/fundid='+rowData.fund_fld022_track,
+                    })
+                  },
+                  {
+                    icon: () => <NotesIcon color="action" />,
+                    tooltip: 'MEMO' ,
+
+                  },    
+                ]}
+                
+                localization={{
+                    header: {
+                    actions: ''
+                }
+                }}
+                />
             </div>
-                <div className='sub-sub-all'>
-                    <table id='fund-menu' border='2'>
-                    <tr>
-                        <th width="30%">基金名稱</th>
-                        <th>地區</th>
-                        <th>最新淨值</th>
-                        <th>漲跌</th>
-                        <th>累積報酬</th>
-                        <th>成立日期</th>
-                    </tr>
-                    <tr>
-                        <td><a href="#all-fund">瀚亞高科技基金</a></td>
-                        <td>台灣</td>
-                        <td>66.3400</td>
-                        <td>2.50%</td>
-                        <td>NULL</td>
-                        <td>1994/11/14</td>
-                    </tr>
-                    </table>
-                </div>
+          </Row>
+                
         </div>
 
-
+      </Row>
     </div> 
         
         

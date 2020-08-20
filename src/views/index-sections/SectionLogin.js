@@ -46,17 +46,17 @@ class SectionLogin extends React.Component {
   handleSubmit(){
     let errors = {}; 
     let member_info=[];
-
+    
     
     //取消DOM的預設功能
     window.event.preventDefault();
   
     if(!isEmpty(this.state.email) && !isEmpty(this.state.password))
-    {
-
+    { 
+        console.log("handleSubmit_start")
         this.state.errors = {};
         //const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        const url = "http://140.115.87.192:8090/Signin";
+        const url = "https://140.115.87.192:8090/Signin";
         //console.log(data)
         fetch( url, {
               method: 'POST',
@@ -111,6 +111,9 @@ class SectionLogin extends React.Component {
             alert("帳號密碼錯誤！")
           }
     })
+    .catch(error => {
+      console.log(error);
+    });
         
         
     }

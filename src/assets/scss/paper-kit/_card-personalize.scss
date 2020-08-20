@@ -268,17 +268,18 @@
 }
 
 .card-personalize-myfund {
-  min-height: 1000px;
+  min-height: 1500px;
+  // bottom: 10px;
+  // margin-top: -150px;
   
   .card-personalize1 {
     background-color: #faeedc;
     border-radius: 8px;
     // color: #fff;
-    width: 800px;
+    width: 900px;
     margin: -580px 80px 100px;
-    // min-height: 1000px;
     padding: 30px;
-    top: 600px; 
+    margin-top: 270px;
     left: 120px;
     position: absolute;
   
@@ -298,6 +299,9 @@
       margin-top: 30px;
       margin-left: 30px;
     }
+    & .following-funds-table {
+      margin-left: 10px;
+    }
     & .fund-favorite{
       color: #b75d69;
       text-align: left;
@@ -306,48 +310,11 @@
       margin-top: 30px;
       margin-left: 30px;
     }
-    & .sub-sub-all {
-      background-color:#f19c79;
-      border-radius: 8px;
-      // width: 980px;
-      // min-height: 250px; //待刪除
-      padding: 30px 10px;
+    & .favorite-funds-table {
+      margin-left: 10px;
       margin-top: 20px;
-      margin-bottom: 50px;
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
-
-      #fund-menu{
-          border: 2px;
-          margin:0 auto;
-      }
-
-      #fund-menu a{
-          color: inherit;
-      }
-
-      #fund-menu th{
-          font-size: 15px;
-          font-family: "微軟正黑體";
-          padding: 10px 25px;
-          color: #F8EDEB;
-          font-weight:bold;
-          text-align:center;
-          background: #e26d5c;
-      }
-
-      #fund-menu tr{
-          font-size: 20px;
-          padding: 10px 25px;
-          color: #e26d5c;
-          font-weight:bold;
-          text-align:center;
-          background: #F8EDEB;
-      }
-
-    
     }
+    
     & .btn {
       margin-top: 30px;
     }
@@ -363,6 +330,9 @@
 
 .card-personalize-mytag {
   min-height: 1000px;
+  .card-personalize5-table{
+    padding: 15px;
+  }
   
   .card-personalize5 {
     background-color: #faeedc;
@@ -375,6 +345,7 @@
     top: 600px; 
     left: 120px;
     position: absolute;
+    
   
     & label {
       margin-top: 15px;
