@@ -8,7 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Button, Card, Form, Input, Container, Row, Col} from "reactstrap";
 import TextField from '@material-ui/core/TextField';
-import { load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
+import { load_cookies, survey_score } from 'views/Function/Cookie_function.js' // 引入cookies
 
 class Surveys extends React.Component {
     constructor(props) {
@@ -18,9 +18,11 @@ class Surveys extends React.Component {
             purpose:'',
             time:'',
             method:'',
-            Single:null,
+            Single:null, //願意投資的金額
             method_css:'method_space',
-            method_type:'您單筆想要投資多少錢？'
+            method_type:'您單筆想要投資多少錢？',
+            score:load_cookies("score_1"),
+            score_page:0
         };
 
         this.handlesummit = this.handlesummit.bind(this)
@@ -37,6 +39,12 @@ class Surveys extends React.Component {
             if((this.state.factor!='')&&(this.state.purpose!='')&&(this.state.time!='')&&(this.state.method!='')){
                 const member_id=load_cookies("member_id");
                 const path=`/page-survey-3/id=${member_id}`
+                //將此頁的分數紀錄到cookie
+                let arr = []
+                arr.push(this.state.score);
+                arr.push(this.state.score_page);
+                survey_score(arr)
+
                 this.props.history.push({
                     pathname: path 
                 })
@@ -89,7 +97,7 @@ class Surveys extends React.Component {
             }
         }
 
-
+        this.state.score_page = parseInt(this.state.factor)+parseInt(this.state.time);
     };
 
     valueChange = name => event => {   //不太懂，問湘琪
@@ -114,9 +122,9 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>請問您投資金融商品最主要的考量因素為何？</FormLabel>
                         <RadioGroup row={true} aria-label="factor" name="factor" onChange={this.handleChange}>
-                        <FormControlLabel value="儲蓄（保本不虧錢）" control={<Radio />} label="儲蓄（保本不虧錢）" />
-                        <FormControlLabel value="有穩定收入（賺小錢）" control={<Radio />} label="有穩定收入（賺小錢）" />
-                        <FormControlLabel value="賺大錢" control={<Radio />} label="賺大錢" />
+                        <FormControlLabel value="2" control={<Radio />} label="儲蓄（保本不虧錢）" />
+                        <FormControlLabel value="6" control={<Radio />} label="有穩定收入（賺小錢）" />
+                        <FormControlLabel value="10" control={<Radio />} label="賺大錢" />
                         </RadioGroup>
                     </FormControl>
                     </div>
@@ -142,10 +150,10 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>您希望在多久以內達到期望報酬</FormLabel>
                         <RadioGroup row={true} aria-label="time" name="time" onChange={this.handleChange}>
-                        <FormControlLabel value="1年以下" control={<Radio />} label="1年以下" />
-                        <FormControlLabel value="1〜5年" control={<Radio />} label="1〜5年" />
-                        <FormControlLabel value="5〜10年" control={<Radio />} label="5〜10年" />
-                        <FormControlLabel value="10年以上" control={<Radio />} label="10年以上" />
+                        <FormControlLabel value="8" control={<Radio />} label="1年以下" />
+                        <FormControlLabel value="6" control={<Radio />} label="1〜5年" />
+                        <FormControlLabel value="4" control={<Radio />} label="5〜10年" />
+                        <FormControlLabel value="2" control={<Radio />} label="10年以上" />
                         </RadioGroup>
                     </FormControl>
                     </div>
