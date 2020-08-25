@@ -123,7 +123,7 @@ class PersonlDataPage extends React.Component {
   getPersonalData(){
     let member_info=[];
     //const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://140.115.87.192:8090/check_LoginStatus";////////改url
+    const url = "http://140.115.87.192:8090/check_LoginStatus";////////改url
     //console.log(data)
     fetch(url, {
               method: 'POST',
@@ -215,7 +215,7 @@ class PersonlDataPage extends React.Component {
       this.setState({image:this.state.image})
     }
     //const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://140.115.87.192:8090/UpdateUserInfo";////////改url
+    const url = "http://140.115.87.192:8090/UpdateUserInfo";////////改url
     fetch(url, {
               method: 'POST',
               headers: {

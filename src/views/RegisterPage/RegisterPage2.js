@@ -170,7 +170,7 @@ class Register extends React.Component {
     if(this.handleValidation()) 
     {
         //const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        const url = "https://140.115.87.192:8090/CreateUser";
+        const url = "http://140.115.87.192:8090/CreateUser";
         //console.log(data)
         fetch(url, {
               method: 'POST',
