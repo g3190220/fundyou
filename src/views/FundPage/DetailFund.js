@@ -41,7 +41,11 @@ class DetailFund extends React.Component{
         this.state = {
           //fields: {},
         errors: {},
-        initial:false
+        initial:false,
+        showtag1:false,
+        showtag2:false,
+        colortag1:true,
+        colortag2:true,
       };
       
       this.handleClick1 = chart_performance.bind(this); //綁定事件，參考：https://reurl.cc/pdkgQ8
@@ -216,8 +220,15 @@ class DetailFund extends React.Component{
             try{
                 tag_info=JSON.parse(jsonData.tag_info)
                 this.setState({tag1:tag_info[0].tagContent})
+                this.setState({showtag1:"visable"})
+                this.setState({colortag1:true})
                 console.log(tag_info.length)
+<<<<<<< HEAD
                 if(tag_info.length==1){
+=======
+            //如果只有一個自創TAG
+            if(tag_info.length==1){
+>>>>>>> 98e524eb1bac164f020bc643157369b599fa420a
                     const url = "http://140.115.87.192:8090/getTag";
                     fetch(url, {
                     method: 'POST',
@@ -235,16 +246,19 @@ class DetailFund extends React.Component{
                     })
                     .then((response) => {return response.json();})
                     .then((jsonData) => { 
-                        if(jsonData.StatusCode==200){
+                    if(jsonData.StatusCode==200){
                             var info = [];
                             var j=0;
                             var _break=true;
                             for(var i = 0; i < jsonData.tag_info.length; i++){
                                 info.push(JSON.parse(jsonData.tag_info[i]))
                             }
+                            console.log()
                             do {
                                 if(info[j].memberID!=member_id){
                                     this.setState({tag2:info[j].tagContent})
+                                    this.setState({showtag2:"visable"})
+                                    this.setState({colortag2:false})//另外一個非自己建立的TAG
                                     _break=false;
                                 }
                                 j++;
@@ -256,11 +270,12 @@ class DetailFund extends React.Component{
                             console.log("no tag")
                             }
                     })
-                }
-                else if(tag_info.length==2){
-                    this.setState({tag1:tag_info[0].tagContent})
-                    this.setState({tag2:tag_info[1].tagContent})
-                }
+            }
+            else if(tag_info.length==2){
+                this.setState({tag2:tag_info[1].tagContent})
+                this.setState({showtag2:"visable"})
+                this.setState({colortag2:true})
+            }
             }
             
             catch (d){
@@ -284,11 +299,18 @@ class DetailFund extends React.Component{
                 .then((jsonData) => { 
                     if(jsonData.StatusCode==200){
                         var info = [];
+                        var count=0;
                         for(var i = 0; i < jsonData.tag_info.length; i++){
-                            info.push(JSON.parse(jsonData.tag_info[i]))
+                            info.push(JSON.parse(jsonData.tag_info[i]));
+                            count=i+1; 
+                            var string =`tag${count}`;
+                            var showstring = `show${string}`
+                            var showcolor = `color${string}`
+                            console.log("showstring:",showstring)
+                            this.setState({[string]:info[i].tagContent})
+                            this.setState({[showstring]:"visable"})
+                            this.setState({[showcolor]:false})
                         }
-                            this.setState({tag1:info[0].tagContent})
-                            this.setState({tag2:info[1].tagContent})
                     
                     }
                     else{ //statuscode=1000 >>沒有tag
@@ -647,8 +669,8 @@ class DetailFund extends React.Component{
                 <div className='sub-sub-detail'  id='info'>
                 <Row >
                     <label className='fund-name'>{this.state.fund_name}</label>  {/*從資料庫讀取基金的名字*/}
-                    <label className='tag-label'>{this.state.tag1}</label>
-                    <label className='tag-label'>{this.state.tag2}</label>
+                    <label className='tag-label' style={{visibility: this.state.showtag2 ? 'visible' : 'hidden', color:this.state.colortag2 ? "#CD5C5C" : "	#444444"}}>{this.state.tag2}</label>
+                    <label className='tag-label' style={{display: this.state.showtag1 ? 'visible' : 'hidden',color:this.state.colortag1 ? "#CD5C5C" : "	#444444"}}>{this.state.tag1}</label>
                    {/* <button className='Compare-btn'><a href='#page-compare'>去比較</a></button>*/}
                    <input type="button" className={this.state.track_state==1 ? "followBtnTrue" : "followBtnFalse"} onClick={this.togglestate,this.CreateTrack} value={this.state.track_state==1 ? "√ 已追蹤" : "+ 追蹤"}></input>
                 </Row>   

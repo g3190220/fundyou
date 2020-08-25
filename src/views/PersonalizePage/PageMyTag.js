@@ -193,7 +193,6 @@ class PageMyTag extends React.Component{
     })
   .then((response) => {return response.json();})
   .then((jsonData) => { 
-    //console.log(jsonData);
     if(jsonData.StatusCode==200){
       this.handleClose()
       alert("刪除成功！")
@@ -344,7 +343,7 @@ else{
           <Button onClick={this.handleClose} color="primary">
             No
           </Button>
-          <Button onClick={() => this.DeleteTag(this.state.in_tagid,this.state.fld022)} color="primary" >
+          <Button onClick={() => this.DeleteTag(this.state.in_tagid,this.state._fld022)} color="primary" >
             Yes
           </Button>
         </DialogActions>

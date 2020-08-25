@@ -519,7 +519,47 @@
 
 .card-personalize-pig {
   min-height: 1000px;
+  text-align: left;
+  .button-center{
+    margin:0 auto
+  }
   
+  .tag-btn{
+    width: 120px;
+    height: 40px;
+    border-radius: 20px;
+    margin-left: 20px;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    border:#e26d5c solid 2px;
+    background-color:#e26d5c;
+    outline:none;
+    color:  #F8EDEB;
+    font-weight:bold;
+    font-family:Microsoft JhengHei;
+}
+.tag-btn-hidden{
+    width: 150px;
+    height: 10px;
+    border-radius: 20px;
+    margin-left: 20px;
+    margin-top: 0px;
+    margin-bottom: 19px;
+    border:0px;
+    background-color: transparent;
+    outline:none;
+    color:  #e26d5c;
+    font-weight:bold;
+    font-family:Microsoft JhengHei;
+    padding-top: 0px
+}
+.tag-btn:hover{
+    background-color: #F8EDEB;
+    color: #e26d5c;
+}
+.tag-btn a{
+    color: inherit;
+}
   .card-personalize3 {
     background-color: #faeedc;
     border-radius: 8px;
@@ -564,53 +604,120 @@
     }
     & .dollor-cost-average{
       color: #b75d69;
-      text-align: left;
-      font-size: 25px;
+      text-align: center;
+      font-size: 26px;
       font-family: "微軟正黑體";
-      margin-top: 30px;
+      margin-top: 25px;
       margin-left: 30px;
     }
     & .dollor-cost-average-sub {
       background-color:#ffd3af;
       border-radius: 8px;
-      width: 600px;
+      width: 615px;
       padding: 30px 10px;
-      margin-top: 30px;
+      // margin-left: 0px;
+      margin-top: 10px;
       margin-bottom: 50px;
       position: relative;
       left: 50%;
       transform: translateX(-50%);
-      font-family: "微軟正黑體";
+      font-family:Microsoft JhengHei;
+
+      .little-title{
+        font-size:18px;
+        font-weight:450;
+        color:#d14c37;
+        margin-left: 28px;
+        margin-top: -3px;
+
+      }
+      .little-radio{
+        margin-top:-24px;
+      }
+      .little-radio-large{
+        margin-top:-14px;
+        margin-left:28px;
+      }
+     
+    
+    & .outlook-sub{
+      background-color:#ffffff;
+      border: 10px #ffffff solid;
+      border-collapse: separate;
+      color: #222222;
+      border-radius: 8px;
+      margin:0 auto;
+      font-size: 16px;
+      padding: 10px;
+      min-height: 266px;
+      max-width: 264px
+    }
+    .outlook-sub-large{
+      background-color:#ffffff;
+      border: 10px #ffffff solid;
+      border-collapse: separate;
+      color: #222222;
+      border-radius: 8px;
+      margin:0 auto;
+      font-size: 16px;
+      padding: 10px;
+      min-height: 312px;
+      max-width: 264px
+    }
       
       #dollor-table {
         background-color:#ffffff;
         border: 10px #ffffff solid;
         border-collapse: separate;
-        color: #222222;
+        color:#666666;
         border-radius: 8px;
         margin:0 auto;
         font-size: 16px;
         padding: 10px;
+        font-weight: 540;
+        min-height: 266px;
+        min-width: 264px;
 
         .dollor-table-btn {
-          text-align: center;
-          padding: 8px;
+          text-align: left;
+          padding-left: 0px;
+          padding-top: 9px;
         }
-        .reset-btn {
-          border-color: #ffffff;
+        .set-btn {
+          border:#e26d5c solid 2px;
+          background-color:#e26d5c;
           text-align: center;
           padding: 5px;
           border-radius: 5px;
           outline:none;
+          color:  #F8EDEB;
+          font-weight:bold;
+          font-family:Microsoft JhengHei;
+          font-size: 14px;
           
         }
-        .submit-btn {
-          border-color: #ffffff;
-          text-align: center;
-          padding: 5px;
-          border-radius: 5px;
+        .set-btn-hidden{
+          width: 150px;
+          height: 10px;
+          border-radius: 20px;
+          margin-left: 20px;
+          margin-top: 0px;
+          margin-bottom: 19px;
+          border:0px;
+          background-color: transparent;
           outline:none;
-        }
+          color:  #e26d5c;
+          font-weight:bold;
+          font-family:Microsoft JhengHei;
+          padding-top: 0px
+      }
+      .set-btn:hover{
+          background-color: #F8EDEB;
+          color: #e26d5c;
+      }
+      .set-btn a{
+          color: inherit;
+      }
       }
     }
     & .btn {

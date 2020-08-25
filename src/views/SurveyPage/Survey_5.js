@@ -8,7 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Button, Card, Form, Input, Container, Row, Col} from "reactstrap";
 import TextField from '@material-ui/core/TextField';
-import { load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
+import { load_cookies, survey_answer } from 'views/Function/Cookie_function.js' // 引入cookies
 
 class Surveys extends React.Component {
     constructor(props) {
@@ -16,6 +16,11 @@ class Surveys extends React.Component {
         this.state = {
             dealwith_lose:'',
             dealwith_profit:'',
+            score:load_cookies("score_1"),
+            score_2:load_cookies("score_2"),
+            score_3:load_cookies("score_3"),
+            score_4:load_cookies("score_4"),
+            score_page:0
         };
 
         this.handlesummit = this.handlesummit.bind(this)
@@ -28,9 +33,31 @@ class Surveys extends React.Component {
 
                  const member_id=load_cookies("member_id");
                  const path=`/page-characterAnalysis/id=${member_id}`
+
                  this.props.history.push({
                      pathname: path 
                  })
+
+                 let arr = []
+                 let ans = '';
+                 let total = parseInt(this.state.score)+parseInt(this.state.score_2)+parseInt(this.state.score_3)+parseInt(this.state.score_4)+parseInt(this.state.score_page)
+                 arr.push(load_cookies("ROI"));
+                 arr.push(total)
+                 survey_answer(arr);
+
+                 if(total <= 34){
+                    ans = '您的結果為：安穩型';
+                 }
+                 else if(total <=45){
+                    ans = '您的結果為：穩健型';
+                 }
+                 else if(total <=58){
+                    ans = '您的結果為：成長型';
+                }
+                else{
+                    ans = '您的結果為：積極型';
+                }
+                alert(ans);
             }
             else{
                 alert('請完全填選後再按下一頁！')
@@ -57,6 +84,8 @@ class Surveys extends React.Component {
         else if(event.target.name=='dealwith-profit'){
             this.state.dealwith_profit = event.target.value;
         }
+
+        this.state.score_page = parseInt(this.state.dealwith_lose)+parseInt(this.state.dealwith_profit);
     };
 
     render() {
@@ -75,11 +104,11 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>當您的投資超過你可以接受的損失時（停損點），你會採取那種處置方式？</FormLabel>
                         <RadioGroup row={true} aria-label="dealwith-lose" name="dealwith-lose" onChange={this.handleChange}>
-                        <FormControlLabel value="立即賣出所有部位" control={<Radio />} label="立即賣出所有部位" />
-                        <FormControlLabel value="先賣出一半或一半以上部位" control={<Radio />} label="先賣出一半或一半以上部位" />
-                        <FormControlLabel value="先賣出一半以內部位" control={<Radio />} label="先賣出一半以內部位" />
-                        <FormControlLabel value="暫時觀望，視情況再因應" control={<Radio />} label="暫時觀望，視情況再因應" />
-                        <FormControlLabel value="繼續持有至回本或不漲為止" control={<Radio />} label="繼續持有至回本或不漲為止" />
+                        <FormControlLabel value="2" control={<Radio />} label="立即賣出所有部位" />
+                        <FormControlLabel value="4" control={<Radio />} label="先賣出一半或一半以上部位" />
+                        <FormControlLabel value="6" control={<Radio />} label="先賣出一半以內部位" />
+                        <FormControlLabel value="8" control={<Radio />} label="暫時觀望，視情況再因應" />
+                        <FormControlLabel value="10" control={<Radio />} label="繼續持有至回本或不漲為止" />
                         </RadioGroup>
                     </FormControl>
                     </div>
@@ -90,11 +119,11 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>當您的投資達到你預先設定的目標利益（停利點），請問您會採取那種處置方式？</FormLabel>
                         <RadioGroup row={true} aria-label="dealwith-profit" name="dealwith-profit" onChange={this.handleChange}>
-                        <FormControlLabel value="立即賣出所有部位" control={<Radio />} label="立即賣出所有部位" />
-                        <FormControlLabel value="先賣出一半或一半以上部位" control={<Radio />} label="先賣出一半或一半以上部位" />
-                        <FormControlLabel value="先賣出一半以內部位" control={<Radio />} label="先賣出一半以內部位" />
-                        <FormControlLabel value="暫時觀望，視情況再因應" control={<Radio />} label="暫時觀望，視情況再因應" />
-                        <FormControlLabel value="繼續持有至回本或不漲為止" control={<Radio />} label="繼續持有至回本或不漲為止" />
+                        <FormControlLabel value="2" control={<Radio />} label="立即賣出所有部位" />
+                        <FormControlLabel value="4" control={<Radio />} label="先賣出一半或一半以上部位" />
+                        <FormControlLabel value="6" control={<Radio />} label="先賣出一半以內部位" />
+                        <FormControlLabel value="8" control={<Radio />} label="暫時觀望，視情況再因應" />
+                        <FormControlLabel value="10" control={<Radio />} label="繼續持有至回本或不漲為止" />
                         </RadioGroup>
                     </FormControl>
                     </div>

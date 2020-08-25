@@ -15,6 +15,20 @@ export const load_cookies = (value) =>{
   return cookie.load(value)
 }
 
+//性格分析換頁面保存分數
+export const survey_score = (value) =>{
+  cookie.save('score_1',value[0])
+  cookie.save('score_2',value[1])
+  cookie.save('score_3',value[2])
+  cookie.save('score_4',value[3])
+  cookie.save('ROI',value[4])
+}
+
+export const survey_answer = (value) =>{
+  cookie.save('ROI',value[0])
+  cookie.save('total_score',value[0])
+}
+
 //比較基金用的
 export const compare_fund_id = (value) =>{
   cookie.save('fund_id_1',value[0])

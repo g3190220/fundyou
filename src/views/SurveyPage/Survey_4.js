@@ -8,7 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Button, Card, Form, Input, Container, Row, Col} from "reactstrap";
 import TextField from '@material-ui/core/TextField';
-import { load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
+import { load_cookies, survey_score } from 'views/Function/Cookie_function.js' // 引入cookies
 
 class Surveys extends React.Component {
     constructor(props) {
@@ -16,7 +16,11 @@ class Surveys extends React.Component {
         this.state = {
             lose:'',
             affect:'',
-            profit:''
+            profit:'',
+            score:load_cookies("score_1"),
+            score_2:load_cookies("score_2"),
+            score_3:load_cookies("score_3"),
+            score_page:0
         };
 
         this.handlesummit = this.handlesummit.bind(this)
@@ -28,6 +32,15 @@ class Surveys extends React.Component {
             if((this.state.lose!='')&&(this.state.affect!='')&&(this.state.profit!='')){
                  const member_id=load_cookies("member_id");
                  const path=`/page-survey-5/id=${member_id}`
+                //將此頁的分數紀錄到cookie
+                 let arr = []
+                 arr.push(this.state.score);
+                 arr.push(this.state.score_2);
+                 arr.push(this.state.score_3);
+                 arr.push(this.state.score_page);
+                 survey_score(arr)
+
+
                  this.props.history.push({
                      pathname: path 
                  })
@@ -60,6 +73,8 @@ class Surveys extends React.Component {
         else if(event.target.name=='profit'){
             this.state.profit = event.target.value;
         }
+
+        this.state.score_page = parseInt(this.state.lose)+parseInt(this.state.affect)+parseInt(this.state.profit);
     };
 
     render() {
@@ -78,10 +93,11 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>假如你今天有(100萬元)要拿去投資基金，請問你最多可以接受多少錢的損失？</FormLabel>
                         <RadioGroup row={true} aria-label="lose" name="lose" onChange={this.handleChange}>
-                        <FormControlLabel value="5萬元以下" control={<Radio />} label="5萬元以下" />
-                        <FormControlLabel value="5萬元〜10萬元" control={<Radio />} label="5萬元〜10萬元" />
-                        <FormControlLabel value="10萬元〜20萬元" control={<Radio />} label="10萬元〜20萬元" />
-                        <FormControlLabel value="20萬元以上" control={<Radio />} label="20萬元以上" />
+                        <FormControlLabel value="2" control={<Radio />} label="不能有損失" />
+                        <FormControlLabel value="4" control={<Radio />} label="5萬元以下" />
+                        <FormControlLabel value="6" control={<Radio />} label="5萬元〜10萬元" />
+                        <FormControlLabel value="8" control={<Radio />} label="10萬元〜20萬元" />
+                        <FormControlLabel value="10" control={<Radio />} label="20萬元以上" />
                         </RadioGroup>
                     </FormControl>
                     </div>
@@ -92,10 +108,11 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>呈上題，如果你損失超過(15萬元)，對你的生活影響程度為？</FormLabel>
                         <RadioGroup row={true} aria-label="affect" name="affect" onChange={this.handleChange}>
-                        <FormControlLabel value="無法承受，會破產" control={<Radio />} label="無法承受，會破產" />
-                        <FormControlLabel value="影響程度大" control={<Radio />} label="影響程度大" />
-                        <FormControlLabel value="中度影響" control={<Radio />} label="中度影響" />
-                        <FormControlLabel value="幾乎無影響" control={<Radio />} label="幾乎無影響" />
+                        <FormControlLabel value="2" control={<Radio />} label="無法承受，會破產" />
+                        <FormControlLabel value="4" control={<Radio />} label="影響程度大" />
+                        <FormControlLabel value="6" control={<Radio />} label="中度影響" />
+                        <FormControlLabel value="8" control={<Radio />} label="影響程度小" />
+                        <FormControlLabel value="10" control={<Radio />} label="幾乎無影響" />
                         </RadioGroup>
                     </FormControl>
                     </div>
@@ -106,10 +123,11 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>當你賺多少錢之後才會想把基金賣出？</FormLabel>
                         <RadioGroup row={true} aria-label="profit" name="profit" onChange={this.handleChange}>
-                        <FormControlLabel value="賺 5萬元〜10萬元" control={<Radio />} label="賺 5萬元〜10萬元" />
-                        <FormControlLabel value="賺 10萬元〜15萬元" control={<Radio />} label="賺 10萬元〜15萬元" />
-                        <FormControlLabel value="賺 15萬元〜20萬元" control={<Radio />} label="賺 15萬元〜20萬元" />
-                        <FormControlLabel value="賺 20萬元〜25萬元" control={<Radio />} label="賺 20萬元〜25萬元" />
+                        <FormControlLabel value="2" control={<Radio />} label="賺 5萬元以下" />
+                        <FormControlLabel value="4" control={<Radio />} label="賺 5萬元〜10萬元" />
+                        <FormControlLabel value="6" control={<Radio />} label="賺 10萬元〜15萬元" />
+                        <FormControlLabel value="8" control={<Radio />} label="賺 15萬元〜20萬元" />
+                        <FormControlLabel value="10" control={<Radio />} label="賺 20萬元〜25萬元" />
                         </RadioGroup>
                     </FormControl>
                     </div>
