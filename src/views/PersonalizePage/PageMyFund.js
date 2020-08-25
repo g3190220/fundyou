@@ -226,7 +226,7 @@ class PageMyFund extends React.Component{
       .then((jsonData) => {
         console.log(jsonData)
         if(jsonData.StatusCode==200){
-          alert("success!")
+          alert("成功更新備忘錄！")
           window.location.reload(true)  //更新狀態後重新整理頁面
         }
         else{
