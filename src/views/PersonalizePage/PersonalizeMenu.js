@@ -65,7 +65,7 @@ class PersonalizeMenu extends React.Component{
   getPDData(){
     let member_info=[];
     
-    const url = "https://140.115.87.192:8090/check_LoginStatus";////////改url
+    const url = "http://140.115.87.192:8090/check_LoginStatus";////////改url
     //console.log(data)
     fetch(url, {
               method: 'POST',
