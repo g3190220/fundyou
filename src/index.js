@@ -25,6 +25,7 @@ import PageSurvey_2 from "views/SurveyPage/Survey_2.js"
 import PageSurvey_3 from "views/SurveyPage/Survey_3.js"
 import PageSurvey_4 from "views/SurveyPage/Survey_4.js"
 import PageSurvey_5 from "views/SurveyPage/Survey_5.js"
+import LineLinking from "views/LinePage/LineLinking.js"
 // others
 
 ReactDOM.render(
@@ -103,7 +104,11 @@ ReactDOM.render(
         path="/page-survey-5"//性格分析問卷頁面_5
         render={props => <PageSurvey_5 {...props} />} 
       />
-      <Redirect to="/index" />
+      <Route
+        path="/account-linkng"//Line-linking
+        render={props => <LineLinking {...props} />} 
+      />
+      <Redirect to="/index"/>
     </Switch>
   </HashRouter>,
   document.getElementById("root")

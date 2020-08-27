@@ -116,6 +116,7 @@ class PageMyFund extends React.Component{
             {title: '最新淨值',field: 'History_NetWorth'},
             {title: '漲跌(%)',field: 'Ups_and_Downs'},
             {title: '三個月報酬(%)',field: 'History_ROI_3M'},
+            {title: '追蹤時間',field: 'fund_track_date'},
             ],
             fld022: "",
             name: "",
