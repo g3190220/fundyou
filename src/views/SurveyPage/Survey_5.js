@@ -26,7 +26,7 @@ class Surveys extends React.Component {
         this.handlesummit = this.handlesummit.bind(this)
         this.handleprevious = this.handleprevious.bind(this)
       }
-    //-------------------下一頁------------------------------
+    //------------------提交------------------------------
     handlesummit(){
 
             if((this.state.dealwith_lose!='')&&(this.state.dealwith_profit!='')){
@@ -40,22 +40,27 @@ class Surveys extends React.Component {
 
                  let arr = []
                  let ans = '';
-                 let total = parseInt(this.state.score)+parseInt(this.state.score_2)+parseInt(this.state.score_3)+parseInt(this.state.score_4)+parseInt(this.state.score_page)
+                 var result = '';
+                 var total = parseInt(this.state.score)+parseInt(this.state.score_2)+parseInt(this.state.score_3)+parseInt(this.state.score_4)+parseInt(this.state.score_page)
                  arr.push(load_cookies("ROI"));
                  arr.push(total)
                  survey_answer(arr);
 
                  if(total <= 34){
                     ans = '您的結果為：安穩型';
+                    result = '安穩型'
                  }
                  else if(total <=45){
                     ans = '您的結果為：穩健型';
+                    result = '穩健型'
                  }
                  else if(total <=58){
                     ans = '您的結果為：成長型';
+                    result = '成長型'
                 }
                 else{
                     ans = '您的結果為：積極型';
+                    result = '積極型'
                 }
                 alert(ans);
             }
@@ -63,8 +68,31 @@ class Surveys extends React.Component {
                 alert('請完全填選後再按下一頁！')
             }
 
+            //-----------更新或新增性格分析結果-----------------------------------------------------------------
+            const url = "http://140.115.87.192:8090/set_characteristic";////////改url
+            //console.log(data)
+            fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        memberID: load_cookies("member_id"),
+                        exceptedreturn: 100,
+                        characteristic:result,
+                        score: total,
+                    })
+                })
+                .then((response) => {return response.json();})
+                .then((jsonData) => {
+                //console.log(this)
+                console.log(jsonData)
+                if(jsonData.StatusCode==200){
+                }
+                })
     }
-        //-------------------上一頁------------------------------
+    //-------------------上一頁------------------------------
     handleprevious(){
         const member_id=load_cookies("member_id");
         const path=`/page-survey-4/id=${member_id}`
