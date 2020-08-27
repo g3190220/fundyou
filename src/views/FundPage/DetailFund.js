@@ -223,12 +223,8 @@ class DetailFund extends React.Component{
                 this.setState({showtag1:"visable"})
                 this.setState({colortag1:true})
                 console.log(tag_info.length)
-<<<<<<< HEAD
-                if(tag_info.length==1){
-=======
             //如果只有一個自創TAG
             if(tag_info.length==1){
->>>>>>> 98e524eb1bac164f020bc643157369b599fa420a
                     const url = "http://140.115.87.192:8090/getTag";
                     fetch(url, {
                     method: 'POST',
@@ -749,8 +745,16 @@ class DetailFund extends React.Component{
                     </tr>
                     </table>
                     </div>
-                </Row>
+            </Row>
             <Row>
+                <div className="sub-sub-fund-introduce">
+                    <table className='fund-introduce-info' border='2' cellpadding="4">
+                    <tr>
+                        <th>基金名稱</th>
+                        <th>基金名稱（英文）</th>
+                    </tr>
+                    </table>
+                </div>
             </Row>
             </div>
             </Container>

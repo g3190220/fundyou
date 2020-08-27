@@ -55,7 +55,7 @@ class Caculate extends React.Component{
             var _cost= this.state.cost;
             var _total= this.state.total;
             var _return=0;
-            _return=(((_total/_cost)-1)*100).toFixd(2);
+            _return=(((_total/_cost)-1)*100).toFixed(2);
             this.setState({roi:_return});
             this.setState({answer_return:"red"});
             this.setState({show:"visible"})

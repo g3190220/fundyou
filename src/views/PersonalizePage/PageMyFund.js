@@ -67,18 +67,29 @@ const tableIcons = {
   };
   
   const styles = () => ({
+    // customDialog: {
+    //   '& div': {
+    //     backgroundColor: "#f8f5c4"
+    //   }
+    // },
     customDialogTitle: {
+      '& div': {
+        // backgroundColor: "#f8f5c4"
+      },
       '& h2': {
         fontFamily:"Microsoft JhengHei",
         fontWeight: 900,
         fontSize:25,
-      }
+        // backgroundColor: "#f8f5c4"
+      },
+      
+
     },
     customDialogContent:{
       '& p': {
         fontFamily:"Microsoft JhengHei",
         fontWeight: 500,
-        fontSize:20,
+        fontSize:18,
         color: "#4d4d4d",
       }
 
@@ -381,29 +392,20 @@ class PageMyFund extends React.Component{
                     aria-labelledby="form-dialog-title"
                     fullWidth={true}
                     maxWidth={'xs'}
-                    
+                    classes={{root: classes.customDialog}}
                    >
                      
                     <DialogTitle 
                       id="form-dialog-title" 
-                      classes={{
-                        root: classes.customDialogTitle
-                      }}
+                      classes={{root: classes.customDialogTitle}}
                     >
                       {this.state.chname}
                       <hr className="hr"></hr>
                       </DialogTitle>
                       
-                    <DialogContent
-                      classes={{
-                        root: classes.customDialogContent
-                      }}
-                    >
+                    <DialogContent classes={{root: classes.customDialogContent}}>
                       <DialogContentText >
-                        
                           {this.state.original_content}
-                       
-                        
                       </DialogContentText>
                       <TextField
                         autoFocus
@@ -411,7 +413,7 @@ class PageMyFund extends React.Component{
                         // id="name"
                         label="請輸入備忘錄內容"
                         type="string"
-                        onChange={this.handleChange('new_content')}
+                        onChange={this.handleChange('new_content')} //更新新增內容
                         fullWidth
                       />
                     </DialogContent>

@@ -54,15 +54,15 @@ class PageCharacterAnalysis extends React.Component{
                 <span style={{fontWeight:"bold"}}>帶您透過情境遊戲來了解投資偏好</span>
             </div>
             <div className="start-btn">
-                <button type="button" class="btn btn-neutral">前往遊戲GO</button>    
+                <button type="button" class="btn btn-neutral" onClick={this.handleSubmit}>前往性格測驗</button>    
             </div>
             
-            <div>
-                <span className='survey-go-font' style={{fontWeight:"bold"}}>不想玩遊戲？前往問卷頁面</span>
+            {/* <div>
+                <span className='survey-go-font' style={{fontWeight:"bold"}}>不想玩遊戲？前往</span>
                 <IconButton aria-label="GO" size="small" onClick={this.handleSubmit}>
                     <ArrowForwardIcon />
                 </IconButton>
-            </div>
+            </div> */}
             
         </div>
 
