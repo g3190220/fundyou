@@ -151,7 +151,7 @@ class PersonlDataPage extends React.Component {
               this.state.gender=member_info.member_gender
               this.state.birthday=member_info.member_birthday
               this.state.job=member_info.member_job
-              this.state.line_id=member_info.member_line_id
+              //this.state.line_id=member_info.member_line_id
               this.state.image=member_info.member_photo
               this.state.image_old=member_info.member_photo
 
@@ -177,7 +177,6 @@ class PersonlDataPage extends React.Component {
     this.setState({disabled: this.state.disabled});
     this.setState({edit_disabled:this.state.edit_disabled})
     this.setState({showButton:this.state.showButton})
-    
     
   }
 
@@ -210,7 +209,7 @@ class PersonlDataPage extends React.Component {
   //點擊submit btn
   handleSubmit(){
     const check_photo=this.state.image
-    if(check_photo.startsWith('https')){
+    if(check_photo.startsWith('http')){
       this.state.image=-1
       this.setState({image:this.state.image})
     }
@@ -229,7 +228,6 @@ class PersonlDataPage extends React.Component {
                     gender:this.state.gender,
                     birthday:this.state.birthday,
                     Job:this.state.job,
-                    line_id:this.state.line_id,
                     photo:this.state.image,
                     session_password: load_cookies("member_session")
               
@@ -240,6 +238,8 @@ class PersonlDataPage extends React.Component {
         })
         .then((response) => {return response.json();})
         .then((jsonData) => {
+          console.log("更新")
+          console.log(this.state.image)
           console.log(jsonData)
           if(jsonData.StatusCode==200){
               alert("更新成功！")
@@ -472,7 +472,7 @@ class PersonlDataPage extends React.Component {
               
           
           </Col>
-          <Col sm>
+          {/* <Col sm>
           
               <TextField
               
@@ -491,7 +491,7 @@ class PersonlDataPage extends React.Component {
               
             />
          
-          </Col>
+          </Col> */}
         </Row>
           {/* <div className="register-btn">
               <Button variant="contained" color="Default" onClick={this.handleEdit} style={{marginRight: '25px',width:'88px',height:'37px'}}>

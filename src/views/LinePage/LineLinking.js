@@ -92,8 +92,9 @@ class LineLinking extends React.Component {
             //取得member_id和member_sesiion
             console.log(nounce)
             console.log(this.state.token)
-            alert("成功登入~")
-            //window.location.href=`https://access.line.me/dialog/bot/accountLink?linkToken=${this.state.token}&nonce=${nounce}`;
+            onLogin(member_info)
+            
+            window.location.href=`https://access.line.me/dialog/bot/accountLink?linkToken=${this.state.token}&nonce=${nounce}`;
             
           }
           else if(jsonData.StatusCode==1000){

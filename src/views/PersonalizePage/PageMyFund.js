@@ -171,25 +171,30 @@ class PageMyFund extends React.Component{
       .then((jsonData) => { 
         console.log(jsonData)
         if(jsonData.StatusCode==200){
-          var track_info=[];
-          var info=[]
-          track_info=JSON.parse(jsonData.info)
-          // for(var i = 0; i < jsonData.info.length; i++){
-          //     track_info.push(JSON.parse(jsonData.info[i]))
-          //   }
-          // }
-          console.log(track_info[0].track)
-          for(var i = 0; i < track_info.length; i++){
-            console.log(track_info[i])
-            if(track_info[i].track==1){
-              console.log(track_info[i])
-              info.push(track_info[i])
-            }
+          try{
+              var track_info=[];
+              var info=[]
+              track_info=JSON.parse(jsonData.info)
+              // for(var i = 0; i < jsonData.info.length; i++){
+              //     track_info.push(JSON.parse(jsonData.info[i]))
+              //   }
+              // }
+              console.log(track_info[0].track)
+              for(var i = 0; i < track_info.length; i++){
+                console.log(track_info[i])
+                if(track_info[i].track==1){
+                  console.log(track_info[i])
+                  info.push(track_info[i])
+                }
+              }
+              console.log(info)
+              this.state.all_data=info
+              this.setState({all_data:this.state.all_data,flag:true})
+              console.log(this.state.all_data)
           }
-          console.log(info)
-          this.state.all_data=info
-          this.setState({all_data:this.state.all_data,flag:true})
-          console.log(this.state.all_data)
+          catch(e){
+              this.state.all_data=[]
+          }
       }
         else{
           this.state.all_data=[]
