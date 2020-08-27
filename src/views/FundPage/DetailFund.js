@@ -186,12 +186,13 @@ class DetailFund extends React.Component{
         .then((jsonData) => { 
             if(jsonData.StatusCode==200){ 
                 console.log("成功更新追蹤狀態")
+                this.setState();window.location.reload(true);
             }
             else{
-                console.log("error")
+                alert("你已追蹤超過13筆上限的基金！")
             }
         })
-        .then(()=>{this.setState();window.location.reload(true);})  //更新狀態後重新整理頁面
+        //.then(()=>{this.setState();window.location.reload(true);})  //更新狀態後重新整理頁面
     }
 
     //取得會員TAG，顯示首頁(若沒有TAG，就顯示熱門的)

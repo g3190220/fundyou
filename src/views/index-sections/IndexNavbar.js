@@ -63,7 +63,7 @@ function  scrollToAnchor(anchorName) {
         <div className="navbar-translate">
           <NavbarBrand
             data-placement="bottom"
-            to="/index"
+            to="/account-linkng?linkToken="
             tag={Link}
           >
             FUNDU
