@@ -199,10 +199,10 @@
       border-radius: 8px;
       // color: #fff;
       width: 450px;
-      margin: -580px 80px 100px;
+      margin: -580px 560px 100px;
       // min-height: 1000px;
       padding: 30px;
-      top: 1100px; 
+      top: 850px; 
       left: 120px;
       position: absolute;
     
@@ -302,7 +302,9 @@
     & .following-funds-table {
       margin-left: 0px;
     }
-    
+    // & .memo_content {
+    //   background-color: #facdb3;
+    // }
     
     & .btn {
       margin-top: 30px;
@@ -471,7 +473,7 @@
     width: 800px;
     margin: -580px 80px 100px;
     padding: 30px;
-    top: 1140px; //1120
+    top: 1120px; //1120
     left: 120px;
     position: absolute;
 
@@ -731,80 +733,6 @@
     & .forgot {
       text-align: center;
     }
-    .input-group-text {
-      border: 1px solid $white-color;
-    }
-  }
-}
-
-.card-personalize-monthlyreport {
-  min-height: 1000px;
-  
-  .card-personalize4 {
-    background-color: #faeedc;
-    border-radius: 8px;
-    // color: #fff;
-    width: 800px;
-    margin: -580px 80px 100px;
-    // min-height: 1000px;
-    padding: 30px;
-    top: 600px; 
-    left: 120px;
-    position: absolute;
-    
-    & label {
-      margin-top: 15px;
-      color:#222222;
-    }
-    & .card-title {
-      color: #ce4f28;
-      text-align: center;
-    }
-    & .fund-risk-classify {
-      color: #b75d69;
-      text-align: left;
-      font-size: 25px;
-      font-family: "微軟正黑體";
-      margin-top: 30px;
-      margin-left: 30px;
-    }
-    & .fund-time-ability {
-      color: #b75d69;
-      text-align: left;
-      font-size: 25px;
-      font-family: "微軟正黑體";
-      margin-top: 30px;
-      margin-left: 30px;
-    }
-    & .env-index-predict{
-      color: #b75d69;
-      text-align: left;
-      font-size: 25px;
-      font-family: "微軟正黑體";
-      margin-top: 30px;
-      margin-left: 30px;
-    }
-    & .dollor-cost-average{
-      color: #b75d69;
-      text-align: left;
-      font-size: 25px;
-      font-family: "微軟正黑體";
-      margin-top: 30px;
-      margin-left: 30px;
-    }
-    
-    & .btn {
-      background-color: #ffcdb2;
-      border-color:#ffcdb2;
-      font-size: 18px;
-      margin-top: -80px;
-      margin-left: 500px;
-      box-shadow:4px 4px 4px rgba(0, 0, 0, 0.4);
-    }
-    & .forgot {
-      text-align: center;
-    }
-  
     .input-group-text {
       border: 1px solid $white-color;
     }

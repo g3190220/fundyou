@@ -746,8 +746,16 @@ class DetailFund extends React.Component{
                     </tr>
                     </table>
                     </div>
-                </Row>
+            </Row>
             <Row>
+                <div className="sub-sub-fund-introduce">
+                    <table className='fund-introduce-info' border='2' cellpadding="4">
+                    <tr>
+                        <th>基金名稱</th>
+                        <th>基金名稱（英文）</th>
+                    </tr>
+                    </table>
+                </div>
             </Row>
             </div>
             </Container>

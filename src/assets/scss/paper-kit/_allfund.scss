@@ -491,6 +491,7 @@
 
             .fund-basic-info td{
                 font-size: 20px;
+                font-weight: 600;
                 width: 600px;
                 padding: 5px 20px 5px 10px;
                 color: #e26d5c;
@@ -502,6 +503,22 @@
                 word-break:break-all;;
             }
 
+        }
+
+        .sub-sub-fund-introduce{
+            background-color:#F8EDEB;
+            border-radius: 15px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            transform: translateX(12%);
+            width: 80%;
+
+            .fund-introduce-info{
+                border: 2px #F8EDEB solid;
+                margin:0 auto;
+                margin-top: 10px;
+                margin-bottom: 30px;
+            }
         }
 
         .compare-fix{

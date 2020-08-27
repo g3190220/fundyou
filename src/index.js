@@ -14,7 +14,6 @@ import PageMyFund from "views/PersonalizePage/PageMyFund.js";
 import PageMyTag from "views/PersonalizePage/PageMyTag.js";
 import PageCharacterAnalysis from "views/PersonalizePage/PageCharacterAnalysis.js";
 import PagePig from "views/PersonalizePage/PagePig.js";
-import PageMonthlyReport from "views/PersonalizePage/PageMonthlyReport.js";
 import AllFundPage from "views/FundPage/AllFund.js";
 import DetailFund from "views/FundPage/DetailFund.js";
 import TAGPage from "views/TagPage/Tag.js";
@@ -75,10 +74,6 @@ ReactDOM.render(
       <Route
         path="/page-pig/:member_id"//豬豬小助理子頁面
         render={props => <PagePig {...props} />} //豬豬小助理子頁面
-      />
-      <Route
-        path="/page-monthlyReport/:member_id"//月報表子頁面
-        render={props => <PageMonthlyReport {...props} />} //月報表子頁面
       />
       <Route
         path="/page-tag/:member_id/:fundid"//tag頁面
