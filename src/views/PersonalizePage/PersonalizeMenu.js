@@ -9,7 +9,6 @@ import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import ChildCareIcon from '@material-ui/icons/ChildCare';
 import FaceIcon from '@material-ui/icons/Face';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 
 //處理個人資料取得
 import {load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
@@ -65,7 +64,7 @@ class PersonalizeMenu extends React.Component{
   getPDData(){
     let member_info=[];
     
-    const url = "https://140.115.87.192:8090/check_LoginStatus";////////改url
+    const url = "http://140.115.87.192:8090/check_LoginStatus";////////改url
     //console.log(data)
     fetch(url, {
               method: 'POST',
@@ -106,7 +105,7 @@ class PersonalizeMenu extends React.Component{
               
               if(!isEmpty(this.state.image)){
                 //一進來有圖片，submit要回傳-1
-                this.state.image="https://drive.google.com/uc?export=view&id="+this.state.image
+                this.state.image="http://drive.google.com/uc?export=view&id="+this.state.image
               }
               this.setState((state, props) => {
                 return {counter: state.counter + props.step,
@@ -163,13 +162,6 @@ class PersonalizeMenu extends React.Component{
                 <button type="button" class="btn btn-neutral" onClick={this.handleSubmit.bind(this, "page-pig")}>
                     <div className="face-icon"><EmojiObjectsIcon></EmojiObjectsIcon></div>
                     豬豬小助理
-                </button>
-            </div>
-
-            <div className="page-monthlyReport">
-                <button type="button" class="btn btn-neutral" onClick={this.handleSubmit.bind(this, "page-monthlyReport")}>
-                    <div className="face-icon"><TrendingUpIcon></TrendingUpIcon></div>
-                    月報表
                 </button>
             </div>
 

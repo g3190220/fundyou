@@ -6,7 +6,14 @@ import PersonalizeMenu from "views/PersonalizePage/PersonalizeMenu.js"; //左側
 import MaterialTable from 'material-table'; //基金表格
 import { load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
 
+import isEmpty from 'views/Function/isEmpty.js'
+
+
 import 'react-multi-carousel/lib/styles.css';
+
+//覆寫CSS
+import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
 
 import { forwardRef } from 'react';
 
@@ -28,8 +35,14 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import FindInPageIcon from '@material-ui/icons/PageviewOutlined';
 import SearchIcon from '@material-ui/icons/Search';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import NotesIcon from '@material-ui/icons/Notes';
+//備忘錄套件
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 const tableIcons = {
@@ -52,7 +65,39 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
     FindInPageIcon:forwardRef((props, ref) => <FindInPageIcon {...props} ref={ref} />)
   };
+  
+  const styles = () => ({
+    // customDialog: {
+    //   '& div': {
+    //     backgroundColor: "#f8f5c4"
+    //   }
+    // },
+    customDialogTitle: {
+      '& div': {
+        // backgroundColor: "#f8f5c4"
+      },
+      '& h2': {
+        fontFamily:"Microsoft JhengHei",
+        fontWeight: 900,
+        fontSize:25,
+        // backgroundColor: "#f8f5c4"
+      },
+      
 
+    },
+    customDialogContent:{
+      '& p': {
+        fontFamily:"Microsoft JhengHei",
+        fontWeight: 500,
+        fontSize:18,
+        color: "#4d4d4d",
+      }
+
+    }
+});
+  
+
+  
 class PageMyFund extends React.Component{
     state = {
     }
@@ -60,12 +105,20 @@ class PageMyFund extends React.Component{
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.getTrackData = this.getTrackData.bind(this);
+        this.handleClickOpen=this.handleClickOpen.bind(this);
+        this.handleClose=this.handleClose.bind(this);
+        this.CreateMemo=this.CreateMemo.bind(this);
+        this.getMemo=this.getMemo.bind(this);
+        this.handleChange=this.handleChange.bind(this);
 
         console.log(props)
         this.state = {
           //fields: {},
+            open:false,
+            // setOpen:false,
             errors: {},
             all_data:[],
+            original_content:"您尚未新增備忘錄",
             flag:false,
             filter_content:false,
             columns:[
@@ -74,6 +127,7 @@ class PageMyFund extends React.Component{
             {title: '最新淨值',field: 'History_NetWorth'},
             {title: '漲跌(%)',field: 'Ups_and_Downs'},
             {title: '三個月報酬(%)',field: 'History_ROI_3M'},
+            {title: '追蹤時間',field: 'fund_track_date'},
             ],
             fld022: "",
             name: "",
@@ -86,6 +140,25 @@ class PageMyFund extends React.Component{
       }
       
     }
+
+    //處理setState的方法
+    handleChange = name => event =>{
+      console.log("enter_chanfe")
+      this.setState({
+        [name]: event.target.value,
+    })}
+
+    handleClickOpen(){
+      this.setState({
+        open: true
+      });
+    }
+
+    handleClose(){
+      this.setState({
+        open: false
+      });
+    }
   
     componentDidMount() {
       window.scrollTo(0, 0);  //頁面置頂
@@ -93,7 +166,7 @@ class PageMyFund extends React.Component{
     }
 
     getTrackData(){  //取得追蹤基金
-      const url = "https://140.115.87.192:8090/getTrack";
+      const url = "http://140.115.87.192:8090/getTrack";
       fetch(url, {
           method: 'POST',
           headers: {
@@ -144,9 +217,89 @@ class PageMyFund extends React.Component{
     handleSubmit(){
       this.props.history.push("/personal-data-page")
     }
+
+
+    CreateMemo(){
+      const url = "http://140.115.87.192:8090/Memo";
+      fetch(url, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            content: this.state.new_content,
+            userid: load_cookies("member_id"),
+            fld022: this.state.fund_fld022_track,
+        })
+        
+      })
+      .then((response) => {return response.json();})
+      .then((jsonData) => {
+        console.log(jsonData)
+        if(jsonData.StatusCode==200){
+          alert("成功更新備忘錄！")
+          window.location.reload(true)  //更新狀態後重新整理頁面
+        }
+        else{
+          alert("error")
+        }
+      })
+
+    }
+
+
+    getMemo(fld022,chname){
+      const url = "http://140.115.87.192:8090/getMemo";
+      console.log(fld022)
+      console.log(chname)
+      fetch(url, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            userid: load_cookies("member_id"),
+            fld022: fld022,
+        })
+        
+      })
+      .then((response) => {return response.json();})
+      .then((jsonData) => {
+        console.log(jsonData)
+        if(jsonData.StatusCode==200){
+          var memo_info=[];
+          
+          //memo_info=JSON.parse(jsonData.info)
+          for(var i = 0; i < jsonData.info.length; i++){
+              memo_info.push(JSON.parse(jsonData.info[i]))
+          }
+          if(isEmpty(memo_info[0][0].content)){
+            this.setState({original_content:"您尚未新增備忘錄！"})
+          }
+          else{
+            this.setState({original_content:memo_info[0][0].content})
+          }
+         
+         this.setState({fund_fld022_track:fld022})
+         this.setState({chname:chname})
+          
+
+        }
+        else{
+          this.setState({original_content:"您尚未新增備忘錄！"})
+          this.setState({fund_fld022_track:fld022})
+          this.setState({chname:chname})
+        }
+      })
+      .then(()=>{this.handleClickOpen()})
+    }
+    
     
     render(){
-    
+      const {classes} = this.props;
+      
     return(
     <div className="page-header" style={{backgroundColor: '#ffcdb2',}}>
     <Container>
@@ -208,16 +361,6 @@ class PageMyFund extends React.Component{
                 
                 }}
                 actions={[
-                  {
-                    icon: () => <FavoriteIcon color="disabled" />,
-                    tooltip: 'FAVORITE',
-                    
-                    onClick: (event, rowData) =>  this.props.history.push({
-                
-                    // pathname: '/detailfund-page/fundid='+rowData.Fund_fld022,
-                    
-                    })
-                  },
                   { 
                     //hidden:true,
                     icon: () => <SearchIcon color="action" />,
@@ -229,7 +372,10 @@ class PageMyFund extends React.Component{
                   {
                     icon: () => <NotesIcon color="action" />,
                     tooltip: 'MEMO' ,
-
+                    onClick: (event, rowData) => {
+                      this.getMemo(rowData.fund_fld022_track,rowData.Fund_CH_Name)
+                    },
+                     
                   },    
                 ]}
                 
@@ -239,93 +385,53 @@ class PageMyFund extends React.Component{
                 }
                 }}
                 />
+                  <div className="memo_content">
+                  <Dialog 
+                    open={this.state.open} 
+                    keepMounted
+                    onClose={this.handleClose} 
+                    aria-labelledby="form-dialog-title"
+                    fullWidth={true}
+                    maxWidth={'xs'}
+                    classes={{root: classes.customDialog}}
+                   >
+                     
+                    <DialogTitle 
+                      id="form-dialog-title" 
+                      classes={{root: classes.customDialogTitle}}
+                    >
+                      {this.state.chname}
+                      <hr className="hr"></hr>
+                      </DialogTitle>
+                      
+                    <DialogContent classes={{root: classes.customDialogContent}}>
+                      <DialogContentText >
+                          {this.state.original_content}
+                      </DialogContentText>
+                      <TextField
+                        autoFocus
+                        margin="dense"
+                        // id="name"
+                        label="請輸入備忘錄內容"
+                        type="string"
+                        onChange={this.handleChange('new_content')} //更新新增內容
+                        fullWidth
+                      />
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={this.handleClose} color="primary">
+                        Cancel
+                      </Button>
+                      <Button onClick={this.CreateMemo} color="primary">
+                        Save
+                      </Button>
+                    </DialogActions>
+                  </Dialog></div>
+
+
             </div>
           </Row>
-            
-          <Row>
-          <div className="fund-favorite">
-                <span style={{fontWeight:"bold"}}>最愛基金</span>
-            </div><br/>
-
-            <div className="favorite-funds-table">
-                <MaterialTable
-                icons={tableIcons}
-                title="Favorite Funds"
-                columns={this.state.columns}
-                data={this.state.all_data}
-                //onChangePage={()=>this.scroll}       
-                
-                options={{
-                sorting: true,
-                headerStyle: {
-                    backgroundColor: '#e26d5c',
-                    color: '#F8EDEB',
-                    width: 140,
-                    maxWidth: 140,
-                    whiteSpace:'nowrap',
-                    position: 'sticky', 
-                    top: 0,
-                    padding: 10 ,
-                    fontFamily: '微軟正黑體',
-                    fontWeight: '800',
-                    fontSize: 16
-                },
-
-                toolbar: false, //隱藏標題和搜尋欄
-
-                cellStyle:{ 
-                    width: 140,
-                    maxWidth: 140,
-                    wordWrap:'break-word',
-                    backgroundColor: '#F8EDEB',
-                    color: '#e26d5c',
-                    fontFamily: '微軟正黑體',
-                    fontWeight: '700',
-                    fontSize: 15,
-                    padding: 10
-                },
-                actionsCellStyle: {
-                    backgroundColor: '#F8EDEB',
-                },
-                maxBodyHeight: '420px',
-                actionsColumnIndex: 0,
-                
-                }}
-                actions={[
-                  {
-                    icon: () => <FavoriteIcon color="action" />,
-                    tooltip: 'FAVORITE',
-                    
-                    // onClick: (event, rowData) =>  this.props.history.push({
-                
-                    // pathname: '/detailfund-page/fundid='+rowData.Fund_fld022,
-                    
-                    // })
-                  },
-                  { 
-                    //hidden:true,
-                    icon: () => <SearchIcon color="action" />,
-                    tooltip: 'SEEFUND',
-                    onClick: (event, rowData) =>  this.props.history.push({
-                      pathname: '/detailfund-page/fundid='+rowData.fund_fld022_track,
-                    })
-                  },
-                  {
-                    icon: () => <NotesIcon color="action" />,
-                    tooltip: 'MEMO' ,
-
-                  },    
-                ]}
-                
-                localization={{
-                    header: {
-                    actions: ''
-                }
-                }}
-                />
-            </div>
-          </Row>
-                
+                            
         </div>
 
       </Row>
@@ -341,4 +447,8 @@ class PageMyFund extends React.Component{
     }
     }
 
-    export default PageMyFund;
+    PageMyFund.propTypes = {
+      classes: PropTypes.object.isRequired,
+    };
+    export default withStyles(styles)(PageMyFund);
+    //export default PageMyFund;

@@ -41,7 +41,11 @@ class DetailFund extends React.Component{
         this.state = {
           //fields: {},
         errors: {},
-        initial:false
+        initial:false,
+        showtag1:false,
+        showtag2:false,
+        colortag1:true,
+        colortag2:true,
       };
       
       this.handleClick1 = chart_performance.bind(this); //綁定事件，參考：https://reurl.cc/pdkgQ8
@@ -60,7 +64,7 @@ class DetailFund extends React.Component{
         let fund_info=[];
         console.log(this.props.match.params.fundid.split('='));
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "https://140.115.87.192:8090/getFundInfo";////////改url
+        const url = "http://140.115.87.192:8090/getFundInfo";////////改url
         //console.log(data)
         fetch( url, {
                 method: 'POST',
@@ -114,7 +118,7 @@ class DetailFund extends React.Component{
     trackstate(){    //看此user有沒有追蹤過此筆基金，並改變追蹤狀態
         let fund_info=[];
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "https://140.115.87.192:8090/getTrack";
+        const url = "http://140.115.87.192:8090/getTrack";
         fetch(url, {
             method: 'POST',
             headers: {
@@ -165,7 +169,7 @@ class DetailFund extends React.Component{
 
     CreateTrack(){  //建立追蹤基金
         let id = (this.props.match.params.fundid.split('='))[1]; //抓現在頁面的id
-        const url = "https://140.115.87.192:8090/CreateTrack";
+        const url = "http://140.115.87.192:8090/CreateTrack";
         //console.log(data)
         fetch(url, {
             method: 'POST',
@@ -182,19 +186,20 @@ class DetailFund extends React.Component{
         .then((jsonData) => { 
             if(jsonData.StatusCode==200){ 
                 console.log("成功更新追蹤狀態")
+                this.setState();window.location.reload(true);
             }
             else{
-                console.log("error")
+                alert("你已追蹤超過13筆上限的基金！")
             }
         })
-        .then(()=>{this.setState();window.location.reload(true);})  //更新狀態後重新整理頁面
+        //.then(()=>{this.setState();window.location.reload(true);})  //更新狀態後重新整理頁面
     }
 
     //取得會員TAG，顯示首頁(若沒有TAG，就顯示熱門的)
     getTag(){
         let member_id=load_cookies("member_id")
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "https://140.115.87.192:8090/getTag";
+        const url = "http://140.115.87.192:8090/getTag";
         fetch(url, {
         method: 'POST',
         headers: {
@@ -216,9 +221,12 @@ class DetailFund extends React.Component{
             try{
                 tag_info=JSON.parse(jsonData.tag_info)
                 this.setState({tag1:tag_info[0].tagContent})
+                this.setState({showtag1:"visable"})
+                this.setState({colortag1:true})
                 console.log(tag_info.length)
-                if(tag_info.length==1){
-                    const url = "https://140.115.87.192:8090/getTag";
+            //如果只有一個自創TAG
+            if(tag_info.length==1){
+                    const url = "http://140.115.87.192:8090/getTag";
                     fetch(url, {
                     method: 'POST',
                     headers: {
@@ -235,16 +243,19 @@ class DetailFund extends React.Component{
                     })
                     .then((response) => {return response.json();})
                     .then((jsonData) => { 
-                        if(jsonData.StatusCode==200){
+                    if(jsonData.StatusCode==200){
                             var info = [];
                             var j=0;
                             var _break=true;
                             for(var i = 0; i < jsonData.tag_info.length; i++){
                                 info.push(JSON.parse(jsonData.tag_info[i]))
                             }
+                            console.log()
                             do {
                                 if(info[j].memberID!=member_id){
                                     this.setState({tag2:info[j].tagContent})
+                                    this.setState({showtag2:"visable"})
+                                    this.setState({colortag2:false})//另外一個非自己建立的TAG
                                     _break=false;
                                 }
                                 j++;
@@ -256,16 +267,17 @@ class DetailFund extends React.Component{
                             console.log("no tag")
                             }
                     })
-                }
-                else if(tag_info.length==2){
-                    this.setState({tag1:tag_info[0].tagContent})
-                    this.setState({tag2:tag_info[1].tagContent})
-                }
+            }
+            else if(tag_info.length==2){
+                this.setState({tag2:tag_info[1].tagContent})
+                this.setState({showtag2:"visable"})
+                this.setState({colortag2:true})
+            }
             }
             
             catch (d){
                 let id = (this.props.match.params.fundid.split('='))[1];
-                const url = "https://140.115.87.192:8090/getTag";
+                const url = "http://140.115.87.192:8090/getTag";
                 fetch(url, {
                 method: 'POST',
                 headers: {
@@ -284,11 +296,18 @@ class DetailFund extends React.Component{
                 .then((jsonData) => { 
                     if(jsonData.StatusCode==200){
                         var info = [];
+                        var count=0;
                         for(var i = 0; i < jsonData.tag_info.length; i++){
-                            info.push(JSON.parse(jsonData.tag_info[i]))
+                            info.push(JSON.parse(jsonData.tag_info[i]));
+                            count=i+1; 
+                            var string =`tag${count}`;
+                            var showstring = `show${string}`
+                            var showcolor = `color${string}`
+                            console.log("showstring:",showstring)
+                            this.setState({[string]:info[i].tagContent})
+                            this.setState({[showstring]:"visable"})
+                            this.setState({[showcolor]:false})
                         }
-                            this.setState({tag1:info[0].tagContent})
-                            this.setState({tag2:info[1].tagContent})
                     
                     }
                     else{ //statuscode=1000 >>沒有tag
@@ -305,7 +324,7 @@ class DetailFund extends React.Component{
     getnet(){
         let fund_net=[];
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url2 = "https://140.115.87.192:8090/getNetWorth";////////改url
+        const url2 = "http://140.115.87.192:8090/getNetWorth";////////改url
         //console.log(data)
         fetch(url2, {
                 method: 'POST',
@@ -360,7 +379,7 @@ class DetailFund extends React.Component{
     getROI(){
         let fund_return=[];
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url2 = "https://140.115.87.192:8090/getReturn";////////改url
+        const url2 = "http://140.115.87.192:8090/getReturn";////////改url
         //console.log(data)
         fetch(url2, {
                 method: 'POST',
@@ -401,7 +420,7 @@ class DetailFund extends React.Component{
         let day = [];
         let i = 0;
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url3 = "https://140.115.87.192:8090/getNetWorth";////////改url
+        const url3 = "http://140.115.87.192:8090/getNetWorth";////////改url
         //console.log(data)
         fetch(url3, {
                 method: 'POST',
@@ -452,7 +471,7 @@ class DetailFund extends React.Component{
         let day = [];
         let i = 0;
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url4 = "https://140.115.87.192:8090/getPerformance";////////改url
+        const url4 = "http://140.115.87.192:8090/getPerformance";////////改url
         //console.log(data)
         fetch(url4, {
                 method: 'POST',
@@ -520,7 +539,7 @@ class DetailFund extends React.Component{
         window.event.preventDefault();
         if(!isEmpty(this.state.new_tag)){
         let fld022 = (this.props.match.params.fundid.split('='))[1];
-        const url = "https://140.115.87.192:8090/GenerateTag";
+        const url = "http://140.115.87.192:8090/GenerateTag";
         fetch(url, {
                 method: 'POST',
                 headers: {
@@ -647,8 +666,8 @@ class DetailFund extends React.Component{
                 <div className='sub-sub-detail'  id='info'>
                 <Row >
                     <label className='fund-name'>{this.state.fund_name}</label>  {/*從資料庫讀取基金的名字*/}
-                    <label className='tag-label'>{this.state.tag1}</label>
-                    <label className='tag-label'>{this.state.tag2}</label>
+                    <label className='tag-label' style={{visibility: this.state.showtag2 ? 'visible' : 'hidden', color:this.state.colortag2 ? "#CD5C5C" : "	#444444"}}>{this.state.tag2}</label>
+                    <label className='tag-label' style={{display: this.state.showtag1 ? 'visible' : 'hidden',color:this.state.colortag1 ? "#CD5C5C" : "	#444444"}}>{this.state.tag1}</label>
                    {/* <button className='Compare-btn'><a href='#page-compare'>去比較</a></button>*/}
                    <input type="button" className={this.state.track_state==1 ? "followBtnTrue" : "followBtnFalse"} onClick={this.togglestate,this.CreateTrack} value={this.state.track_state==1 ? "√ 已追蹤" : "+ 追蹤"}></input>
                 </Row>   
@@ -727,8 +746,16 @@ class DetailFund extends React.Component{
                     </tr>
                     </table>
                     </div>
-                </Row>
+            </Row>
             <Row>
+                <div className="sub-sub-fund-introduce">
+                    <table className='fund-introduce-info' border='2' cellpadding="4">
+                    <tr>
+                        <th>基金名稱</th>
+                        <th>基金名稱（英文）</th>
+                    </tr>
+                    </table>
+                </div>
             </Row>
             </div>
             </Container>

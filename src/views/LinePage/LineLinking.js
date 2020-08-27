@@ -30,7 +30,7 @@ import {
 
 
 //function SectionLogin() {
-class SectionLogin extends React.Component {
+class LineLinking extends React.Component {
   state = {
   }
   constructor(props) {
@@ -38,14 +38,21 @@ class SectionLogin extends React.Component {
       console.log(props)
       this.state = {
         //fields: {},
-        errors: {}
+        errors: {},
+        flag: false
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.keyPress = this.keyPress.bind(this);
   }
+  componentDidMount() { 
+    let token = (this.props.location.search.split('='))[1];
+    
+    this.setState({token:token})
+  }
   handleSubmit(){
     let errors = {}; 
     let member_info=[];
+    let nounce="";
     
     
     //取消DOM的預設功能
@@ -53,6 +60,7 @@ class SectionLogin extends React.Component {
   
     if(!isEmpty(this.state.email) && !isEmpty(this.state.password))
     { 
+       
         console.log("handleSubmit_start")
         this.state.errors = {};
         //const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -78,19 +86,14 @@ class SectionLogin extends React.Component {
       
           if(jsonData.StatusCode==200){
             member_info=JSON.parse(jsonData.member_info)
-            onLogin(member_info)
-            alert("登入成功")
-            //跳轉頁面
+
+            nounce=member_info.member_nonce
+            console.log("取得nounce")
             //取得member_id和member_sesiion
-            const member_id=member_info.member_id
-            //const member_session=member_info.member_session
-            //預設網址
-            const path=`/allfund-page/id=${member_id}`
-            this.props.history.push({
-              pathname: path
-              
-            })
-            console.log(this.props)
+            console.log(nounce)
+            console.log(this.state.token)
+            alert("成功登入~")
+            //window.location.href=`https://access.line.me/dialog/bot/accountLink?linkToken=${this.state.token}&nonce=${nounce}`;
             
           }
           else if(jsonData.StatusCode==1000){
@@ -103,8 +106,7 @@ class SectionLogin extends React.Component {
             this.setState({errors: this.state.errors});
             console.log(this.state.errors);
             
-            
-
+          
     }
         
           else{
@@ -157,8 +159,8 @@ class SectionLogin extends React.Component {
           <Container >
             <Row>
               <Col className="mx-auto" lg="4" md="6">
-                <Card className="card-register">
-                  <h3  className="title mx-auto">Welcome</h3>
+                <Card className="card-register-line">
+                  <h3  className="title mx-auto">登入以連動Line</h3>
                   <div className="social-line text-center">
                   </div>
                   <Form className="register-form">
@@ -207,4 +209,4 @@ class SectionLogin extends React.Component {
   }}
 
 //export default SectionLogin;
-export default withRouter(SectionLogin);
+export default withRouter(LineLinking);

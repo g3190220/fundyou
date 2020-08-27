@@ -90,14 +90,6 @@ class PersonalizePage extends React.Component {
               <span style={{fontWeight:"bold"}}>讓您在投資基金時也獲取更多資訊</span>
             </div>
         </div>
-
-        <div className="card-personalize4-intro">
-        <h4><font color="#E76F51" size="6" face="微軟正黑體"><b>月報表</b></font></h4>
-            <div className="p2-intro">
-              <span style={{fontWeight:"bold"}}>將您關注的基金組合彙整成月報表，</span><br/>
-              <span style={{fontWeight:"bold"}}>了解本月的數值變化和趨勢</span>
-            </div>
-        </div>
      
       </div>
       </Container>

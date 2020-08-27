@@ -133,7 +133,7 @@ class PageMyTag extends React.Component{
   //本周新增的tag顯示
   getNewTagData(){
         
-        const url = "https://140.115.87.192:8090/getNewTag";
+        const url = "http://140.115.87.192:8090/getNewTag";
         fetch(url, {
           method: 'POST',
           headers: {
@@ -176,7 +176,7 @@ class PageMyTag extends React.Component{
 
   //本周tag刪除
   DeleteTag(in_tagid,in_fld022){
-        const url = "https://140.115.87.192:8090/DeleteTag";
+        const url = "http://140.115.87.192:8090/DeleteTag";
         fetch(url, {
           method: 'POST',
           headers: {
@@ -193,7 +193,6 @@ class PageMyTag extends React.Component{
     })
   .then((response) => {return response.json();})
   .then((jsonData) => { 
-    //console.log(jsonData);
     if(jsonData.StatusCode==200){
       this.handleClose()
       alert("刪除成功！")
@@ -210,7 +209,7 @@ class PageMyTag extends React.Component{
   //歷史新增tag顯示
   getHistoryTagData(){
         
-    const url = "https://140.115.87.192:8090/getTag";
+    const url = "http://140.115.87.192:8090/getTag";
     fetch(url, {
       method: 'POST',
       headers: {
@@ -344,7 +343,7 @@ else{
           <Button onClick={this.handleClose} color="primary">
             No
           </Button>
-          <Button onClick={() => this.DeleteTag(this.state.in_tagid,this.state.fld022)} color="primary" >
+          <Button onClick={() => this.DeleteTag(this.state.in_tagid,this.state._fld022)} color="primary" >
             Yes
           </Button>
         </DialogActions>

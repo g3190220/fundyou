@@ -5,7 +5,6 @@ import PageMyFund from './page-myFund';
 import PageMyTag from './page-myTag';
 import PageCharacterAnalysis from './page-characterAnalysis';
 import PagePig from './page-pig';
-import PageMonthlyReport from './page-monthlyReport';
 
 import logo from './logo.svg';
 import './App.css';

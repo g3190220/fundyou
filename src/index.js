@@ -14,7 +14,6 @@ import PageMyFund from "views/PersonalizePage/PageMyFund.js";
 import PageMyTag from "views/PersonalizePage/PageMyTag.js";
 import PageCharacterAnalysis from "views/PersonalizePage/PageCharacterAnalysis.js";
 import PagePig from "views/PersonalizePage/PagePig.js";
-import PageMonthlyReport from "views/PersonalizePage/PageMonthlyReport.js";
 import AllFundPage from "views/FundPage/AllFund.js";
 import DetailFund from "views/FundPage/DetailFund.js";
 import TAGPage from "views/TagPage/Tag.js";
@@ -25,6 +24,7 @@ import PageSurvey_2 from "views/SurveyPage/Survey_2.js"
 import PageSurvey_3 from "views/SurveyPage/Survey_3.js"
 import PageSurvey_4 from "views/SurveyPage/Survey_4.js"
 import PageSurvey_5 from "views/SurveyPage/Survey_5.js"
+import LineLinking from "views/LinePage/LineLinking.js"
 // others
 
 ReactDOM.render(
@@ -76,10 +76,6 @@ ReactDOM.render(
         render={props => <PagePig {...props} />} //豬豬小助理子頁面
       />
       <Route
-        path="/page-monthlyReport/:member_id"//月報表子頁面
-        render={props => <PageMonthlyReport {...props} />} //月報表子頁面
-      />
-      <Route
         path="/page-tag/:member_id/:fundid"//tag頁面
         render={props => <TAGPage {...props} />} 
       />
@@ -103,7 +99,11 @@ ReactDOM.render(
         path="/page-survey-5"//性格分析問卷頁面_5
         render={props => <PageSurvey_5 {...props} />} 
       />
-      <Redirect to="/index" />
+      <Route
+        path="/account-linkng"//Line-linking
+        render={props => <LineLinking {...props} />} 
+      />
+      <Redirect to="/index"/>
     </Switch>
   </HashRouter>,
   document.getElementById("root")
