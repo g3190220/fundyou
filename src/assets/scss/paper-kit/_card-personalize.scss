@@ -8,6 +8,7 @@
   top: 0px;
   height: 100%;
   position: fixed;
+  // color: #bba57d;
 
   & label {
     margin-top: 15px;
@@ -88,18 +89,23 @@
 
 .card-personalize {
   min-height: 1000px;
-  
-    .card-personalize1-intro {
+  .intro-space{
+    margin-top: -100px;
+    .intro-myfund {
       background-color: #faeedc;
       border-radius: 8px;
-      // color: #fff;
       width: 450px;
-      margin: -580px 80px 100px;
-      // min-height: 1000px;
+      // height: 200px;
+      margin-left: 200px;
+      margin-top: 250px;
       padding: 30px;
-      top: 600px; 
-      left: 120px;
-      position: absolute;
+      // margin: -580px 80px 100px;
+      // margin: 200px 80px 100px;
+
+      // padding: 30px;
+      // top: 600px; 
+      // left: 120px;
+      // position: absolute;
     
       & label {
         margin-top: 15px;
@@ -132,7 +138,7 @@
       margin: -580px 560px 100px;
       // min-height: 1000px;
       padding: 30px;
-      top: 600px; 
+      top: 730px; 
       left: 120px;
       position: absolute;
     
@@ -162,14 +168,21 @@
     .card-personalize2-intro {
       background-color: #faeedc;
       border-radius: 8px;
-      // color: #fff;
       width: 450px;
-      margin: -580px 80px 100px;
-      // min-height: 1000px;
+      // height: 200px;
+      margin-left: 200px;
+      margin-top: 30px;
       padding: 30px;
-      top: 850px; 
-      left: 120px;
-      position: absolute;
+      // background-color: #faeedc;
+      // border-radius: 8px;
+      // // color: #fff;
+      // width: 450px;
+      // margin: -580px 80px 100px;
+      // // min-height: 1000px;
+      // padding: 30px;
+      // top: 850px; 
+      // left: 120px;
+      // position: absolute;
     
       & label {
         margin-top: 15px;
@@ -202,7 +215,7 @@
       margin: -580px 560px 100px;
       // min-height: 1000px;
       padding: 30px;
-      top: 850px; 
+      top: 970px; 
       left: 120px;
       position: absolute;
     
@@ -265,6 +278,7 @@
         text-align: center;
       }
     }
+  }
 }
 
 .card-personalize-myfund {
@@ -300,7 +314,8 @@
       margin-left: 4px;
     }
     & .following-funds-table {
-      margin-left: 0px;
+      margin-left: auto;
+      margin-right: auto;
     }
     // & .memo_content {
     //   background-color: #facdb3;
@@ -420,7 +435,7 @@
     background-color: #faeedc;
     border-radius: 8px;
     // color: #fff;
-    width: 800px;
+    width: 850px;
     margin: -580px 80px 100px;
     // min-height: 1000px;
     padding: 30px;
@@ -470,7 +485,7 @@
   .card-personalize2-1 {
     background-color: #faeedc;
     border-radius: 8px;
-    width: 800px;
+    width: 850px;
     margin: -580px 80px 100px;
     padding: 30px;
     top: 1120px; //1120
@@ -485,7 +500,7 @@
       color: #ce4f28;
       text-align: center;
     }
-    & .game-result-title {
+    & .game-result-title-1 {
       color: #b75d69;
       text-align: left;
       font-size: 20px;
@@ -493,13 +508,7 @@
       margin-top: 30px;
       margin-left: 30px;
     }
-    & .result-chart {
-      font-size: 18px;
-      font-weight: 600;
-      margin-left: 280px;
-      margin-top: -100px;
-    }
-    & .result-content {
+    & .result-content-1 {
       background-color: #facdb3;
       width: 350px;
       height: 220px;
@@ -515,6 +524,12 @@
       // margin-top: 30px;
       padding: 25px;
       padding-top: 35px;
+    }
+    & .result-chart {
+      font-size: 18px;
+      font-weight: 600;
+      margin-left: 300px;
+      margin-top: -100px;
     }
   }
 }

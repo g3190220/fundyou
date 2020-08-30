@@ -140,7 +140,7 @@ class PersonalizeMenu extends React.Component{
             <div className="page-myfund">
                 <button type="button" class="btn btn-neutral" onClick={this.handleSubmit.bind(this, "page-myFund")}>
                     <div className="face-icon"><FavoriteIcon></FavoriteIcon></div>
-                    我的基金
+                    追蹤基金
                 </button>
             </div>
 
