@@ -27,6 +27,11 @@ class PersonalizePage extends React.Component {
         errors: {}
     }}
 
+    componentDidMount() {
+      window.scrollTo(0, 0);  //頁面置頂
+    }
+
+
   
   //點擊去頁面
   handleSubmit(url,e){
@@ -58,12 +63,13 @@ class PersonalizePage extends React.Component {
       <div className="card-personalize">
        
       <PersonalizeMenu></PersonalizeMenu>
+      <div className="intro-space">
 
-        <div className="card-personalize1-intro">
+        <div className="intro-myfund">
         <h4><font color="#E76F51" size="6" face="微軟正黑體"><b>我的基金</b></font></h4>
           <div className="p1-intro">
             <span style={{fontWeight:"bold"}}>動手追蹤基金，輕鬆查看基金資訊</span>
-            <br/><span style={{fontWeight:"bold"}}>加入最愛基金，隨時掌握最新動態</span>
+            <br/><span style={{fontWeight:"bold"}}>用備忘錄隨時紀錄基金狀態</span>
           </div>
         </div>
 
@@ -79,7 +85,7 @@ class PersonalizePage extends React.Component {
         <h4><font color="#E76F51" size="6" face="微軟正黑體"><b>性格分析</b></font></h4>
             <div className="p2-intro">
               <span style={{fontWeight:"bold"}}>由FundU打造的投資性格分析，</span><br/>
-              <span style={{fontWeight:"bold"}}>帶您透過情境遊戲來了解投資偏好</span>
+              <span style={{fontWeight:"bold"}}>帶您透過性格測驗來了解投資偏好</span>
             </div>
         </div>
 
@@ -89,6 +95,8 @@ class PersonalizePage extends React.Component {
               <span style={{fontWeight:"bold"}}>豬豬小助理提供各種分析工具，</span><br/>
               <span style={{fontWeight:"bold"}}>讓您在投資基金時也獲取更多資訊</span>
             </div>
+        </div>
+
         </div>
      
       </div>
