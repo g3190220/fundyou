@@ -30,7 +30,7 @@ import {
 
 
 //function SectionLogin() {
-class LineLinking extends React.Component {
+class CheckLogin extends React.Component {
   state = {
   }
   constructor(props) {
@@ -86,14 +86,10 @@ class LineLinking extends React.Component {
       
           if(jsonData.StatusCode==200){
             member_info=JSON.parse(jsonData.member_info)
-
-            nounce=member_info.member_nonce
-            console.log("取得nounce")
-            //取得member_id和member_sesiion
-            console.log(nounce)
-            console.log(this.state.token)
-            alert("成功登入~")
-            window.location.href=`https://access.line.me/dialog/bot/accountLink?linkToken=${this.state.token}&nonce=${nounce}`;
+            onLogin(member_info)
+            //回到操作頁
+            window.location.reload(true);
+            
             
           }
           else if(jsonData.StatusCode==1000){
@@ -160,7 +156,7 @@ class LineLinking extends React.Component {
             <Row>
               <Col className="mx-auto" lg="4" md="6">
                 <Card className="card-register-line">
-                  <h3  className="title mx-auto">登入以連動Line</h3>
+                  <h3  className="title mx-auto">請先登入FUNDU</h3>
                   <div className="social-line text-center">
                   </div>
                   <Form className="register-form">
@@ -209,4 +205,4 @@ class LineLinking extends React.Component {
   }}
 
 //export default SectionLogin;
-export default withRouter(LineLinking);
+export default withRouter(CheckLogin);

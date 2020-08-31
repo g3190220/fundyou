@@ -151,7 +151,6 @@ class PersonlDataPage extends React.Component {
               this.state.gender=member_info.member_gender
               this.state.birthday=member_info.member_birthday
               this.state.job=member_info.member_job
-              //this.state.line_id=member_info.member_line_id
               this.state.image=member_info.member_photo
               this.state.image_old=member_info.member_photo
 
@@ -468,39 +467,8 @@ class PersonlDataPage extends React.Component {
               </MenuItem>
             ))}
             </TextField>
-                
-              
-          
           </Col>
-          {/* <Col sm>
-          
-              <TextField
-              
-              id="LINE id"
-              label="LINE id"
-              value={this.state.line_id}
-              margin="normal"
-              onChange={this.handleChange('line_id')}
-              variant="outlined"
-              fullWidth
-              autoComplete='off'
-              disabled={this.state.disabled}
-              InputLabelProps={{
-                shrink: true
-              }}
-              
-            />
-         
-          </Col> */}
         </Row>
-          {/* <div className="register-btn">
-              <Button variant="contained" color="Default" onClick={this.handleEdit} style={{marginRight: '25px',width:'88px',height:'37px'}}>
-                Edit
-              </Button>
-              <Button variant="contained" color="Default" style={{width:'88px',height:'37px'}}>
-                Submit
-              </Button>
-          </div> */}
           <div className='register-alert' ><span>{this.state.errors["message"]}</span></div>
         </React.Fragment>
         </form>

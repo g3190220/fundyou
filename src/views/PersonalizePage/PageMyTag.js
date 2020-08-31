@@ -84,8 +84,8 @@ const column_week=[
 const column_history=[
   {title: '基金統編', field: 'fld022'},
   {title: 'TAG名稱', field: 'tagContent' },
-  {title: '累積讚數', field: 'History_like' },
-  {title: '累積倒讚數', field: 'History_unlike' },
+  // {title: '累積讚數', field: 'History_like' },
+  // {title: '累積倒讚數', field: 'History_unlike' },
   {title: '創建時間',field: 'Create_Date'},
 
 ];
