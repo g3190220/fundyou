@@ -67,25 +67,17 @@ const tableIcons = {
   };
   
   const styles = () => ({
-    // customDialog: {
-    //   '& div': {
-    //     backgroundColor: "#f8f5c4"
-    //   }
-    // },
     customDialogTitle: {
-      '& div': {
-        // backgroundColor: "#f8f5c4"
-      },
+      backgroundColor: "#f8f5c4",
       '& h2': {
         fontFamily:"Microsoft JhengHei",
         fontWeight: 900,
         fontSize:25,
         // backgroundColor: "#f8f5c4"
       },
-      
-
     },
     customDialogContent:{
+      backgroundColor: "#f8f5c4",
       '& p': {
         fontFamily:"Microsoft JhengHei",
         fontWeight: 500,
@@ -93,7 +85,14 @@ const tableIcons = {
         color: "#4d4d4d",
       }
 
-    }
+    },
+    customDialogActions:{
+      backgroundColor: "#f8f5c4",
+      '& button': {
+        backgroundColor: "#bba57d",
+        borderColor: "#bba57d",
+      },
+    },
 });
   
 
@@ -127,7 +126,7 @@ class PageMyFund extends React.Component{
             {title: '最新淨值',field: 'History_NetWorth'},
             {title: '漲跌(%)',field: 'Ups_and_Downs'},
             {title: '三個月報酬(%)',field: 'History_ROI_3M'},
-            {title: '追蹤時間',field: 'fund_track_date'},
+            {title: '追蹤日期',field: 'fund_track_date'},
             ],
             fld022: "",
             name: "",
@@ -182,25 +181,30 @@ class PageMyFund extends React.Component{
       .then((jsonData) => { 
         console.log(jsonData)
         if(jsonData.StatusCode==200){
-          var track_info=[];
-          var info=[]
-          track_info=JSON.parse(jsonData.info)
-          // for(var i = 0; i < jsonData.info.length; i++){
-          //     track_info.push(JSON.parse(jsonData.info[i]))
-          //   }
-          // }
-          console.log(track_info[0].track)
-          for(var i = 0; i < track_info.length; i++){
-            console.log(track_info[i])
-            if(track_info[i].track==1){
-              console.log(track_info[i])
-              info.push(track_info[i])
-            }
+          try{
+              var track_info=[];
+              var info=[]
+              track_info=JSON.parse(jsonData.info)
+              // for(var i = 0; i < jsonData.info.length; i++){
+              //     track_info.push(JSON.parse(jsonData.info[i]))
+              //   }
+              // }
+              console.log(track_info[0].track)
+              for(var i = 0; i < track_info.length; i++){
+                console.log(track_info[i])
+                if(track_info[i].track==1){
+                  console.log(track_info[i])
+                  info.push(track_info[i])
+                }
+              }
+              console.log(info)
+              this.state.all_data=info
+              this.setState({all_data:this.state.all_data,flag:true})
+              console.log(this.state.all_data)
           }
-          console.log(info)
-          this.state.all_data=info
-          this.setState({all_data:this.state.all_data,flag:true})
-          console.log(this.state.all_data)
+          catch(e){
+              this.state.all_data=[]
+          }
       }
         else{
           this.state.all_data=[]
@@ -308,18 +312,18 @@ class PageMyFund extends React.Component{
     <PersonalizeMenu></PersonalizeMenu>
       <Row>
         <div className="card-personalize1">
-            <h4><font color="#E76F51" size="6" face="微軟正黑體"><b>我的基金</b></font></h4>
+            <h4><font color="#E76F51" size="6" face="微軟正黑體"><b>追蹤基金</b></font></h4><br/>
 
           
-          <div className="fund-follows">
+          {/* <div className="fund-follows">
                 <span style={{fontWeight:"bold"}}>追蹤基金</span>
-            </div><br/>
+            </div><br/> */}
 
         <Row>
             <div className="following-funds-table">
                 <MaterialTable
                 icons={tableIcons}
-                title="Following Funds"
+                title=""
                 columns={this.state.columns}
                 data={this.state.all_data}
                 //onChangePage={()=>this.scroll}       
@@ -340,7 +344,7 @@ class PageMyFund extends React.Component{
                     fontSize: 16
                 },
 
-                toolbar: false, //隱藏標題和搜尋欄
+                // toolbar: false, //隱藏標題和搜尋欄
 
                 cellStyle:{ 
                     width: 140,
@@ -418,7 +422,7 @@ class PageMyFund extends React.Component{
                         fullWidth
                       />
                     </DialogContent>
-                    <DialogActions>
+                    <DialogActions classes={{root: classes.customDialogActions}}>
                       <Button onClick={this.handleClose} color="primary">
                         Cancel
                       </Button>

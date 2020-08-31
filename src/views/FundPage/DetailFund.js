@@ -6,9 +6,10 @@ import _ from "underscore";
 import ReactHighcharts from'react-highcharts'; //基金圖表套件，參考：https://reurl.cc/0ored6
 import {browserHistory} from 'react-router';
 import { load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
-import FollowFund from 'views/FundPage/FollowFund.js';
 import { TextField } from "@material-ui/core";
 import isEmpty from "views/Function/isEmpty.js"
+import VerticalTabs from "views/FundPage/VerticalTab.js"
+import CheckLogin from "views/Function/CheckLogin.js"
 
 // reactstrap components
 import { Button, Card, Form, Input, Container, Row, Col} from "reactstrap";
@@ -44,6 +45,8 @@ class DetailFund extends React.Component{
         initial:false,
         showtag1:false,
         showtag2:false,
+        showtag3:false,
+        showtag4:false,
         colortag1:true,
         colortag2:true,
         fund_net_CSS:'fund-value-red',
@@ -57,6 +60,7 @@ class DetailFund extends React.Component{
       this.trackstate = this.trackstate.bind(this); //追蹤基金事件(綁定track按鈕)
       this.togglestate = this.togglestate.bind(this);
       this.CreateTrack = this.CreateTrack.bind(this);
+      this.getMyTag=this.getMyTag.bind(this);
       this.getTag=this.getTag.bind(this);
       this.handleChange=this.handleChange.bind(this);
       this.handleSubmit=this.handleSubmit.bind(this);
@@ -198,8 +202,54 @@ class DetailFund extends React.Component{
         //.then(()=>{this.setState();window.location.reload(true);})  //更新狀態後重新整理頁面
     }
 
-    //取得會員TAG，顯示首頁(若沒有TAG，就顯示熱門的)
     getTag(){
+        let id = (this.props.match.params.fundid.split('='))[1];
+        const url = "http://140.115.87.192:8090/getTag";
+        fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                        //取得全部fund
+                        member_id: -2,
+                        tag_id:-2,
+                        fld022:id,
+        })
+                
+        })
+        .then((response) => {return response.json();})
+        .then((jsonData) => { 
+            console.log(jsonData)
+            if(jsonData.StatusCode==200){
+                var tag_info = [];
+                try{
+                    for(var i = 0; i < jsonData.tag_info.length; i++){
+                        tag_info.push(JSON.parse(jsonData.tag_info[i]))
+                    }
+                    this.setState({tag3:tag_info[0].tagContent})
+                    this.setState({showtag3:"visable"})
+                    console.log(tag_info.length)
+                
+                if(tag_info.length>1){
+                    this.setState({tag4:tag_info[1].tagContent})
+                    this.setState({showtag4:"visable"})
+                }
+                }
+                
+                catch (d){
+                    console.log("管理員沒有創建tag")
+                   
+                }
+            }
+        })
+        .then(() => { this.getMyTag();})
+
+    }
+
+    //取得會員自己創建之TAG，顯示首頁(若沒有TAG，就顯示熱門的)
+    getMyTag(){
         let member_id=load_cookies("member_id")
         let id = (this.props.match.params.fundid.split('='))[1];
         const url = "http://140.115.87.192:8090/getTag";
@@ -228,50 +278,50 @@ class DetailFund extends React.Component{
                 this.setState({colortag1:true})
                 console.log(tag_info.length)
             //如果只有一個自創TAG
-            if(tag_info.length==1){
-                    const url = "http://140.115.87.192:8090/getTag";
-                    fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                            //取得全部fund
-                            member_id: -1,
-                            tag_id:-1,
-                            fld022:id,
-                    })
+            // if(tag_info.length==1){
+            //         const url = "http://140.115.87.192:8090/getTag";
+            //         fetch(url, {
+            //         method: 'POST',
+            //         headers: {
+            //             'Accept': 'application/json',
+            //             'Content-Type': 'application/json',
+            //         },
+            //         body: JSON.stringify({
+            //                 //取得全部fund
+            //                 member_id: -1,
+            //                 tag_id:-1,
+            //                 fld022:id,
+            //         })
                     
-                    })
-                    .then((response) => {return response.json();})
-                    .then((jsonData) => { 
-                    if(jsonData.StatusCode==200){
-                            var info = [];
-                            var j=0;
-                            var _break=true;
-                            for(var i = 0; i < jsonData.tag_info.length; i++){
-                                info.push(JSON.parse(jsonData.tag_info[i]))
-                            }
-                            console.log()
-                            do {
-                                if(info[j].memberID!=member_id){
-                                    this.setState({tag2:info[j].tagContent})
-                                    this.setState({showtag2:"visable"})
-                                    this.setState({colortag2:false})//另外一個非自己建立的TAG
-                                    _break=false;
-                                }
-                                j++;
-                             } while (j<info.length&&_break==true);
+            //         })
+            //         .then((response) => {return response.json();})
+            //         .then((jsonData) => { 
+            //         if(jsonData.StatusCode==200){
+            //                 var info = [];
+            //                 var j=0;
+            //                 var _break=true;
+            //                 for(var i = 0; i < jsonData.tag_info.length; i++){
+            //                     info.push(JSON.parse(jsonData.tag_info[i]))
+            //                 }
+            //                 console.log()
+            //                 do {
+            //                     if(info[j].memberID!=member_id){
+            //                         this.setState({tag2:info[j].tagContent})
+            //                         this.setState({showtag2:"visable"})
+            //                         this.setState({colortag2:false})//另外一個非自己建立的TAG
+            //                         _break=false;
+            //                     }
+            //                     j++;
+            //                  } while (j<info.length&&_break==true);
                                 
                         
-                        }
-                        else{ //statuscode=1000 >>沒有tag
-                            console.log("no tag")
-                            }
-                    })
-            }
-            else if(tag_info.length==2){
+            //             }
+            //             else{ //statuscode=1000 >>沒有tag
+            //                 console.log("no tag")
+            //                 }
+            //         })
+            // }
+            if(tag_info.length==2){
                 this.setState({tag2:tag_info[1].tagContent})
                 this.setState({showtag2:"visable"})
                 this.setState({colortag2:true})
@@ -279,44 +329,45 @@ class DetailFund extends React.Component{
             }
             
             catch (d){
-                let id = (this.props.match.params.fundid.split('='))[1];
-                const url = "http://140.115.87.192:8090/getTag";
-                fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                        //取得全部fund
-                        member_id: -2,
-                        tag_id:-2,
-                        fld022:id,
-                })
+                console.log("一個自己創建的tag都沒有")
+                // let id = (this.props.match.params.fundid.split('='))[1];
+                // const url = "http://140.115.87.192:8090/getTag";
+                // fetch(url, {
+                // method: 'POST',
+                // headers: {
+                //     'Accept': 'application/json',
+                //     'Content-Type': 'application/json',
+                // },
+                // body: JSON.stringify({
+                //         //取得全部fund
+                //         member_id: -2,
+                //         tag_id:-2,
+                //         fld022:id,
+                // })
                 
-                })
-                .then((response) => {return response.json();})
-                .then((jsonData) => { 
-                    if(jsonData.StatusCode==200){
-                        var info = [];
-                        var count=0;
-                        for(var i = 0; i < jsonData.tag_info.length; i++){
-                            info.push(JSON.parse(jsonData.tag_info[i]));
-                            count=i+1; 
-                            var string =`tag${count}`;
-                            var showstring = `show${string}`
-                            var showcolor = `color${string}`
-                            console.log("showstring:",showstring)
-                            this.setState({[string]:info[i].tagContent})
-                            this.setState({[showstring]:"visable"})
-                            this.setState({[showcolor]:false})
-                        }
+                // })
+                // .then((response) => {return response.json();})
+                // .then((jsonData) => { 
+                //     if(jsonData.StatusCode==200){
+                //         var info = [];
+                //         var count=0;
+                //         for(var i = 0; i < jsonData.tag_info.length; i++){
+                //             info.push(JSON.parse(jsonData.tag_info[i]));
+                //             count=i+1; 
+                //             var string =`tag${count}`;
+                //             var showstring = `show${string}`
+                //             var showcolor = `color${string}`
+                //             console.log("showstring:",showstring)
+                //             this.setState({[string]:info[i].tagContent})
+                //             this.setState({[showstring]:"visable"})
+                //             this.setState({[showcolor]:false})
+                //         }
                     
-                    }
-                    else{ //statuscode=1000 >>沒有tag
-                        console.log("no tag")
-                        }
-                })
+                //     }
+                //     else{ //statuscode=1000 >>沒有tag
+                //         console.log("no tag")
+                //         }
+                // })
             }
         }
         })
@@ -666,11 +717,12 @@ class DetailFund extends React.Component{
                 data: this.state.history_treynor
             }],
             };
-
         return(
             
             <div>
-            {!this.state.initial ? (<LoadingIndicator></LoadingIndicator>): 
+            {
+            isEmpty(load_cookies("member_id")) ? <CheckLogin></CheckLogin> :
+            !this.state.initial ? (<LoadingIndicator></LoadingIndicator>): 
             (
             <div className='allfund-menu'>
             <Container>
@@ -679,12 +731,20 @@ class DetailFund extends React.Component{
             <Row>
                 <div className='sub-sub-detail'  id='info'>
                 <Row >
-                    <label className='fund-name'>{this.state.fund_name}</label>  {/*從資料庫讀取基金的名字*/}
-                    <label className='tag-label' style={{visibility: this.state.showtag2 ? 'visible' : 'hidden', color:this.state.colortag2 ? "#CD5C5C" : "	#444444"}}>{this.state.tag2}</label>
-                    <label className='tag-label' style={{display: this.state.showtag1 ? 'visible' : 'hidden',color:this.state.colortag1 ? "#CD5C5C" : "	#444444"}}>{this.state.tag1}</label>
-                   {/* <button className='Compare-btn'><a href='#page-compare'>去比較</a></button>*/}
-                   <input type="button" className={this.state.track_state==1 ? "followBtnTrue" : "followBtnFalse"} onClick={this.togglestate,this.CreateTrack} value={this.state.track_state==1 ? "√ 已追蹤" : "+ 追蹤"}></input>
-                </Row>   
+                    <Col sm={10}> <label className='fund-name'>{this.state.fund_name}</label>  {/*從資料庫讀取基金的名字*/}</Col>
+                    <Col sm={2}>
+                        {/* <button className='Compare-btn'><a href='#page-compare'>去比較</a></button>*/}
+                        <input type="button" className={this.state.track_state==1 ? "followBtnTrue" : "followBtnFalse"} onClick={this.togglestate,this.CreateTrack} value={this.state.track_state==1 ? "√ 已追蹤" : "+ 追蹤"}></input> 
+                    </Col>
+                </Row> 
+                <Row>
+                    <div className='tag-position'>
+                        <label className='tag-label' style={{display: this.state.showtag3 ? 'inline' : 'none', color:"#444444"}}>{this.state.tag3}</label>
+                        <label className='tag-label' style={{display: this.state.showtag4 ? 'inline' : 'none',color:"#444444"}}>{this.state.tag4}</label>  
+                        <label className='tag-label' style={{display: this.state.showtag2 ? 'inline' : 'none', color:"#CD5C5C"}}>{this.state.tag2}</label>
+                        <label className='tag-label' style={{display: this.state.showtag1 ? 'inline' : 'none',color:"#CD5C5C"}}>{this.state.tag1}</label>
+                    </div>
+                </Row>  
                 <Row >
                     <label className={this.state.fund_net_CSS}>{this.state.new_net}</label> {/*從資料庫讀取基金的淨值*/}
                     <label className='fund-currency'>{this.state.fund_currency}</label>
@@ -763,10 +823,31 @@ class DetailFund extends React.Component{
             </Row>
             <Row>
                 <div className="sub-sub-fund-introduce">
+                <label className='fund-introduce-label'>基金各指標含意</label>
+                {/* <VerticalTabs></VerticalTabs> */}
+                {/* <button id='performance-btn' onClick={this.networth_introduce}>淨值</button>
+                <button id='performance-btn' onClick={this.performance_introduce}>績效</button>
+                <button id='risk-btn' onClick={this.risk_introduce}>風險</button> */}
                     <table className='fund-introduce-info' border='2' cellpadding="4">
                     <tr>
-                        <th>基金名稱</th>
-                        <th>基金名稱（英文）</th>
+                        <th width="25%">淨值</th>
+                        <td>該基金之單位淨值；歷史資料為各月底數值，但當月份至月底前係採用目前該檔基金最近一日的資料。</td>
+                    </tr>
+                    <tr>
+                        <th>Sharpe Ratio</th>
+                        <td>夏普指數，為衡量基金承擔每單位總風險所得之超額報酬。</td>
+                    </tr>
+                    <tr>
+                        <th>Treynor Ratio</th>
+                        <td>崔納指數，為衡量基金承擔每單位市場風險所得之超額報酬。</td>
+                    </tr>
+                    <tr>
+                        <th>Beta</th>
+                        <td>為衡量基金相較於市場報酬率波動的幅度，此處以近12個月該基金單月ROI與市場(Y9999加權指數)單月ROI所計算之值。</td>
+                    </tr>
+                    <tr>
+                        <th>SD(Standard Deviation)</th>
+                        <td>以近12個月的單月報酬率所計算之年化標準差；成立未滿12個月者不予計算。</td>
                     </tr>
                     </table>
                 </div>

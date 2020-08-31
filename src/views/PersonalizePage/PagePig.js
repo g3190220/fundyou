@@ -26,6 +26,10 @@ class PagePig extends React.Component{
       }
     this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    componentDidMount() {
+        window.scrollTo(0, 0);  //頁面置頂
+    }
   
     //點擊去頁面
     handleSubmit(){

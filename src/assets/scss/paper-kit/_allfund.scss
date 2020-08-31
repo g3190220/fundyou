@@ -163,6 +163,11 @@
                 margin-top: 20px;
                 font-family:Microsoft JhengHei;
             }
+            .tag-position{
+                width: 620px; 
+                margin-left: 50px;
+                font-family:Microsoft JhengHei;
+            }
 
             .tag-label{
                 height: 30px;
@@ -529,11 +534,33 @@
             transform: translateX(12%);
             width: 80%;
 
+            .fund-introduce-label{
+                width: 180px;
+                height: 45px;
+                border-radius: 10px;
+                border:#e26d5c solid 2px;
+                background-color: #e26d5c;
+                color: #F8EDEB;
+                margin-top: 30px;
+                margin-left: 40px;
+                font-weight:bold;
+                font-family:Microsoft JhengHei;
+                font-size: 20px;
+                text-align: center;
+                padding-top: 5px;
+            }
+
             .fund-introduce-info{
                 border: 2px #F8EDEB solid;
                 margin:0 auto;
                 margin-top: 10px;
                 margin-bottom: 30px;
+                margin-left: 10px;
+                margin-right: 10px;
+                font-family:Microsoft JhengHei;
+                font-size: 16px;
+                font-weight: bold;
+                color: #3a3a3a;
             }
         }
 
