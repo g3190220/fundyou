@@ -2,11 +2,25 @@ import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector } from 'recharts';
 
 const data = [
-  { name: '穩健型', value: 700 },
-  // { name: '穩健型', value: 300 },
-//   { name: 'Group C', value: 300 },
-//   { name: 'Group D', value: 200 },
+  // { name: '保守型', value: 200 },
+  { name: '穩健型', value: 500 },
+  // { name: '成長型', value: 800 },
+  // { name: '積極型', value: 1000 },
 ];
+
+// const styles = () => {
+//   customSpace: {
+//     backgroundColor: "#f8f5c4",
+//     '& h2': {
+//       fontFamily:"Microsoft JhengHei",
+//       fontWeight: 900,
+//       fontSize:25,
+//       // backgroundColor: "#f8f5c4"
+//     }
+    
+
+//   }
+// }
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
@@ -25,6 +39,7 @@ const renderActiveShape = (props) => {
   const textAnchor = cos >= 0 ? 'start' : 'end';
 
   return (
+    // <g classes={{root: classes.customSpace}}>
     <g>
       <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>{payload.name}</text>
       <Sector
@@ -48,15 +63,12 @@ const renderActiveShape = (props) => {
       <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
       <text style={{fontSize:"16"}} x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#b75d69">{`風險指數${value}`}</text>
-      {/* <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-        {`(Rate ${(percent * 100).toFixed(2)}%)`}
-      </text> */}
     </g>
   );
 };
 
 
-export default class Example extends PureComponent {
+export default class Result extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/hqnrgxpj/';
 
   state = {

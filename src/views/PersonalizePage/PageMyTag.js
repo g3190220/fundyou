@@ -126,6 +126,7 @@ class PageMyTag extends React.Component{
 
   
     componentDidMount(){
+      window.scrollTo(0, 0);  //頁面置頂
       this.getNewTagData();
       
     }
@@ -274,25 +275,28 @@ else{
               headerStyle: {
                 backgroundColor: '#e26d5c',
                 color: '#F8EDEB',
-                width:300,
-                maxWidth: 300,
+                width:200,
+                maxWidth: 200,
                 whiteSpace:'nowrap',
                 position: 'sticky', 
                 top: 0,
-                fontSize: 17,
+                padding: 10,
+                fontSize: 16,
                 textAlign:'center',
                 fontFamily: '微軟正黑體',
                 fontWeight: '800'
               },
           
               cellStyle:{ 
-                width:300,
-                maxWidth:300,
+                width:200,
+                maxWidth:200,
                 backgroundColor: '#F8EDEB',
                 color: '#e26d5c',
                 textAlign:'center',
                 fontFamily: '微軟正黑體',
-                fontWeight: '700'
+                fontWeight: '700',
+                fontSize: 15,
+                padding: 10,
                 
               },
               actionsCellStyle: {
@@ -304,7 +308,7 @@ else{
               { 
                 
                 //hidden:true,
-                icon: () => <DeleteOutline />,
+                icon: () => <DeleteOutline color="action"/>,
                 tooltip: 'Delete',
                 onClick: (event, rowData) => {
                   this.handleClickOpen()

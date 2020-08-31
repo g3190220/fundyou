@@ -6,9 +6,9 @@ import _ from "underscore";
 import ReactHighcharts from'react-highcharts'; //基金圖表套件，參考：https://reurl.cc/0ored6
 import {browserHistory} from 'react-router';
 import { load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
-import FollowFund from 'views/FundPage/FollowFund.js';
 import { TextField } from "@material-ui/core";
 import isEmpty from "views/Function/isEmpty.js"
+import VerticalTabs from "views/FundPage/VerticalTab.js"
 
 // reactstrap components
 import { Button, Card, Form, Input, Container, Row, Col} from "reactstrap";
@@ -749,10 +749,31 @@ class DetailFund extends React.Component{
             </Row>
             <Row>
                 <div className="sub-sub-fund-introduce">
+                <label className='fund-introduce-label'>基金各指標含意</label>
+                {/* <VerticalTabs></VerticalTabs> */}
+                {/* <button id='performance-btn' onClick={this.networth_introduce}>淨值</button>
+                <button id='performance-btn' onClick={this.performance_introduce}>績效</button>
+                <button id='risk-btn' onClick={this.risk_introduce}>風險</button> */}
                     <table className='fund-introduce-info' border='2' cellpadding="4">
                     <tr>
-                        <th>基金名稱</th>
-                        <th>基金名稱（英文）</th>
+                        <th width="25%">淨值</th>
+                        <td>該基金之單位淨值；歷史資料為各月底數值，但當月份至月底前係採用目前該檔基金最近一日的資料。</td>
+                    </tr>
+                    <tr>
+                        <th>Sharpe Ratio</th>
+                        <td>夏普指數，為衡量基金承擔每單位總風險所得之超額報酬。</td>
+                    </tr>
+                    <tr>
+                        <th>Treynor Ratio</th>
+                        <td>崔納指數，為衡量基金承擔每單位市場風險所得之超額報酬。</td>
+                    </tr>
+                    <tr>
+                        <th>Beta</th>
+                        <td>為衡量基金相較於市場報酬率波動的幅度，此處以近12個月該基金單月ROI與市場(Y9999加權指數)單月ROI所計算之值。</td>
+                    </tr>
+                    <tr>
+                        <th>SD(Standard Deviation)</th>
+                        <td>以近12個月的單月報酬率所計算之年化標準差；成立未滿12個月者不予計算。</td>
                     </tr>
                     </table>
                 </div>
