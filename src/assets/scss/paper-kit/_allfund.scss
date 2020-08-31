@@ -237,13 +237,21 @@
                 color: #F8EDEB;
             }
 
-            .fund-value{
-                color: #e26d5c;
+            .fund-value-red{
+                color: 	#ff0000;
                 font-size: 50px;
                 margin-left: 120px;
                 font-weight:bold;
                 margin-bottom: 20px;
             }
+            .fund-value-green{
+                color: #00ff00;
+                font-size: 50px;
+                margin-left: 120px;
+                font-weight:bold;
+                margin-bottom: 20px;
+            }
+
             .fund-currency{
                 color: #e26d5c;
                 font-size: 22px;
@@ -252,8 +260,16 @@
                 font-family:Microsoft JhengHei;
             }
 
-            .fund-percentage{
-                color: #e26d5c;
+            .fund-percentage-red{
+                color: 	#ff0000;
+                font-size: 15px;
+                margin-left: 20px;
+                margin-top: 15px;
+                font-weight:bold;
+                font-family:Microsoft JhengHei;
+            }
+            .fund-percentage-green{
+                color: #00ff00;
                 font-size: 15px;
                 margin-left: 20px;
                 margin-top: 15px;

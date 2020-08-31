@@ -46,6 +46,9 @@ class DetailFund extends React.Component{
         showtag2:false,
         colortag1:true,
         colortag2:true,
+        fund_net_CSS:'fund-value-red',
+        fund_percentage_CSS:'fund-percentage-red',
+
       };
       
       this.handleClick1 = chart_performance.bind(this); //綁定事件，參考：https://reurl.cc/pdkgQ8
@@ -353,11 +356,22 @@ class DetailFund extends React.Component{
                     minus = '▲ '+minus;
                     percent = '▲ '+percent;
                     console.log('正')
+                    this.setState((state, props) => {
+                        return {fund_net_CSS:'fund-value-red',
+                                fund_percentage_CSS:'fund-percentage-red',
+                        };
+                    });
                 }
                 else if(minus<0){
                     minus = '▼'+minus;
                     percent = '▼'+percent;
                     console.log('負')
+                    this.setState((state, props) => {
+                        return {fund_net_CSS:'fund-value-green',
+                                fund_percentage_CSS:'fund-percentage-green',
+                        };
+                    });
+                    
                 }
                 else{
                     console.log('平')
@@ -672,9 +686,9 @@ class DetailFund extends React.Component{
                    <input type="button" className={this.state.track_state==1 ? "followBtnTrue" : "followBtnFalse"} onClick={this.togglestate,this.CreateTrack} value={this.state.track_state==1 ? "√ 已追蹤" : "+ 追蹤"}></input>
                 </Row>   
                 <Row >
-                    <label className='fund-value'>{this.state.new_net}</label> {/*從資料庫讀取基金的淨值*/}
+                    <label className={this.state.fund_net_CSS}>{this.state.new_net}</label> {/*從資料庫讀取基金的淨值*/}
                     <label className='fund-currency'>{this.state.fund_currency}</label>
-                    <label className='fund-percentage'>{this.state.fund_percent}%​<p></p>{this.state.fund_gain}</label>
+                    <label className={this.state.fund_percentage_CSS}>{this.state.fund_percent}%​<p></p>{this.state.fund_gain}</label>
                 </Row> 
                 <Row  className='fund-data'>
                     <span><label>績效：3月：</label><label>{this.state.History_ROI_3M}%</label><label>&nbsp;&nbsp;&nbsp;</label><label>6月：</label><label>{this.state.History_ROI_6M}%</label><label>&nbsp;&nbsp;&nbsp;</label><label>1年：</label><label>{this.state.History_ROI_12M}%</label></span>
