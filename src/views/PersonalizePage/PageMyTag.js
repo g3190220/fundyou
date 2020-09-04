@@ -255,7 +255,7 @@ else{
     
   render(){
     return(
-    <div className="page-header" style={{backgroundColor: '#ffcdb2',}}>
+    <div className="page-header" style={{backgroundColor: '#fff',}}>
     <Container>
     <div className="card-personalize-mytag">
 

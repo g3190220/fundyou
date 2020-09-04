@@ -305,7 +305,7 @@ class PageMyFund extends React.Component{
       const {classes} = this.props;
       
     return(
-    <div className="page-header" style={{backgroundColor: '#ffcdb2',}}>
+    <div className="page-header" style={{backgroundColor: '#fff',}}>
     <Container>
     <div className="card-personalize-myfund">
 

@@ -43,7 +43,7 @@ class PageCharacterAnalysis extends React.Component{
     
     
     return(
-    <div className="page-header" style={{backgroundColor: '#ffcdb2',}}>
+    <div className="page-header" style={{backgroundColor: '#fff',}}>
     {/* <IndexNavbar></IndexNavbar> */}
     <Container>
     <div className="card-personalize-characteranalysis">

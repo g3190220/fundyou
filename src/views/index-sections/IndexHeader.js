@@ -7,7 +7,9 @@ function IndexHeader() {
     <div
       className="page-header"
       style={{
-        backgroundColor: '#ffb5a7',
+        // backgroundColor: '#ffb5a7',
+        backgroundColor: '#004c8c',
+        
     }}>
     <Container>
     

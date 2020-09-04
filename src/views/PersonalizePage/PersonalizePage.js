@@ -54,7 +54,7 @@ class PersonalizePage extends React.Component {
       <div
         className="page-header"
         style={{
-          backgroundColor: '#ffcdb2',
+          backgroundColor: '#fff',
       }}>
         
       {/* <IndexNavbar></IndexNavbar> */}
@@ -66,7 +66,7 @@ class PersonalizePage extends React.Component {
       <div className="intro-space">
 
         <div className="intro-myfund">
-        <h4><font color="#E76F51" size="6" face="微軟正黑體"><b>我的基金</b></font></h4>
+        <h4><font color="#E76F51" size="6" face="微軟正黑體"><b>追蹤基金</b></font></h4>
           <div className="p1-intro">
             <span style={{fontWeight:"bold"}}>動手追蹤基金，輕鬆查看基金資訊</span>
             <br/><span style={{fontWeight:"bold"}}>用備忘錄隨時紀錄基金狀態</span>

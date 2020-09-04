@@ -158,7 +158,7 @@ class SectionLogin extends React.Component {
             <Row>
               <Col className="mx-auto" lg="4" md="6">
                 <Card className="card-register">
-                  <h3  className="title mx-auto">Welcome</h3>
+                  <div className="title" >Welcome</div>
                   <div className="social-line text-center">
                   </div>
                   <Form className="register-form">

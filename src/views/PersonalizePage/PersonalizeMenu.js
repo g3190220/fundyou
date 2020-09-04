@@ -128,9 +128,9 @@ class PersonalizeMenu extends React.Component{
                   <Avatar src={this.state.image} className="avatar-size"/>
                 </div>
                 <br/><Divider variant="middle"/>
-                <br/><span><font color="black" face="微軟正黑體" style={{fontWeight:"bold"}}>{this.state.email}</font></span>
-                <br/><span><font color="black" face="微軟正黑體" style={{fontWeight:"bold"}}>姓名：{this.state.username}</font></span>
-                <br/><span><font color="black" face="微軟正黑體" style={{fontWeight:"bold"}}>性別：{this.state.gender}</font></span>
+                <br/><span><font color="white" face="微軟正黑體" style={{fontWeight:"bold"}}>{this.state.email}</font></span>
+                <br/><span><font color="white" face="微軟正黑體" style={{fontWeight:"bold"}}>姓名：{this.state.username}</font></span>
+                <br/><span><font color="white" face="微軟正黑體" style={{fontWeight:"bold"}}>性別：{this.state.gender}</font></span>
                 <br/><br/><Divider variant="middle"/>
                 <button type="button" class="btn btn-neutral" onClick={this.handleSubmit.bind(this, "personal-data-page")} >
                     <div className="face-icon"><RecentActorsIcon></RecentActorsIcon></div>

@@ -1287,7 +1287,7 @@ fieldset[disabled] .btn-danger.active {
 }
 
 .btn-neutral {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-color: #FFFFFF;
   color: #FFFFFF;
   opacity: 1;
@@ -1953,7 +1953,8 @@ textarea.form-control {
 }
 
 .register-form .form-control {
-  border: 1px solid transparent !important;
+  /* border: 1px solid transparent !important; */
+  border: 1px solid #858585;
 }
 
 .register-form .input-group .form-control {

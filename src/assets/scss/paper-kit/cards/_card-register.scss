@@ -1,11 +1,19 @@
 .card-register {
-  background-color: #ffe6e6;
+  background-color: #fff;
   border-radius: 8px;
   color: #fff;
   max-width: 350px;
   margin: 20px 0 70px;
   min-height: 400px;
   padding: 30px;
+
+  & .title {
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+    font-size: 30px;
+    text-align: center;
+
+  }
 
   & label {
     margin-top: 15px;
@@ -23,7 +31,9 @@
   }
 
   .input-group-text {
-    border: 1px solid $white-color;
+    // border: 1px solid $white-color;
+    border: 1px solid #858585;
+
   }
 }
 
@@ -51,6 +61,8 @@
   }
 
   .input-group-text {
-    border: 1px solid $white-color;
+    // border: 1px solid $white-color;
+    border: 1px solid #858585;
+
   }
 }

@@ -55,7 +55,7 @@ class PagePig extends React.Component{
     render(){
     
     return(
-    <div className="page-header" style={{backgroundColor: '#ffcdb2',}}>
+    <div className="page-header" style={{backgroundColor: '#fff',}}>
     {/* <IndexNavbar></IndexNavbar> */}
     <Container>
     <div className="card-personalize-pig">
@@ -64,18 +64,6 @@ class PagePig extends React.Component{
         
         <div className="card-personalize3">
             <h4><font color="#E76F51" size="6" face="微軟正黑體"><b>豬豬小助理</b></font></h4>
-
-            {/* <div className="fund-risk-classify">
-                <span style={{fontWeight:"bold"}}>基金風險分類</span>
-            </div>
-
-            <div className="fund-time-ability">
-                <span style={{fontWeight:"bold"}}>選股擇時能力計算器</span>
-            </div>
-
-            <div className="env-index-predict">
-                <span style={{fontWeight:"bold"}}>環境指數關聯性預測</span>
-            </div> */}
             <Row>
                 <Col sm={4}>
                 <div className="dollor-cost-average">
