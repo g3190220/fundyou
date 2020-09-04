@@ -163,29 +163,21 @@ class SectionLogin extends React.Component {
                   </div>
                   <Form className="register-form">
                     <label>Email</label>
-                    <InputGroup className="form-group-no-border">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="nc-icon nc-email-85" />
-                        </InputGroupText>
-                      </InputGroupAddon>
+                   
+                     
                       <Input placeholder="Email" type="email" value={this.state.email} onChange={this.handleChange('email')} invalid={this.state.errors["email_is_errors"]} onKeyDown={this.keyPress}/>
                       <FormFeedback invalid>
                       {this.state.errors["email"]}
                       </FormFeedback>
-                    </InputGroup>
+                   
                     <label>Password</label>
-                    <InputGroup className="form-group-no-border">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="nc-icon nc-key-25" />
-                        </InputGroupText>
-                      </InputGroupAddon>
+                    
+                      
                       <Input placeholder="Password" type="password" value={this.state.password} onChange={this.handleChange('password')} invalid={this.state.errors["password_is_errors"]} onKeyDown={this.keyPress}/>
                       <FormFeedback invalid>
                       {this.state.errors["password"]}
                       </FormFeedback>
-                    </InputGroup>
+                    
                     <Button
                     block
                     className="btn-round"
