@@ -47,8 +47,8 @@ class Surveys extends React.Component {
                  survey_answer(arr);
 
                  if(total <= 34){
-                    ans = '您的結果為：安穩型';
-                    result = '安穩型'
+                    ans = '您的結果為：保守型';
+                    result = '保守型'
                  }
                  else if(total <=45){
                     ans = '您的結果為：穩健型';
