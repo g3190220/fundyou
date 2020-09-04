@@ -243,7 +243,7 @@
     text-align: center;
     color: #FFFFFF;
     display: block;
-    font-size: 22px;
+    font-size: 25px;
 
     .type{
         position: absolute;
@@ -259,7 +259,7 @@
 }
 
 .presentation-title{
-    font-size: 7em;
+    font-size: 9em;
     font-weight: 700;
     text-align: center;
     margin: 0;
@@ -268,7 +268,7 @@
     background: -moz-linear-gradient(top, #FFFFFF 35%, #ffc6c6 100%);
     background: -webkit-linear-gradient(top, #FFFFFF 35%,#ffc6c6 100%);
     background: -ms-linear-gradient(top, #FFFFFF 35%,#ffc6c6 100%);
-    background: linear-gradient(to bottom, #FFFFFF 35%,#ffc6c6 100%);
+    background: linear-gradient(to bottom, #FFFFFF 35%,#ddfeff 100%);
 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

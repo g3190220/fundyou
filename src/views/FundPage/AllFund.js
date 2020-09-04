@@ -607,7 +607,7 @@ class AllFund extends React.Component {
         <IndexNavbar></IndexNavbar>
         
         <div className='sub-menu'>
-        <Row>
+        {/* <Row>
           <Col>
             <div className='sub-sub-ranking'>
             <div className='fund-ranking'>Top 10 Fund Rankings</div>
@@ -624,7 +624,7 @@ class AllFund extends React.Component {
             </table>
             </div>
           </Col>
-        </Row>
+        </Row> */}
         <Row>
         
           <div className='sub-sub-search'>

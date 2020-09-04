@@ -68,7 +68,13 @@
 .btn-success { @include btn-styles($success-color, $success-states-color); }
 .btn-info    { @include btn-styles($info-color, $info-states-color); }
 .btn-warning { @include btn-styles($warning-color, $warning-states-color); }
-.btn-danger  { @include btn-styles($danger-color, $danger-states-color); }
+.btn-danger  { @include btn-styles($danger-color, $danger-states-color);
+    border-color:#ffffff;
+    &:hover{
+        border-color:#ffffff;
+        background: #367ee2;
+    };
+} 
 .btn-neutral  { @include btn-styles($white-color, $default-states-color); }
 
 
@@ -84,6 +90,7 @@
     &:active {
         color: $default-states-color !important;
         background-color: $white-color;
+        border-color:#ffffff;
     }
 }
 .btn-neutral {
@@ -199,6 +206,12 @@
 }
 .btn-round{
     border-radius: 30px;
+    border-color:#ffffff;
+    &:hover{
+        border-color:#ffffff;
+        background: #367ee2;
+    };
+    
 }
 .btn.btn-link:focus{
     box-shadow: none !important;
