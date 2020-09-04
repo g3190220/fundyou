@@ -42,7 +42,8 @@
     "styled-components": "^5.1.1",
     "survey-react": "^1.7.23",
     "underscore": "^1.10.2",
-    "validate.js": "^0.13.1"
+    "validate.js": "^0.13.1",
+    "vconsole": "^3.3.4"
   },
   "scripts": {
     "start": "react-scripts start",
