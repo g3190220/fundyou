@@ -44,16 +44,16 @@ class LineLinking extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.keyPress = this.keyPress.bind(this);
   }
-  componentDidMount() { 
-    let token = (this.props.location.search.split('='))[1];
-    
-    this.setState({token:token})
-  }
+  // componentDidMount() { 
+  //   let token = (this.props.location.search.split('='))[1];
+  //   this.setState({token:token})
+  // }
   handleSubmit(){
     let errors = {}; 
     let member_info=[];
     let nounce="";
-    
+    let token = (this.props.location.search.split('='))[1];
+    console.log(token)
     
     //取消DOM的預設功能
     window.event.preventDefault();
@@ -61,7 +61,8 @@ class LineLinking extends React.Component {
     if(!isEmpty(this.state.email) && !isEmpty(this.state.password))
     { 
        
-        console.log("handleSubmit_start")
+        alert(this.state.email)
+        alert(this.state.password)
         this.state.errors = {};
         //const proxyurl = "https://cors-anywhere.herokuapp.com/";
         const url = "http://140.115.87.192:8090/Signin";
@@ -86,14 +87,17 @@ class LineLinking extends React.Component {
       
           if(jsonData.StatusCode==200){
             member_info=JSON.parse(jsonData.member_info)
-
             nounce=member_info.member_nonce
             console.log("取得nounce")
             //取得member_id和member_sesiion
             console.log(nounce)
             console.log(this.state.token)
             alert("成功登入~")
-            window.location.href=`https://access.line.me/dialog/bot/accountLink?linkToken=${this.state.token}&nonce=${nounce}`;
+            setTimeout(() =>
+              //window.event.preventDefault();
+              window.location.href=`https://access.line.me/dialog/bot/accountLink?linkToken=${token}&nonce=${nounce}`
+            ,1500)
+            // //window.location.href=`https://access.line.me/dialog/bot/accountLink?linkToken=${this.state.token}&nonce=${nounce}`;
             
           }
           else if(jsonData.StatusCode==1000){
@@ -106,9 +110,7 @@ class LineLinking extends React.Component {
             this.setState({errors: this.state.errors});
             console.log(this.state.errors);
             
-          
-    }
-        
+          }
           else{
             alert("帳號密碼錯誤！")
           }

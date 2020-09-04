@@ -47,8 +47,10 @@ class DetailFund extends React.Component{
         showtag2:false,
         showtag3:false,
         showtag4:false,
-        colortag1:true,
-        colortag2:true,
+        teach1:true,
+        teach2:false,
+        teach3:false,
+
       };
       
       this.handleClick1 = chart_performance.bind(this); //綁定事件，參考：https://reurl.cc/pdkgQ8
@@ -809,34 +811,52 @@ class DetailFund extends React.Component{
             </Row>
             <Row>
                 <div className="sub-sub-fund-introduce">
-                <label className='fund-introduce-label'>基金各指標含意</label>
-                {/* <VerticalTabs></VerticalTabs> */}
-                {/* <button id='performance-btn' onClick={this.networth_introduce}>淨值</button>
-                <button id='performance-btn' onClick={this.performance_introduce}>績效</button>
-                <button id='risk-btn' onClick={this.risk_introduce}>風險</button> */}
-                    <table className='fund-introduce-info' border='2' cellpadding="4">
+            <Row>
+                <Col sm={3}><label className='fund-introduce-label'>基金各指標含意</label></Col>
+                <Col sm={9}>
+                    <div className='teach-btn-position'>
+                        <button className='teach-btn' onClick={()=>this.setState({teach1:true,teach2:false,teach3:false})}>淨值</button>
+                        <button className='teach-btn' onClick={()=>this.setState({teach2:true,teach1:false,teach3:false})}>績效</button>
+                        <button className='teach-btn' onClick={()=>this.setState({teach3:true,teach2:false,teach1:false})}>風險</button>
+                    </div>
+                </Col>
+            </Row>
+            <Row>
+                <div className='teach-content' style={{display: this.state.teach1 ? 'inline' : 'none'}}>
+                <table className='fund-introduce-info'>
                     <tr>
-                        <th width="25%">淨值</th>
-                        <td>該基金之單位淨值；歷史資料為各月底數值，但當月份至月底前係採用目前該檔基金最近一日的資料。</td>
+                        <th width="28%">淨值</th>
+                        <td height="80px">該基金之單位淨值；歷史資料為各月底數值，但當月份至月底前係採用目前該檔基金最近一日的資料。</td>
                     </tr>
-                    <tr>
-                        <th>Sharpe Ratio</th>
-                        <td>夏普指數，為衡量基金承擔每單位總風險所得之超額報酬。</td>
-                    </tr>
-                    <tr>
-                        <th>Treynor Ratio</th>
-                        <td>崔納指數，為衡量基金承擔每單位市場風險所得之超額報酬。</td>
-                    </tr>
-                    <tr>
-                        <th>Beta</th>
-                        <td>為衡量基金相較於市場報酬率波動的幅度，此處以近12個月該基金單月ROI與市場(Y9999加權指數)單月ROI所計算之值。</td>
-                    </tr>
-                    <tr>
-                        <th>SD(Standard Deviation)</th>
-                        <td>以近12個月的單月報酬率所計算之年化標準差；成立未滿12個月者不予計算。</td>
-                    </tr>
+                </table>
+                </div>
+                <div className='teach-content' style={{display: this.state.teach2 ? 'inline' : 'none'}}>
+                    <table className='fund-introduce-info'>
+                        <tr>
+                            <th width="33%">Sharpe Ratio</th>
+                            <td height="80px">夏普指數，為衡量基金承擔每單位總風險所得之超額報酬。</td>
+                        </tr>
+                        <tr>
+                            <th width="33%">Treynor Ratio</th>
+                            <td height="80px">崔納指數，為衡量基金承擔每單位市場風險所得之超額報酬。</td>
+                        </tr>
                     </table>
                 </div>
+                <div className='teach-content' style={{display: this.state.teach3 ? 'inline' : 'none'}}>
+                    <table className='fund-introduce-info'>
+                        <tr>
+                            <th width="28%">Beta</th>
+                            <td height="80px">為衡量基金相較於市場報酬率波動的幅度，此處以近12個月該基金單月ROI與市場(Y9999加權指數)單月ROI所計算之值。</td>
+                        </tr>
+                        <tr>
+                            <th width="28%">SD(Standard Deviation)</th>
+                            <td height="80px">以近12個月的單月報酬率所計算之年化標準差；成立未滿12個月者不予計算。</td>
+                        </tr>
+                    </table>
+                </div>
+                
+            </Row>
+            </div>
             </Row>
             </div>
             </Container>
