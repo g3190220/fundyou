@@ -69,7 +69,7 @@ class Surveys extends React.Component {
             }
 
             //-----------更新或新增性格分析結果-----------------------------------------------------------------
-            const url = "http://140.115.87.192:8090/set_characteristic";////////改url
+            const url = "https://fundu.ddns.net:8090/set_characteristic";////////改url
             //console.log(data)
             fetch(url, {
                     method: 'POST',

@@ -51,6 +51,9 @@ class DetailFund extends React.Component{
         colortag2:true,
         fund_net_CSS:'fund-value-red',
         fund_percentage_CSS:'fund-percentage-red',
+        teach1:true,
+        teach2:false,
+        teach3:false,
 
       };
       
@@ -71,7 +74,7 @@ class DetailFund extends React.Component{
         let fund_info=[];
         console.log(this.props.match.params.fundid.split('='));
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "http://140.115.87.192:8090/getFundInfo";////////改url
+        const url = "https://fundu.ddns.net:8090/getFundInfo";////////改url
         //console.log(data)
         fetch( url, {
                 method: 'POST',
@@ -125,7 +128,7 @@ class DetailFund extends React.Component{
     trackstate(){    //看此user有沒有追蹤過此筆基金，並改變追蹤狀態
         let fund_info=[];
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "http://140.115.87.192:8090/getTrack";
+        const url = "https://fundu.ddns.net:8090/getTrack";
         fetch(url, {
             method: 'POST',
             headers: {
@@ -176,7 +179,7 @@ class DetailFund extends React.Component{
 
     CreateTrack(){  //建立追蹤基金
         let id = (this.props.match.params.fundid.split('='))[1]; //抓現在頁面的id
-        const url = "http://140.115.87.192:8090/CreateTrack";
+        const url = "https://fundu.ddns.net:8090/CreateTrack";
         //console.log(data)
         fetch(url, {
             method: 'POST',
@@ -204,7 +207,7 @@ class DetailFund extends React.Component{
 
     getTag(){
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "http://140.115.87.192:8090/getTag";
+        const url = "https://fundu.ddns.net:8090/getTag";
         fetch(url, {
                 method: 'POST',
                 headers: {
@@ -252,7 +255,7 @@ class DetailFund extends React.Component{
     getMyTag(){
         let member_id=load_cookies("member_id")
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "http://140.115.87.192:8090/getTag";
+        const url = "https://fundu.ddns.net:8090/getTag";
         fetch(url, {
         method: 'POST',
         headers: {
@@ -279,7 +282,7 @@ class DetailFund extends React.Component{
                 console.log(tag_info.length)
             //如果只有一個自創TAG
             // if(tag_info.length==1){
-            //         const url = "http://140.115.87.192:8090/getTag";
+            //         const url = "https://fundu.ddns.net:8090/getTag";
             //         fetch(url, {
             //         method: 'POST',
             //         headers: {
@@ -331,7 +334,7 @@ class DetailFund extends React.Component{
             catch (d){
                 console.log("一個自己創建的tag都沒有")
                 // let id = (this.props.match.params.fundid.split('='))[1];
-                // const url = "http://140.115.87.192:8090/getTag";
+                // const url = "https://fundu.ddns.net:8090/getTag";
                 // fetch(url, {
                 // method: 'POST',
                 // headers: {
@@ -378,7 +381,7 @@ class DetailFund extends React.Component{
     getnet(){
         let fund_net=[];
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url2 = "http://140.115.87.192:8090/getNetWorth";////////改url
+        const url2 = "https://fundu.ddns.net:8090/getNetWorth";////////改url
         //console.log(data)
         fetch(url2, {
                 method: 'POST',
@@ -444,7 +447,7 @@ class DetailFund extends React.Component{
     getROI(){
         let fund_return=[];
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url2 = "http://140.115.87.192:8090/getReturn";////////改url
+        const url2 = "https://fundu.ddns.net:8090/getReturn";////////改url
         //console.log(data)
         fetch(url2, {
                 method: 'POST',
@@ -485,7 +488,7 @@ class DetailFund extends React.Component{
         let day = [];
         let i = 0;
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url3 = "http://140.115.87.192:8090/getNetWorth";////////改url
+        const url3 = "https://fundu.ddns.net:8090/getNetWorth";////////改url
         //console.log(data)
         fetch(url3, {
                 method: 'POST',
@@ -536,7 +539,7 @@ class DetailFund extends React.Component{
         let day = [];
         let i = 0;
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url4 = "http://140.115.87.192:8090/getPerformance";////////改url
+        const url4 = "https://fundu.ddns.net:8090/getPerformance";////////改url
         //console.log(data)
         fetch(url4, {
                 method: 'POST',
@@ -604,7 +607,7 @@ class DetailFund extends React.Component{
         window.event.preventDefault();
         if(!isEmpty(this.state.new_tag)){
         let fld022 = (this.props.match.params.fundid.split('='))[1];
-        const url = "http://140.115.87.192:8090/GenerateTag";
+        const url = "https://fundu.ddns.net:8090/GenerateTag";
         fetch(url, {
                 method: 'POST',
                 headers: {
@@ -823,34 +826,52 @@ class DetailFund extends React.Component{
             </Row>
             <Row>
                 <div className="sub-sub-fund-introduce">
-                <label className='fund-introduce-label'>基金各指標含意</label>
-                {/* <VerticalTabs></VerticalTabs> */}
-                {/* <button id='performance-btn' onClick={this.networth_introduce}>淨值</button>
-                <button id='performance-btn' onClick={this.performance_introduce}>績效</button>
-                <button id='risk-btn' onClick={this.risk_introduce}>風險</button> */}
-                    <table className='fund-introduce-info' border='2' cellpadding="4">
+            <Row>
+                <Col sm={3}><label className='fund-introduce-label'>基金各指標含意</label></Col>
+                <Col sm={9}>
+                    <div className='teach-btn-position'>
+                        <button className='teach-btn' onClick={()=>this.setState({teach1:true,teach2:false,teach3:false})}>淨值</button>
+                        <button className='teach-btn' onClick={()=>this.setState({teach2:true,teach1:false,teach3:false})}>績效</button>
+                        <button className='teach-btn' onClick={()=>this.setState({teach3:true,teach2:false,teach1:false})}>風險</button>
+                    </div>
+                </Col>
+            </Row>
+            <Row>
+                <div className='teach-content' style={{display: this.state.teach1 ? 'inline' : 'none'}}>
+                <table className='fund-introduce-info'>
                     <tr>
-                        <th width="25%">淨值</th>
-                        <td>該基金之單位淨值；歷史資料為各月底數值，但當月份至月底前係採用目前該檔基金最近一日的資料。</td>
+                        <th width="28%">淨值</th>
+                        <td height="80px">該基金之單位淨值；歷史資料為各月底數值，但當月份至月底前係採用目前該檔基金最近一日的資料。</td>
                     </tr>
-                    <tr>
-                        <th>Sharpe Ratio</th>
-                        <td>夏普指數，為衡量基金承擔每單位總風險所得之超額報酬。</td>
-                    </tr>
-                    <tr>
-                        <th>Treynor Ratio</th>
-                        <td>崔納指數，為衡量基金承擔每單位市場風險所得之超額報酬。</td>
-                    </tr>
-                    <tr>
-                        <th>Beta</th>
-                        <td>為衡量基金相較於市場報酬率波動的幅度，此處以近12個月該基金單月ROI與市場(Y9999加權指數)單月ROI所計算之值。</td>
-                    </tr>
-                    <tr>
-                        <th>SD(Standard Deviation)</th>
-                        <td>以近12個月的單月報酬率所計算之年化標準差；成立未滿12個月者不予計算。</td>
-                    </tr>
+                </table>
+                </div>
+                <div className='teach-content' style={{display: this.state.teach2 ? 'inline' : 'none'}}>
+                    <table className='fund-introduce-info'>
+                        <tr>
+                            <th width="33%">Sharpe Ratio</th>
+                            <td height="80px">夏普指數，為衡量基金承擔每單位總風險所得之超額報酬。</td>
+                        </tr>
+                        <tr>
+                            <th width="33%">Treynor Ratio</th>
+                            <td height="80px">崔納指數，為衡量基金承擔每單位市場風險所得之超額報酬。</td>
+                        </tr>
                     </table>
                 </div>
+                <div className='teach-content' style={{display: this.state.teach3 ? 'inline' : 'none'}}>
+                    <table className='fund-introduce-info'>
+                        <tr>
+                            <th width="28%">Beta</th>
+                            <td height="80px">為衡量基金相較於市場報酬率波動的幅度，此處以近12個月該基金單月ROI與市場(Y9999加權指數)單月ROI所計算之值。</td>
+                        </tr>
+                        <tr>
+                            <th width="28%">SD(Standard Deviation)</th>
+                            <td height="80px">以近12個月的單月報酬率所計算之年化標準差；成立未滿12個月者不予計算。</td>
+                        </tr>
+                    </table>
+                </div>
+                
+            </Row>
+            </div>
             </Row>
             </div>
             </Container>
