@@ -55,19 +55,11 @@ class PageCharacterAnalysis extends React.Component{
 
             <div className="game-title">
                 <span style={{fontWeight:"bold"}}>由FundU打造的投資性格分析，</span><br/>
-                <span style={{fontWeight:"bold"}}>帶您透過情境遊戲來了解投資偏好</span>
+                <span style={{fontWeight:"bold"}}>帶您透過性格測驗來了解投資偏好</span>
             </div>
             <div className="start-btn">
                 <button type="button" class="btn btn-neutral" onClick={this.handleSubmit}>前往性格測驗</button>    
-            </div>
-            
-            {/* <div>
-                <span className='survey-go-font' style={{fontWeight:"bold"}}>不想玩遊戲？前往</span>
-                <IconButton aria-label="GO" size="small" onClick={this.handleSubmit}>
-                    <ArrowForwardIcon />
-                </IconButton>
-            </div> */}
-            
+            </div>            
         </div>
 
         <div className="card-personalize2-1">

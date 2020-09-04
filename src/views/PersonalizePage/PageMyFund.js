@@ -14,7 +14,6 @@ import 'react-multi-carousel/lib/styles.css';
 //覆寫CSS
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-
 import { forwardRef } from 'react';
 
 //基金Table套件
@@ -43,6 +42,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import BorderColorIcon from '@material-ui/icons/BorderColor';
 
 
 const tableIcons = {
@@ -80,7 +80,7 @@ const tableIcons = {
       backgroundColor: "#f8f5c4",
       '& p': {
         fontFamily:"Microsoft JhengHei",
-        fontWeight: 500,
+        fontWeight: 600,
         fontSize:18,
         color: "#4d4d4d",
       }
@@ -165,7 +165,7 @@ class PageMyFund extends React.Component{
     }
 
     getTrackData(){  //取得追蹤基金
-      const url = "http://140.115.87.192:8090/getTrack";
+      const url = "https://fundu.ddns.net:8090/getTrack";
       fetch(url, {
           method: 'POST',
           headers: {
@@ -224,7 +224,7 @@ class PageMyFund extends React.Component{
 
 
     CreateMemo(){
-      const url = "http://140.115.87.192:8090/Memo";
+      const url = "https://fundu.ddns.net:8090/Memo";
       fetch(url, {
         method: 'POST',
         headers: {
@@ -254,7 +254,7 @@ class PageMyFund extends React.Component{
 
 
     getMemo(fld022,chname){
-      const url = "http://140.115.87.192:8090/getMemo";
+      const url = "https://fundu.ddns.net:8090/getMemo";
       console.log(fld022)
       console.log(chname)
       fetch(url, {
@@ -404,7 +404,7 @@ class PageMyFund extends React.Component{
                       id="form-dialog-title" 
                       classes={{root: classes.customDialogTitle}}
                     >
-                      {this.state.chname}
+                      <BorderColorIcon></BorderColorIcon>{this.state.chname}
                       <hr className="hr"></hr>
                       </DialogTitle>
                       
@@ -417,6 +417,8 @@ class PageMyFund extends React.Component{
                         margin="dense"
                         // id="name"
                         label="請輸入備忘錄內容"
+                        multiline
+                        rowsMax={4}
                         type="string"
                         onChange={this.handleChange('new_content')} //更新新增內容
                         fullWidth

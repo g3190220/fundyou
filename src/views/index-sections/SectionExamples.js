@@ -9,7 +9,7 @@ import { Button, Container, Row, Col,Card,Form,} from "reactstrap";
 function SectionExamples() {
   return (
     <>
-      <div className="section-introduction">
+      {/* <div className="section-introduction">
         <Container>
           <Row className="example-page">
             <Col className="text-center" >
@@ -56,7 +56,7 @@ function SectionExamples() {
             </Col>
           </Row>
         </Container>
-      </div>{" "}
+      </div>{" "} */}
     </>
   );
 }

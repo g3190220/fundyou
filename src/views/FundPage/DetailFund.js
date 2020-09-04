@@ -71,7 +71,7 @@ class DetailFund extends React.Component{
         let fund_info=[];
         console.log(this.props.match.params.fundid.split('='));
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "http://140.115.87.192:8090/getFundInfo";////////改url
+        const url = "https://fundu.ddns.net:8090/getFundInfo";////////改url
         //console.log(data)
         fetch( url, {
                 method: 'POST',
@@ -125,7 +125,7 @@ class DetailFund extends React.Component{
     trackstate(){    //看此user有沒有追蹤過此筆基金，並改變追蹤狀態
         let fund_info=[];
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "http://140.115.87.192:8090/getTrack";
+        const url = "https://fundu.ddns.net:8090/getTrack";
         fetch(url, {
             method: 'POST',
             headers: {
@@ -176,7 +176,7 @@ class DetailFund extends React.Component{
 
     CreateTrack(){  //建立追蹤基金
         let id = (this.props.match.params.fundid.split('='))[1]; //抓現在頁面的id
-        const url = "http://140.115.87.192:8090/CreateTrack";
+        const url = "https://fundu.ddns.net:8090/CreateTrack";
         //console.log(data)
         fetch(url, {
             method: 'POST',
@@ -204,7 +204,7 @@ class DetailFund extends React.Component{
 
     getTag(){
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "http://140.115.87.192:8090/getTag";
+        const url = "https://fundu.ddns.net:8090/getTag";
         fetch(url, {
                 method: 'POST',
                 headers: {
@@ -252,7 +252,7 @@ class DetailFund extends React.Component{
     getMyTag(){
         let member_id=load_cookies("member_id")
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url = "http://140.115.87.192:8090/getTag";
+        const url = "https://fundu.ddns.net:8090/getTag";
         fetch(url, {
         method: 'POST',
         headers: {
@@ -279,7 +279,7 @@ class DetailFund extends React.Component{
                 console.log(tag_info.length)
             //如果只有一個自創TAG
             // if(tag_info.length==1){
-            //         const url = "http://140.115.87.192:8090/getTag";
+            //         const url = "https://fundu.ddns.net:8090/getTag";
             //         fetch(url, {
             //         method: 'POST',
             //         headers: {
@@ -331,7 +331,7 @@ class DetailFund extends React.Component{
             catch (d){
                 console.log("一個自己創建的tag都沒有")
                 // let id = (this.props.match.params.fundid.split('='))[1];
-                // const url = "http://140.115.87.192:8090/getTag";
+                // const url = "https://fundu.ddns.net:8090/getTag";
                 // fetch(url, {
                 // method: 'POST',
                 // headers: {
@@ -378,7 +378,7 @@ class DetailFund extends React.Component{
     getnet(){
         let fund_net=[];
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url2 = "http://140.115.87.192:8090/getNetWorth";////////改url
+        const url2 = "https://fundu.ddns.net:8090/getNetWorth";////////改url
         //console.log(data)
         fetch(url2, {
                 method: 'POST',
@@ -444,7 +444,7 @@ class DetailFund extends React.Component{
     getROI(){
         let fund_return=[];
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url2 = "http://140.115.87.192:8090/getReturn";////////改url
+        const url2 = "https://fundu.ddns.net:8090/getReturn";////////改url
         //console.log(data)
         fetch(url2, {
                 method: 'POST',
@@ -485,7 +485,7 @@ class DetailFund extends React.Component{
         let day = [];
         let i = 0;
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url3 = "http://140.115.87.192:8090/getNetWorth";////////改url
+        const url3 = "https://fundu.ddns.net:8090/getNetWorth";////////改url
         //console.log(data)
         fetch(url3, {
                 method: 'POST',
@@ -536,7 +536,7 @@ class DetailFund extends React.Component{
         let day = [];
         let i = 0;
         let id = (this.props.match.params.fundid.split('='))[1];
-        const url4 = "http://140.115.87.192:8090/getPerformance";////////改url
+        const url4 = "https://fundu.ddns.net:8090/getPerformance";////////改url
         //console.log(data)
         fetch(url4, {
                 method: 'POST',
@@ -604,7 +604,7 @@ class DetailFund extends React.Component{
         window.event.preventDefault();
         if(!isEmpty(this.state.new_tag)){
         let fld022 = (this.props.match.params.fundid.split('='))[1];
-        const url = "http://140.115.87.192:8090/GenerateTag";
+        const url = "https://fundu.ddns.net:8090/GenerateTag";
         fetch(url, {
                 method: 'POST',
                 headers: {

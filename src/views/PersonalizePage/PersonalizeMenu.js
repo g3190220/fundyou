@@ -64,7 +64,7 @@ class PersonalizeMenu extends React.Component{
   getPDData(){
     let member_info=[];
     
-    const url = "http://140.115.87.192:8090/check_LoginStatus";////////改url
+    const url = "https://fundu.ddns.net:8090/check_LoginStatus";////////改url
     //console.log(data)
     fetch(url, {
               method: 'POST',
@@ -127,6 +127,7 @@ class PersonalizeMenu extends React.Component{
                 <div className="default-photo">
                   <Avatar src={this.state.image} className="avatar-size"/>
                 </div>
+                <br/><Divider variant="middle"/>
                 <br/><span><font color="black" face="微軟正黑體" style={{fontWeight:"bold"}}>{this.state.email}</font></span>
                 <br/><span><font color="black" face="微軟正黑體" style={{fontWeight:"bold"}}>姓名：{this.state.username}</font></span>
                 <br/><span><font color="black" face="微軟正黑體" style={{fontWeight:"bold"}}>性別：{this.state.gender}</font></span>

@@ -134,7 +134,7 @@ class PageMyTag extends React.Component{
   //本周新增的tag顯示
   getNewTagData(){
         
-        const url = "http://140.115.87.192:8090/getNewTag";
+        const url = "https://fundu.ddns.net:8090/getNewTag";
         fetch(url, {
           method: 'POST',
           headers: {
@@ -177,7 +177,7 @@ class PageMyTag extends React.Component{
 
   //本周tag刪除
   DeleteTag(in_tagid,in_fld022){
-        const url = "http://140.115.87.192:8090/DeleteTag";
+        const url = "https://fundu.ddns.net:8090/DeleteTag";
         fetch(url, {
           method: 'POST',
           headers: {
@@ -210,7 +210,7 @@ class PageMyTag extends React.Component{
   //歷史新增tag顯示
   getHistoryTagData(){
         
-    const url = "http://140.115.87.192:8090/getTag";
+    const url = "https://fundu.ddns.net:8090/getTag";
     fetch(url, {
       method: 'POST',
       headers: {
