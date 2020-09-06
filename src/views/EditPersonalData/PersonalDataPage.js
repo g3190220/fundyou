@@ -14,6 +14,11 @@ import imageToBase64 from 'image-to-base64';
 //cookies
 import { load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
 
+//覆寫CSS
+import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
+import { forwardRef } from 'react';
+
 //功能
 import isEmpty from 'views/Function/isEmpty.js'
 //自動跳轉
@@ -90,6 +95,34 @@ const job_ = [
     label: '其他',
   },
 ];
+
+const styles = () =>({
+  headercolor: {
+    color: "#000",
+    fontSize:25,
+    fontWeight: 500,
+  },
+  email: {
+    backgroundColor: "#fff",
+  },
+  password: {
+    backgroundColor: "#fff",
+  },
+  username: {
+    backgroundColor: "#fff",
+  },
+  gender: {
+    backgroundColor: "#fff",
+  },
+  birthday: {
+    backgroundColor: "#fff",
+  },
+  job: {
+    backgroundColor: "#fff",
+  },
+
+
+})
 
 
 class PersonlDataPage extends React.Component {
@@ -274,13 +307,13 @@ class PersonlDataPage extends React.Component {
         className="page-header"
         id="signup"
         style={{
-          backgroundColor: '#d28f82',
+          backgroundColor: '#f6f6f6',
          }}
        >
       <ExamplesNavbar></ExamplesNavbar>
       
       <Container className='Personalization-page-position'>
-        <div className='personalization-title'><span className="title-size">PERSONAL DATA </span>
+        <div className='personalization-title'><span className={classes.headercolor}>PERSONAL DATA </span>
               <div className="position-right">
               <Button variant="contained" color="Default" onClick={this.handleEdit} style={{marginRight: '25px',width:'88px'}}>
                 Edit
@@ -329,6 +362,7 @@ class PersonlDataPage extends React.Component {
                 InputLabelProps={{
                   shrink: true,
                 }}
+                classes={{root: classes.email}}
   
               />
           
@@ -350,6 +384,7 @@ class PersonlDataPage extends React.Component {
               InputLabelProps={{
                 shrink: true
               }}
+              classes={{root: classes.password}}
 
             />
          
@@ -373,7 +408,8 @@ class PersonlDataPage extends React.Component {
             InputLabelProps={{
               shrink: true
             }}
-            
+            classes={{root: classes.username}}
+
           />
           </Col>
           <Col sm={3}>
@@ -395,6 +431,7 @@ class PersonlDataPage extends React.Component {
             InputLabelProps={{
               shrink: true
             }}
+            classes={{root: classes.gender}}
             >
             {/* {gender_.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -430,6 +467,8 @@ class PersonlDataPage extends React.Component {
             InputLabelProps={{
               shrink: true
             }}
+            classes={{root: classes.birthday}}
+
           />
           </Col>
         </Row>
@@ -455,6 +494,8 @@ class PersonlDataPage extends React.Component {
                 InputLabelProps={{
                   shrink: true
                 }}
+                classes={{root: classes.job}}
+
               >
               {/* {job_.map((option) => (
               <MenuItem key={option.value} value={option.value} >
@@ -480,5 +521,9 @@ class PersonlDataPage extends React.Component {
   );
   }
 }
-  
-export default PersonlDataPage
+PersonlDataPage.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+export default withStyles(styles)(PersonlDataPage);
+
+// export default PersonlDataPage

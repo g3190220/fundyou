@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 // import IndexNavbar from "views/FundPage/IndexNavbar_Fund.js";
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Card } from 'reactstrap';
-import PersonalizeMenu from "views/PersonalizePage/PersonalizeMenu.js";
+import PersonalizeMenu from "views/PersonalizePage/PersonalizePage.js"; //左側選單
 import Result from "views/PersonalizePage/PersonalizeResult.js";
 import {Button} from '@material-ui/core/Button';
 import { IconButton } from '@material-ui/core';
@@ -43,27 +43,18 @@ class PageCharacterAnalysis extends React.Component{
     
     
     return(
-    <div className="page-header" style={{backgroundColor: '#fff',}}>
-    {/* <IndexNavbar></IndexNavbar> */}
-    <Container>
     <div className="card-personalize-characteranalysis">
-
     <PersonalizeMenu></PersonalizeMenu>
-        
+    <Container>
+    <Row>
         <div className="card-personalize2">
-            <h4><font color="#E76F51" size="6" face="微軟正黑體"><b>性格分析</b></font></h4>
-
-            <div className="game-title">
-                <span style={{fontWeight:"bold"}}>由FundU打造的投資性格分析，</span><br/>
-                <span style={{fontWeight:"bold"}}>帶您透過性格測驗來了解投資偏好</span>
-            </div>
+        <div className="card-personalize1-title">性格分析</div>
             <div className="start-btn">
                 <button type="button" class="btn btn-neutral" onClick={this.handleSubmit}>前往性格測驗</button>    
-            </div>            
-        </div>
+            </div>
 
-        <div className="card-personalize2-1">
-            <h4><font color="#E76F51" size="6" face="微軟正黑體"><b>性格分析結果</b></font></h4>
+            <div className="card-personalize2-1">
+            <div className="card-personalize1-title2">性格分析結果</div>
 
             <div className="result-1">
                 <div className="game-result-title-1">
@@ -125,13 +116,10 @@ class PageCharacterAnalysis extends React.Component{
                 </div>
             </div> */}
 
-            
+        </div>
 
         </div>
-    </div>
-
-        
-
+    </Row>
     </Container>
 
     </div>

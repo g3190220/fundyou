@@ -4,7 +4,7 @@ import { Container, Row, Col, Button, Card } from 'reactstrap';
 import Caculate from "views/Function/Caculate.js";
 import Caculate2 from "views/Function/Caculate2.js";
 import Caculate3 from "views/Function/Caculate3.js";
-import PersonalizeMenu from "views/PersonalizePage/PersonalizeMenu.js";
+import PersonalizeMenu from "views/PersonalizePage/PersonalizePage.js";
 
 
 
@@ -55,35 +55,27 @@ class PagePig extends React.Component{
     render(){
     
     return(
-    <div className="page-header" style={{backgroundColor: '#fff',}}>
-    {/* <IndexNavbar></IndexNavbar> */}
-    <Container>
     <div className="card-personalize-pig">
-
-        <PersonalizeMenu></PersonalizeMenu>
-        
-        <div className="card-personalize3">
-            <h4><font color="#E76F51" size="6" face="微軟正黑體"><b>豬豬小助理</b></font></h4>
-            <Row>
-                <Col sm={4}>
-                <div className="dollor-cost-average">
-                    <span style={{fontWeight:"bold"}}>基金試算器</span>  
-                </div>
-                </Col>
-                <Col sm={8}>
-                <div className='button-center'>
-                        <button className='tag-btn'  onClick={()=>this.Change_rank(1)}>單筆投資</button>
-                        <button className='tag-btn'  onClick={()=>this.Change_rank(2)}>每月定期定額</button>
-                        <button className='tag-btn'  onClick={()=>this.Change_rank(3)}>每年定期定額</button>
-                </div>
-                </Col>
-            </Row>
-                {this.state.selected==1?(<Caculate></Caculate>):(this.state.selected==3?(<Caculate2></Caculate2>):(<Caculate3></Caculate3>))}
+    <PersonalizeMenu></PersonalizeMenu>
+    <Container>
+    <Row>       
+        <div className="card-personalize1">
+            <div className="card-personalize1-title">豬豬小助理</div>
+            
+            <Col sm={4}>
+            <div className="dollor-cost-average">基金試算器</div>
+            </Col>
+            <Col sm={8}>
+            <div className='button-center'>
+                    <button className='tag-btn'  onClick={()=>this.Change_rank(1)}>單筆投資</button>
+                    <button className='tag-btn'  onClick={()=>this.Change_rank(2)}>每月定期定額</button>
+                    <button className='tag-btn'  onClick={()=>this.Change_rank(3)}>每年定期定額</button>
+            </div>
+            </Col>
+            {this.state.selected==1?(<Caculate></Caculate>):(this.state.selected==3?(<Caculate2></Caculate2>):(<Caculate3></Caculate3>))}
 
         </div>
-
-        
-    </div> 
+    </Row>     
     </Container>
     </div>
     
