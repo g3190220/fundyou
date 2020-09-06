@@ -2,7 +2,7 @@ import React from 'react';
 // import IndexNavbar from "views/FundPage/IndexNavbar_Fund.js";
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Card, Alert } from 'reactstrap';
-import PersonalizeMenu from "views/PersonalizePage/PersonalizeMenu.js";
+import PersonalizeMenu from "views/PersonalizePage/PersonalizePage.js";
 
 import { makeStyles } from '@material-ui/core/styles';
 import 'react-multi-carousel/lib/styles.css';
@@ -123,8 +123,6 @@ class PageMyTag extends React.Component{
       });
     }
 
-
-  
     componentDidMount(){
       window.scrollTo(0, 0);  //頁面置頂
       this.getNewTagData();
@@ -132,8 +130,7 @@ class PageMyTag extends React.Component{
     }
 
   //本周新增的tag顯示
-  getNewTagData(){
-        
+  getNewTagData(){       
         const url = "https://fundu.ddns.net:8090/getNewTag";
         fetch(url, {
           method: 'POST',
@@ -250,20 +247,17 @@ else{
   alert("error")
 }
   })}
-
-
-    
+ 
   render(){
     return(
-    <div className="page-header" style={{backgroundColor: '#fff',}}>
-    <Container>
-    <div className="card-personalize-mytag">
-
+    <div className="card-personalize-myfund">
     <PersonalizeMenu></PersonalizeMenu>
-
-      <div className="card-personalize5">
-        <h4><font color="#E76F51" size="6" face="微軟正黑體"><b>我的TAG管理</b></font></h4>
-        <div className="card-personalize5-table">
+    <Container>
+    <Row>
+      <div className="card-personalize1">
+            <div className="card-personalize1-title">我的TAG</div>
+      <div className="following-funds-table">
+        
             <MuiThemeProvider theme={THEME}>
             <MaterialTable
             icons={tableIcons}
@@ -273,8 +267,8 @@ else{
             options={{
               sorting: true,
               headerStyle: {
-                backgroundColor: '#e26d5c',
-                color: '#F8EDEB',
+                backgroundColor: '#004487',
+                color: '#f6f6f6',
                 width:200,
                 maxWidth: 200,
                 whiteSpace:'nowrap',
@@ -290,8 +284,8 @@ else{
               cellStyle:{ 
                 width:200,
                 maxWidth:200,
-                backgroundColor: '#F8EDEB',
-                color: '#e26d5c',
+                backgroundColor: '#f6f6f6',
+                color: '#000000',
                 textAlign:'center',
                 fontFamily: '微軟正黑體',
                 fontWeight: '700',
@@ -300,9 +294,9 @@ else{
                 
               },
               actionsCellStyle: {
-                backgroundColor: '#F8EDEB'
+                backgroundColor: '#f6f6f6'
               },
-              maxBodyHeight: '420px'
+              maxBodyHeight: '360px'
             }}
             actions={[
               { 
@@ -353,9 +347,9 @@ else{
         </DialogActions>
       </Dialog>
           </div>
-
       </div>
-    </div> 
+    
+    </Row>
     </Container>
 
     </div>
