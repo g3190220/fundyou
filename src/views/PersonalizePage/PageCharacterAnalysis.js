@@ -122,14 +122,9 @@ class PageCharacterAnalysis extends React.Component{
             <div className="result-1">
                 <Row>
                 <div className="game-result-title-1">
-<<<<<<< HEAD
                     <span style={{fontWeight:"bold"}}>{this.state.texts}</span>
                     <span style={{fontWeight:"bold"}}>{this.state.characteristic}</span><br/>
                     <div className="result-chart"><Result></Result></div>
-=======
-                    <span style={{fontWeight:"bold"}}>根據測驗結果，您屬於：</span>
-                    <span style={{fontWeight:"bold"}}>{this.state.characteristic}投資人</span><br/>
->>>>>>> edbf5b5cbf6e4c1107ed1475e8d3af0eb590fa53
                 </div>
                 </Row>
                 <Row>
