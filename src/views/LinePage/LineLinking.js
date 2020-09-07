@@ -61,8 +61,6 @@ class LineLinking extends React.Component {
     if(!isEmpty(this.state.email) && !isEmpty(this.state.password))
     { 
        
-        alert(this.state.email)
-        alert(this.state.password)
         this.state.errors = {};
         //const proxyurl = "https://cors-anywhere.herokuapp.com/";
         const url = "https://fundu.ddns.net:8090/Signin";
@@ -96,7 +94,7 @@ class LineLinking extends React.Component {
             setTimeout(() =>
               //window.event.preventDefault();
               window.location.href=`https://access.line.me/dialog/bot/accountLink?linkToken=${token}&nonce=${nounce}`
-            ,1500)
+            ,1000).then(()=>{alert("關閉了")})
             // //window.location.href=`https://access.line.me/dialog/bot/accountLink?linkToken=${this.state.token}&nonce=${nounce}`;
             
           }
