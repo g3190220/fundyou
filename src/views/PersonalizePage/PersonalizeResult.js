@@ -1,15 +1,12 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector } from 'recharts';
-import { load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
-
 
 const data = [
   // { name: '保守型', value: 200 },
-  { name: '風險指數', value: 300 },
+  { name: '穩健型', value: 500 },
   // { name: '成長型', value: 800 },
   // { name: '積極型', value: 1000 },
 ];
-
 
 // const styles = () => {
 //   customSpace: {
@@ -65,7 +62,7 @@ const renderActiveShape = (props) => {
       />
       <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-      <text style={{fontSize:"16"}} x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#b75d69">{`${value}`}</text>
+      <text style={{fontSize:"16"}} x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#14416e">{`風險指數${value}`}</text>
     </g>
   );
 };
@@ -77,15 +74,6 @@ export default class Result extends PureComponent {
   state = {
     activeIndex: 0,
   };
-  constructor(props) {
-    super(props)
-    console.log(props)
-    this.state = {
-      //fields: {},
-      errors: {}
-  }
-
-  }
 
   onPieEnter = (data, index) => {
     this.setState({
@@ -95,13 +83,13 @@ export default class Result extends PureComponent {
 
   render() {
     return (
-      <PieChart width={360} height={250}>
+      <PieChart width={400} height={400}>
         <Pie
           activeIndex={this.state.activeIndex}
           activeShape={renderActiveShape}
           data={data}
-          cx={250}
-          cy={120}
+          cx={300}
+          cy={200}
           innerRadius={50}
           outerRadius={70}
           fill="#14416e"

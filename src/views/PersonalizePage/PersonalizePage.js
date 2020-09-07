@@ -53,9 +53,6 @@ import isEmpty from 'views/Function/isEmpty.js'
 import {load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
 import { isImageUrl } from "antd/lib/upload/utils";
 
-//sidebar 圖片
-import Background from 'assets/img/sidebar.jpg';
-
 const mql = window.matchMedia(`(min-width: 800px)`);
 
 //處理登出
@@ -200,7 +197,7 @@ class PersonalizePage extends React.Component {
       <Sidebar
       rootClassName="root-siderbar"
       sidebar={ 
-        <div className='menu-position' style={{backgroundImage: "url(" + Background + ")"}}>
+        <div className='menu-position'>
         
           <div className="default-photo">
               <Avatar src={this.state.image} className="avatar-size"/>

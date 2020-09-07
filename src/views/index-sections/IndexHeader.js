@@ -22,8 +22,9 @@ function IndexHeader() {
             //     backgroundImage:
             //       "url(" + require("assets/img/examples/clock.gif") + ")"
             // }}> */}
-              <h3 className="title-brand">Think and Grow Rich</h3>
-              <h2 className="presentation-title">Fund<br/>You</h2>
+              <h3 className="title-brand">思 考 致 富</h3>
+              <div className="title-line"></div>
+              <h2 className="presentation-title"><span className="title_1">Fund</span><br/><span className="title_2">You</span></h2>
             </div >
         </Col>
       </Row>

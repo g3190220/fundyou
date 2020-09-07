@@ -154,7 +154,6 @@ class Caculate2 extends React.Component{
     return(
         <div>
             <Container>
-            <Row>
             <div className="dollor-cost-average-sub">
                 <Row>
                     <div className='little-title'>選擇欲計算答案：</div>
@@ -223,7 +222,6 @@ class Caculate2 extends React.Component{
                     </Col>
                 </Row>
             </div>
-            </Row>
             </Container>
         </div>
  

@@ -1,3 +1,11 @@
+/*添加自訂義字型 */
+
+@font-face {
+    font-family: 'jf-openhuninn';
+    src: url('../fonts/jf-openhuninn-1.1.woff') format("woff"),
+           url('../fonts/jf-openhuninn-1.1.ttf') format("truetype"),
+  }
+
 @import 'paper-kit/variables';
 @import 'paper-kit/mixins';
 
@@ -5,6 +13,7 @@
 @import "paper-kit/plugins/plugin-bootstrap-switch";
 @import "paper-kit/plugins/plugin-nouislider";
 @import "paper-kit/plugins/plugin-datepicker";
+// Plugins font
 
 // Core CSS
 @import "paper-kit/buttons";
@@ -53,4 +62,7 @@
 @import "paper-kit/responsive";
 
 // React Differences
-@import "react/react-differences.scss"
+@import "react/react-differences.scss";
+
+
+

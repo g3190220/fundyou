@@ -1,5 +1,5 @@
 .surveypage{
-    background-color:#e1f5fe;
+    background-color:#faeedc;
     padding: 35px 120px 15px;
     min-height: 720px;
 
@@ -76,10 +76,10 @@
         width: 80px;
         height: 40px;
         border-radius: 5px;
-        border: #0288d1 solid;
+        border: #E5989B solid;
         outline:none;
-        background: #e1f5fe;
-        color: #0288d1;
+        background: #F8EDEB;
+        color: #E5989B;
         font-weight:bold;
         margin-top: -20px;
         transform: translateX(1300%);
@@ -89,23 +89,23 @@
         width: 80px;
         height: 40px;
         border-radius: 5px;
-        border: #0288d1 solid;
+        border: #E5989B solid;
         outline:none;
-        background: #e1f5fe;
-        color: #0288d1;
+        background: #F8EDEB;
+        color: #E5989B;
         font-weight:bold;
         margin-top: -20px;
         margin-left: -30px;
     }
 
     .submit-btn:hover{
-        background: #0288d1;
+        background: #E5989B;
         color: #F8EDEB;
         transition-duration: 0.4s;
     }
 
     .previous-btn:hover{
-        background: #0288d1;
+        background: #E5989B;
         color: #F8EDEB;
         transition-duration: 0.4s;
     }
