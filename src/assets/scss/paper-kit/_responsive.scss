@@ -566,6 +566,19 @@
         align-items: center;
         @include transform-translate-x(0);
         @include transition (0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
+        position:relative;
+    }
+    .navbar-translate-fund-bar{
+        width: 100%;
+        position: relative;
+        display: flex;
+        -ms-flex-pack: justify !important;
+        justify-content: space-between !important;
+        -ms-flex-align: center;
+        align-items: center;
+        @include transform-translate-x(0);
+        @include transition (0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
+        position:relative;
     }
 
     #bodyClick {

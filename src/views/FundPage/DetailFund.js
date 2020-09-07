@@ -826,7 +826,7 @@ class DetailFund extends React.Component{
             </Row>
             <Row>
                 <div className="sub-sub-fund-introduce">
-            <Row>
+            {/* <Row>
                 <Col sm={3}><label className='fund-introduce-label'>基金各指標含意</label></Col>
                 <Col sm={9}>
                     <div className='teach-btn-position'>
@@ -835,6 +835,14 @@ class DetailFund extends React.Component{
                         <button className='teach-btn' onClick={()=>this.setState({teach3:true,teach2:false,teach1:false})}>風險</button>
                     </div>
                 </Col>
+            </Row> */}
+            <Row><label className='fund-introduce-label'>基金各指標含意</label></Row>
+            <Row>
+                <div className='teach-btn-position'>
+                        <button className='teach-btn' onClick={()=>this.setState({teach1:true,teach2:false,teach3:false})}>淨值</button>
+                        <button className='teach-btn' onClick={()=>this.setState({teach2:true,teach1:false,teach3:false})}>績效</button>
+                        <button className='teach-btn' onClick={()=>this.setState({teach3:true,teach2:false,teach1:false})}>風險</button>
+                </div>
             </Row>
             <Row>
                 <div className='teach-content' style={{display: this.state.teach1 ? 'inline' : 'none'}}>
