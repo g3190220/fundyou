@@ -43,6 +43,7 @@ class Surveys extends React.Component {
                  var result = '';
                  var total = parseInt(this.state.score)+parseInt(this.state.score_2)+parseInt(this.state.score_3)+parseInt(this.state.score_4)+parseInt(this.state.score_page)
                  arr.push(load_cookies("ROI"));
+                 arr.push(load_cookies("method"))
                  arr.push(total)
                  survey_answer(arr);
 
@@ -132,11 +133,11 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>當您的投資超過你可以接受的損失時（停損點），你會採取那種處置方式？</FormLabel>
                         <RadioGroup row={true} aria-label="dealwith-lose" name="dealwith-lose" onChange={this.handleChange}>
-                        <FormControlLabel value="2" control={<Radio />} label="立即賣出所有部位" />
-                        <FormControlLabel value="4" control={<Radio />} label="先賣出一半或一半以上部位" />
-                        <FormControlLabel value="6" control={<Radio />} label="先賣出一半以內部位" />
-                        <FormControlLabel value="8" control={<Radio />} label="暫時觀望，視情況再因應" />
-                        <FormControlLabel value="10" control={<Radio />} label="繼續持有至回本或不漲為止" />
+                        <FormControlLabel value="2" control={<Radio color="primary" />} label="立即賣出所有部位" />
+                        <FormControlLabel value="4" control={<Radio color="primary" />} label="先賣出一半或一半以上部位" />
+                        <FormControlLabel value="6" control={<Radio color="primary" />} label="先賣出一半以內部位" />
+                        <FormControlLabel value="8" control={<Radio color="primary" />} label="暫時觀望，視情況再因應" />
+                        <FormControlLabel value="10" control={<Radio color="primary" />} label="繼續持有至回本或不漲為止" />
                         </RadioGroup>
                     </FormControl>
                     </div>
@@ -147,11 +148,11 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>當您的投資達到你預先設定的目標利益（停利點），請問您會採取那種處置方式？</FormLabel>
                         <RadioGroup row={true} aria-label="dealwith-profit" name="dealwith-profit" onChange={this.handleChange}>
-                        <FormControlLabel value="2" control={<Radio />} label="立即賣出所有部位" />
-                        <FormControlLabel value="4" control={<Radio />} label="先賣出一半或一半以上部位" />
-                        <FormControlLabel value="6" control={<Radio />} label="先賣出一半以內部位" />
-                        <FormControlLabel value="8" control={<Radio />} label="暫時觀望，視情況再因應" />
-                        <FormControlLabel value="10" control={<Radio />} label="繼續持有至回本或不漲為止" />
+                        <FormControlLabel value="2" control={<Radio color="primary" />} label="立即賣出所有部位" />
+                        <FormControlLabel value="4" control={<Radio color="primary" />} label="先賣出一半或一半以上部位" />
+                        <FormControlLabel value="6" control={<Radio color="primary" />} label="先賣出一半以內部位" />
+                        <FormControlLabel value="8" control={<Radio color="primary" />} label="暫時觀望，視情況再因應" />
+                        <FormControlLabel value="10" control={<Radio color="primary" />} label="繼續持有至回本或不漲為止" />
                         </RadioGroup>
                     </FormControl>
                     </div>

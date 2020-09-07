@@ -21,6 +21,9 @@ class PageCharacterAnalysis extends React.Component{
         console.log(props)
         this.state = {
           //fields: {},
+          characteristic:"無資料",
+          description_1:'',
+          description_2:'',
           errors: {}
       }
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,6 +31,53 @@ class PageCharacterAnalysis extends React.Component{
 
     componentDidMount() {
         window.scrollTo(0, 0);  //頁面置頂
+
+        //取得性格分析結果
+        let data = []
+        const url = "https://fundu.ddns.net:8090/getCharacteristic";////////改url
+        //console.log(data)
+        fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    memberID: load_cookies("member_id")
+                })
+            })
+            .then((response) => {return response.json();})
+            .then((jsonData) => {
+            //console.log(this)
+            console.log(jsonData.info)
+            data=JSON.parse(jsonData.info)
+            if(jsonData.StatusCode==200){
+                
+                console.log(data[0])
+                let description = [];
+                if(data[0].Member_characteristic =='保守型'){
+                    description = ["保守型投資人對風險的承受力較低，期待投資能夠盡量保本並有穩定的回報。建議選擇風險波動度較小的產品。","債券型、有固定配息的收益型債券基金、組合式基金"]
+                }
+                else if(data[0].Member_characteristic =='穩健型'){
+                    description = ["穩健型投資人願意為了累積財富而適當承受風險。在做決策時會審慎評估其可能隱含的損失，並在風險合理的情況下去追求中等的獲利與報酬。",'平衡型、區域型基金']
+                }
+                else if(data[0].Member_characteristic =='成長型'){
+                    description = ["成長型投資人願意承受部分風險，追求資產能有成長的機會。通常願意嘗試新鮮的事物，在資產配置中可將基金列為資產成長主力。",'平衡型、區域型、全球股票型基金']
+                }
+                else if(data[0].Member_characteristic =='積極型'){
+                    description = ["積極型投資人以追求資本利得為目標，願意利用風險較高或是新推出的金融商品作為投資工具，來獲得高報酬。","單一國家股票型、產業股票型基金"]
+                }
+
+                //更新state並獲得以下資料
+                this.setState((state, props) => {
+                    return {counter: state.counter + props.step,
+                            characteristic:data[0].Member_characteristic,
+                            description_1:description[0],
+                            description_2:description[1]
+                            };
+                });
+            }
+            })       
     }
   
     //點擊去頁面
@@ -68,15 +118,15 @@ class PageCharacterAnalysis extends React.Component{
             <div className="result-1">
                 <div className="game-result-title-1">
                     <span style={{fontWeight:"bold"}}>根據測驗結果，您屬於：</span>
-                    <span style={{fontWeight:"bold"}}>保守型投資人</span><br/>
+                    <span style={{fontWeight:"bold"}}>{this.state.characteristic}投資人</span><br/>
                     <div className="result-chart"><Result></Result></div>
                 </div>
                 <div className="result-content-1">
                     <span style={{fontWeight:"bold"}}>
-                        保守型投資人對風險的承受力較低，期待投資能夠盡量保本並有穩定的回報。建議選擇風險波動度較小的產品。
+                        {this.state.description_1}
                     </span><br/><br/>
                     <span style={{fontWeight:"bold"}}>適合的基金類型：</span><br/>
-                    <span style={{fontWeight:"bold"}}>債券型、有固定配息的收益型債券基金、組合式基金</span><br/>
+                    <span style={{fontWeight:"bold"}}>{this.state.description_2}</span><br/>
                 </div>
             </div>
 

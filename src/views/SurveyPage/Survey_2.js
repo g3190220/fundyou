@@ -8,7 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Button, Card, Form, Input, Container, Row, Col} from "reactstrap";
 import TextField from '@material-ui/core/TextField';
-import { load_cookies, survey_score } from 'views/Function/Cookie_function.js' // 引入cookies
+import { load_cookies, survey_score, survey_answer} from 'views/Function/Cookie_function.js' // 引入cookies
 
 class Surveys extends React.Component {
     constructor(props) {
@@ -39,11 +39,34 @@ class Surveys extends React.Component {
             if((this.state.factor!='')&&(this.state.purpose!='')&&(this.state.time!='')&&(this.state.method!='')){
                 const member_id=load_cookies("member_id");
                 const path=`/page-survey-3/id=${member_id}`
+
+                //--------投資年份------------
+                let year = 0;
+                if(this.state.time=='8'){
+                    year = 0.5;
+                }
+                else if(this.state.time=='6'){
+                    year = 2.5;
+                }
+                else if(this.state.time=='4'){
+                    year = 7.5;
+                }
+                else if(this.state.time=='2'){
+                    year = 10;
+                }
+                //-------------------------------
+
                 //將此頁的分數紀錄到cookie
                 let arr = []
+                let money = [];
                 arr.push(this.state.score);
                 arr.push(this.state.score_page);
+                money.push(this.state.Single)
+                money.push(this.state.method)
+                money.push(year)
                 survey_score(arr)
+                survey_answer(money) //使用者願意投資的金額以及方式
+                console.log(money)
 
                 this.props.history.push({
                     pathname: path 
@@ -77,6 +100,7 @@ class Surveys extends React.Component {
         }
         else if(event.target.name=='time'){
             this.state.time = event.target.value;
+
         }
         else if(event.target.name=='method'){
             this.state.method = event.target.value;
@@ -122,9 +146,9 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>請問您投資金融商品最主要的考量因素為何？</FormLabel>
                         <RadioGroup row={true} aria-label="factor" name="factor" onChange={this.handleChange}>
-                        <FormControlLabel value="2" control={<Radio />} label="儲蓄（保本不虧錢）" />
-                        <FormControlLabel value="6" control={<Radio />} label="有穩定收入（賺小錢）" />
-                        <FormControlLabel value="10" control={<Radio />} label="賺大錢" />
+                        <FormControlLabel value="2" control={<Radio color="primary" />} label="儲蓄（保本不虧錢）" />
+                        <FormControlLabel value="6" control={<Radio color="primary" />} label="有穩定收入（賺小錢）" />
+                        <FormControlLabel value="10" control={<Radio color="primary" />} label="賺大錢" />
                         </RadioGroup>
                     </FormControl>
                     </div>
@@ -135,11 +159,11 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>請問您投資目的為何？</FormLabel>
                         <RadioGroup row={true} aria-label="purpose" name="purpose" onChange={this.handleChange}>
-                        <FormControlLabel value="養老基金" control={<Radio />} label="養老基金" />
-                        <FormControlLabel value="結婚基金" control={<Radio />} label="結婚基金" />
-                        <FormControlLabel value="教育基金" control={<Radio />} label="教育基金" />
-                        <FormControlLabel value="購屋基金" control={<Radio />} label="購屋基金" />
-                        <FormControlLabel value="其他" control={<Radio />} label="其他" />
+                        <FormControlLabel value="養老基金" control={<Radio color="primary" />} label="養老基金" />
+                        <FormControlLabel value="結婚基金" control={<Radio color="primary" />} label="結婚基金" />
+                        <FormControlLabel value="教育基金" control={<Radio color="primary" />} label="教育基金" />
+                        <FormControlLabel value="購屋基金" control={<Radio color="primary" />} label="購屋基金" />
+                        <FormControlLabel value="其他" control={<Radio color="primary" />} label="其他" />
                         </RadioGroup>
                     </FormControl>
                     </div>
@@ -150,10 +174,10 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>您希望在多久以內達到期望報酬</FormLabel>
                         <RadioGroup row={true} aria-label="time" name="time" onChange={this.handleChange}>
-                        <FormControlLabel value="8" control={<Radio />} label="1年以下" />
-                        <FormControlLabel value="6" control={<Radio />} label="1〜5年" />
-                        <FormControlLabel value="4" control={<Radio />} label="5〜10年" />
-                        <FormControlLabel value="2" control={<Radio />} label="10年以上" />
+                        <FormControlLabel value="8" control={<Radio color="primary" />} label="1年以下" />
+                        <FormControlLabel value="6" control={<Radio color="primary" />} label="1〜5年" />
+                        <FormControlLabel value="4" control={<Radio color="primary" />} label="5〜10年" />
+                        <FormControlLabel value="2" control={<Radio color="primary" />} label="10年以上" />
                         </RadioGroup>
                     </FormControl>
                     </div>
@@ -164,8 +188,8 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>您想要的投資方式</FormLabel>
                         <RadioGroup row={true} aria-label="method" name="method" onChange={this.handleChange}>
-                        <FormControlLabel value="單筆" control={<Radio />} label="單筆" />
-                        <FormControlLabel value="定期定額" control={<Radio />} label="定期定額" />
+                        <FormControlLabel value="單筆" control={<Radio color="primary" />} label="單筆" />
+                        <FormControlLabel value="定期定額" control={<Radio color="primary" />} label="定期定額" />
                         </RadioGroup>
                     </FormControl>
                     </div>
@@ -182,7 +206,7 @@ class Surveys extends React.Component {
                         value={this.state.Single}
                         onChange={this.valueChange} 
                         type="search"
-                        color="secondary" 
+                        color="primary" 
                     />
                     <span className='dollar'>TWD</span>
                 </Row>

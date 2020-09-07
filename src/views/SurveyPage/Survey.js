@@ -82,11 +82,11 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>請選擇 您的年齡區間</FormLabel>
                         <RadioGroup row={true} aria-label="age-range" name="age" onChange={this.handleChange}>
-                        <FormControlLabel value="2" control={<Radio />} label="未滿 20 歲/70 歲(含)以上" />
-                        <FormControlLabel value="4" control={<Radio />} label="60 歲(含)以上〜70 歲" />
-                        <FormControlLabel value="6" control={<Radio />} label="50 歲(含)以上〜60 歲" />
-                        <FormControlLabel value="8" control={<Radio />} label="40 歲(含)以上〜50 歲" />
-                        <FormControlLabel value="10" control={<Radio />} label="20 歲(含)以上〜40 歲" />
+                        <FormControlLabel value="2" control={<Radio color="primary" />} label="未滿 20 歲/70 歲(含)以上" />
+                        <FormControlLabel value="4" control={<Radio color="primary" />} label="60 歲(含)以上〜70 歲" />
+                        <FormControlLabel value="6" control={<Radio color="primary" />} label="50 歲(含)以上〜60 歲" />
+                        <FormControlLabel value="8" control={<Radio color="primary" />} label="40 歲(含)以上〜50 歲" />
+                        <FormControlLabel value="10" control={<Radio color="primary" />} label="20 歲(含)以上〜40 歲" />
                         </RadioGroup>
                     </FormControl>
                     </div>
@@ -97,15 +97,15 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>請選擇 您的職業</FormLabel>
                         <RadioGroup row={true} aria-label="job" name="job" onChange={this.handleChange}>
-                        <FormControlLabel value="待業中" control={<Radio />} label="待業中" />
-                        <FormControlLabel value="學生" control={<Radio />} label="學生" />
-                        <FormControlLabel value="家管" control={<Radio />} label="家管" />
-                        <FormControlLabel value="退休人士" control={<Radio />} label="退休人士" />
-                        <FormControlLabel value="生產事業" control={<Radio />} label="生產事業" />
-                        <FormControlLabel value="軍公教人員" control={<Radio />} label="軍公教人員" />
-                        <FormControlLabel value="金融保險業" control={<Radio />} label="金融保險業" />
-                        <FormControlLabel value="專業人士（醫生、律師、會計師等等）" control={<Radio />} label="專業人士（醫生、律師、會計師等等）" />
-                        <FormControlLabel value="其他" control={<Radio />} label="其他" />
+                        <FormControlLabel value="待業中" control={<Radio color="primary" />} label="待業中" />
+                        <FormControlLabel value="學生" control={<Radio color="primary" />} label="學生" />
+                        <FormControlLabel value="家管" control={<Radio color="primary" />} label="家管" />
+                        <FormControlLabel value="退休人士" control={<Radio color="primary" />} label="退休人士" />
+                        <FormControlLabel value="生產事業" control={<Radio color="primary" />} label="生產事業" />
+                        <FormControlLabel value="軍公教人員" control={<Radio color="primary" />} label="軍公教人員" />
+                        <FormControlLabel value="金融保險業" control={<Radio color="primary" />} label="金融保險業" />
+                        <FormControlLabel value="專業人士（醫生、律師、會計師等等）" control={<Radio color="primary" />} label="專業人士（醫生、律師、會計師等等）" />
+                        <FormControlLabel value="其他" control={<Radio color="primary" />} label="其他" />
                         </RadioGroup>
                     </FormControl>
                     </div>
@@ -116,11 +116,11 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>請選擇 您的年所得區間</FormLabel>
                         <RadioGroup row={true} aria-label="income" name="income" onChange={this.handleChange}>
-                        <FormControlLabel value="2" control={<Radio />} label="50 萬以下" />
-                        <FormControlLabel value="4" control={<Radio />} label="50 萬(含)〜100 萬" />
-                        <FormControlLabel value="6" control={<Radio />} label="100 萬(含)〜150 萬" />
-                        <FormControlLabel value="8" control={<Radio />} label="150 萬(含)〜200 萬" />
-                        <FormControlLabel value="10" control={<Radio />} label="200 萬(含)以上" />
+                        <FormControlLabel value="2" control={<Radio color="primary" />} label="50 萬以下" />
+                        <FormControlLabel value="4" control={<Radio color="primary" />} label="50 萬(含)〜100 萬" />
+                        <FormControlLabel value="6" control={<Radio color="primary" />} label="100 萬(含)〜150 萬" />
+                        <FormControlLabel value="8" control={<Radio color="primary" />} label="150 萬(含)〜200 萬" />
+                        <FormControlLabel value="10" control={<Radio color="primary" />} label="200 萬(含)以上" />
                         </RadioGroup>
                     </FormControl>
                     </div>
@@ -131,11 +131,11 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>請選擇 您的最高學歷</FormLabel>
                         <RadioGroup row={true} aria-label="education" name="education" onChange={this.handleChange}>
-                        <FormControlLabel value="2" control={<Radio />} label="識字有限" />
-                        <FormControlLabel value="4" control={<Radio />} label="國中含以下" />
-                        <FormControlLabel value="6" control={<Radio />} label="高中職" />
-                        <FormControlLabel value="8" control={<Radio />} label="專科 大學" />
-                        <FormControlLabel value="10" control={<Radio />} label="研究所以上" />
+                        <FormControlLabel value="2" control={<Radio color="primary" />} label="識字有限" />
+                        <FormControlLabel value="4" control={<Radio color="primary" />} label="國中含以下" />
+                        <FormControlLabel value="6" control={<Radio color="primary" />} label="高中職" />
+                        <FormControlLabel value="8" control={<Radio color="primary" />} label="專科 大學" />
+                        <FormControlLabel value="10" control={<Radio color="primary" />} label="研究所以上" />
                         </RadioGroup>
                     </FormControl>
                     </div>

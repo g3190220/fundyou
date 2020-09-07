@@ -86,11 +86,11 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>請問您的投資基金的經驗為何？</FormLabel>
                         <RadioGroup row={true} aria-label="experience" name="experience" onChange={this.handleChange}>
-                        <FormControlLabel value="2" control={<Radio />} label="沒有經驗" />
-                        <FormControlLabel value="4" control={<Radio />} label="1年以下" />
-                        <FormControlLabel value="6" control={<Radio />} label="1〜5年" />
-                        <FormControlLabel value="8" control={<Radio />} label="6〜10年" />
-                        <FormControlLabel value="10" control={<Radio />} label="10年（含）以上" />
+                        <FormControlLabel value="2" control={<Radio color="primary" />} label="沒有經驗" />
+                        <FormControlLabel value="4" control={<Radio color="primary" />} label="1年以下" />
+                        <FormControlLabel value="6" control={<Radio color="primary" />} label="1〜5年" />
+                        <FormControlLabel value="8" control={<Radio color="primary" />} label="6〜10年" />
+                        <FormControlLabel value="10" control={<Radio color="primary" />} label="10年（含）以上" />
                         </RadioGroup>
                     </FormControl>
                     </div>
@@ -101,11 +101,11 @@ class Surveys extends React.Component {
                     <FormControl component="fieldset">
                         <FormLabel component="legend" className='problem_title'>請問您曾經或現在投資過那些金融商品(可複選)？</FormLabel>
                         <RadioGroup row={true} aria-label="product" name="product" onChange={this.handleChange}>
-                        <FormControlLabel value="2" control={<Radio />} label="台外幣存款、貨幣型基金、儲蓄型保險" />
-                        <FormControlLabel value="4" control={<Radio />} label="債券、債券型基金" />
-                        <FormControlLabel value="6" control={<Radio />} label="股票、股票型基金" />
-                        <FormControlLabel value="8" control={<Radio />} label="結構型商品、投資型保單" />
-                        <FormControlLabel value="10" control={<Radio />} label="期貨、選擇權或其他衍生性金融商品" />
+                        <FormControlLabel value="2" control={<Radio color="primary" />} label="台外幣存款、貨幣型基金、儲蓄型保險" />
+                        <FormControlLabel value="4" control={<Radio color="primary" />} label="債券、債券型基金" />
+                        <FormControlLabel value="6" control={<Radio color="primary" />} label="股票、股票型基金" />
+                        <FormControlLabel value="8" control={<Radio color="primary" />} label="結構型商品、投資型保單" />
+                        <FormControlLabel value="10" control={<Radio color="primary" />} label="期貨、選擇權或其他衍生性金融商品" />
                         </RadioGroup>
                     </FormControl>
                     </div>
