@@ -1,3 +1,128 @@
+.personlization-menu{
+  // background-color: #f6f6f6;
+  // min-height:730px;
+  .root-siderbar{
+    min-height:730px;
+    position:relative;
+    background-color: #f6f6f6;
+  }
+
+  .menu-position{ 
+  //background-color: rgb(0, 68, 135);
+  background: -webkit-linear-gradient(left,#041f3a,#1a5da0);
+  background: -o-linear-gradient(right,#041f3a,#1a5da0);
+  background: -moz-linear-gradient(right,#041f3a,#1a5da0);
+  background: linear-gradient(to right,#041f3a,#1a5da0);
+  //border: 1px rgb(1, 56, 112); 
+  border-top-right-radius:    3px;
+  border-bottom-right-radius: 3px;
+  width: 205px;
+  padding: 25px;
+  height:100%;
+  color: #f6f6f6;
+  font-family: "微軟正黑體";
+  z-index:299;
+  
+  & .default-photo {
+    text-align: center;
+    margin-top: 0px;
+    margin-left: 55px; 
+  }
+  & .avatar-size {
+    margin-left: -15px;
+    height: 70px;
+    width: 70px;
+  }
+  & .personality-position{
+    font-size: 15px;
+    padding-top: 12px;
+    text-align: center;
+    font-weight:600;
+    color:#f6f6f6;
+    margin-bottom: -6px;
+  }
+  & .list-btn{
+      text-align: left;
+      width: 180px;
+      height: 55px;
+      //border-radius: 10px;
+      background-color:transparent;
+      outline:none;
+      color:  #f6f6f6;
+      font-weight:500;
+      font-family: "微軟正黑體";
+      border: none;
+
+      
+  }
+  & .list-btn-hidden{
+      text-align: left;
+      width: 180px;
+      height: 55px;
+      border-radius: 10px;
+      border:0px;
+      background-color: transparent;
+      outline:none;
+      color:  #f6f6f6;
+      font-weight:bold;
+      font-family: "微軟正黑體";
+      padding-top: 0px
+  }
+  & .list-btn:hover{
+      background-color: #35343c4f;
+      color: #f6f6f6;
+  }
+  & .list-btn a{
+      color: inherit;
+  }
+  & .list-btn-content{
+        font-size:16px;
+        display:inline;
+        margin-left: 10px;
+  }
+  
+  & .logout-btn{
+    text-align: left;
+    width: 180px;
+    //height: 55px;
+    //border-radius: 10px;
+    background-color:transparent;
+    outline:none;
+    color:  #f6f6f6;
+    font-weight:500;
+    font-family: "微軟正黑體";
+    border: none;
+
+    
+}
+& .logout-btn-hidden{
+    text-align: left;
+    width: 180px;
+    height: 55px;
+    border-radius: 10px;
+    border:0px;
+    background-color: transparent;
+    outline:none;
+    color:  #f6f6f6;
+    font-weight:bold;
+    font-family: "微軟正黑體";
+    padding-top: 0px
+}
+& .logout-btn:hover{
+    background-color: #35343c4f;
+    color: #f6f6f6;
+}
+& .logout-btn a{
+    color: inherit;
+}
+& .logout-btn-content{
+      font-size:16px;
+      display:inline;
+      
+}
+}
+}
+
 //PersonalizePage和子頁面的css
 .personalize-menu {
   background-color: rgb(0, 68, 135);
@@ -270,31 +395,44 @@
 }
 
 .card-personalize-myfund {
-  min-height: 1500px;
+  width: 100%;
+  min-height: 100%;
   // bottom: 10px;
   // margin-top: -150px;
+  position:relative;
   
   .card-personalize1 {
-    background-color: #faeedc;
+    background-color: #f6f6f6;
     border-radius: 8px;
-    // color: #fff;
-    width: 900px;
-    margin: -580px 80px 100px;
-    padding: 30px;
-    margin-top: 270px;
+    color: #f6f6f6;
+    width: 100%;
+    margin-top:-10px;
+    padding:0px 20px;
+    //margin-left: 160px;
     left: 120px;
-    position: absolute;
+    font-family: "微軟正黑體";
+    z-index:0;
+    
+
+    & .card-personalize1-title{
+      font-family: "微軟正黑體";
+      font-weight:800;
+      color:#1a5da0;
+      font-size:30px;
+      z-index:1;
+      padding:5px;
+    }
   
     & label {
       margin-top: 15px;
-      color:#222222;
+      color:#f6f6f6;
     }
     & .card-title {
-      color: #ce4f28;
+      color: #f6f6f6;
       text-align: center;
     }
     & .fund-follows {
-      color: #b75d69;
+      color: #f6f6f6;
       text-align: left;
       font-size: 25px;
       font-family: "微軟正黑體";
@@ -304,6 +442,7 @@
     & .following-funds-table {
       margin-left: auto;
       margin-right: auto;
+      z-index:1;
     }
     // & .memo_content {
     //   background-color: #facdb3;
@@ -417,45 +556,65 @@
 }
 
 .card-personalize-characteranalysis {
-  min-height: 1500px;
+  width: 100%;
+  min-height: 100%;
+  // bottom: 10px;
+  // margin-top: -150px;
+  position:relative;
   
   .card-personalize2 {
-    background-color: #faeedc;
+    background-color: #f6f6f6;
     border-radius: 8px;
-    // color: #fff;
-    width: 850px;
-    margin: -580px 80px 100px;
-    // min-height: 1000px;
-    padding: 30px;
-    top: 850px; 
+    color: #f6f6f6;
+    width: 100%;
+    margin-top:-10px;
+    padding:0px 20px;
+    //margin-left: 160px;
     left: 120px;
-    position: absolute;
-    
-  
-    & label {
-      margin-top: 15px;
-      color:#222222;
-    }
-    & .card-title {
-      color: #ce4f28;
-      text-align: center;
-    }
-    & .game-title {
-      color: #b75d69;
-      text-align: left;
-      font-size: 22px;
+    font-family: "微軟正黑體";
+    z-index:0;
+
+    & .card-personalize1-title{
       font-family: "微軟正黑體";
-      margin-top: 30px;
-      margin-left: 30px;
+      font-weight:800;
+      color:#1a5da0;
+      font-size:30px;
+      z-index:1;
+      padding:5px;
     }
     & .btn {
-      background-color: #ffcdb2;
-      border-color:#ffcdb2;
-      font-size: 18px;
-      font-weight: 650;
-      margin-top: -90px;
-      margin-left: 470px;
-      box-shadow:4px 4px 4px rgba(0, 0, 0, 0.4);
+      background-color: #347cc4;
+      border-color:#347cc4;
+      color: rgb(243, 243, 243);
+      font-size: 16px;
+      font-weight: 550;
+      margin-left: 180px;
+      margin-top: -70px;
+      box-shadow:4px 4px 4px rgba(0, 0, 0, 0.3);
+      border-radius: 15px;
+    }
+
+    & .card-personalize2-1{
+      background-color:rgb(216, 216, 216);
+      border-radius: 8px;
+      width: 1100px;
+      padding: 30px 10px;
+      // margin-left: 0px;
+      margin-top: 10px;
+      margin-bottom: 50px;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family:Microsoft JhengHei;
+    }
+    & .card-personalize1-title2{
+      font-family: "微軟正黑體";
+      font-weight:800;
+      color:#1a5da0;
+      font-size:28px;
+      z-index:1;
+      padding:5px;
+      margin-left:10px;
     }
     & .forgot {
       text-align: center;
@@ -463,48 +622,23 @@
     .input-group-text {
       border: 1px solid $white-color;
     }
-    .survey-go-font {
-      font-size: 15px;
-      color: #4F4F4F;
-      margin-left: 450px;
-      font-family: "微軟正黑體";
-    }
-  }
-  .card-personalize2-1 {
-    background-color: #faeedc;
-    border-radius: 8px;
-    width: 850px;
-    margin: -580px 80px 100px;
-    padding: 30px;
-    top: 1120px; //1120
-    left: 120px;
-    position: absolute;
-
-    & label {
-      margin-top: 15px;
-      color:#222222;
-    }
-    & .card-title {
-      color: #ce4f28;
-      text-align: center;
-    }
     & .game-result-title-1 {
-      color: #b75d69;
+      color: #000;
       text-align: left;
       font-size: 20px;
       font-family: "微軟正黑體";
       margin-top: 30px;
-      margin-left: 30px;
+      margin-left: 100px;
     }
     & .result-content-1 {
-      background-color: #facdb3;
-      width: 350px;
+      background-color: #FFF;
+      width: 500px;
       height: 220px;
       border-radius: 10px;
       margin-top: -280px;
-      margin-left: 20px;
+      margin-left: 40px;
 
-      color: #ce4f28;
+      color: #000;
       text-align: left;
       font-size: 17px;
       font-weight: 700;
@@ -516,109 +650,104 @@
     & .result-chart {
       font-size: 18px;
       font-weight: 600;
-      margin-left: 300px;
+      margin-left: 450px;
       margin-top: -100px;
     }
+
+    
   }
+  
 }
 
 .card-personalize-pig {
-  min-height: 1000px;
-  text-align: left;
-  .button-center{
-    margin:0 auto
-  }
-  
-  .tag-btn{
-    width: 120px;
-    height: 40px;
-    border-radius: 20px;
-    margin-left: 20px;
-    margin-top: 15px;
-    margin-bottom: 8px;
-    border:#e26d5c solid 2px;
-    background-color:#e26d5c;
-    outline:none;
-    color:  #F8EDEB;
-    font-weight:bold;
-    font-family:Microsoft JhengHei;
-}
-.tag-btn-hidden{
-    width: 150px;
-    height: 10px;
-    border-radius: 20px;
-    margin-left: 20px;
-    margin-top: 0px;
-    margin-bottom: 19px;
-    border:0px;
-    background-color: transparent;
-    outline:none;
-    color:  #e26d5c;
-    font-weight:bold;
-    font-family:Microsoft JhengHei;
-    padding-top: 0px
-}
-.tag-btn:hover{
-    background-color: #F8EDEB;
-    color: #e26d5c;
-}
-.tag-btn a{
-    color: inherit;
-}
-  .card-personalize3 {
-    background-color: #faeedc;
+  width: 100%;
+  min-height: 100%;
+  // bottom: 10px;
+  // margin-top: -150px;
+  position:relative;
+
+  .card-personalize1 {
+    background-color: #f6f6f6;
     border-radius: 8px;
-    width: 800px;
-    margin: -580px 80px 100px;
-    padding: 30px;
-    top: 600px; 
+    color: #f6f6f6;
+    width: 100%;
+    margin-top:-10px;
+    padding:0px 20px;
+    //margin-left: 160px;
     left: 120px;
-    position: absolute;
+    font-family: "微軟正黑體";
+    z-index:0;
+
+    & .card-personalize1-title{
+      font-family: "微軟正黑體";
+      font-weight:800;
+      color:#1a5da0;
+      font-size:30px;
+      z-index:1;
+      padding:5px;
+    }
+    & .dollor-cost-average{
+      font-family: "微軟正黑體";
+      font-weight:600;
+      color: #347cc4;
+      font-size: 26px;
+      z-index:1;
+      margin-left:80px;
+    }
+    & .button-center{
+      margin:0 auto;
+      margin-left: 220px;
+      margin-top: -50px;
+      z-index:1;
+    }
+    & .tag-btn{
+      width: 120px;
+      height: 40px;
+      border-radius: 20px;
+      margin-left: 20px;
+      margin-top: 15px;
+      margin-bottom: 8px;
+      border:#347cc4 solid 2px;
+      background-color:#347cc4;
+      outline:none;
+      color:  #FFF;
+      font-weight:bold;
+      font-family:Microsoft JhengHei;
+    }
+    & .tag-btn-hidden{
+      width: 150px;
+      height: 10px;
+      border-radius: 20px;
+      margin-left: 20px;
+      margin-top: 0px;
+      margin-bottom: 19px;
+      border:0px;
+      background-color: transparent;
+      outline:none;
+      color:  #1a5da0;
+      font-weight:bold;
+      font-family:Microsoft JhengHei;
+      padding-top: 0px
+    }
+    & .tag-btn:hover{
+      background-color: #ffffff;
+      color: #1a5da0;
+    }
+    & .tag-btn a{
+      color: inherit;
+    }
+  
+
     
     & label {
       margin-top: 15px;
       color:#222222;
     }
-    & .card-title {
-      color: #ce4f28;
-      text-align: center;
-    }
-    & .fund-risk-classify {
-      color: #b75d69;
-      text-align: left;
-      font-size: 25px;
-      font-family: "微軟正黑體";
-      margin-top: 30px;
-      margin-left: 30px;
-    }
-    & .fund-time-ability {
-      color: #b75d69;
-      text-align: left;
-      font-size: 25px;
-      font-family: "微軟正黑體";
-      margin-top: 30px;
-      margin-left: 30px;
-    }
-    & .env-index-predict{
-      color: #b75d69;
-      text-align: left;
-      font-size: 25px;
-      font-family: "微軟正黑體";
-      margin-top: 30px;
-      margin-left: 30px;
-    }
-    & .dollor-cost-average{
-      color: #b75d69;
-      text-align: center;
-      font-size: 26px;
-      font-family: "微軟正黑體";
-      margin-top: 25px;
-      margin-left: 30px;
-    }
+    
     & .dollor-cost-average-sub {
-      background-color:#ffd3af;
+      background-color:rgb(216, 216, 216);
       border-radius: 8px;
-      width: 615px;
+      width: 950px;
       padding: 30px 10px;
       // margin-left: 0px;
       margin-top: 10px;
@@ -630,8 +759,8 @@
 
       .little-title{
         font-size:18px;
-        font-weight:450;
-        color:#d14c37;
+        font-weight:600;
+        color:#1a5da0;
         margin-left: 28px;
         margin-top: -3px;
 
@@ -689,13 +818,13 @@
           padding-top: 9px;
         }
         .set-btn {
-          border:#e26d5c solid 2px;
-          background-color:#e26d5c;
+          border:#1a5da0 solid 2px;
+          background-color:#1a5da0;
           text-align: center;
           padding: 5px;
           border-radius: 5px;
           outline:none;
-          color:  #F8EDEB;
+          color:  #FFF;
           font-weight:bold;
           font-family:Microsoft JhengHei;
           font-size: 14px;
@@ -711,14 +840,14 @@
           border:0px;
           background-color: transparent;
           outline:none;
-          color:  #e26d5c;
+          color:  #1a5da0;
           font-weight:bold;
           font-family:Microsoft JhengHei;
           padding-top: 0px
       }
       .set-btn:hover{
-          background-color: #F8EDEB;
-          color: #e26d5c;
+          background-color: #FFF;
+          color: #1a5da0;
       }
       .set-btn a{
           color: inherit;
@@ -726,8 +855,8 @@
       }
     }
     & .btn {
-      background-color: #ffcdb2;
-      border-color:#ffcdb2;
+      background-color: #fff;
+      border-color:#fff;
       font-size: 18px;
       margin-top: -80px;
       margin-left: 500px;

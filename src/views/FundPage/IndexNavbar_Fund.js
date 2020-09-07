@@ -36,7 +36,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 function IndexNavbar() {
-  const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
+  const [navbarColor, setNavbarColor] = React.useState("");
   const [navbarCollapse, setNavbarCollapse] = React.useState(false);
 
   const toggleNavbarCollapse = () => {
@@ -48,16 +48,17 @@ function IndexNavbar() {
   React.useEffect(() => {
     const updateNavbarColor = () => {
       if (
-        document.documentElement.scrollTop > 99 ||
-        document.body.scrollTop > 99
+        document.documentElement.scrollTop > 0 ||
+        document.body.scrollTop > 0
       ) {
         setNavbarColor("");
-      } else if (
-        document.documentElement.scrollTop < 500 ||
-        document.body.scrollTop < 500
-      ) {
-        setNavbarColor("navbar-transparent");
-      }
+      } 
+      // else if (
+      //   document.documentElement.scrollTop < 500 ||
+      //   document.body.scrollTop < 500
+      // ) {
+      //   setNavbarColor("navbar-transparent");
+      // }
     };
 
     window.addEventListener("scroll", updateNavbarColor);
@@ -82,7 +83,7 @@ function IndexNavbar() {
   const member_id=load_cookies("member_id")
   const member_session=load_cookies("member_session")
   //預設網址
-  const [path] = React.useState(`/personalize-page/id=${member_id}`);
+  const [path] = React.useState(`/page-myTag/id=${member_id}`);
   const[path_all_fund] = React.useState(`/allfund-page/id=${member_id}`);
   
 
@@ -103,6 +104,15 @@ function IndexNavbar() {
           >
            FUNDU
           </NavbarBrand>
+          <NavbarBrand
+            data-placement="bottom"
+            to={path}
+          
+            title="Coded by Creative Tim"
+            tag={Link}
+          >
+           <FaceIcon></FaceIcon>個人專區
+          </NavbarBrand>
           <button
             aria-expanded={navbarCollapse}
             className={classnames("navbar-toggler navbar-toggler", {
@@ -116,14 +126,7 @@ function IndexNavbar() {
           </button>
         </div>
         <div className="navbar-face-icon">
-          <NavbarBrand
-            data-placement="bottom"
-            to = {path}
-            tag={Link}
-          >
-           <FaceIcon className="navbar-face-icon"></FaceIcon>
-           <span>   個人專區</span>
-          </NavbarBrand>
+         
           
         </div>
         
@@ -133,11 +136,12 @@ function IndexNavbar() {
           isOpen={navbarCollapse}
         >
         <Nav navbar>
+            
         <NavItem>
-        <Button color="secondary" onClick={handleClickOpen}>
-        LOGOUT
-        </Button>
-      </NavItem>
+          <Button color="secondary" onClick={handleClickOpen}>
+          LOGOUT
+          </Button>
+        </NavItem>
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -146,18 +150,18 @@ function IndexNavbar() {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title">{"Confirm"}</DialogTitle>
+        <DialogTitle id="alert-dialog-slide-title">{""}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Do you want to log out?
+            您確定要登出？
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Disagree
+            取消
           </Button>
           <Button onClick={(e)=>logout(e)} color="primary" >
-            Agree
+            是
           </Button>
         </DialogActions>
       </Dialog>

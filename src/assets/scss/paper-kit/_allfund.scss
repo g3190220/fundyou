@@ -1,6 +1,10 @@
 .allfund-menu{
-    background-color:#F9DCC4;
-    min-height: 1000px;
+    background-color:#f6f6f6;
+    //min-height: 1000px;
+    min-height:100%;
+    .sub-bar{
+        min-height:43px;
+    }
     .sub-menu{
         background-color:#F9DCC4;
         width: AUTO;
@@ -43,13 +47,14 @@
         }
 
         .sub-sub-search{
-            background-color:#f19c79;
-            width: 1200px;
+            background-color:rgb(173, 174, 178);
+            width: 100%;
             padding: 30px;
             position: relative;
             left: 50%;
             transform: translateX(-50%);
             display:inline;
+            //margin-top:-30px;
 
             #search{
                 width: 300px;
@@ -611,7 +616,7 @@
             //position: fixed;
             min-height: 100px;
             bottom: 0;
-            background-color: white;
+            background-color: #f6f6f6;
             display: inline-block;
     
             .comparefund-bar{
@@ -628,12 +633,34 @@
                 margin-left: 20px;
                 margin-right: 25px;
                 font-size: 20px;
-                background-color: #e26d5c;
-                color: #F8EDEB;
-                border: #F8EDEB solid 1px;
+                background-color: rgb(0, 68, 135);
+                color: #fff;
+                border: rgb(0, 68, 135) solid 1px;
                 border-radius: 20px;
                 font-family:Microsoft JhengHei;
                 font-weight:bold;
+            }
+            .compare-btn-hidden{
+                width: 150px;
+                height: 10px;
+                border-radius: 20px;
+                margin-left: 20px;
+                margin-top: 0px;
+                margin-bottom: 19px;
+                border:rgb(0, 68, 135) solid 1px;
+                background-color: rgb(207, 229, 252);
+                outline:none;
+                color:  #fff;
+                font-weight:bold;
+                font-family:Microsoft JhengHei;
+                padding-top: 0px
+            }
+            .compare-btn:hover{
+                background-color: rgb(0, 68, 135);
+                color: #fff;
+            }
+            .compare-btn a{
+                color: inherit;
             }
         }
     }

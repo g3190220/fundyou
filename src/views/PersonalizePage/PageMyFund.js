@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button, Card } from 'reactstrap';
-import PersonalizeMenu from "views/PersonalizePage/PersonalizeMenu.js"; //左側選單
+import PersonalizeMenu from "views/PersonalizePage/PersonalizePage.js"; //左側選單
 import MaterialTable from 'material-table'; //基金表格
 import { load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
 
@@ -93,8 +93,18 @@ const tableIcons = {
         borderColor: "#bba57d",
       },
     },
+    customTable: {
+      "& .MuiPaper-elevation2": {
+        color: "rgba(0, 0, 0, 0.87)",
+        transition: "box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+        backgroundColor: "#fff",
+        width: "100%",
+        fontFamily:"微軟正黑體",
+      }
+      
+    }
 });
-  
+
 
   
 class PageMyFund extends React.Component{
@@ -305,22 +315,14 @@ class PageMyFund extends React.Component{
       const {classes} = this.props;
       
     return(
-    <div className="page-header" style={{backgroundColor: '#fff',}}>
-    <Container>
     <div className="card-personalize-myfund">
-
     <PersonalizeMenu></PersonalizeMenu>
-      <Row>
+    <Container>
+    <Row>
         <div className="card-personalize1">
-            <h4><font color="#E76F51" size="6" face="微軟正黑體"><b>追蹤基金</b></font></h4><br/>
-
-          
-          {/* <div className="fund-follows">
-                <span style={{fontWeight:"bold"}}>追蹤基金</span>
-            </div><br/> */}
-
-        <Row>
-            <div className="following-funds-table">
+            <div className="card-personalize1-title">追蹤基金</div>
+        <div className="following-funds-table">
+        <div className={classes.customTable}>
                 <MaterialTable
                 icons={tableIcons}
                 title=""
@@ -331,8 +333,8 @@ class PageMyFund extends React.Component{
                 options={{
                 sorting: true,
                 headerStyle: {
-                    backgroundColor: '#e26d5c',
-                    color: '#F8EDEB',
+                    backgroundColor: '#004487',
+                    color: '#f6f6f6',
                     width: 140,
                     maxWidth: 140,
                     whiteSpace:'nowrap',
@@ -350,17 +352,17 @@ class PageMyFund extends React.Component{
                     width: 140,
                     maxWidth: 140,
                     wordWrap:'break-word',
-                    backgroundColor: '#F8EDEB',
-                    color: '#e26d5c',
+                    backgroundColor: '#f6f6f6',
+                    color: '#000000',
                     fontFamily: '微軟正黑體',
                     fontWeight: '700',
                     fontSize: 15,
                     padding: 10
                 },
                 actionsCellStyle: {
-                    backgroundColor: '#F8EDEB',
+                    backgroundColor: '#f6f6f6',
                 },
-                maxBodyHeight: '420px',
+                maxBodyHeight: '360px',
                 actionsColumnIndex: 0,
                 
                 }}
@@ -432,22 +434,16 @@ class PageMyFund extends React.Component{
                         Save
                       </Button>
                     </DialogActions>
-                  </Dialog></div>
-
-
+                  </Dialog>
+                  </div>
+              </div>
+                  
             </div>
-          </Row>
-                            
-        </div>
-
-      </Row>
-    </div> 
-        
-        
-
+      </div>
+    </Row>
     </Container>
-
-    </div>
+  </div> 
+   
     
     );
     }

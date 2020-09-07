@@ -1,7 +1,7 @@
 import React from "react";
 import 'react-multi-carousel/lib/styles.css';
 import IndexNavbar from "views/FundPage/IndexNavbar_Fund.js";
-
+import SideBar from  "views/PersonalizePage/PersonalizePage.js";
 //table
 import MaterialTable from 'material-table';
 //icon
@@ -44,6 +44,11 @@ import LoadingIndicator_small from "views/Function/LoadingIndicator_small.js";
 
 //compare page
 import ComparePage from "views/ComparePage/OneComparePage.js"
+
+//覆寫CSS
+import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
+
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -386,6 +391,20 @@ const RR_=[
   },
 ]
 
+//覆寫CSS
+const styles = () => ({
+  customTable: {
+    "& .MuiPaper-elevation2": {
+      color: "rgba(0, 0, 0, 0.87)",
+      transition: "box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      backgroundColor: "#fff",
+      width: "100%",
+      fontFamily:"微軟正黑體",
+    }
+    
+  }
+});
+
 class AllFund extends React.Component {
   state = {
   }
@@ -599,32 +618,16 @@ class AllFund extends React.Component {
   }
   
   render() {
+    const {classes} = this.props;
       return (
         <div>
         {!this.state.flag ? (<LoadingIndicator></LoadingIndicator>): 
         ( <div className='allfund-menu'>
-        <Container>
-        <IndexNavbar></IndexNavbar>
+        <div className='sub-bar'><IndexNavbar></IndexNavbar></div>
         
+        <Container>
         <div className='sub-menu'>
-        {/* <Row>
-          <Col>
-            <div className='sub-sub-ranking'>
-            <div className='fund-ranking'>Top 10 Fund Rankings</div>
-            <div class="link-top"></div>
-            <table>
-            </table>
-            </div>
-          </Col>
-          <Col>
-            <div className='sub-sub-ranking'>
-            <div className='fund-ranking'>Our Recommendation</div>
-            <div class="link-top"></div>
-            <table>
-            </table>
-            </div>
-          </Col>
-        </Row> */}
+        
         <Row>
         
           <div className='sub-sub-search'>
@@ -731,11 +734,12 @@ class AllFund extends React.Component {
           </Row>
         </div> 
         </Row>   
-        <div>
+        <div className={classes.customTable}>
         <Row>
           <MaterialTable
+            
             icons={tableIcons}
-            title="ALL FUNDS"
+            title=""
             columns={this.state.columns}
             data={this.state.all_data} 
             //onChangePage={()=>this.scroll}       
@@ -743,8 +747,8 @@ class AllFund extends React.Component {
             options={{
               sorting: true,
               headerStyle: {
-                backgroundColor: '#e26d5c',
-                color: '#F8EDEB',
+                backgroundColor: '#004487',
+                color: '#f6f6f6',
                 width:120,
                 maxWidth: 120,
                 whiteSpace:'nowrap',
@@ -757,13 +761,13 @@ class AllFund extends React.Component {
                 width:120,
                 maxWidth:120,
                 //whiteSpace:'nowrap',
-                backgroundColor: '#F8EDEB',
-                color: '#e26d5c',
+                backgroundColor: '#f6f6f6',
+                color: '#000000',
                 fontFamily: '微軟正黑體',
                 fontWeight: '700'
               },
               actionsCellStyle: {
-                backgroundColor: '#F8EDEB'
+                backgroundColor: '#f6f6f6'
               },
               maxBodyHeight: '420px'
             }}
@@ -811,8 +815,9 @@ class AllFund extends React.Component {
           />
           
         </Row>
-        </div>
         <Row><ComparePage fund_id_1={this.state.fund_id1} fund_id_2={this.state.fund_id2} fund_id_3={this.state.fund_id3}></ComparePage></Row>
+        </div>
+        
         </div>
         </Container>
         </div>
@@ -820,8 +825,11 @@ class AllFund extends React.Component {
   )};
 
   }
-  
-  export default AllFund;
+  AllFund.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+  export default withStyles(styles)(AllFund);
+  //export default AllFund;
 
   //如果頁面(html)不變，那就是透過state 跟 props 來做更新
   //如果頁面(html)更改，那就透過ReactDOM來做

@@ -4,15 +4,14 @@ import Loader from 'react-loader-spinner';
 function LoadingIndicator() {
     return (
       <div
-       style={{
-         width: "100%",
-         height: "100",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        }}
+      style={{
+        position: "fixed", 
+        top: "50%", 
+        left: "50%", 
+        transform: "translate(-50%, -50%)"
+      }}
       >
-        <Loader type="ThreeDots" color="#FF8000" height="100" width="100" />
+        <Loader type="ThreeDots" color="#004487" height="100" width="100" />
      </div>)
 };
 export default LoadingIndicator;
