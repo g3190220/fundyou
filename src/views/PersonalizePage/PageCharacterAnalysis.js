@@ -107,29 +107,48 @@ class PageCharacterAnalysis extends React.Component{
     <Container>
     <Row>
         <div className="card-personalize2">
+        <Row>
         <div className="card-personalize1-title">性格分析</div>
             <div className="start-btn">
                 <button type="button" class="btn btn-neutral" onClick={this.handleSubmit}>前往性格測驗</button>    
             </div>
-
+        </Row>
+        <Row>
             <div className="card-personalize2-1">
+            <Row>
             <div className="card-personalize1-title2">性格分析結果</div>
-
+            </Row>
+            <Row>
             <div className="result-1">
+                <Row>
                 <div className="game-result-title-1">
+<<<<<<< HEAD
                     <span style={{fontWeight:"bold"}}>{this.state.texts}</span>
                     <span style={{fontWeight:"bold"}}>{this.state.characteristic}</span><br/>
                     <div className="result-chart"><Result></Result></div>
+=======
+                    <span style={{fontWeight:"bold"}}>根據測驗結果，您屬於：</span>
+                    <span style={{fontWeight:"bold"}}>{this.state.characteristic}投資人</span><br/>
+>>>>>>> edbf5b5cbf6e4c1107ed1475e8d3af0eb590fa53
                 </div>
-                <div className="result-content-1">
+                </Row>
+                <Row>
+                    <Col>
+                    <div className="result-content-1">
                     <span style={{fontWeight:"bold"}}>
                         {this.state.description_1}
                     </span><br/><br/>
                     <span style={{fontWeight:"bold"}}>適合的基金類型：</span><br/>
                     <span style={{fontWeight:"bold"}}>{this.state.description_2}</span><br/>
-                </div>
+                    </div>
+                    </Col>
+                    <Col>
+                    <div className="result-chart"><Result></Result></div>
+                    </Col>
+                </Row>
+                
             </div>
-
+            </Row>
             {/* <div className="result-2">
                 <div className="game-result-title-2">
                     <span style={{fontWeight:"bold"}}>根據測驗結果，您屬於：</span>
@@ -176,7 +195,7 @@ class PageCharacterAnalysis extends React.Component{
             </div> */}
 
         </div>
-
+        </Row>
         </div>
     </Row>
     </Container>

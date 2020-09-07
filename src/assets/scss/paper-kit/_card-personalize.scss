@@ -574,6 +574,7 @@
     font-family: "微軟正黑體";
     z-index:0;
 
+
     & .card-personalize1-title{
       font-family: "微軟正黑體";
       font-weight:800;
@@ -588,8 +589,8 @@
       color: rgb(243, 243, 243);
       font-size: 16px;
       font-weight: 550;
-      margin-left: 180px;
-      margin-top: -70px;
+      margin-left: 60px;
+      margin-top: 5px;
       box-shadow:4px 4px 4px rgba(0, 0, 0, 0.3);
       border-radius: 15px;
     }
@@ -598,14 +599,14 @@
       background-color:rgb(216, 216, 216);
       border-radius: 8px;
       width: 1100px;
-      padding: 30px 10px;
+      padding: 30px 40px;
       // margin-left: 0px;
-      margin-top: 10px;
-      margin-bottom: 50px;
+      margin-top: 30px;
       position: relative;
       left: 50%;
       transform: translateX(-50%);
       font-family:Microsoft JhengHei;
+
     }
     & .card-personalize1-title2{
       font-family: "微軟正黑體";
@@ -614,7 +615,7 @@
       font-size:28px;
       z-index:1;
       padding:5px;
-      margin-left:10px;
+      margin-left:20px;
     }
     & .forgot {
       text-align: center;
@@ -633,9 +634,9 @@
     & .result-content-1 {
       background-color: #FFF;
       width: 500px;
-      height: 220px;
+      // height: 220px;
       border-radius: 10px;
-      margin-top: -280px;
+      margin-top: 20px;
       margin-left: 40px;
 
       color: #000;
@@ -650,8 +651,7 @@
     & .result-chart {
       font-size: 18px;
       font-weight: 600;
-      margin-left: 450px;
-      margin-top: -100px;
+      margin-left: 10px;
     }
 
     
@@ -674,7 +674,7 @@
     margin-top:-10px;
     padding:0px 20px;
     //margin-left: 160px;
-    left: 120px;
+    left: 50%;
     font-family: "微軟正黑體";
     z-index:0;
 
@@ -692,12 +692,15 @@
       color: #347cc4;
       font-size: 26px;
       z-index:1;
-      margin-left:80px;
+      text-align: center;
+      margin-left: 80px;
+      margin-top:15px;
+      left:50%;
     }
     & .button-center{
       margin:0 auto;
-      margin-left: 220px;
-      margin-top: -50px;
+      margin-left: 0px;
+      margin-top: 0px;
       z-index:1;
     }
     & .tag-btn{
@@ -751,6 +754,7 @@
       padding: 30px 10px;
       // margin-left: 0px;
       margin-top: 10px;
+      margin-left: 50px;
       margin-bottom: 50px;
       position: relative;
       left: 50%;
@@ -760,17 +764,17 @@
       .little-title{
         font-size:18px;
         font-weight:600;
-        color:#1a5da0;
-        margin-left: 28px;
-        margin-top: -3px;
+        color:#000;
+        margin-left: 30px;
+        margin-top: 0px;
 
       }
       .little-radio{
         margin-top:-24px;
       }
       .little-radio-large{
-        margin-top:-14px;
-        margin-left:28px;
+        margin-top:-20px;
+        margin-left:10px;
       }
      
     
