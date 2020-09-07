@@ -65,11 +65,7 @@ const renderActiveShape = (props) => {
       />
       <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-<<<<<<< HEAD
       <text style={{fontSize:"16"}} x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#b75d69">{`${value}`}</text>
-=======
-      <text style={{fontSize:"16"}} x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#14416e">{`風險指數${value}`}</text>
->>>>>>> 254f6737590e0f9167c2418722946c2dec875b2e
     </g>
   );
 };
