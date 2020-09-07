@@ -846,7 +846,7 @@ class DetailFund extends React.Component{
                 </table>
                 </div>
                 <div className='teach-content' style={{display: this.state.teach2 ? 'inline' : 'none'}}>
-                    <table className='fund-introduce-info'>
+                    <table className='fund-introduce-info' style={{border:"0"}}>
                         <tr>
                             <th width="33%">Sharpe Ratio</th>
                             <td height="80px">夏普指數，為衡量基金承擔每單位總風險所得之超額報酬。</td>
@@ -858,7 +858,7 @@ class DetailFund extends React.Component{
                     </table>
                 </div>
                 <div className='teach-content' style={{display: this.state.teach3 ? 'inline' : 'none'}}>
-                    <table className='fund-introduce-info'>
+                    <table className='fund-introduce-info' style={{border:"0"}}>
                         <tr>
                             <th width="28%">Beta</th>
                             <td height="80px">為衡量基金相較於市場報酬率波動的幅度，此處以近12個月該基金單月ROI與市場(Y9999加權指數)單月ROI所計算之值。</td>

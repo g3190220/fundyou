@@ -223,7 +223,7 @@ class Register extends React.Component {
                     gender: this.state.gender,//數值 1,2
                     birthday: this.state.birthday,
                     Job: this.state.job,//數值 1~2
-                    line_id: this.state.line_id
+                    line_id: "",
               })
               
         
@@ -425,7 +425,7 @@ class Register extends React.Component {
               
           
           </Col>
-          <Col sm>
+          {/* <Col sm>
           
               <TextField
               
@@ -441,7 +441,7 @@ class Register extends React.Component {
 
             />
          
-          </Col>
+          </Col> */}
         </Row>
           <div className="register-btn">
               <Button variant="contained" color="Default" onClick={this.handleSubmit}>
