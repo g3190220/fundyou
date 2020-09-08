@@ -220,22 +220,6 @@
     margin: 50px 0;
     min-height: 300px;
 }
-#following h3{
-    margin: 20px 0 40px 0;
-}
-
-#follows .follows .unfollow .checkbox{
-    margin-top: -15px;
-}
-#follows .follows h6{
-    margin-top: 15px;
-}
-.follows hr{
-    margin-top: 10px;
-}
-.alert h5{
-    margin-bottom: 10px;
-}
 .title-brand{
     font-family: "jf-openhuninn";
     font-size: 40px;
@@ -280,8 +264,8 @@
     }
 }
 .presentation-title{
-    font-family: "jf-openhuninn";
-    font-size: 11em;
+    font-family: 'Montserrat','Noto Sans TC', sans-serif;
+    font-size: 10em;
     letter-spacing: 10px;
     line-height: 1em;
     font-weight: 700;
@@ -342,6 +326,7 @@
     font-size: 1.7em;
     color: #FFFFFF;
 }
+
 .category-absolute{
     position: absolute;
     text-align: center;

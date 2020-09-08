@@ -826,7 +826,7 @@ class DetailFund extends React.Component{
             </Row>
             <Row>
                 <div className="sub-sub-fund-introduce">
-            <Row>
+            {/* <Row>
                 <Col sm={3}><label className='fund-introduce-label'>基金各指標含意</label></Col>
                 <Col sm={9}>
                     <div className='teach-btn-position'>
@@ -835,6 +835,14 @@ class DetailFund extends React.Component{
                         <button className='teach-btn' onClick={()=>this.setState({teach3:true,teach2:false,teach1:false})}>風險</button>
                     </div>
                 </Col>
+            </Row> */}
+            <Row><label className='fund-introduce-label'>基金各指標含意</label></Row>
+            <Row>
+                <div className='teach-btn-position'>
+                        <button className='teach-btn' onClick={()=>this.setState({teach1:true,teach2:false,teach3:false})}>淨值</button>
+                        <button className='teach-btn' onClick={()=>this.setState({teach2:true,teach1:false,teach3:false})}>績效</button>
+                        <button className='teach-btn' onClick={()=>this.setState({teach3:true,teach2:false,teach1:false})}>風險</button>
+                </div>
             </Row>
             <Row>
                 <div className='teach-content' style={{display: this.state.teach1 ? 'inline' : 'none'}}>
@@ -846,7 +854,7 @@ class DetailFund extends React.Component{
                 </table>
                 </div>
                 <div className='teach-content' style={{display: this.state.teach2 ? 'inline' : 'none'}}>
-                    <table className='fund-introduce-info'>
+                    <table className='fund-introduce-info' style={{border:"0"}}>
                         <tr>
                             <th width="33%">Sharpe Ratio</th>
                             <td height="80px">夏普指數，為衡量基金承擔每單位總風險所得之超額報酬。</td>
@@ -858,7 +866,7 @@ class DetailFund extends React.Component{
                     </table>
                 </div>
                 <div className='teach-content' style={{display: this.state.teach3 ? 'inline' : 'none'}}>
-                    <table className='fund-introduce-info'>
+                    <table className='fund-introduce-info' style={{border:"0"}}>
                         <tr>
                             <th width="28%">Beta</th>
                             <td height="80px">為衡量基金相較於市場報酬率波動的幅度，此處以近12個月該基金單月ROI與市場(Y9999加權指數)單月ROI所計算之值。</td>

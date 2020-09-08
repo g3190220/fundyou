@@ -7,6 +7,12 @@ import _ from "underscore";
 import { Container, Row, Col, Button } from 'reactstrap';
 import ExamplesNavbar from "views/RegisterPage/ExamplesNavbar.js";
 
+//覆寫CSS
+import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
+import { forwardRef } from 'react';
+
+
 //自動跳轉
 import {
   BrowserRouter as Router,
@@ -80,6 +86,38 @@ const job_ = [
     label: '其他',
   },
 ];
+
+const styles = () =>({
+  headercolor: {
+    color: "#000",
+    fontSize:25,
+    fontWeight: 500,
+  },
+  email: {
+    backgroundColor: "#fff",
+  },
+  password: {
+    backgroundColor: "#fff",
+  },
+  username: {
+    backgroundColor: "#fff",
+  },
+  gender: {
+    backgroundColor: "#fff",
+  },
+  birthday: {
+    backgroundColor: "#fff",
+  },
+  job: {
+    backgroundColor: "#fff",
+  },
+  lineid: {
+    backgroundColor: "#fff",
+  },
+
+
+})
+
 
 
 class Register extends React.Component {
@@ -185,7 +223,7 @@ class Register extends React.Component {
                     gender: this.state.gender,//數值 1,2
                     birthday: this.state.birthday,
                     Job: this.state.job,//數值 1~2
-                    line_id: this.state.line_id
+                    line_id: "",
               })
               
         
@@ -247,13 +285,13 @@ class Register extends React.Component {
         className="page-header"
         id="signup"
         style={{
-          backgroundColor: '#d28f82',
+          backgroundColor: '#e9ecef',
          }}
        >
       <ExamplesNavbar></ExamplesNavbar>
       
       <Container>
-        <div className='register-title'><h3>Create a new account</h3></div>
+        <div className='register-title'><h3 className={classes.headercolor}>Create a new account</h3></div>
         <hr className="my-2" />
         <div>  
         <form onSubmit={this.handleSubmit} className='register_textfield_font'>
@@ -272,7 +310,7 @@ class Register extends React.Component {
                 required
                 helperText={this.state.errors["email"]}
                 error={this.state.errors["email_is_errors"]}
-  
+                classes={{root: classes.email}}
               />
           
           </Col>
@@ -289,6 +327,7 @@ class Register extends React.Component {
               required
               helperText={this.state.errors["password"]}
               error={this.state.errors["password_is_errors"]}
+              classes={{root: classes.password}}
 
             />
          
@@ -308,6 +347,8 @@ class Register extends React.Component {
             required
             helperText={this.state.errors["username"]}
             error={this.state.errors["username_is_errors"]}
+            classes={{root: classes.username}}
+
           />
           </Col>
           <Col sm={3}>
@@ -323,6 +364,8 @@ class Register extends React.Component {
             required
             helperText={this.state.errors["gender"]}
             error={this.state.errors["gender"]}
+            classes={{root: classes.gender}}
+
             >
             {gender_.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -349,6 +392,8 @@ class Register extends React.Component {
             required
             helperText={this.state.errors["birthday"]}
             error={this.state.errors["birthday"]}
+            classes={{root: classes.birthday}}
+
           />
           </Col>
         </Row>
@@ -367,6 +412,8 @@ class Register extends React.Component {
                 required
                 helperText={this.state.errors["job"]}
                 error={this.state.errors["job"]}
+                classes={{root: classes.job}}
+
               >
               {job_.map((option) => (
               <MenuItem key={option.value} value={option.value} >
@@ -378,7 +425,7 @@ class Register extends React.Component {
               
           
           </Col>
-          <Col sm>
+          {/* <Col sm>
           
               <TextField
               
@@ -390,10 +437,11 @@ class Register extends React.Component {
               variant="outlined"
               fullWidth
               autoComplete='off'
-              
+              classes={{root: classes.lineid}}
+
             />
          
-          </Col>
+          </Col> */}
         </Row>
           <div className="register-btn">
               <Button variant="contained" color="Default" onClick={this.handleSubmit}>
@@ -411,5 +459,9 @@ class Register extends React.Component {
   );
   }
 }
-  
-export default Register
+Register.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+export default withStyles(styles)(Register);
+
+// export default Register

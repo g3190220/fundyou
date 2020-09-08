@@ -21,12 +21,12 @@ export const survey_score = (value) =>{
   cookie.save('score_2',value[1])
   cookie.save('score_3',value[2])
   cookie.save('score_4',value[3])
-  cookie.save('ROI',value[4])
 }
 
 export const survey_answer = (value) =>{
   cookie.save('ROI',value[0])
-  cookie.save('total_score',value[0])
+  cookie.save('method',value[1])
+  cookie.save('total_score',value[2])
 }
 
 //比較基金用的

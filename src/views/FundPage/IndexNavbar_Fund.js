@@ -83,7 +83,7 @@ function IndexNavbar() {
   const member_id=load_cookies("member_id")
   const member_session=load_cookies("member_session")
   //預設網址
-  const [path] = React.useState(`/page-myTag/id=${member_id}`);
+  const [path] = React.useState(`/page-myFund/id=${member_id}`);
   const[path_all_fund] = React.useState(`/allfund-page/id=${member_id}`);
   
 
@@ -94,7 +94,7 @@ function IndexNavbar() {
       expand="lg"
     >
       <Container>
-        <div className="navbar-translate">
+        <div className="navbar-translate-fund-bar">
           <NavbarBrand
             data-placement="bottom"
             to={path_all_fund}
