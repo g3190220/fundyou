@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { HashRouter, Route, Redirect, Switch,withRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Redirect, Switch, withRouter } from "react-router-dom";
+import { Router, browserHistory as historyProvider, match } from 'react-router';
+import { createBrowserHistory } from "history";
 
 // styles
 import "assets/css/bootstrap.min.css";
@@ -25,10 +27,12 @@ import PageSurvey_3 from "views/SurveyPage/Survey_3.js"
 import PageSurvey_4 from "views/SurveyPage/Survey_4.js"
 import PageSurvey_5 from "views/SurveyPage/Survey_5.js"
 import LineLinking from "views/LinePage/LineLinking.js"
-// others
+import LineAllFundPage from "views/LinePage/LineAllFund.js";
 
+// others
+const BrowserHistory = createBrowserHistory()
 ReactDOM.render(
-  <HashRouter>
+  <Router history={BrowserHistory}>
     <Switch>
       <Route path="/index" render={props => <Index {...props} />} />
       
@@ -103,8 +107,13 @@ ReactDOM.render(
         path="/account-linkng"//Line-linking
         render={props => <LineLinking {...props} />} 
       />
+      <Route
+        path="/line-allfund-page"//Line-linking
+        render={props => <LineAllFundPage {...props} />} 
+      />
+
       <Redirect to="/index"/>
     </Switch>
-  </HashRouter>,
+  </Router>,
   document.getElementById("root")
 );
