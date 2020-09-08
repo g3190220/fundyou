@@ -63,8 +63,9 @@ function  scrollToAnchor(anchorName) {
         <div className="navbar-translate">
           <NavbarBrand
             data-placement="bottom"
-            to="/account-linkng?linkToken="
+            to="/index"
             tag={Link}
+            style={{fontSize:'26px'}}
           >
             FUNDU
           </NavbarBrand>
@@ -93,7 +94,8 @@ function  scrollToAnchor(anchorName) {
                 href="javascript:;"
                 onClick={() => scrollToAnchor("login")}
                 title="Login to get more !"
-              >Login
+                style={{fontFamily:'jf-openhuninn',fontSize:'18px'}}
+              >登 入
               </NavLink>
             </NavItem>
             <NavItem>
@@ -104,8 +106,9 @@ function  scrollToAnchor(anchorName) {
                 // to = "/register-page"
                 href = "/register-page"
                 title="Let's join us !"
+                style={{fontFamily:'jf-openhuninn',fontSize:'18px'}}
               >
-                Sign up 
+                註 冊
               </Button>
             </NavItem>
           </Nav>

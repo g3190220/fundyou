@@ -89,7 +89,6 @@ class SectionLogin extends React.Component {
             const path=`/allfund-page`
             this.props.history.push({
               pathname: path
-              
             })
             console.log(this.props)
             
@@ -159,22 +158,22 @@ class SectionLogin extends React.Component {
             <Row>
               <Col className="mx-auto" lg="4" md="6">
                 <Card className="card-register">
-                  <div className="title" >Welcome</div>
+                  <div className="title" >FUNDU</div>
                   <div className="social-line text-center">
                   </div>
                   <Form className="register-form">
-                    <label>Email</label>
+                    <label style={{fontFamily:'jf-openhuninn',fontSize:'15px'}}>電子信箱</label>
                    
                      
-                      <Input placeholder="Email" type="email" value={this.state.email} onChange={this.handleChange('email')} invalid={this.state.errors["email_is_errors"]} onKeyDown={this.keyPress}/>
+                      <Input placeholder="電子信箱" type="email" value={this.state.email} onChange={this.handleChange('email')} invalid={this.state.errors["email_is_errors"]} onKeyDown={this.keyPress}/>
                       <FormFeedback invalid>
                       {this.state.errors["email"]}
                       </FormFeedback>
                    
-                    <label>Password</label>
+                    <label style={{fontFamily:'jf-openhuninn',fontSize:'15px'}}>密碼</label>
                     
                       
-                      <Input placeholder="Password" type="password" value={this.state.password} onChange={this.handleChange('password')} invalid={this.state.errors["password_is_errors"]} onKeyDown={this.keyPress}/>
+                      <Input placeholder="密碼" type="password" value={this.state.password} onChange={this.handleChange('password')} invalid={this.state.errors["password_is_errors"]} onKeyDown={this.keyPress}/>
                       <FormFeedback invalid>
                       {this.state.errors["password"]}
                       </FormFeedback>
@@ -195,6 +194,20 @@ class SectionLogin extends React.Component {
               </Col>
             </Row>
           </Container>
+          
+          <div id="face-wrap">
+            <div id="face" class=" body">
+            <div className='z1'>z</div>
+              <div id="ear-r" class="ear body"></div>
+              <div id="ear-l" class="ear body"></div>
+              <div id="eye-r" class="eye body"></div>
+              <div id="eye-l" class="eye body"></div>
+              <div id="nose">
+                <div id="nose-r" class="nose body"></div>
+                <div id="nose-l" class="nose body"></div>
+              </div>
+            </div>
+          </div>
     </div>
     );
   }}

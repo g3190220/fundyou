@@ -14,16 +14,20 @@ function IndexHeader() {
     
     <Row>
         <Col>
-        <div id="stars"></div>
-        <div id="stars2"></div>
-        <div id="stars3"></div>
+        <div className="stars1" id="s1_1"></div>
+        <div className="stars2" id="m1_2"></div>
+        <div className="stars3" id="l1_3"></div>
+        <div className="stars1" id="s2_1"></div>
+        <div className="stars2" id="m2_2"></div>
+        <div className="stars3" id="l2_3"></div>
             <div className="content-logo">
             {/* //   style={{
             //     backgroundImage:
             //       "url(" + require("assets/img/examples/clock.gif") + ")"
             // }}> */}
-              <h3 className="title-brand">Think and Grow Rich</h3>
-              <h2 className="presentation-title">Fund<br/>You</h2>
+              <h3 className="title-brand">致 富 思 考 </h3>
+              <div className="title-line"></div>
+              <h2 className="presentation-title"><span className="title_1">FUND</span><br/><span className="title_2">YOU</span></h2>
             </div >
         </Col>
       </Row>

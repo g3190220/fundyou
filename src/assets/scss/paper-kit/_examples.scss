@@ -220,59 +220,107 @@
     margin: 50px 0;
     min-height: 300px;
 }
-#following h3{
-    margin: 20px 0 40px 0;
-}
-
-#follows .follows .unfollow .checkbox{
-    margin-top: -15px;
-}
-#follows .follows h6{
-    margin-top: 15px;
-}
-.follows hr{
-    margin-top: 10px;
-}
-.alert h5{
-    margin-bottom: 10px;
-}
 .title-brand{
+    font-family: "jf-openhuninn";
+    font-size: 40px;
     max-width: 730px;
     margin: 0 auto;
     position: relative;
+    display: block;
     text-align: center;
     color: #FFFFFF;
-    display: block;
-    font-size: 25px;
-    text-shadow: 0 0 0.2em #6eca97;
-
-    .type{
-        position: absolute;
-        font-size: 20px;
-        background: #132026;
-        padding: 6px 10px;
-        border-radius: 4px;
-        top: 0;
-        font-weight: 600;
-        margin-top: 10px;
-        right: -15px;
+    text-shadow: 0em 0em 0.085em #ffffff;
+    opacity: 1;
+    animation: brand 2s ease 1;
+}
+@keyframes brand{
+    from{
+        opacity: 0;
+        top:-2.5em;
+    }
+    to{
+        opacity: 1;
+        top:0em;
     }
 }
-
+.title-line{
+    width: 0%;
+    opacity: 0.9;
+    height: 5px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background:white;
+    border-radius: 60px;
+    box-shadow: 0em 0em 2em #ffffff;
+    animation: line 1.5s ease 0.5s 1 forwards;
+}
+@keyframes line{
+    from{
+        width: 0%;
+    }
+    to{
+        width: 20%;
+    }
+}
 .presentation-title{
-    font-size: 9em;
+    font-family: 'Montserrat','Noto Sans TC', sans-serif;
+    font-size: 10em;
+    letter-spacing: 10px;
+    line-height: 1em;
     font-weight: 700;
     text-align: center;
     margin: 0;
-    color: #FFFFFF;
-    background: #fbf8ec;
-    background: -moz-linear-gradient(top, #FFFFFF 35%, #ffc6c6 100%);
-    background: -webkit-linear-gradient(top, #FFFFFF 35%,#ffc6c6 100%);
-    background: -ms-linear-gradient(top, #FFFFFF 35%,#ffc6c6 100%);
-    background: linear-gradient(to bottom, #FFFFFF 35%,#ddfeff 100%);
+    
+    
+    .title_1{
+        display: inline-block;
+        animation: move1 2s ease 1 forwards;
+        background: linear-gradient(180deg, white 60%,#9ef2f7);
+        background: -ms-linear-gradient(180deg, white 60%,#9ef2f7);
+        background: -moz-linear-gradient(180deg, white 60%,#9ef2f7);
+        background: -webkit-linear-gradient(270deg, white 60%,#9ef2f7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color:transparent;
+    }
+    .title_2{
+        display: inline-block;
+        animation: move2 2s ease 1 forwards;
+        background: linear-gradient(270deg, white 60%,#9ef2f7);
+        background: -ms-linear-gradient(180deg, white 60%,#9ef2f7);
+        background: -moz-linear-gradient(180deg, white 60%,#9ef2f7);
+        background: -webkit-linear-gradient(270deg, white 60%,#9ef2f7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color:transparent;
+    }
+    //background-position需要注意，如果背景圖片的大小和容器一樣，那設置百分比的值將永遠無效，
+    //因為“容器和圖片的差”為0（圖片永遠填滿容器，並且圖片的相對位置和容器的相對位置永遠重合）。
+    //在這種情況下，需要為偏移使用絕對值（例如px）。
+}
 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+@keyframes move1{
+    from{
+        text-shadow: 0em 0em 0em #ffffff;
+        transform: translateX(-30%);
+        opacity: 0;
+    }
+    to{
+        text-shadow: 0em 0em 0.7em #ddfeff;
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+@keyframes move2{
+    from{
+        text-shadow: 0em 0em 0em #ffffff;
+        transform: translateX(30%);
+        opacity: 0;
+    }
+    to{
+        text-shadow: 0em 0em 0.7 #ddfeff;
+        transform: translateX(0%);
+        opacity: 1;
+    }
 }
 .presentation-subtitle{
     font-size: 1.7em;
