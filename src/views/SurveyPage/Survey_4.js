@@ -34,7 +34,8 @@ class Surveys extends React.Component {
 
             if((this.state.lose!='')&&(this.state.affect!='')&&(this.state.profit!='')){
                  const member_id=load_cookies("member_id");
-                 const path=`/page-survey-5/id=${member_id}`
+                //  const path=`/page-survey-5/id=${member_id}`
+                 const path=`/page-survey-5`
                 //將此頁的分數紀錄到cookie
                  let arr = []
                  arr.push(this.state.score);
@@ -105,7 +106,8 @@ class Surveys extends React.Component {
         //-------------------上一頁------------------------------
     handleprevious(){
         const member_id=load_cookies("member_id");
-        const path=`/page-survey-3/id=${member_id}`
+        // const path=`/page-survey-3/id=${member_id}`
+        const path=`/page-survey-3`
         this.props.history.push({
             pathname: path 
         })

@@ -32,7 +32,8 @@ class Surveys extends React.Component {
             if((this.state.dealwith_lose!='')&&(this.state.dealwith_profit!='')){
 
                  const member_id=load_cookies("member_id");
-                 const path=`/page-characterAnalysis/id=${member_id}`
+                //  const path=`/page-characterAnalysis/id=${member_id}`
+                 const path=`/page-characterAnalysis`
 
                  this.props.history.push({
                      pathname: path 
@@ -96,7 +97,8 @@ class Surveys extends React.Component {
     //-------------------上一頁------------------------------
     handleprevious(){
         const member_id=load_cookies("member_id");
-        const path=`/page-survey-4/id=${member_id}`
+        // const path=`/page-survey-4/id=${member_id}`
+        const path=`/page-survey-4`
         this.props.history.push({
             pathname: path 
         })

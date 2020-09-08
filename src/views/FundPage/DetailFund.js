@@ -593,7 +593,9 @@ class DetailFund extends React.Component{
     tag_link(){
         let fund_id = (this.props.match.params.fundid.split('='))[1];
         let member_id = load_cookies("member_id");
-        let path = '/page-tag/member_id='+ member_id +'/fundid='+fund_id;
+        // let path = '/page-tag/member_id='+ member_id +'/fundid='+fund_id;
+        let path = '/page-tag/fundid='+fund_id;
+
         
         this.props.history.push({
             pathname: path

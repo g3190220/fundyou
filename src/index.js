@@ -42,12 +42,12 @@ ReactDOM.render(
       />
 
       <Route
-        path="/personalize-page/:member_id"//個人化頁面
+        path="/personalize-page"//個人化頁面
         render={props => <PersonalizePage {...props} />}  //個人化頁面
       />
 
       <Route
-        path="/allfund-page/:member_id"//基金總覽頁面、登入後首頁
+        path="/allfund-page"//基金總覽頁面、登入後首頁
         render={props => <AllFundPage {...props} />}  //基金總覽頁面、登入後首頁
       />
       <Route
@@ -56,15 +56,15 @@ ReactDOM.render(
         render={props => <DetailFund {...props} />}  //基金詳細頁面
       />
       <Route
-        path="/personal-data-page/:member_id"//更改個資頁面
+        path="/personal-data-page"//更改個資頁面
         render={props => <PersonalDataPage {...props} />}  //更改個資頁面
       />   
       <Route
-        path="/page-myFund/:member_id"//我的基金子頁面
+        path="/page-myFund"//我的基金子頁面
         render={props => <PageMyFund {...props} />} //我的基金子頁面
       />
       <Route
-        path="/page-myTag/:member_id"//我的TAG子頁面
+        path="/page-myTag"//我的TAG子頁面
         render={props => <PageMyTag {...props} />} //我的TAG子頁面
       />
       <Route
@@ -72,11 +72,11 @@ ReactDOM.render(
         render={props => <ComparePage {...props} />} 
       />
       <Route
-        path="/page-characterAnalysis/:member_id"//性格分析子頁面
+        path="/page-characterAnalysis"//性格分析子頁面
         render={props => <PageCharacterAnalysis {...props} />} //性格分析子頁面
       />
       <Route
-        path="/page-pig/:member_id"//豬豬小助理子頁面
+        path="/page-pig"//豬豬小助理子頁面
         render={props => <PagePig {...props} />} //豬豬小助理子頁面
       />
       <Route

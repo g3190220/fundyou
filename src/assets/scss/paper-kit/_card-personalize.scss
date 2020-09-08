@@ -710,8 +710,8 @@
       margin-left: 20px;
       margin-top: 15px;
       margin-bottom: 8px;
-      border:#347cc4 solid 2px;
-      background-color:#347cc4;
+      border:#1a5da0 solid 2px;
+      background-color:#1a5da0;
       outline:none;
       color:  #FFF;
       font-weight:bold;
@@ -785,6 +785,7 @@
       color: #222222;
       border-radius: 8px;
       margin:0 auto;
+      font-weight:600;
       font-size: 16px;
       padding: 10px;
       min-height: 266px;
@@ -810,9 +811,9 @@
         color:#666666;
         border-radius: 8px;
         margin:0 auto;
+        font-weight:600;
         font-size: 16px;
         padding: 10px;
-        font-weight: 540;
         min-height: 266px;
         min-width: 264px;
 
@@ -826,10 +827,11 @@
           background-color:#1a5da0;
           text-align: center;
           padding: 5px;
+          width: 90px;
           border-radius: 5px;
           outline:none;
           color:  #FFF;
-          font-weight:bold;
+          font-weight:600;
           font-family:Microsoft JhengHei;
           font-size: 14px;
           

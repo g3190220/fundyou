@@ -49,7 +49,8 @@ class PersonalizeMenu extends React.Component{
     //const member_session=load_cookies("member_session")
     
     //預設網址
-    const path=`/${url}/id=${member_id}`
+    // const path=`/${url}/id=${member_id}`
+    const path=`/${url}`
     
     console.log(path)
     this.props.history.push({

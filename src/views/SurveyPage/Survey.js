@@ -26,7 +26,8 @@ class Surveys extends React.Component {
     handlesummit(){
         if((this.state.age!='')&&(this.state.job!='')&&(this.state.income!='')&&(this.state.education!='')){
             const member_id=load_cookies("member_id");
-            const path=`/page-survey-2/id=${member_id}`
+            // const path=`/page-survey-2/id=${member_id}`
+            const path=`/page-survey-2`
 
             //將此頁的分數紀錄到cookie，每個頁面分開計算最後再加總，避免使用者回到上一頁計算重複的問題。
             let arr = []

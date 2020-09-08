@@ -85,7 +85,8 @@ class SectionLogin extends React.Component {
             const member_id=member_info.member_id
             //const member_session=member_info.member_session
             //預設網址
-            const path=`/allfund-page/id=${member_id}`
+            // const path=`/allfund-page/id=${member_id}`
+            const path=`/allfund-page`
             this.props.history.push({
               pathname: path
               

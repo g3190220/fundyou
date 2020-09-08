@@ -759,7 +759,8 @@ class CompareFund extends React.Component{
     //------------新增比較基金------------------------------
     addnewFund(){
         let member_id = load_cookies("member_id");
-        let path = "/allfund-page/:member_id="+ member_id;
+        // let path = "/allfund-page/:member_id="+ member_id;
+        let path = "/allfund-page";
 
         this.props.history.push({
             pathname: path

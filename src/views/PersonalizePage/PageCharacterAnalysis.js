@@ -83,7 +83,8 @@ class PageCharacterAnalysis extends React.Component{
     //點擊去頁面
     handleSubmit(){
         const member_id=load_cookies("member_id");
-        const path=`/page-survey/id=${member_id}`
+        // const path=`/page-survey/id=${member_id}`
+        const path=`/page-survey`
         this.props.history.push({
             pathname: path 
         })

@@ -27,6 +27,7 @@ import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import CallMissedOutgoingIcon from '@material-ui/icons/CallMissedOutgoing';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ListIcon from '@material-ui/icons/List';
 
 
 //引入 Avatar
@@ -111,7 +112,8 @@ class PersonalizePage extends React.Component {
     const member_id=load_cookies("member_id")
     
     //預設網址
-    const path=`/${url}/id=${member_id}`
+    // const path=`/${url}/id=${member_id}`
+    const path=`/${url}`
     
     console.log(path)
     this.props.history.push({
@@ -279,7 +281,7 @@ class PersonalizePage extends React.Component {
         
       </Sidebar>
       <IconButton onClick={this.onSetSidebarOpen}>
-          <ArrowForwardIcon />
+          <ListIcon fontSize="large"/>
       </IconButton>
       </div>
       
