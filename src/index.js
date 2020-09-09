@@ -28,6 +28,8 @@ import PageSurvey_4 from "views/SurveyPage/Survey_4.js"
 import PageSurvey_5 from "views/SurveyPage/Survey_5.js"
 import LineLinking from "views/LinePage/LineLinking.js"
 import LineAllFundPage from "views/LinePage/LineAllFund.js";
+import LiffLogin from "views/LinePage/LiffLogin.js";
+
 
 // others
 const BrowserHistory = createBrowserHistory()
@@ -37,8 +39,8 @@ ReactDOM.render(
       <Route path="/index" render={props => <Index {...props} />} />
       
       <Route
-        path="/register-page"
-        render={props => <RegisterPage {...props} />}
+        path="/register-page" //註冊頁面
+        render={props => <RegisterPage {...props} />} //註冊頁面
       />
 
       <Route
@@ -104,13 +106,19 @@ ReactDOM.render(
         render={props => <PageSurvey_5 {...props} />} 
       />
       <Route
-        path="/account-linkng"//Line-linking
+        path="/account-linkng"//LineBot-Accountlinking頁面
         render={props => <LineLinking {...props} />} 
       />
       <Route
-        path="/line-allfund-page"//Line-linking
+        path="/line-allfund-page"//LineBot-基金總覽頁面
         render={props => <LineAllFundPage {...props} />} 
       />
+      <Route
+        path="/liff-linkng"//LineBot-Liff登入頁面
+        render={props => <LiffLogin {...props} />} 
+      />
+      
+
 
       <Redirect to="/index"/>
     </Switch>

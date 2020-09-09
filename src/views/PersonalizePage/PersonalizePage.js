@@ -166,7 +166,7 @@ class PersonalizePage extends React.Component {
               
               if(!isEmpty(this.state.image)){
                 //一進來有圖片，submit要回傳-1
-                this.state.image="http://drive.google.com/uc?export=view&id="+this.state.image
+                this.state.image="https://drive.google.com/uc?export=view&id="+this.state.image
               }
               this.setState((state, props) => {
                 return {counter: state.counter + props.step,
