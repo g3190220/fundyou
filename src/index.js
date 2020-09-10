@@ -29,6 +29,7 @@ import PageSurvey_5 from "views/SurveyPage/Survey_5.js"
 import LineLinking from "views/LinePage/LineLinking.js"
 import LineAllFundPage from "views/LinePage/LineAllFund.js";
 import LiffLogin from "views/LinePage/LiffLogin.js";
+import LiffRegister from "views/LinePage/LiffRegister.js";
 
 
 // others
@@ -82,7 +83,7 @@ ReactDOM.render(
         render={props => <PagePig {...props} />} //豬豬小助理子頁面
       />
       <Route
-        path="/page-tag/:member_id/:fundid"//tag頁面
+        path="/page-tag/:fundid"//tag頁面
         render={props => <TAGPage {...props} />} 
       />
       <Route
@@ -114,8 +115,12 @@ ReactDOM.render(
         render={props => <LineAllFundPage {...props} />} 
       />
       <Route
-        path="/liff-linkng"//LineBot-Liff登入頁面
+        path="/liff-linking"//LineBot-Liff登入頁面
         render={props => <LiffLogin {...props} />} 
+      />
+      <Route
+        path="/liff-register"//LineBot-Liff註冊頁面
+        render={props => <LiffRegister {...props} />} 
       />
       
 

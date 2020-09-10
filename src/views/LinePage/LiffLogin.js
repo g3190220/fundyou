@@ -206,7 +206,9 @@ class LiffLogin extends React.Component {
  }
 
  goto(){
-   alert("ji")
+  this.props.history.push({
+    pathname: "/liff-register"
+})
  }
   render(){
     return (
