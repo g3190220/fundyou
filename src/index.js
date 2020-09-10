@@ -80,7 +80,7 @@ ReactDOM.render(
         render={props => <PagePig {...props} />} //豬豬小助理子頁面
       />
       <Route
-        path="/page-tag/:member_id/:fundid"//tag頁面
+        path="/page-tag/:fundid"//tag頁面
         render={props => <TAGPage {...props} />} 
       />
       <Route

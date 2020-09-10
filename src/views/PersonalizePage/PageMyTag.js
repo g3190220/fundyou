@@ -26,6 +26,7 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import FindInPageIcon from '@material-ui/icons/PageviewOutlined';
+import SearchIcon from '@material-ui/icons/Search';
 
 
 //替代style
@@ -75,6 +76,7 @@ const THEME = createMuiTheme({
 
 const column_week=[
   {title: '基金統編', field: 'fld022'},
+  {title: '基金名稱', field: 'Fund_CH_Name' },
   {title: 'TAG名稱', field: 'tagContent' },
   {title: '累積投票數', field: 'Vote' },
   {title: '創建時間',field: 'Create_Date'},
@@ -83,10 +85,11 @@ const column_week=[
 
 const column_history=[
   {title: '基金統編', field: 'fld022'},
+  // {title: '基金名稱', field: 'Fund_CH_Name' },
   {title: 'TAG名稱', field: 'tagContent' },
   // {title: '累積讚數', field: 'History_like' },
   // {title: '累積倒讚數', field: 'History_unlike' },
-  {title: '創建時間',field: 'Create_Date'},
+  {title: '創建日期',field: 'Create_Date'},
 
 ];
 
@@ -299,6 +302,15 @@ else{
               maxBodyHeight: '360px'
             }}
             actions={[
+              {
+                icon: () => <SearchIcon color="action" />,
+                tooltip: 'SEEFUND',
+                onClick: (event, rowData) =>  this.props.history.push({
+                  pathname: '/detailfund-page/fundid='+rowData.fld022,
+                })
+
+              },
+
               { 
                 
                 //hidden:true,
@@ -315,7 +327,7 @@ else{
                 },
                 
                
-              }    
+              },
             ]}
             localization={{
                 header: {

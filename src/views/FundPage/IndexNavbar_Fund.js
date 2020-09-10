@@ -83,17 +83,12 @@ function IndexNavbar() {
   const member_id=load_cookies("member_id")
   const member_session=load_cookies("member_session")
   //預設網址
-<<<<<<< HEAD
   // const [path] = React.useState(`/page-myTag/id=${member_id}`);
   const [path] = React.useState(`/page-myTag`);
 
   // const[path_all_fund] = React.useState(`/allfund-page/id=${member_id}`);
   const[path_all_fund] = React.useState(`/allfund-page`);
 
-=======
-  const [path] = React.useState(`/page-myFund/id=${member_id}`);
-  const[path_all_fund] = React.useState(`/allfund-page/id=${member_id}`);
->>>>>>> 6e8f14d5e1a38a6c7eae45b24fce240be067b784
   
 
   return (
