@@ -10,7 +10,6 @@ import DemoFooter from "views/index-sections/DemoFooter.js";
 
 import SectionCarousel from "views/index-sections/SectionCarousel.js";
 import SectionLogin from "views/index-sections/SectionLogin.js";
-import SectionExamples from "views/index-sections/SectionExamples.js";
 
 
 function Index() {
@@ -27,8 +26,7 @@ function Index() {
       <IndexNavbar />
       <IndexHeader />
       <div className="main">
-        <SectionCarousel />
-        <SectionExamples/>
+        <SectionCarousel/>
         <SectionLogin />   
         <DemoFooter />
       </div>
