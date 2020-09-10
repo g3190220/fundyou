@@ -6,7 +6,7 @@
         min-height:43px;
     }
     .sub-menu{
-        background-color:#F9DCC4;
+        background-color:#d8d8d8;
         width: AUTO;
         position: relative;
         font-family: Microsoft JhengHei;
@@ -47,7 +47,7 @@
         }
 
         .sub-sub-search{
-            background-color:rgb(173, 174, 178);
+            background-color:rgb(194, 196, 201);
             width: 100%;
             padding: 30px;
             position: relative;
@@ -153,14 +153,14 @@
         }
 
         .sub-sub-detail{
-            background-color:#F8EDEB;
+            background-color:#FFFFFF;
             border-radius: 15px;
             margin-top: 150px;
             transform: translateX(12%);
             width: 80%;
 
             .fund-name{
-                color:  #e26d5c;
+                color:  rgb(0, 68, 135);
                 width: 620px;
                 font-weight:bold;
                 font-size: 33px;
@@ -188,31 +188,12 @@
                 
             }
 
-            .Compare-btn{
-                width: 80px;
-                height: 40px;
-                border-radius: 20px;
-                border:#e26d5c solid 2px;
-                background-color:#F8EDEB;
-                margin-top: 30px;
-                margin-left: 20px;
-                outline:none;
-                color:  #e26d5c;
-                font-weight:bold;
-                font-family:Microsoft JhengHei;
-            }
-
-            .Compare-btn a{
-                color: inherit;
-                font-weight:bold;
-                font-family:Microsoft JhengHei;
-            }
             .followBtnTrue { //已追蹤
                 width: 80px;
                 height: 40px;
                 border-radius: 20px;
-                border:#e26d5c solid 2px;
-                background-color:#e26d5c;
+                border:rgb(0, 68, 135) solid 2px;
+                background-color:rgb(0, 68, 135);
                 margin-top: 30px;
                 margin-left: 15px;
                 outline:none;
@@ -225,25 +206,19 @@
                 width: 80px;
                 height: 40px;
                 border-radius: 20px;
-                border:#e26d5c solid 2px;
-                background-color:#F8EDEB;
+                border:rgb(0, 68, 135) solid 2px;
+                background-color:rgb(196, 215, 233);
                 margin-top: 30px;
                 margin-left: 15px;
                 outline:none;
-                color:  #e26d5c;
+                color:  rgb(0, 68, 135);
                 font-weight:bold;
                 font-family:Microsoft JhengHei;
                 
             }
-              
-
-            .Compare-btn:hover{
-                background-color: #e26d5c;
-                color: #F8EDEB;
-            }
 
             .followBtnFalse:hover{
-                background-color: #e26d5c;
+                background-color: rgb(0, 68, 135);
                 color: #F8EDEB;
             }
 
@@ -263,7 +238,7 @@
             }
 
             .fund-currency{
-                color: #e26d5c;
+                color: rgb(0, 68, 135);
                 font-size: 22px;
                 margin-left: 40px;
                 margin-top: 23px;
@@ -273,7 +248,7 @@
             .fund-percentage-red{
                 color: 	#ff0000;
                 font-size: 15px;
-                margin-left: 20px;
+                margin-left: 30px;
                 margin-top: 15px;
                 font-weight:bold;
                 font-family:Microsoft JhengHei;
@@ -281,23 +256,24 @@
             .fund-percentage-green{
                 color: #00ff00;
                 font-size: 15px;
-                margin-left: 20px;
+                margin-left: 30px;
                 margin-top: 15px;
                 font-weight:bold;
                 font-family:Microsoft JhengHei;
             }
 
             .fund-data span{
-                color: #e26d5c;
-                font-size: 20px;
+                color: #1a5da0;
+                font-size: 18px;
                 font-family:Microsoft JhengHei;
                 margin-left: 120px;
+                font-weight:bold;
             }
 
         }
 
         .sub-sub-graphics{
-            background-color:#F8EDEB;
+            background-color:#FFFFFF;
             border-radius: 15px;
             margin-top: 30px;
             transform: translateX(12%);
@@ -307,9 +283,9 @@
                 width: 150px;
                 height: 45px;
                 border-radius: 10px;
-                border:#e26d5c solid 2px;
-                background-color: #e26d5c;
-                color: #F8EDEB;
+                border:rgb(0, 68, 135) solid 2px;
+                background-color: rgb(0, 68, 135);
+                color: #FFFFFF;
                 margin-top: 30px;
                 margin-left: 75px;
                 font-weight:bold;
@@ -339,12 +315,12 @@
             #performance-btn{
                 width: 90px;
                 height: 35px;
-                border:#FFB5A7 solid 2px;
-                background-color:#F8EDEB;
+                border:rgb(2, 90, 179) solid 2px;
+                background-color:rgb(196, 215, 233);
                 margin-top:15px;
                 margin-left: 75px;
                 outline:none;
-                color:  #FFB5A7;
+                color:  rgb(2, 90, 179);
                 font-weight:bold;
                 font-family:Microsoft JhengHei;
             }
@@ -352,24 +328,24 @@
             #risk-btn{
                 width: 90px;
                 height: 35px;
-                border:#FFB5A7 solid 2px;
-                background-color:#F8EDEB;
+                border:rgb(2, 90, 179) solid 2px;
+                background-color:rgb(196, 215, 233);
                 margin-top: 15px;
                 margin-left: -2px;
                 outline:none;
-                color:  #FFB5A7;
+                color:  rgb(2, 90, 179);
                 font-weight:bold;
                 font-family:Microsoft JhengHei;
             }
 
             #performance-btn:focus {
-                background-color: #FFB5A7;
-                color: #F8EDEB;
+                background-color: rgb(2, 90, 179);
+                color: #FFFFFF;
               }
             
             #risk-btn:focus {
-                background-color: #FFB5A7;
-                color: #F8EDEB;
+                background-color: rgb(2, 90, 179);
+                color: #FFFFFF;
             }
             #chart2{
                 display: none;
@@ -377,14 +353,14 @@
         }
 
         .sub-sub-tag{
-            background-color:#F8EDEB;
+            background-color:#FFFFFF;
             border-radius: 15px;
             margin-top: 30px;
             transform: translateX(12%);
             width: 80%;
             display: inline;
             .input-tag{
-                background-color:#ffffff;
+                background-color:rgb(196, 215, 233);
                 border-radius: 15px;
                 width: 700px;
                 height: 42px;
@@ -451,10 +427,10 @@
                 margin-left: 20px;
                 margin-top: 15px;
                 margin-bottom: 8px;
-                border:#e26d5c solid 2px;
-                background-color:#e26d5c;
+                border:rgb(0, 68, 135) solid 2px;
+                background-color:rgb(196, 215, 233);
                 outline:none;
-                color:  #F8EDEB;
+                color:  rgb(0, 68, 135);
                 font-weight:bold;
                 font-family:Microsoft JhengHei;
             }
@@ -468,14 +444,14 @@
                 border:0px;
                 background-color: transparent;
                 outline:none;
-                color:  #e26d5c;
+                color:  rgb(0, 68, 135);
                 font-weight:bold;
                 font-family:Microsoft JhengHei;
                 padding-top: 0px
             }
             .tag-btn:hover{
-                background-color: #F8EDEB;
-                color: #e26d5c;
+                background-color: rgb(0, 68, 135);
+                color: #FFFFFF;
             }
             .tag-btn a{
                 color: inherit;
@@ -484,7 +460,7 @@
         }
 
         .sub-sub-basic-info{
-            background-color:#F8EDEB;
+            background-color:#FFFFFF;
             border-radius: 15px;
             margin-top: 30px;
             margin-bottom: 50px;
@@ -492,7 +468,7 @@
             width: 80%;
             
             .fund-basic-info{
-                border: 2px #F8EDEB solid;
+                border: 2px #FFFFFF solid;
                 margin:0 auto;
                 margin-top: 30px;
                 margin-bottom: 30px;
@@ -506,10 +482,10 @@
             .fund-basic-info th{
                 font-size: 20px;
                 padding: 5px 15px;
-                color: #F8EDEB;
+                color: #FFFFFF;
                 font-weight:bold;
                 text-align:center;
-                background: #e26d5c;
+                background: rgb(0, 68, 135);
                 display: block;
                 font-family:Microsoft JhengHei;
                 
@@ -520,11 +496,11 @@
                 font-weight: 600;
                 width: 600px;
                 padding: 5px 20px 5px 10px;
-                color: #e26d5c;
+                color: #000000;
               //  text-align:center;
-                background: #F8EDEB;
+                background: #FFFFFF;
                 display: block;
-                border:#e26d5c solid 1px;
+                border:rgb(0, 68, 135) solid 1px;
                 font-family:Microsoft JhengHei;
                 word-break:break-all;;
             }
@@ -532,7 +508,7 @@
         }
 
         .sub-sub-fund-introduce{
-            background-color:#F8EDEB;
+            background-color:#FFFFFF;
             border-radius: 15px;
             margin-top: 5px;
             margin-bottom: 20px;
@@ -553,10 +529,10 @@
                 margin-left: 20px;
                 margin-top: 15px;
                 margin-bottom: 8px;
-                border:#e26d5c solid 2px;
+                border:rgb(0, 68, 135) solid 2px;
                 background-color:#ffffff;
                 outline:none;
-                color:  #e26d5c;
+                color:  rgb(0, 68, 135);
                 font-weight:bold;
                 font-family:Microsoft JhengHei;
             }
@@ -570,14 +546,14 @@
                 border:0px;
                 background-color: transparent;
                 outline:none;
-                color:  #e26d5c;
+                color:  rgb(0, 68, 135);
                 font-weight:bold;
                 font-family:Microsoft JhengHei;
                 padding-top: 0px
             }
             .teach-btn:hover{
-                background-color: #F8EDEB;
-                color: #e26d5c;
+                background-color: #FFFFFF;
+                color: rgb(0, 68, 135);
             }
             .teach-btn a{
                 color: inherit;
@@ -587,9 +563,9 @@
                 width: 180px;
                 height: 45px;
                 border-radius: 10px;
-                border:#e26d5c solid 2px;
-                background-color: #e26d5c;
-                color: #F8EDEB;
+                border:rgb(0, 68, 135) solid 2px;
+                background-color: rgb(0, 68, 135);
+                color: #FFFFFF;
                 margin-top: 20px;
                 margin-left: 40px;
                 font-weight:bold;
@@ -635,7 +611,7 @@
                 margin-right: 25px;
                 font-size: 20px;
                 background-color: rgb(0, 68, 135);
-                color: #fff;
+                color: #ffffff;
                 border: rgb(0, 68, 135) solid 1px;
                 border-radius: 20px;
                 font-family:Microsoft JhengHei;

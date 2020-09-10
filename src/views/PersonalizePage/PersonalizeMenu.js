@@ -49,7 +49,8 @@ class PersonalizeMenu extends React.Component{
     //const member_session=load_cookies("member_session")
     
     //預設網址
-    const path=`/${url}/id=${member_id}`
+    // const path=`/${url}/id=${member_id}`
+    const path=`/${url}`
     
     console.log(path)
     this.props.history.push({
@@ -105,7 +106,7 @@ class PersonalizeMenu extends React.Component{
               
               if(!isEmpty(this.state.image)){
                 //一進來有圖片，submit要回傳-1
-                this.state.image="http://drive.google.com/uc?export=view&id="+this.state.image
+                this.state.image="https://drive.google.com/uc?export=view&id="+this.state.image
               }
               this.setState((state, props) => {
                 return {counter: state.counter + props.step,

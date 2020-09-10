@@ -26,15 +26,7 @@ var risk_SD = [];
 
 // core components
 class DetailFund extends React.Component{
-//function DetailFund() {
 
- /*   document.documentElement.classList.remove("nav-open");
-    React.useEffect(() => {
-        document.body.classList.add("detail-fund-page");
-        return function cleanup() {
-          document.body.classList.remove("detail-fund-page");
-        };
-      });  */
       state = {
     }
     
@@ -594,7 +586,9 @@ class DetailFund extends React.Component{
     tag_link(){
         let fund_id = (this.props.match.params.fundid.split('='))[1];
         let member_id = load_cookies("member_id");
-        let path = '/page-tag/member_id='+ member_id +'/fundid='+fund_id;
+        // let path = '/page-tag/member_id='+ member_id +'/fundid='+fund_id;
+        let path = '/page-tag/fundid='+fund_id;
+
         
         this.props.history.push({
             pathname: path
@@ -650,12 +644,17 @@ class DetailFund extends React.Component{
         var config_net = {
 
             chart : {
-                backgroundColor: '#fffafa',
+                backgroundColor: '#f6f6f6',
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                borderRadius: 10,
+                borderRadius: 5,
+                shadow:true
             },
+            // color :{
+            //         colors: ['#00008b', '#00008b', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655',
+            //     '#FFF263', '#6AF9C4']
+            // },
             title: {
                 text: ''
             },
@@ -665,7 +664,10 @@ class DetailFund extends React.Component{
             yAxis: {
                 title: {
                     text: '淨值單位'
-                }
+                },
+                gridLineColor:'#000000',
+                gridLineWidth:'0.5',
+
             },
             credits:{
                 enabled:false
@@ -675,7 +677,9 @@ class DetailFund extends React.Component{
                 labels:{  //參考連結：https://reurl.cc/ar2eGX
                     //step: 30
                     enabled:false //不顯示X軸
-                }
+                },
+
+                //gridLineWidth:'1'
             },
             series: [{    //這裡要從資料庫讀
                 name: '淨值',
@@ -686,11 +690,12 @@ class DetailFund extends React.Component{
         var config_performance = {
 
             chart : {
-                backgroundColor: '#fffafa',
+                backgroundColor: '#f6f6f6',
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                borderRadius: 10,
+                borderRadius: 5,
+                shadow:true
             },
             title: {
                 text: ''
@@ -701,7 +706,9 @@ class DetailFund extends React.Component{
             yAxis: {
                 title: {
                     text: '單位',
-                }
+                },
+                gridLineColor:'#000000',
+                gridLineWidth:'0.5'
             },
             credits:{
                 enabled:false
@@ -897,11 +904,12 @@ function chart_performance() {  //顯示績效
     var config_performance = {
 
         chart : {
-            backgroundColor: '#fffafa',
+            backgroundColor: '#f6f6f6',
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
-            borderRadius: 10,
+            borderRadius: 5,
+            shadow:true
         },
         title: {
             text: ''
@@ -912,7 +920,9 @@ function chart_performance() {  //顯示績效
         yAxis: {
             title: {
                 text: '單位',
-            }
+            },
+            gridLineColor:'#000000',
+            gridLineWidth:'0.5'
         },
         credits:{
             enabled:false
@@ -941,11 +951,12 @@ function chart_risk() {  //顯示風險
     var config_risk = {
 
         chart : {
-            backgroundColor: '#fffafa',
+            backgroundColor: '#f6f6f6',
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
-            borderRadius: 10,
+            borderRadius: 5,
+            shadow:true
         },
         title: {
             text: ''
@@ -956,7 +967,9 @@ function chart_risk() {  //顯示風險
         yAxis: {
             title: {
                 text: '單位',
-            }
+            },
+            gridLineColor:'#000000',
+            gridLineWidth:'0.5'
         },
         credits:{
             enabled:false

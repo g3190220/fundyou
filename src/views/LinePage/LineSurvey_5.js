@@ -31,14 +31,6 @@ class Surveys extends React.Component {
 
             if((this.state.dealwith_lose!='')&&(this.state.dealwith_profit!='')){
 
-                 const member_id=load_cookies("member_id");
-                //  const path=`/page-characterAnalysis/id=${member_id}`
-                 const path=`/page-characterAnalysis`
-
-                 this.props.history.push({
-                     pathname: path 
-                 })
-
                  let arr = []
                  let ans = '';
                  var result = '';

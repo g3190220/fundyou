@@ -27,6 +27,7 @@ import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import CallMissedOutgoingIcon from '@material-ui/icons/CallMissedOutgoing';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ListIcon from '@material-ui/icons/List';
 
 
 //引入 Avatar
@@ -114,7 +115,8 @@ class PersonalizePage extends React.Component {
     const member_id=load_cookies("member_id")
     
     //預設網址
-    const path=`/${url}/id=${member_id}`
+    // const path=`/${url}/id=${member_id}`
+    const path=`/${url}`
     
     console.log(path)
     this.props.history.push({
@@ -164,7 +166,7 @@ class PersonalizePage extends React.Component {
               
               if(!isEmpty(this.state.image)){
                 //一進來有圖片，submit要回傳-1
-                this.state.image="http://drive.google.com/uc?export=view&id="+this.state.image
+                this.state.image="https://drive.google.com/uc?export=view&id="+this.state.image
               }
               this.setState((state, props) => {
                 return {counter: state.counter + props.step,
@@ -206,12 +208,12 @@ class PersonalizePage extends React.Component {
               <Avatar src={this.state.image} className="avatar-size"/>
           </div>
           <div className='personality-position'>
-            <span>{this.state.username}，你好</span>
+            <span>{this.state.username}，您好</span>
             <IconButton aria-label="個人資料設定" color="primary" onClick={this.handleSubmit.bind(this, "personal-data-page")}>
               <SettingsIcon color="action" />
             </IconButton>
           </div>
-          <hr size="8px" align="center" width="100%"></hr>
+          <hr size="6px" align="center" width="100%"></hr>
           <div>
           <div className="page-myfund">
                 <button type="button" className="list-btn" onClick={this.handleSubmit.bind(this, "page-myFund")}>
@@ -239,7 +241,7 @@ class PersonalizePage extends React.Component {
             </div>
             <div className="page-pig">
                 <button type="button" class="list-btn" onClick={this.handleSubmit.bind(this, "allfund-page")}>
-                    <div className="face-icon"><CallMissedOutgoingIcon></CallMissedOutgoingIcon><div className="list-btn-content">回 首 頁</div></div>
+                    <div className="face-icon"><CallMissedOutgoingIcon></CallMissedOutgoingIcon><div className="list-btn-content">回 到 FUNDU</div></div>
                 </button>
             </div>
             <div className='logout-btn-position'>
@@ -282,7 +284,7 @@ class PersonalizePage extends React.Component {
         
       </Sidebar>
       <IconButton onClick={this.onSetSidebarOpen}>
-          <ArrowForwardIcon />
+          <ListIcon fontSize="large"/>
       </IconButton>
       </div>
       

@@ -27,7 +27,7 @@ function logout(){
         //清除cookie
         
         //跳回首頁
-        window.location.href = '/#/index' 
+        window.location.href = '/index' 
         
         //this.props.history.push("/index")
         logout_deletecookie()

@@ -13,7 +13,7 @@ import {
   Nav,
   Container
 } from "reactstrap";
-import { HashRouter, Route, Link } from "react-router-dom"
+import { BrowserRouter, Route, Link } from "react-router-dom"
 
 
 function IndexNavbar() {
@@ -103,7 +103,8 @@ function  scrollToAnchor(anchorName) {
               <Button
                 className="btn-round"
                 color="danger"
-                href = "#register-page"
+                // to = "/register-page"
+                href = "/register-page"
                 title="Let's join us !"
                 style={{fontFamily:'jf-openhuninn',fontSize:'18px'}}
               >

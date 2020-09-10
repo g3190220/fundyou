@@ -22,6 +22,19 @@ import {
     withRouter
     } from "react-router-dom";
 
+//覆寫CSS
+import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
+
+const styles = () =>({
+  sidebarIcon: {
+    '&span': {
+      fontWeight: 800,
+    }
+  }
+})
+
+
 const mql = window.matchMedia(`(min-width: 800px)`);
 
 class PersonalizeMenu2 extends React.Component{
@@ -67,6 +80,7 @@ class PersonalizeMenu2 extends React.Component{
       open={this.state.sidebarOpen}
       docked={this.state.sidebarDocked}
       onSetOpen={this.onSetSidebarOpen}
+      classes={{root: classes.sidebarIcon}}
     >
       <b>SIDEBAR</b>
     </Sidebar>
@@ -75,4 +89,9 @@ class PersonalizeMenu2 extends React.Component{
     )}
 }
 
-export default withRouter(PersonalizeMenu2);
+PersonalizeMenu2.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+export default withStyles(styles)(PersonalizeMenu2);
+
+// export default withRouter(PersonalizeMenu2);

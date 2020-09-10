@@ -92,7 +92,8 @@ class PageCharacterAnalysis extends React.Component{
     //點擊去頁面
     handleSubmit(){
         const member_id=load_cookies("member_id");
-        const path=`/page-survey/id=${member_id}`
+        // const path=`/page-survey/id=${member_id}`
+        const path=`/page-survey`
         this.props.history.push({
             pathname: path 
         })
@@ -124,7 +125,6 @@ class PageCharacterAnalysis extends React.Component{
                 <div className="game-result-title-1">
                     <span style={{fontWeight:"bold"}}>{this.state.texts}</span>
                     <span style={{fontWeight:"bold"}}>{this.state.characteristic}</span><br/>
-                    <div className="result-chart"><Result></Result></div>
                 </div>
                 </Row>
                 <Row>

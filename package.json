@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "./",
   "dependencies": {
+    "@line/liff": "^2.4.0",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "antd": "^4.2.2",
@@ -12,6 +13,7 @@
     "classnames": "2.2.6",
     "financejs": "^4.1.0",
     "image-to-base64": "^2.1.0",
+    "lazyload": "^2.0.0-rc.2",
     "material-table": "^1.64.0",
     "material-ui-icons": "^1.0.0-beta.36",
     "moment": "2.24.0",
@@ -29,6 +31,7 @@
     "react-fade-in": "^1.1.0",
     "react-file-input-previews-base64": "^1.0.8",
     "react-highcharts": "^16.1.0",
+    "react-lazyload": "^3.0.0",
     "react-loader-spinner": "^3.1.14",
     "react-loading": "^2.0.3",
     "react-lottie": "^1.2.3",
