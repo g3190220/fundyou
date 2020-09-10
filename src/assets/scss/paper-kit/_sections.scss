@@ -90,7 +90,36 @@
 .section-login{
     min-height: 700px;
     //background-color: '#fb8b75';
-    background:linear-gradient(#005b9f,transparent)
+    background:linear-gradient(#005b9f,transparent);
+    & .go-to-register-btn-position{
+        margin:0px auto;
+        padding-top: 8px;
+        font-size: 10px;
+        
+    }
+    & .go-to-register-btn{
+        a:link {
+            color: rgb(75, 75, 75)5b9f;
+            text-decoration: none;
+        }
+      
+        a:visited {
+            color: rgb(75, 75, 75)5b9f;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            color: rgb(100, 161, 235)5b9f;
+            text-decoration: none;
+            cursor: pointer; 
+        }
+        
+        a:active {
+            color: rgb(100, 161, 235)5b9f;
+            text-decoration: none;
+        }
+    }
+    
     
 }
 //--------------豬豬--------------
