@@ -34,12 +34,17 @@
     }
 
     a:not(.btn){
-        color: $black-hr;
+        color: #969494;
 
         &:hover,
         &:focus{
             color: $black-color;
         }
+    }
+    a:not([href]):not([tabindex]):hover{
+        color: #444444;
+        text-decoration: none;
+        cursor: pointer; 
     }
     .card-description{
         color: $dark-gray;

@@ -2,7 +2,9 @@ import React from "react";
 import _ from "underscore";
 import isEmpty from "views/Function/isEmpty.js"
 import { onLogin,load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
-
+import liff from '@line/liff';
+import Link_M from '@material-ui/core/Link';
+import HomeIcon from '@material-ui/icons/Home';
 
 // reactstrap components
 import {
@@ -28,9 +30,7 @@ import {
   } from "react-router-dom";
 
 
-
-//function SectionLogin() {
-class SectionLogin extends React.Component {
+class LiffLogin extends React.Component {
   state = {
   }
   constructor(props) {
@@ -38,22 +38,68 @@ class SectionLogin extends React.Component {
       console.log(props)
       this.state = {
         //fields: {},
-        errors: {}
+        errors: {},
+        flag: false
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.keyPress = this.keyPress.bind(this);
+    this.setLineID=this.setLineID.bind(this);
+    this.goto=this.goto.bind(this);
   }
+  // componentDidMount() { 
+  //   let token = (this.props.location.search.split('='))[1];
+  //   this.setState({token:token})
+  // }
+
+  //存取liff-userid至資料庫
+  setLineID(nounce,liff_userid){
+    const url = "https://fundu.ddns.net:8090/setLineID";
+        //console.log(data)
+    fetch( url, {
+              method: 'POST',
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                    nonce: nounce,
+                    lineid: liff_userid,
+              })
+              
+        
+        })
+        .then((response) => {console.log(response);return response.json();})
+        .then((jsonData) => {
+          alert("成功登入")
+          console.log(jsonData)
+          if(jsonData.StatusCode==200){
+            alert("開始liff.init")
+            liff.init({
+              liffId: "1654887866-WEYVrLMQ" // Use own liffId
+            })
+            .then(() => {
+              alert("closeWindow()")
+              liff.closeWindow()
+            })
+          }
+        })
+      }
+
+  
+
   handleSubmit(){
     let errors = {}; 
     let member_info=[];
-    
-    
+    let nounce="";
+    let token = (this.props.location.search.split('='))[1];
+    console.log(token)
+    let liff_userid;
     //取消DOM的預設功能
     window.event.preventDefault();
   
     if(!isEmpty(this.state.email) && !isEmpty(this.state.password))
     { 
-        console.log("handleSubmit_start")
+       
         this.state.errors = {};
         //const proxyurl = "https://cors-anywhere.herokuapp.com/";
         const url = "https://fundu.ddns.net:8090/Signin";
@@ -73,25 +119,38 @@ class SectionLogin extends React.Component {
         })
         .then((response) => {console.log(response);return response.json();})
         .then((jsonData) => {
-          
+          alert("成功登入")
           console.log(jsonData)
-      
           if(jsonData.StatusCode==200){
             member_info=JSON.parse(jsonData.member_info)
-            onLogin(member_info)
-            alert("登入成功")
-            //跳轉頁面
-            //取得member_id和member_sesiion
-            const member_id=member_info.member_id
-            //const member_session=member_info.member_session
-            //預設網址
-            // const path=`/allfund-page/id=${member_id}`
-            const path=`/allfund-page`
-            this.props.history.push({
-              pathname: path
+            nounce=member_info.member_nonce
+            liff.init({
+              liffId: "1654887866-WEYVrLMQ" // Use own liffId
             })
-            console.log(this.props)
-            
+            .then(() => {
+              if (liff.isLoggedIn()) {
+                  liff.getProfile()
+                  .then(profile => {
+                    const userId = profile.userId
+                    //取得liff_userid;
+                    liff_userid=userId;
+                    alert("連結成功！")
+                  })
+                  .then(()=>{this.setLineID(nounce,liff_userid)})
+                }
+              else{
+                alert("取得失敗")
+              }
+            })
+            .then(()=>{
+              alert("連結成功！")
+              liff.closeWindow();
+            })
+              
+            .catch((err) => {
+              // Error happens during initialization
+              console.log(err.code, err.message);
+            }); 
           }
           else if(jsonData.StatusCode==1000){
             this.state.errors["message"] = "帳號或密碼錯誤！";
@@ -103,10 +162,7 @@ class SectionLogin extends React.Component {
             this.setState({errors: this.state.errors});
             console.log(this.state.errors);
             
-            
-
-    }
-        
+          }
           else{
             alert("帳號密碼錯誤！")
           }
@@ -148,32 +204,38 @@ class SectionLogin extends React.Component {
        this.handleSubmit();
     }
  }
+
+ goto(){
+  this.props.history.push({
+    pathname: "/liff-register"
+})
+ }
   render(){
     return (
         <div
           className="section section-login"
           id="login"
         >
-          <Container >
+           <Container >
             <Row>
               <Col className="mx-auto" lg="4" md="6">
                 <Card className="card-register">
-                  <div className="title" >FUNDU</div>
+                  <div className="title" >登入以連動Line</div>
                   <div className="social-line text-center">
                   </div>
                   <Form className="register-form">
-                    <label style={{fontFamily:'jf-openhuninn',fontSize:'15px'}}>電子信箱</label>
+                    <label>Email</label>
                    
                      
-                      <Input placeholder="電子信箱" type="email" value={this.state.email} onChange={this.handleChange('email')} invalid={this.state.errors["email_is_errors"]} onKeyDown={this.keyPress}/>
+                      <Input placeholder="Email" type="email" value={this.state.email} onChange={this.handleChange('email')} invalid={this.state.errors["email_is_errors"]} onKeyDown={this.keyPress}/>
                       <FormFeedback invalid>
                       {this.state.errors["email"]}
                       </FormFeedback>
                    
-                    <label style={{fontFamily:'jf-openhuninn',fontSize:'15px'}}>密碼</label>
+                    <label>Password</label>
                     
                       
-                      <Input placeholder="密碼" type="password" value={this.state.password} onChange={this.handleChange('password')} invalid={this.state.errors["password_is_errors"]} onKeyDown={this.keyPress}/>
+                      <Input placeholder="Password" type="password" value={this.state.password} onChange={this.handleChange('password')} invalid={this.state.errors["password_is_errors"]} onKeyDown={this.keyPress}/>
                       <FormFeedback invalid>
                       {this.state.errors["password"]}
                       </FormFeedback>
@@ -186,31 +248,19 @@ class SectionLogin extends React.Component {
                     //href="#allfund-page"//新增這行!!!
                     onClick={this.handleSubmit}
                   >
-                    登  入
+                    登 入
                   </Button>
-                  </Form>
                   
+                  </Form>
+                  <div className="go-to-register-btn-position">
+                    <a className="go-to-register-btn" onClick={this.goto}>尚未註冊FUNDU會員？</a>
+                  </div>
                 </Card>
               </Col>
             </Row>
           </Container>
-          
-          <div id="face-wrap">
-            <div id="face" class=" body">
-            <div className='z1'>z</div>
-              <div id="ear-r" class="ear body"></div>
-              <div id="ear-l" class="ear body"></div>
-              <div id="eye-r" class="eye body"></div>
-              <div id="eye-l" class="eye body"></div>
-              <div id="nose">
-                <div id="nose-r" class="nose body"></div>
-                <div id="nose-l" class="nose body"></div>
-              </div>
-            </div>
-          </div>
     </div>
     );
   }}
 
-//export default SectionLogin;
-export default withRouter(SectionLogin);
+export default withRouter(LiffLogin);

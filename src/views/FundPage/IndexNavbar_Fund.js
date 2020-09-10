@@ -98,7 +98,7 @@ function IndexNavbar() {
       expand="lg"
     >
       <Container>
-        <div className="navbar-translate-fund-bar">
+        <div className="navbar-translate">
           <NavbarBrand
             data-placement="bottom"
             to={path_all_fund}

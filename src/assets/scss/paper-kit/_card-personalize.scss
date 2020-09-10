@@ -19,7 +19,7 @@
   border-top-right-radius:    3px;
   border-bottom-right-radius: 3px;
   width: 205px;
-  padding: 25px;
+  padding: 0px;
   height:100%;
   color: #f6f6f6;
   font-family: "微軟正黑體";
@@ -29,15 +29,16 @@
     text-align: center;
     margin-top: 0px;
     margin-left: 55px; 
+    padding: 25px;
   }
   & .avatar-size {
     margin-left: -15px;
-    height: 70px;
-    width: 70px;
+    height: 80px;
+    width: 80px;
   }
   & .personality-position{
     font-size: 15px;
-    padding-top: 12px;
+    // padding-top: 5px;
     text-align: center;
     font-weight:600;
     color:#f6f6f6;
@@ -45,7 +46,7 @@
   }
   & .list-btn{
       text-align: left;
-      width: 180px;
+      width: 205px;
       height: 55px;
       //border-radius: 10px;
       background-color:transparent;
@@ -54,12 +55,12 @@
       font-weight:500;
       font-family: "微軟正黑體";
       border: none;
-
+      padding: 0px 28px 0px;
       
   }
   & .list-btn-hidden{
       text-align: left;
-      width: 180px;
+      width: 205px;
       height: 55px;
       border-radius: 10px;
       border:0px;
@@ -68,7 +69,7 @@
       color:  #f6f6f6;
       font-weight:bold;
       font-family: "微軟正黑體";
-      padding-top: 0px
+      // padding-top: 0px
   }
   & .list-btn:hover{
       background-color: #35343c4f;
@@ -79,6 +80,7 @@
   }
   & .list-btn-content{
         font-size:16px;
+        font-weight:600;
         display:inline;
         margin-left: 10px;
   }
@@ -153,8 +155,8 @@
   }
   & .avatar-size {
     margin-left: -15px;
-    height: 75px;
-    width: 75px;
+    height: 80px;
+    width: 80px;
   }
   & .user-bar {
     color: #505050;

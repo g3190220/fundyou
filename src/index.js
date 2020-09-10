@@ -28,6 +28,9 @@ import PageSurvey_4 from "views/SurveyPage/Survey_4.js"
 import PageSurvey_5 from "views/SurveyPage/Survey_5.js"
 import LineLinking from "views/LinePage/LineLinking.js"
 import LineAllFundPage from "views/LinePage/LineAllFund.js";
+import LiffLogin from "views/LinePage/LiffLogin.js";
+import LiffRegister from "views/LinePage/LiffRegister.js";
+
 
 // others
 const BrowserHistory = createBrowserHistory()
@@ -37,8 +40,8 @@ ReactDOM.render(
       <Route path="/index" render={props => <Index {...props} />} />
       
       <Route
-        path="/register-page"
-        render={props => <RegisterPage {...props} />}
+        path="/register-page" //註冊頁面
+        render={props => <RegisterPage {...props} />} //註冊頁面
       />
 
       <Route
@@ -80,7 +83,7 @@ ReactDOM.render(
         render={props => <PagePig {...props} />} //豬豬小助理子頁面
       />
       <Route
-        path="/page-tag/:member_id/:fundid"//tag頁面
+        path="/page-tag/:fundid"//tag頁面
         render={props => <TAGPage {...props} />} 
       />
       <Route
@@ -104,13 +107,23 @@ ReactDOM.render(
         render={props => <PageSurvey_5 {...props} />} 
       />
       <Route
-        path="/account-linkng"//Line-linking
+        path="/account-linkng"//LineBot-Accountlinking頁面
         render={props => <LineLinking {...props} />} 
       />
       <Route
-        path="/line-allfund-page"//Line-linking
+        path="/line-allfund-page"//LineBot-基金總覽頁面
         render={props => <LineAllFundPage {...props} />} 
       />
+      <Route
+        path="/liff-linking"//LineBot-Liff登入頁面
+        render={props => <LiffLogin {...props} />} 
+      />
+      <Route
+        path="/liff-register"//LineBot-Liff註冊頁面
+        render={props => <LiffRegister {...props} />} 
+      />
+      
+
 
       <Redirect to="/index"/>
     </Switch>
