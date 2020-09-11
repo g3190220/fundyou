@@ -552,6 +552,9 @@ class AllFund extends React.Component {
           }
         })
   }
+
+  
+
   handleselect(fund_id){  //勾選比較基金
     if(this.state.counters < 3){
       this.Update_comparebar(fund_id);
@@ -561,8 +564,8 @@ class AllFund extends React.Component {
     }
 
   }
+  
   cancelhandleselect(fund_id){  //取消勾選比較基金
-
     console.log(fund_id)
     console.log(this.state.fund_id1)
     this.state.counters--;
