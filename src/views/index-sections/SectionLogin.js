@@ -186,11 +186,7 @@ class SectionLogin extends React.Component {
                     style={{fontFamily:'jf-openhuninn',fontSize:'15px'}}
                     onClick={this.handleSubmit}
                   >
-<<<<<<< HEAD
-                    登入
-=======
                     登  入
->>>>>>> 2f79b7f5a254b750ad49585aab63c5ef3699dd50
                   </Button>
                   </Form>
                   
