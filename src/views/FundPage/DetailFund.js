@@ -398,6 +398,7 @@ class DetailFund extends React.Component{
             .then((jsonData) => {
             //console.log(this)
             console.log(jsonData.fund_net)
+            
             fund_net=JSON.parse(jsonData.fund_net)
             if(jsonData.StatusCode==200){
                 

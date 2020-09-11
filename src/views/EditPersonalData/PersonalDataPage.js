@@ -191,7 +191,7 @@ class PersonlDataPage extends React.Component {
               
               if(!isEmpty(this.state.image)){
                 //一進來有圖片，submit要回傳-1
-                this.state.image="http://drive.google.com/uc?export=view&id="+this.state.image
+                this.state.image="https://drive.google.com/uc?export=view&id="+this.state.image
               }
               this.setState((state, props) => {
                 return {counter: state.counter + props.step,
@@ -241,7 +241,7 @@ class PersonlDataPage extends React.Component {
   //點擊submit btn
   handleSubmit(){
     const check_photo=this.state.image
-    if(check_photo.startsWith('http')){
+    if(check_photo.startsWith('https')){
       this.state.image=-1
       this.setState({image:this.state.image})
     }

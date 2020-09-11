@@ -12,15 +12,18 @@ import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import { forwardRef } from 'react';
 
+//loading 頁面
+import LoadingIndicator_small from "views/Function/LoadingIndicator_small.js";
+
 
 //自動跳轉
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter
-  } from "react-router-dom";
+// import {
+//   BrowserRouter as Router,
+//   Route,
+//   Link,
+//   Redirect,
+//   withRouter
+//   } from "react-router-dom";
 
 
 //gender 選項
@@ -131,7 +134,8 @@ class Register extends React.Component {
       //console.log(this.state)
       this.state = {
         //fields: {},
-        errors: {}
+        errors: {},
+        flag:false,
     }
       //console.log(this.state) 
   }
@@ -200,6 +204,7 @@ class Register extends React.Component {
 
 
   handleSubmit(){
+    this.setState({flag:true});
     let errors = {};
     //errors["email"] = "Duplicate account"
     console.log(this)
@@ -231,14 +236,16 @@ class Register extends React.Component {
         .then((response) => {console.log(response);return response.json();})
         .then((jsonData) => {
           console.log(jsonData)
+          
           //console.log(jsonData.StatusCode)
           if(jsonData.StatusCode==200){
+            this.setState({flag:false});
             this.state.errors["message"] = "註冊成功！即將跳轉回主頁面，請重新做登入。";
             this.setState({errors: this.state.errors});
             setTimeout(() =>
               //window.event.preventDefault();
               this.props.history.push("/index")
-            ,4000)
+            ,2500)
             console.log(this.state.errors)
 
           }
@@ -291,7 +298,8 @@ class Register extends React.Component {
       <ExamplesNavbar></ExamplesNavbar>
       
       <Container>
-        <div className='register-title'><h3 className={classes.headercolor}>Create a new account</h3></div>
+        <div className='register-title'><h3 className={classes.headercolor}>創建新的帳戶</h3></div>
+        {!this.state.flag ? (<span></span>):(<LoadingIndicator_small></LoadingIndicator_small>)}
         <hr className="my-2" />
         <div>  
         <form onSubmit={this.handleSubmit} className='register_textfield_font'>
