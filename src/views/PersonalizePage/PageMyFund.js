@@ -118,6 +118,7 @@ class PageMyFund extends React.Component{
         this.handleClose=this.handleClose.bind(this);
         this.CreateMemo=this.CreateMemo.bind(this);
         this.getMemo=this.getMemo.bind(this);
+        // this.memostate=this.memostate.bind(this);
         this.handleChange=this.handleChange.bind(this);
 
         console.log(props)
@@ -127,7 +128,7 @@ class PageMyFund extends React.Component{
             // setOpen:false,
             errors: {},
             all_data:[],
-            original_content:"您尚未新增備忘錄",
+            // original_content:"您尚未新增備忘錄",
             flag:false,
             filter_content:false,
             columns:[
@@ -309,6 +310,40 @@ class PageMyFund extends React.Component{
       })
       .then(()=>{this.handleClickOpen()})
     }
+
+    // memostate(fld022){
+    //   let memo_content=[];
+    //   const url = "https://fundu.ddns.net:8090/getMemo";
+    //   fetch(url, {
+    //     method: 'POST',
+    //     headers: {
+    //         'Accept': 'application/json',
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //         userid: load_cookies("member_id"),
+    //         fld022: fld022,
+    //     })
+    //   })
+    //   .then((response) => {return response.json();})
+    //   .then((jsonData) => {
+    //     console.log(jsonData); 
+    //     try{
+    //     memo_content=JSON.parse(jsonData.info)
+    //     if(jsonData.StatusCode==200){
+    //       console.log(memo_content)
+    //       this.setState((state, props) => {
+    //         return {
+    //           content:memo_content[0][0].content
+    //         }
+    //       })
+    //     }
+  
+    //     }
+    //     catch(e){}
+    //   })
+    // }
+
     
     
     render(){
@@ -417,11 +452,12 @@ class PageMyFund extends React.Component{
                       <TextField
                         autoFocus
                         margin="dense"
-                        // id="name"
+                        id="name"
                         label="請輸入備忘錄內容"
                         multiline
                         rowsMax={4}
                         type="string"
+                        // defaultValue={this.state.content}
                         onChange={this.handleChange('new_content')} //更新新增內容
                         fullWidth
                       />

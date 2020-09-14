@@ -125,7 +125,6 @@ class PageCharacterAnalysis extends React.Component{
                 <div className="game-result-title-1">
                     <span style={{fontWeight:"bold"}}>{this.state.texts}</span>
                     <span style={{fontWeight:"bold"}}>{this.state.characteristic}</span><br/>
-                    <div className="result-chart"><Result></Result></div>
                 </div>
                 </Row>
                 <Row>

@@ -147,7 +147,7 @@ class Caculate extends React.Component{
                     </Col>
                     <Col sm={6}>
                         <div className="outlook-sub">
-                            <h5>試算結果</h5>
+                            <h5 style={{fontWeight:"normal"}}>試算結果</h5>
                             <div style={{visibility:this.state.show}}>
                                 <div>您設定：</div>
                                 <div>{this.state.o1}：{this.state.a1}</div>

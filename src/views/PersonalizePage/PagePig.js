@@ -71,7 +71,7 @@ class PagePig extends React.Component{
                 <Col sm={7}>
                     <div className='button-center'>
                     <button className='tag-btn'  onClick={()=>this.Change_rank(1)}>單筆投資</button>
-                    <button className='tag-btn'  onClick={()=>this.Change_rank(2)}>每月定期定額</button>
+                    {/* <button className='tag-btn'  onClick={()=>this.Change_rank(2)}>每月定期定額</button> */}
                     <button className='tag-btn'  onClick={()=>this.Change_rank(3)}>每年定期定額</button>
                     </div>
                 </Col>
