@@ -46,5 +46,12 @@ export const logout_deletecookie = () => {
     cookie.remove('fund_id_1')
     cookie.remove('fund_id_2')
     cookie.remove('fund_id_3')
+    cookie.remove('ROI')
+    cookie.remove('method')
+    cookie.remove('total_score')
+    cookie.remove('score_1')
+    cookie.remove('score_2')
+    cookie.remove('score_3')
+    cookie.remove('score_4')
     //window.location.href = '/index'
 }

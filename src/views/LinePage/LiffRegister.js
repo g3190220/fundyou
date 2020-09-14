@@ -1,11 +1,12 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
-//import Cookies from 'js-cookie';
 import _ from "underscore";
 
 import { Container, Row, Col, Button } from 'reactstrap';
-import ExamplesNavbar from "views/RegisterPage/ExamplesNavbar.js";
+
+//loading 頁面
+import LoadingIndicator_small from "views/Function/LoadingIndicator_small.js";
 
 //覆寫CSS
 import PropTypes from 'prop-types';
@@ -14,13 +15,13 @@ import { forwardRef } from 'react';
 
 
 //自動跳轉
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter
-  } from "react-router-dom";
+// import {
+//   BrowserRouter as Router,
+//   Route,
+//   Link,
+//   Redirect,
+//   withRouter
+//   } from "react-router-dom";
 
 
 //gender 選項
@@ -132,7 +133,8 @@ class LiffRegister extends React.Component {
       //console.log(this.state)
       this.state = {
         //fields: {},
-        errors: {}
+        errors: {},
+        flag:false,
     }
       //console.log(this.state) 
   }
@@ -201,9 +203,10 @@ class LiffRegister extends React.Component {
 
 
   handleSubmit(){
+    this.setState({flag:true});
     let errors = {};
     //errors["email"] = "Duplicate account"
-    console.log(this)
+    console.log(this.handleValidation())
     //取消DOM的預設功能
     window.event.preventDefault();
     if(this.handleValidation()) 
@@ -234,12 +237,13 @@ class LiffRegister extends React.Component {
           console.log(jsonData)
           //console.log(jsonData.StatusCode)
           if(jsonData.StatusCode==200){
+            this.setState({flag:false});
             this.state.errors["message"] = "註冊成功！即將跳轉回連結頁面，請重新做連結。";
             this.setState({errors: this.state.errors});
             setTimeout(() =>
               //window.event.preventDefault();
-              this.props.history.push("/LiffLogin")
-            ,4000)
+              this.props.history.push("/liff-linking")
+            ,2500)
             console.log(this.state.errors)
 
           }
@@ -258,6 +262,9 @@ class LiffRegister extends React.Component {
         })
         
         
+    }
+    else{
+      console.log("error")
     }
     
   }
@@ -297,7 +304,8 @@ class LiffRegister extends React.Component {
        >
       
       <Container>
-        <div className='register-title'><h3 className={classes.headercolor}>Create a new account</h3></div>
+        <div className='register-title'><h3 className={classes.headercolor}>創建新帳戶</h3></div>
+        {!this.state.flag ? (<span></span>):(<LoadingIndicator_small></LoadingIndicator_small>)}
         <hr className="my-2" />
         <div>  
         <form onSubmit={this.handleSubmit} className='register_textfield_font'>
@@ -474,5 +482,3 @@ LiffRegister.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 export default withStyles(styles)(LiffRegister);
-
-// export default Register

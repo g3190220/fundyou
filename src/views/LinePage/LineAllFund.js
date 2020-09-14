@@ -627,6 +627,112 @@ class AllFund extends React.Component {
         
         <Container>
         <div className='sub-menu'>
+        <Row>
+        
+          <div className='sub-sub-search'>
+            {/* <div>
+              <form>
+              <input id='search' placeholder="Search" type="search" /><input id='search-button' type="submit" value="search"></input>
+              </form>
+            </div> */}
+            <div>
+              <label className='search-font'>條件篩選基金</label>{!this.state.filter_content ? (<span></span>):(<LoadingIndicator_small></LoadingIndicator_small>)}
+            </div>
+        <Row>
+        <Col sm>
+            <TextField
+                id="currency"
+                label="請選擇 貨幣"
+                select
+                value={this.state.currency}
+                margin="normal"
+                onChange={this.handleSelectChange('currency')}
+                fullWidth
+                autoComplete='off'
+              >
+              {currency_.map((option) => (
+              <MenuItem key={option.value} value={option.value} >
+                {option.label}
+              </MenuItem>
+            ))}
+            </TextField>
+          </Col>
+            <Col sm>
+            <TextField
+                id="agent"
+                label="請選擇 公司"
+                select
+                value={this.state.agent}
+                margin="normal"
+                onChange={this.handleSelectChange('agent')}
+                fullWidth
+                autoComplete='off'
+              >
+              {agent_.map((option) => (
+              <MenuItem key={option.value} value={option.value} >
+                {option.label}
+              </MenuItem>
+            ))}
+            </TextField>
+            </Col>
+            <Col sm>
+            <TextField
+                id="fundtype"
+                label="請選擇 種類"
+                select
+                value={this.state.fundtype}
+                margin="normal"
+                onChange={this.handleSelectChange('fundtype')}
+                fullWidth
+                autoComplete='off'
+              >
+              {fundtype_.map((option) => (
+              <MenuItem key={option.value} value={option.value} >
+                {option.label}
+              </MenuItem>
+            ))}
+            </TextField>
+            </Col>
+            <Col sm>
+            <TextField
+                id="roi3M"
+                label="請選擇 三個月報酬區間"
+                select
+                value={this.state.roi3M}
+                margin="normal"
+                onChange={this.handleSelectChange('roi3M')}
+                fullWidth
+                autoComplete='off'
+              >
+              {roi3M_.map((option) => (
+              <MenuItem key={option.value} value={option.value} >
+                {option.label}
+              </MenuItem>
+            ))}
+            </TextField>
+            </Col>
+            <Col sm>
+            <TextField
+                id="RR"
+                label="請選擇 RR風險"
+                select
+                value={this.state.RR}
+                margin="normal"
+                onChange={this.handleSelectChange('RR')}
+                fullWidth
+                autoComplete='off'
+              >
+              {RR_.map((option) => (
+              <MenuItem key={option.value} value={option.value} >
+                {option.label}
+              </MenuItem>
+            ))}
+            </TextField>
+            </Col>
+              
+          </Row>
+        </div> 
+        </Row>   
         
         <div className={classes.customTable}>
         <Row>
