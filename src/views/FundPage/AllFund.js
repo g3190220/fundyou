@@ -484,9 +484,7 @@ class AllFund extends React.Component {
       //抓取淨值資料
       const url2 = "https://fundu.ddns.net:8090/getFundInfo";////////改url
   }
-  getNetWorth(){
-    
-  }
+  
 
   //處理filter、select value
   handleSelectChange = name2 => event =>{

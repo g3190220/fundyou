@@ -173,7 +173,8 @@ class PersonlDataPage extends React.Component {
         })
         .then((response) => {return response.json();})
         .then((jsonData) => {
-          //console.log(this)
+          console.log("或取資料")
+          console.log(jsonData)
           
           if(jsonData.StatusCode==200){
               member_info=JSON.parse(jsonData.member_info)
