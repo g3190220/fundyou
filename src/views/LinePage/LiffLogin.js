@@ -145,7 +145,6 @@ class LiffLogin extends React.Component {
               }
             })
             .then(()=>{
-              alert("連結成功！")
               liff.closeWindow();
             })
               

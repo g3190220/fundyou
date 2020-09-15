@@ -637,51 +637,51 @@ class LineDetailFund extends React.Component{
                 <div className='sub-sub-basic-info'>               
                     <table className='fund-basic-info' border='2' cellpadding="4">
                         <tr>
-                            <th style={{fontSize:'18px'}}>基金名稱</th>
+                            <th>基金名稱</th>
                             <td>{this.state.fund_name}</td>
                         </tr>
                         <tr>
-                            <th style={{fontSize:'18px'}}>基金名稱（英文）</th>
+                            <th>基金名稱（英文）</th>
                             <td>{this.state.fund_EN_name}</td>
                         </tr>
                         <tr>
-                            <th style={{fontSize:'18px'}}>基金統編</th>
+                            <th>基金統編</th>
                             <td>{this.state.fund_fld022}</td>  
                         </tr>
                         <tr>
-                            <th style={{fontSize:'18px'}}>國際證券識別碼</th>
+                            <th>國際證券識別碼</th>
                             <td>{this.state.fund_ISINcode}</td>
                         </tr>
                         <tr>
-                            <th style={{fontSize:'18px'}}>管理公司</th>
+                            <th>管理公司</th>
                             <td>{this.state.company_name}</td>
                         </tr>
                         <tr>
-                            <th style={{fontSize:'18px'}}>經理人</th>
+                            <th>經理人</th>
                             <td>{this.state.manager_name}</td>
                         </tr>
                         <tr>
-                            <th style={{fontSize:'18px'}}>基金規模</th>
+                            <th>基金規模</th>
                             <td>{this.state.fund_currency} {this.state.fund_scale}</td>
                         </tr>
                         <tr>
-                            <th style={{fontSize:'18px'}}>風險評等</th>
+                            <th>風險評等</th>
                             <td>{this.state.fund_riskRank}</td>
                         </tr>
                         <tr>
-                            <th style={{fontSize:'18px'}}>計價幣別</th>
+                            <th>計價幣別</th>
                             <td>{this.state.fund_currency}</td>
                         </tr>
                         <tr>
-                            <th style={{fontSize:'18px'}}>成立時間</th>
+                            <th>成立時間</th>
                             <td>{this.state.fund_startdate}</td>
                         </tr>
                         <tr>
-                            <th style={{fontSize:'18px'}}>基金類別</th>
+                            <th>基金類別</th>
                             <td>{this.state.fund_type}</td>
                         </tr>
                         <tr>
-                            <th style={{fontSize:'18px'}}>目標</th>
+                            <th>目標</th>
                             <td>{this.state.fund_Target}</td>
                         </tr>
                     </table>
