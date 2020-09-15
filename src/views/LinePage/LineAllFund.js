@@ -49,6 +49,9 @@ import ComparePage from "views/ComparePage/OneComparePage.js"
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 
+//liff套件
+import liff from '@line/liff';
+
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -405,15 +408,15 @@ const styles = () => ({
   }
 });
 
-class AllFund extends React.Component {
+class LineAllFund extends React.Component {
   state = {
   }
   constructor(props) {
-      super(props)
+      super (props)
       this.getAllFundData=this.getAllFundData.bind(this);
-      //this.handleSelectChange = this.handleSelectChange.bind(this);
+      //this.getLiffid = this.getLiffid.bind(this);
       this.filterShow=this.filterShow.bind(this);
-      //this.scroll=this.scroll.bind(this);
+      //this.ChangeLiffid=this.ChangeLiffid.bind(this);
       this.state = {
         fund_id1:'',
         fund_id2:'',
@@ -481,13 +484,76 @@ class AllFund extends React.Component {
           this.state.all_data=[]
           }
         })
+        // .then(()=>{
+        //   //獲取liff id
+        //   this.getLiffid()
+        // })
       //抓取淨值資料
-      const url2 = "https://fundu.ddns.net:8090/getFundInfo";////////改url
+      //const url2 = "https://fundu.ddns.net:8090/getFundInfo";////////改url
   }
-  getNetWorth(){
+  //獲取liff id
+  // getLiffid(){
+  //   let liff_userid;
+  //   liff.init({
+  //     liffId: "1654887866-Ll5OVBq2" // Use own liffId
+  //   })
+  //   .then(() => {
+  //     if (liff.isLoggedIn()) {
+  //         liff.getProfile()
+  //         .then(profile => {
+  //           const userId = profile.userId
+  //           //取得liff_userid;
+  //           liff_userid=userId;
+  //         })
+  //         .then(()=>{this.setState({liff_userid:liff_userid,flag:true})})
+  //         .then(()=>{
+  //          //獲取liff id
+  //         this.ChangeLiffid()
+  //          })
+  //       }
+  //     else{
+  //       alert("取得失敗")
+  //     }
+  //   })
     
-  }
+  // }
+  //檢查Liff有無連接，並回傳userid
+  // ChangeLiffid(){
+  //   let member_info=[];
+  //   const url = "https://fundu.ddns.net:8090/LineLogin";////////改url
+  //   //console.log(data)
+  //   fetch(url, {
+  //             method: 'POST',
+  //             headers: {
+  //                 'Accept': 'application/json',
+  //                 'Content-Type': 'application/json',
+  //             },
+  //             body: JSON.stringify({
+  //                   //取得全部fund
+  //                   lineid: this.state.liff_userid,
+  //             })
+              
+  //       })
+  //       .then((response) => {return response.json();})
+  //       .then((jsonData) => { 
+  //         console.log(jsonData)
+  //         if(jsonData.StatusCode==200){
+  //           member_info=JSON.parse(jsonData.member_info)
+  //           //取得系統id了
+  //           this.state.member_id=member_info.member_id
+  //           alert(this.state.member_id)
+            
+  //         }
+  //         else{
+  //           alert("您尚未與系統連結，無法使用此功能。即將跳轉至連結頁面！")
+  //           this.props.history.push({
+  //             pathname: "/liff-linking"
+  //           })
+          
+  //         }
+  //       })
 
+  // }
   //處理filter、select value
   handleSelectChange = name2 => event =>{
     this.setState({
@@ -552,89 +618,19 @@ class AllFund extends React.Component {
           }
         })
   }
-  handleselect(fund_id){  //勾選比較基金
-    if(this.state.counters < 3){
-      this.Update_comparebar(fund_id);
-    }
-    else{
-      alert('最多只可比較三筆基金！')
-    }
 
-  }
-  cancelhandleselect(fund_id){  //取消勾選比較基金
 
-    console.log(fund_id)
-    console.log(this.state.fund_id1)
-    this.state.counters--;
-    if(fund_id== this.state.fund_id1){
-      this.setState((state, props) => {
-        return {fund_id1:this.state.fund_id2,
-                fund_id2:this.state.fund_id3,
-                fund_id3:'',
 
-        };
-    });
-    console.log('取消勾選')
-    }
-    else if(fund_id == this.state.fund_id2){
-      this.setState((state, props) => {
-        return {fund_id2:this.state.fund_id3,
-                fund_id3:'',
-        };
-    }); 
-    }
-    else if(fund_id == this.state.fund_id3){
-      this.setState((state, props) => {
-        return {fund_id3:'',
-        };
-    });
-    }
-  }
-  //切到下一頁，頁面
-  scroll(){
-    alert("scroll")
-  }
-
-  Update_comparebar(fund_id) {  //更新下方的比較bar
-
-    //判別選取到第幾個比較基金
-    if(this.state.counters == 0){
-      this.setState((state, props) => {
-        return {fund_id1:fund_id};
-    });
-    }
-    else if(this.state.counters == 1){
-      this.setState((state, props) => {
-        return {fund_id2:fund_id};
-    });
-    }
-    else if(this.state.counters == 2){
-      this.setState((state, props) => {
-        return {fund_id3:fund_id};
-    });
-    }
-
-    this.state.counters++;
-  }
-  
   render() {
     const {classes} = this.props;
       return (
         <div>
         {!this.state.flag ? (<LoadingIndicator></LoadingIndicator>): 
         ( <div className='allfund-menu'>
-        {/* <div className='sub-bar'><IndexNavbar></IndexNavbar></div> */}
-        
         <Container>
         <div className='sub-menu'>
         <Row>
-        
-          <div className='sub-sub-search'>
-            {/* <div>
-              <form>
-              <input id='search' placeholder="Search" type="search" /><input id='search-button' type="submit" value="search"></input>
-              </form>
-            </div> */}
+         <div className='sub-sub-search'>
             <div>
               <label className='search-font'>條件篩選基金</label>{!this.state.filter_content ? (<span></span>):(<LoadingIndicator_small></LoadingIndicator_small>)}
             </div>
@@ -733,7 +729,6 @@ class AllFund extends React.Component {
           </Row>
         </div> 
         </Row>   
-        
         <div className={classes.customTable}>
         <Row>
           <MaterialTable
@@ -779,11 +774,13 @@ class AllFund extends React.Component {
                 tooltip: 'SEEFUND',
                 onClick: (event, rowData) =>  this.props.history.push({
                
-                pathname: '/detailfund-page/fundid='+rowData.Fund_fld022,
+                  pathname: '/line-detailfund/fundid='+rowData.Fund_fld022,
+                  state: { fundid: rowData.Fund_fld022 }
                   
                 })
                
               },
+              
             ]}
             
             localization={{
@@ -794,6 +791,7 @@ class AllFund extends React.Component {
           />
           
         </Row>
+        
         </div>
         
         </div>
@@ -803,10 +801,10 @@ class AllFund extends React.Component {
   )};
 
   }
-  AllFund.propTypes = {
+  LineAllFund.propTypes = {
     classes: PropTypes.object.isRequired,
   };
-  export default withStyles(styles)(AllFund);
+  export default withStyles(styles)(LineAllFund);
   //export default AllFund;
 
   //如果頁面(html)不變，那就是透過state 跟 props 來做更新

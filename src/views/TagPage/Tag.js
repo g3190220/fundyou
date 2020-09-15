@@ -50,6 +50,25 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { makeStyles } from '@material-ui/core/styles';
 
+//覆寫CSS
+import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
+
+//覆寫CSS
+const styles = () => ({
+    customTable: {
+      "& .MuiPaper-elevation2": {
+        color: "rgba(0, 0, 0, 0.87)",
+        transition: "box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+        backgroundColor: "#fff",
+        width: "100%",
+        fontFamily:"微軟正黑體",
+        
+      }
+      
+    }
+  });
+  
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -729,101 +748,107 @@ class Tag extends React.Component{
     }
    
     render(){
+        const {classes} = this.props;
         return(
             <div>
             {!this.state.flag ? (<LoadingIndicator></LoadingIndicator>):(
             <div className='tag-menu'>
             <Container>
             <IndexNavbar></IndexNavbar>
-            <Row>
-                <a className='tag-title' href="javascript:history.back()" style={{cursor: 'pointer'}}>{this.state.fund_name}</a>
-            </Row>
-            <Row>
-                <Col sm={4}>
-                    <div className='button-center'>
-                        <button className='tag-btn'  onClick={()=>this.Change_rank(1)}>歷史tag排行</button><br/>
-                        <button className='tag-btn'  onClick={()=>this.Change_rank(2)}>本週TAG排行</button><br/>
-                        <button className='tag-btn'  onClick={()=>this.Change_rank(3)}>最新TAG排行</button><br/>
-                    </div>
-                </Col>
-                <Col sm={8}>
-                    
-                    <div className="rank-content">
-                    <MuiThemeProvider theme={THEME}>
-                        <MaterialTable
-                            icons={tableIcons}
-                            title="TAG排行"
-                            columns={this.state.selected_columns}
-                            data={this.state.selected_data}
-                            options={{
-                            sorting: false,
-                            paging: false,
-                            toolbar: false,
-                            headerStyle: {
-                                backgroundColor: '#e26d5c',
-                                color: '#F8EDEB',
-                                width:100,
-                                maxWidth: 100,
-                                whiteSpace:'nowrap',
-                                position: 'sticky', 
-                                top: 0,
-                                fontSize: 17,
-                                textAlign:'center',
-                                fontFamily: '微軟正黑體',
-                                fontWeight: '800'
-                            },
-                            search: false,
-                            minBodyHeight: 400,
-                            cellStyle:{ 
-                                width:100,
-                                maxWidth:100,
-                                //whiteSpace:'nowrap',
-                                backgroundColor: '#F8EDEB',
-                                color: '#e26d5c',
-                                textAlign:'center',
-                                fontFamily: '微軟正黑體',
-                                fontWeight: '700'
-                                
-                            },
-                            actionsCellStyle: {
-                                backgroundColor: '#F8EDEB'
-                            },
-                            maxBodyHeight: 400,
-                            actionsColumnIndex: -1,
-                            }}
-                            actions={[
-                                rowData =>({
-                                    icon: () => (rowData.is_like_byuser==1)?<ThumbUpIcon color="secondary"/>:<ThumbUpIcon color="action"/>,
+                <div className="tag-menu-1">
+                    <Row>
+                        <Col xs={12} md={7}>
+                            <div>
+                                <a className='tag-title' href="javascript:history.back()" style={{cursor: 'pointer'}}>{this.state.fund_name}</a>
+                            </div>
+                        </Col>
+                        <Col xs={12}>
+                            <div className='button-center'>
+                                <div className='button-center-1'><button className='tag-btn'  onClick={()=>this.Change_rank(1)}>歷史TAG排行</button></div>
+                                <div className='button-center-1'><button className='tag-btn'  onClick={()=>this.Change_rank(2)}>本週TAG排行</button></div>
+                                <div className='button-center-1'><button className='tag-btn'  onClick={()=>this.Change_rank(3)}>最新TAG排行</button></div>
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
+                <div className={classes.customTable}>
+                    <Row> 
+                        <div className="rank-content">
+                        <MuiThemeProvider theme={THEME}>
+                            <MaterialTable
+                                icons={tableIcons}
+                                title="TAG排行"
+                                columns={this.state.selected_columns}
+                                data={this.state.selected_data}
+                                options={{
+                                sorting: false,
+                                paging: false,
+                                toolbar: false,
+                                headerStyle: {
+                                    backgroundColor: '#004487',
+                                    color: '#f6f6f6',
+                                    width:120,
+                                    maxWidth: 120,
+                                    whiteSpace:'nowrap',
+                                    position: 'sticky', 
+                                    top: 0,
+                                    fontSize: 17,
+                                    textAlign:'center',
+                                    fontFamily: '微軟正黑體',
+                                    fontWeight: '800'
+                                },
+                                search: false,
+                                minBodyHeight: 400,
+                                cellStyle:{ 
+                                    width:120,
+                                    maxWidth:120,
+                                    //whiteSpace:'nowrap',
+                                    backgroundColor: '#f6f6f6',
+                                    color: '#000000',
+                                    textAlign:'center',
+                                    fontFamily: '微軟正黑體',
+                                    fontWeight: '700'
                                     
-                                    tooltip: 'like',
-                                    onClick: (event, rowData) => {
+                                },
+                                actionsCellStyle: {
+                                    backgroundColor: '#f6f6f6'
+                                },
+                                maxBodyHeight: '420px',
+                                actionsColumnIndex: -1,
+                                }}
+                                actions={[
+                                    rowData =>({
+                                        icon: () => (rowData.is_like_byuser==1)?<ThumbUpIcon color="secondary"/>:<ThumbUpIcon color="action"/>,
                                         
-                                        this.getLike(rowData.tagID,1)
+                                        tooltip: 'like',
+                                        onClick: (event, rowData) => {
+                                            
+                                            this.getLike(rowData.tagID,1)
+                                        }
+                                    }),
+                                    rowData =>({
+                                        icon: () => (rowData.is_like_byuser==2)?<ThumbDownIcon color="primary"/>:<ThumbDownIcon color="action"/>,
+                                        tooltip: 'unlike',
+                                        onClick: (event, rowData) => {
+                                            
+                                            this.getLike(rowData.tagID,2)
+                                        }
+                                    }),
+                                ]}
+                                localization={{ 
+                                    body:{ emptyDataSourceMessage:<h4 style={{marginTop:'6%', position:'absolute', top:'16%', textAlign:'center',color: '#004487'}}>尚無TAG資料...</h4> },
+                                    header: {
+                                        actions: ''
                                     }
-                                }),
-                                rowData =>({
-                                    icon: () => (rowData.is_like_byuser==2)?<ThumbDownIcon color="primary"/>:<ThumbDownIcon color="action"/>,
-                                    tooltip: 'unlike',
-                                    onClick: (event, rowData) => {
-                                        
-                                        this.getLike(rowData.tagID,2)
-                                    }
-                                }),
-                            ]}
-                            localization={{ 
-                                body:{ emptyDataSourceMessage:<h4 style={{marginTop:'6%', position:'absolute', top:'16%', textAlign:'center',color: '#e26d5c'}}>還沒有人新增TAG...</h4> },
-                                header: {
-                                    actions: ''
-                                }
-                            }}
-                        />
-                        </MuiThemeProvider>
-                        </div>
-                </Col>
-                
-                
-            </Row>
-            
+                                }}
+                            />
+                            </MuiThemeProvider>
+                            </div>
+                    
+                    
+                    
+                </Row>
+                </div>
             
             </Container>
             </div>
@@ -831,4 +856,8 @@ class Tag extends React.Component{
         );
     }
 }
-export default Tag;
+Tag.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+export default withStyles(styles)(Tag);
+//export default Tag;

@@ -183,7 +183,7 @@ class PersonalizePage extends React.Component {
           })
         }
         })
-   }
+  }
 
   //處理登出視窗
   handleClickOpen(){
