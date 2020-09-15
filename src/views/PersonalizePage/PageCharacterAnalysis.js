@@ -9,7 +9,6 @@ import { IconButton } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { logout_deletecookie,load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
 import { PieChart, Pie, Sector } from 'recharts';
-
 // import FcBusinessman from "react-icons/fc";
 
 
@@ -141,7 +140,6 @@ class PageCharacterAnalysis extends React.Component{
                     <div className="result-chart"><Result></Result></div>
                     </Col>
                 </Row>
-                
             </div>
             </Row>
             {/* <div className="result-2">

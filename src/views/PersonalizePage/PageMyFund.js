@@ -311,38 +311,6 @@ class PageMyFund extends React.Component{
       .then(()=>{this.handleClickOpen()})
     }
 
-    // memostate(fld022){
-    //   let memo_content=[];
-    //   const url = "https://fundu.ddns.net:8090/getMemo";
-    //   fetch(url, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Accept': 'application/json',
-    //         'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //         userid: load_cookies("member_id"),
-    //         fld022: fld022,
-    //     })
-    //   })
-    //   .then((response) => {return response.json();})
-    //   .then((jsonData) => {
-    //     console.log(jsonData); 
-    //     try{
-    //     memo_content=JSON.parse(jsonData.info)
-    //     if(jsonData.StatusCode==200){
-    //       console.log(memo_content)
-    //       this.setState((state, props) => {
-    //         return {
-    //           content:memo_content[0][0].content
-    //         }
-    //       })
-    //     }
-  
-    //     }
-    //     catch(e){}
-    //   })
-    // }
 
     
     
