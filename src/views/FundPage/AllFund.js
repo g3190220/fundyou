@@ -790,7 +790,7 @@ class AllFund extends React.Component {
               { //這邊改比較基金按鈕
                 
                 //hidden:true,
-                icon: () =><Checkbox/>,
+                icon: () =><Checkbox color="primary"/>,
                 tooltip: 'Compare Fund',
 
                 onClick: (event, rowData) =>  {
