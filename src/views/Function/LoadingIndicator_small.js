@@ -7,12 +7,12 @@ function LoadingIndicator_small() {
        style={{
          width:"40px",
          height: "40px",
-         display:"inline"
+         display:"inline-block"
           // justifyContent: "center",
           // alignItems: "center"
         }}
       >
-        <Loader type="ThreeDots" color="#FFFFFF" height="40" width="40" />
+        <Loader type="ThreeDots" color="#004487" height="40" width="40" />
      </div>)
 };
 export default LoadingIndicator_small;

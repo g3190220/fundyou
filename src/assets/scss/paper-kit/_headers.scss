@@ -36,30 +36,30 @@
   }
   #s1_1{
     position: fixed;
-    animation: star11 70s linear infinite ;
+    animation: star11 350s linear infinite ;
   }
   #m1_2{
     position: fixed;
-    animation: star12 65s linear infinite ;
+    animation: star12 330s linear infinite ;
   }
   #l1_3{
     position: fixed;
-    animation: star13 60s linear infinite ;
+    animation: star13 280s linear infinite ;
   }
   #s2_1{
     position: fixed;
     top:-420%;
-    animation: star21 70s linear 35s infinite ;
+    animation: star21 350s linear 35s infinite ;
   }
   #m2_2{
     position: fixed;
     top:-420%;
-    animation: star22 65s linear 32s infinite ;
+    animation: star22 330s linear 32s infinite ;
   }
   #l2_3{
     position: fixed;
     top:-420%;
-    animation: star23 60s linear 30s infinite ;
+    animation: star23 280s linear 30s infinite ;
   }
 }
 @keyframes star11{

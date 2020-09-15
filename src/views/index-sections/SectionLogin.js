@@ -183,7 +183,7 @@ class SectionLogin extends React.Component {
                     className="btn-round"
                     color="danger"
                     type="button"
-                    //href="#allfund-page"//新增這行!!!
+                    style={{fontFamily:'jf-openhuninn',fontSize:'15px'}}
                     onClick={this.handleSubmit}
                   >
                     登  入
@@ -200,8 +200,8 @@ class SectionLogin extends React.Component {
             <div className='z1'>z</div>
               <div id="ear-r" class="ear body"></div>
               <div id="ear-l" class="ear body"></div>
-              <div id="eye-r" class="eye body"></div>
-              <div id="eye-l" class="eye body"></div>
+              <div id="eye-r" class="eye body"><span className="eyeball"></span></div>
+              <div id="eye-l" class="eye body"><span className="eyeball"></span></div>
               <div id="nose">
                 <div id="nose-r" class="nose body"></div>
                 <div id="nose-l" class="nose body"></div>

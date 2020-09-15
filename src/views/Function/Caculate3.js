@@ -159,7 +159,7 @@ class Caculate3 extends React.Component{
                             <RadioGroup aria-label="gender" name="gender1" value={this.state.selected} onChange={this.handleChange} row>
                                 <FormControlLabel value="1" control={<Radio />} label="每月投資金額" />
                                 <FormControlLabel value="4" control={<Radio />} label="投資期間" />
-                                <FormControlLabel value="2" control={<Radio />} label="目標投資月報酬率" />
+                                {/* <FormControlLabel value="2" control={<Radio />} label="目標投資月報酬率" /> */}
                                 <FormControlLabel value="3" control={<Radio />} label="期末金額" />
                             </RadioGroup>
                         </FormControl>
@@ -204,7 +204,7 @@ class Caculate3 extends React.Component{
                     </Col>
                     <Col sm={6}>
                         <div className="outlook-sub-large">
-                            <h5>試算結果</h5>
+                            <h5 style={{fontWeight:"normal"}}>試算結果</h5>
                             <div style={{visibility:this.state.show}}>
                                 <div>您設定：</div>
                                 <div>{this.state.o1}：{this.state.a1}</div>

@@ -3,89 +3,6 @@
     position: relative;
     background-color: #FFFFFF;
 }
-.section-with-space{
-    padding: 60px 0;
-}
-.section-gray{
-    background-color: #EEEEEE;
-}
-.section-nude{
-    background-color: $bg-nude;
-}
-.section-gold{
-    background-color: #caac90;
-    color: $white-color;
-}
-.section-brown{
-    background-color: #A59E94;
-    color: $white-color;
-}
-.section-light-blue{
-    background-color: $primary-color;
-    color: $white-color;
-}
-.section-dark-blue{
-    background-color: #506367;
-    color: $white-color;
-}
-.section-dark{
-    background-color: #0b1011;
-}
-.section-image,
-.section-gold,
-.section-dark{
-    position: relative;
-
-    .title,
-    .info-title,
-    .card-plain .card-title{
-        color: $white-color !important;
-    }
-    .category,
-    .description,
-    .card-plain .card-description,
-    .card-plain .card-category{
-        color: rgba($white-color, .7);
-    }
-    hr{
-        border-color: rgba(255, 255, 255, 0.19);
-    }
-}
-.page-header,
-.carousel-caption{
-    .title,
-    .info-title{
-        color: $white-color;
-    }
-}
-[class*="features-"],
-[class*="team-"],
-[class*="projects-"],
-[class*="pricing-"],
-[class*="testimonials-"],
-[class*="contactus-"]{
-    padding: 80px 0;
-}
-.section-image{
-    background-position: center center;
-    background-size: cover;
-
-    &:before{
-        background-color: rgba(0, 0, 0, 0.5);
-        content: "";
-        display: block;
-        height: 100%;
-        left: 0;
-        top: 0;
-        position: absolute;
-        width: 100%;
-        z-index: 1;
-    }
-    & .container{
-        position: relative;
-        z-index: 2;
-    }
-}
 
 .section-login{
     min-height: 700px;
@@ -127,7 +44,22 @@
     margin: 160px auto 0;
     width: 160px;
   }
-  
+  #face-wrap:hover {
+    .eye{
+        top: +60px;
+    
+        width:40px;height:18px;
+        border-radius: 10px;
+        
+      }
+    .eyeball {
+        animation: move_eye  5s linear 5s 2;
+      }
+      .z1{
+        visibility: hidden;
+        animation: sleep  1.5s linear 2s infinite paused;
+    }
+  }
   #face {
     position: relative;
     width: 160px;
@@ -146,6 +78,7 @@
     height: 70px;
     border-radius: 35px;
     background: rgb(255, 200, 200);
+    
   }
   #ear-l {
     left: -20px;
@@ -160,9 +93,34 @@
     width: 40px;
     height: 4px;
     background: rgb(255, 250, 250);
+    transition: 1.5s;
+    overflow: hidden;
   }
+  .eyeball {
+    position: relative;
+    left:48%;
+    top:58%;
+    
+    transform: translateY(-50%);
+    display: block;
+    width:12px;height:12px; //正圓形，所以寬與高都設一樣
+    border-radius:999em;
+    background:black;
+    animation: move_eye  5s linear 5s 2 paused;
+  }
+  @keyframes move_eye{
+    0%{
+        left:40%;
+    }
+    50%{
+        left:20%
+    }
+    100%{
+        left:40%;
+    }
+}
   #eye-l {
-    left: +14px;
+    left: +20px;
   }
   #eye-r {
     left: +100px;
@@ -171,7 +129,7 @@
   #nose {
     position: absolute;
     top: +75px;
-    left: +47px;
+    left: +45px;
     width: 60px;
     height: 60px;
     border-radius: 30px;
@@ -202,7 +160,7 @@
         line-height: 0px;
         color: black;
         display: inline;
-        animation: sleep  1.5s linear 2s infinite;
+        animation: sleep  0.8s linear 2s infinite;
         z-index: 1;
     }
 @keyframes sleep{
@@ -221,67 +179,32 @@
 //--------------------------------
 .section-carousel{
     //background-color: '#fb8b75';
-    background-color:rgba(182, 202, 228, 0.76);
-    padding: 50px 0;
+    background-image: linear-gradient(to right, #243949 15%, #517fa4 50%, #243949 85%);
+    padding: 30px 0;
     .container{
-      margin:auto;
-    }
-    .features_title{
-        font-family: "jf-openhuninn",'Montserrat','Noto Sans TC', sans-serif;
-        font-size: 55px;
+      margin: auto;
     }
     
     .col{
-        padding: 45px 30px 20px 30px;
-        background: rgba(255,255,255,0.4);
-        transition: 0.3s;
+        min-width: 350px;
+        padding: 30px 10px 20px 30px;
+        transition: 0.2s;
         margin-top:20px;
         margin-bottom:20px;
-        border-radius: 30px;
-        overflow: hidden;
-    }
-    .col1{
-        margin-right:70px;
-        span{
-            opacity: 1;
-            transition: 0.3s;
-        }
+        border-radius: 15px;
+        margin-left: 20px;
+        margin-right: 20px;
     }
     .col:hover{
-        background: rgba(75, 126, 192, 0.596);
+        background: rgba(255,255,255,0.3);
+        box-shadow:1px 1px 4px 3px #30d6a4d7;
         h4{ 
-            transform: translateY(-4px);
+            transform: translateY(-4px) scale(1.05);
         }
-        .title_line{ 
-            width: 60%;
-        }
-        span{
-            opacity: 0;
-            transform: translate(0px,40px);
-            }
-        p{
-            transform: translate(0px,8px);
-        }
-        p::after{
-            opacity: 1;
-            transform: translate(0, 0);
-        }      
     }
     // 參考https://reurl.cc/GrxDGW
-    p::after{
-        content: attr(data-text);
-        position: absolute;
-        line-height: 1.8em;
-        top: 0%;
-        left: 0%;
-        opacity: 0;
-        transform: translate(-30%, -50%) rotate(-30deg);
-        color: black;
-        transition: all 0.3s;   
-    }
     .features{
         position: relative;
-        transition: background-position 5s ease-out;
         height: 100%;
         width: 100%;
         h4{
@@ -289,16 +212,16 @@
             left: 5%;
             font-family: "jf-openhuninn",'Montserrat','Noto Sans TC', sans-serif;
             font-size: 30px;
-            color: black;
+            color: white;
             margin: 0px;
             transition: 0.5s;
             transform: translateY(0px);
         }
         .title_line{
-            width: 92%;
+            width: 60%;
             opacity: 0.9;
-            height: 2.5px;
-            background:#253ca3d7;
+            height: 3.5px;
+            background:#30d6a4d7;
             border-radius: 60px;
             box-shadow: 0em 0em 2em #ffffff;
             transition: 0.5s;
@@ -307,94 +230,47 @@
             transition: 0.5s;
         }
         p{
+            position: relative;
+            top:10px;
+            //position: absolute; 或 float 隱式改成 display: inline-block;
             font-family: "jf-openhuninn",'Montserrat','Noto Sans TC', sans-serif;
-            color: rgba(70, 70, 70, 0.267);
-            font-size: 20px;
-            display: inline-block;
+            color: white;
+            font-size: 22px;
+            display: inline;
             line-height: 1.8em;
-            max-width: 70%;
-            transform: translateY(2px);
-            vertical-align: top;
+            vertical-align: middle;
             transition: 0.3s;
-            overflow: hidden;
+            word-wrap:break-word;
         }
         
         .feature1{
             display: inline-block;
-            width: 22%;
-            vertical-align: top;
-            margin-right: 20px;
+            width: 17%;
+            vertical-align: middle;
+            margin-right: 10px;
             margin-top: 20px;
         }
         .feature2{
             display: inline-block;
-            width: 20%;
-            vertical-align: top;
-            margin-right: 20px;
+            width: 17%;
+            vertical-align: middle;
+            margin-right: 10px;
             margin-top: 20px;
         }
         .feature3{
             display: inline-block;
-            width: 18%;
-            vertical-align: top;
-            margin-right: 20px;
+            width: 17%;
+            vertical-align: middle;
+            margin-right: 10px;
             margin-top: 20px;
         }
         .feature4{
             display: inline-block;
-            width: 20%;
-            vertical-align: top;
-            margin-right: 20px;
+            width: 17%;
+            vertical-align: middle;
+            margin-right: 10px;
             margin-top: 20px;
         }
         
-    }
-}
-.section-introduction{
-    background-color:#da7973;
-    padding: 55px 0;
-}
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    /* IE10+ CSS styles go here */
-    .page-header{
-        .content-center{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -75%);
-        }
-        .presentation-title{
-            background: none !important;
-        }
-    }
-}
-
-
-[class*="features-"],
-[class*="team-"],
-[class*="projects-"],
-[class*="pricing-"],
-[class*="testimonials-"],
-[class*="contactus-"] {
-    padding: 80px 0;
-}
-.section-image {
-    background-position: center center;
-    background-size: cover;
-
-    &:before {
-        background-color: rgba(0, 0, 0, 0.5);
-        content: "";
-        display: block;
-        height: 100%;
-        left: 0;
-        top: 0;
-        position: absolute;
-        width: 100%;
-        z-index: 1;
-    }
-    & .container {
-        position: relative;
-        z-index: 2;
     }
 }

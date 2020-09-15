@@ -1,8 +1,8 @@
 @font-face {
-    font-family: 'jf-openhuninn';
-    src: url('../fonts/jf-openhuninn-1.1.woff') format("woff"),
-           url('../fonts/jf-openhuninn-1.1.ttf') format("truetype"),
-  }
+  font-family: 'jf-openhuninn';
+  src: url('../fonts/jf-openhuninn-1.1.woff') format("woff"),
+         url('../fonts/jf-openhuninn-1.1.ttf') format("truetype"),
+}
 @import 'paper-kit/variables';
 @import 'paper-kit/mixins';
 
@@ -34,7 +34,7 @@
 @import "paper-kit/modal";
 @import "paper-kit/icons";
 @import "paper-kit/carousel";
-@import "paper-kit/footers";
+@import "paper-kit/_footers";
 @import "paper-kit/headers";
 
 // Cards

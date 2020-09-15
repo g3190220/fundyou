@@ -29,6 +29,8 @@ class DetailFund extends React.Component{
 
       state = {
     }
+    
+
     constructor(props) { //待搞懂
         super(props)
         this.state = {
@@ -46,7 +48,6 @@ class DetailFund extends React.Component{
         teach1:true,
         teach2:false,
         teach3:false,
-
       };
       
       this.handleClick1 = chart_performance.bind(this); //綁定事件，參考：https://reurl.cc/pdkgQ8
@@ -390,6 +391,7 @@ class DetailFund extends React.Component{
             .then((jsonData) => {
             //console.log(this)
             console.log(jsonData.fund_net)
+            
             fund_net=JSON.parse(jsonData.fund_net)
             if(jsonData.StatusCode==200){
                 
