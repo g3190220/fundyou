@@ -1,17 +1,17 @@
 .compare-menu{
-    background-color:#F9DCC4;
+    background-color:rgb(110, 164, 218);
 
     .compare-title{
-        color: #e26d5c;
-        font-size: 35px;
+        color: #f6f6f6;
+        font-size: 40px;
         margin-top: 150px;
         display:inline-block;
-        font-weight:bold;
+        font-weight:900;
         font-family:Microsoft JhengHei;
     }
 
     .sub-compare-gragh{
-        background-color:#F8EDEB;
+        background-color:#f6f6f6;
         border-radius: 15px;
         margin-top: 30px;
         transform: translateX(1%);
@@ -22,9 +22,9 @@
             width: 150px;
             height: 45px;
             border-radius: 10px;
-            border:#e26d5c solid 2px;
-            background-color: #e26d5c;
-            color: #F8EDEB;
+            border:rgb(0, 68, 135) solid 2px;
+            background-color:rgb(0, 68, 135);
+            color: #ffffff;
             margin-top: 10px;
             margin-left: 75px;
             font-weight:bold;
@@ -47,12 +47,12 @@
         #btn-net{
             width: 90px;
             height: 35px;
-            border:#FFB5A7 solid 2px;
-            background-color:#FFB5A7;
+            borderrgb:(2, 90, 179) solid 2px;
+            background-color:rgb(2, 90, 179);
             font-size: 20px;
             margin-left: 30px;
             outline:none;
-            color:  #F8EDEB;
+            color:  #ffffff;
             font-weight:bold;
             text-align:center;
             font-family:Microsoft JhengHei;
@@ -60,13 +60,13 @@
         #btn-performance{
             width: 90px;
             height: 35px;
-            border:#FFB5A7 solid 2px;
-            background-color:#FFB5A7;
+            border:rgb(2, 90, 179) solid 2px;
+            background-color:rgb(2, 90, 179);
             font-size: 20px;
             margin-top: -4px;
             margin-left: 30px;
             outline:none;
-            color:  #F8EDEB;
+            color:  #ffffff;
             font-weight:bold;
             text-align:center;
             font-family:Microsoft JhengHei;
@@ -74,13 +74,13 @@
         #btn-risk{
             width: 90px;
             height: 35px;
-            border:#FFB5A7 solid 2px;
-            background-color:#FFB5A7;
+            border:rgb(2, 90, 179) solid 2px;
+            background-color:rgb(2, 90, 179);
             font-size: 20px;
             margin-top: -4px;
             margin-left: 30px;
             outline:none;
-            color:  #F8EDEB;
+            color:  #ffffff;
             font-weight:bold;
             text-align:center;
             font-family:Microsoft JhengHei;
@@ -89,11 +89,11 @@
         .sub-btn-net{
             width: 90px;
             height: 35px;
-            border:#FFB5A7 solid 2px;
-            background-color:#F8EDEB;
+            border:rgb(2, 90, 179) solid 2px;
+            background-color:#ffffff;
             margin-left: -3px;
             outline:none;
-            color:  #FFB5A7;
+            color:  rgb(2, 90, 179);
             font-weight:bold;
             font-family:Microsoft JhengHei;
         }
@@ -101,12 +101,12 @@
         .sub-btn-performance{
             width: 90px;
             height: 35px;
-            border:#FFB5A7 solid 2px;
-            background-color:#F8EDEB;
+            border:rgb(2, 90, 179) solid 2px;
+            background-color:#ffffff;
             margin-top: -4px;
             margin-left: -3px;
             outline:none;
-            color:  #FFB5A7;
+            color:  rgb(2, 90, 179);
             font-weight:bold;
             font-family:Microsoft JhengHei;
         }
@@ -114,35 +114,35 @@
         .sub-btn-risk{
             width: 90px;
             height: 35px;
-            border:#FFB5A7 solid 2px;
-            background-color:#F8EDEB;
+            border:rgb(2, 90, 179) solid 2px;
+            background-color:#ffffff;
             margin-top: -4px;
             margin-left: -3px;
             outline:none;
-            color:  #FFB5A7;
+            color:  rgb(2, 90, 179);
             font-weight:bold;
             font-family:Microsoft JhengHei;
         }
 
         .sub-btn-net:focus {
-            background-color: #FFB5A7;
-            color: #F8EDEB;
-            border-left:#F8EDEB solid 1px;
+            background-color: rgb(2, 90, 179);
+            color: #ffffff;
+            border-left:#ffffff solid 1px;
         }
         .sub-btn-performance:focus {
-            background-color: #FFB5A7;
-            color: #F8EDEB;
-            border-left:#F8EDEB solid 1px;
+            background-color: rgb(2, 90, 179);
+            color: #ffffff;
+            border-left:#ffffff solid 1px;
         }
         .sub-btn-risk:focus {
-            background-color: #FFB5A7;
-            color: #F8EDEB;
-            border-left:#F8EDEB solid 1px;
+            background-color: rgb(2, 90, 179);
+            color: #ffffff;
+            border-left:#ffffff solid 1px;
         }
     }
 
     .sub-compare-info{
-        background-color:#F8EDEB;
+        background-color:#f6f6f6;
         border-radius: 15px;
         margin-top: 30px;
         transform: translateX(1%);
@@ -150,7 +150,7 @@
         padding: 30px 0px;
 
         .compare-table{
-            border: 2px #F8EDEB solid;
+            border: 2px #ffffff solid;
             margin:0 auto;
           //  margin-top: 10px;
             margin-bottom: 15px;
@@ -165,10 +165,10 @@
             font-size: 20px;
             padding: 5px 5px;
           //  width: 350px;
-            color: #F8EDEB;
+            color: #ffffff;
             font-weight:bold;
             text-align:center;
-            background: #e26d5c;
+            background: rgb(0, 68, 135);
          //   display: block;
             font-family:Microsoft JhengHei;
             
@@ -177,19 +177,19 @@
         .compare-table td{
             font-size: 20px;
             padding: 2px 5px;
-            color: #e26d5c;
+            color: rgb(0, 68, 135);
          //   width: 350px;
           //  text-align:center;
             text-align:center;
-            background: #F8EDEB;
+            background: #ffffff;
           //  display: block;
-            border:#e26d5c solid 1px;
+            border:rgb(0, 68, 135) solid 1px;
             font-family:Microsoft JhengHei;
         }
 
         .compare-label{
             font-size: 20px;
-            color: #e26d5c;
+            color: rgb(0, 68, 135);
             text-align:center;
             font-weight:bold;
             margin-left: 25px;
@@ -197,18 +197,18 @@
         }
 
         .add-compare{
-            background-color: #e26d5c;
-            color: #F8EDEB;
+            background-color: rgb(0, 68, 135);
+            color: #ffffff;
             font-weight:bold;
             font-family:Microsoft JhengHei;
-            border:#F8EDEB dotted 2px;
+            border:#ffffff dotted 2px;
             outline:none;
             border-radius: 20px;
 
         }
 
         .add-compare:focus{
-            background-color: #e24e37;
+            background-color: rgb(0, 68, 135);
         }
         
     }

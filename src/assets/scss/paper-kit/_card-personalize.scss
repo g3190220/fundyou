@@ -701,6 +701,28 @@
       margin-top:15px;
       left:50%;
     }
+    & .fund-recommendation{
+      font-family: "微軟正黑體";
+      font-weight:600;
+      color: #347cc4;
+      font-size: 26px;
+      z-index:1;
+      text-align: center;
+      margin-left: 130px;
+      margin-top:15px;
+      left:50%;
+    }
+    & .sub-fund-recommendation{
+      font-family: "微軟正黑體";
+      font-weight:600;
+      color: #000000;
+      font-size: 15px;
+      z-index:1;
+      text-align: center;
+      margin-left: 170px;
+      margin-top:15px;
+      left:50%;
+    }
     & .button-center{
       margin:0 auto;
       margin-left: 0px;
@@ -744,7 +766,11 @@
       color: inherit;
     }
   
-
+    & .recommendation-div{
+      margin-left:40px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
     
     & label {
       margin-top: 15px;
@@ -780,6 +806,7 @@
         margin-top:-20px;
         margin-left:10px;
       }
+
      
     
     & .outlook-sub{
