@@ -156,28 +156,54 @@
             background-color:#FFFFFF;
             border-radius: 15px;
             margin-top: 150px;
+            padding:0px;
             transform: translateX(12%);
             width: 80%;
-
+            .button-position{
+                padding-top:20px;
+                //padding-right:35px;
+                //padding-left:35px;
+                //transform: translateX(50%);
+                margin: 0 auto; 
+            }
             .fund-name{
                 color:  rgb(0, 68, 135);
-                width: 620px;
+                //width: 620px;
+                width:100%;
                 font-weight:bold;
                 font-size: 33px;
-                margin-left: 50px;
-                margin-top: 20px;
+                padding-left:35px;
+                padding-top:20px;
                 font-family:Microsoft JhengHei;
+                //margin-bottom: -2px;
+                
+            }
+            .fund-currency-position{
+                padding-left:35px;
+                
+            }
+            
+            .fund-percentage-position{
+                padding-left:35px;
             }
             .tag-position{
-                width: 620px; 
-                margin-left: 50px;
+                //width: 620px; 
+                //margin-left: 50px;
+                width:90%;
+                padding-left:35px;
                 font-family:Microsoft JhengHei;
+                .tag-label-position{
+                    //padding-top:5px;
+                    display: inline-block;
+                    margin: 5px;
+
+                }
             }
 
             .tag-label{
                 height: 30px;
                 font-size: 15px;
-                margin-left: 10px;
+                margin-left: 9px;
                 margin-top: 35px;
                 font-family:Microsoft JhengHei;
                 font-weight:bold;
@@ -185,17 +211,24 @@
                 border-radius: 10px;
                 padding: 0px 3px;
                 background-color:#ffffff;
+                .delete-tag{
+                    font-family:Microsoft JhengHei;
+                    font-weight:bold;
+
+                }
                 
             }
 
             .followBtnTrue { //已追蹤
-                width: 80px;
+                //width: 80px;
+                min-width:70px;
+                width:80%;
                 height: 40px;
                 border-radius: 20px;
                 border:rgb(0, 68, 135) solid 2px;
                 background-color:rgb(0, 68, 135);
-                margin-top: 30px;
-                margin-left: 15px;
+                //margin-top: 30px;
+                //margin-left: 15px;
                 outline:none;
                 color:  #F8EDEB;
                 font-weight:bold;
@@ -203,7 +236,8 @@
             }
               
             .followBtnFalse { //未追蹤
-                width: 80px;
+                min-width:70px;
+                width:80%;
                 height: 40px;
                 border-radius: 20px;
                 border:rgb(0, 68, 135) solid 2px;
@@ -225,39 +259,43 @@
             .fund-value-red{
                 color: 	#ff0000;
                 font-size: 50px;
-                margin-left: 120px;
+                //margin-left: 120px;
                 font-weight:bold;
-                margin-bottom: 20px;
+                margin-bottom: -8px;
             }
             .fund-value-green{
                 color: #00ff00;
                 font-size: 50px;
-                margin-left: 120px;
+                //margin-left: 120px;
                 font-weight:bold;
-                margin-bottom: 20px;
+                margin-bottom: -8px;
             }
 
             .fund-currency{
                 color: rgb(0, 68, 135);
                 font-size: 22px;
-                margin-left: 40px;
-                margin-top: 23px;
+                //margin-left: 40px;
+                //margin-top: 23px;
                 font-family:Microsoft JhengHei;
+                font-weight:500;
+                padding-left: 5px;
             }
 
             .fund-percentage-red{
+                width:100%;
                 color: 	#ff0000;
                 font-size: 15px;
-                margin-left: 30px;
-                margin-top: 15px;
+                //margin-left: 30px;
+                margin-top: 12px;
                 font-weight:bold;
                 font-family:Microsoft JhengHei;
             }
             .fund-percentage-green{
+                width:100%;
                 color: #00ff00;
                 font-size: 15px;
-                margin-left: 30px;
-                margin-top: 15px;
+                //margin-left: 30px;
+                margin-top: 12px;
                 font-weight:bold;
                 font-family:Microsoft JhengHei;
             }
@@ -266,7 +304,9 @@
                 color: #1a5da0;
                 font-size: 18px;
                 font-family:Microsoft JhengHei;
-                margin-left: 120px;
+                padding-top:7px;
+                padding-left:50px;
+                padding-right:25px;
                 font-weight:bold;
             }
 
@@ -278,6 +318,18 @@
             margin-top: 30px;
             transform: translateX(12%);
             width: 80%;
+            .sub-sub-graphics-title{
+                padding-left:40px;
+                padding-top:10px;
+                padding-bottom: 10px;
+            }
+            .sub-sub-graphics-btn{
+                //padding-left:8px;
+                //padding-top:5px;
+                //padding-bottom: 5px; 
+                //padding-top:10px;
+                //padding-bottom: 10px;
+            }
 
             .net-worth-label{
                 width: 150px;
@@ -287,7 +339,7 @@
                 background-color: rgb(0, 68, 135);
                 color: #FFFFFF;
                 margin-top: 30px;
-                margin-left: 75px;
+                //margin-left: 75px;
                 font-weight:bold;
                 font-family:Microsoft JhengHei;
                 font-size: 30px;
@@ -318,7 +370,8 @@
                 border:rgb(2, 90, 179) solid 2px;
                 background-color:rgb(196, 215, 233);
                 margin-top:15px;
-                margin-left: 75px;
+                //margin-left: 75px;
+                //padding-left: 15px;
                 outline:none;
                 color:  rgb(2, 90, 179);
                 font-weight:bold;
@@ -359,14 +412,17 @@
             transform: translateX(12%);
             width: 80%;
             display: inline;
+            padding:15px 15px;
+            
             .input-tag{
+                
                 background-color:rgb(196, 215, 233);
                 border-radius: 15px;
-                width: 700px;
+                width: 90%;
                 height: 42px;
-                margin-left: -20px;
-                margin-top:-48px;
-                transform: translateX(30%);
+                //margin-left: -20px;
+                //margin-top:13px;
+                //transform: translateX(20%);
                 
             }
             .input-fieled{
@@ -378,7 +434,7 @@
                 outline: none;
                 margin-left: 20px;
                 margin-top: 10px;
-                width:640px;
+                width:100%;
             }
 
             .tag-table{
@@ -420,13 +476,13 @@
                 font-weight: 100;
                 margin-right: 30px;
             }
+            .input-tag-btn{
+                margin:0 auto;
+            }
             .tag-btn{
-                width: 150px;
+                width: 95%;
                 height: 40px;
                 border-radius: 20px;
-                margin-left: 20px;
-                margin-top: 15px;
-                margin-bottom: 8px;
                 border:rgb(0, 68, 135) solid 2px;
                 background-color:rgb(196, 215, 233);
                 outline:none;
@@ -435,12 +491,9 @@
                 font-family:Microsoft JhengHei;
             }
             .tag-btn-hidden{
-                width: 150px;
-                height: 10px;
+                width: 95%;
+                height: 20%;
                 border-radius: 20px;
-                margin-left: 20px;
-                margin-top: 0px;
-                margin-bottom: 19px;
                 border:0px;
                 background-color: transparent;
                 outline:none;
@@ -466,17 +519,21 @@
             margin-bottom: 50px;
             transform: translateX(12%);
             width: 80%;
+            padding:20px;
             
             .fund-basic-info{
                 border: 2px #FFFFFF solid;
+                //border: 2px #ffffff00 solid;
                 margin:0 auto;
                 margin-top: 30px;
                 margin-bottom: 30px;
+                overflow-wrap: break-word;
+                
             }
 
             .fund-basic-info tr{
-                display: block;
-                float: left;
+                //display: block;
+                //float: left;
             }
 
             .fund-basic-info th{
@@ -486,23 +543,25 @@
                 font-weight:bold;
                 text-align:center;
                 background: rgb(0, 68, 135);
-                display: block;
+                //display: block;
                 font-family:Microsoft JhengHei;
+                border:rgb(0, 68, 135) solid 1px;
+                
                 
             }
 
             .fund-basic-info td{
                 font-size: 20px;
                 font-weight: 600;
-                width: 600px;
+                max-width: 600px;
                 padding: 5px 20px 5px 10px;
                 color: #000000;
               //  text-align:center;
                 background: #FFFFFF;
-                display: block;
                 border:rgb(0, 68, 135) solid 1px;
                 font-family:Microsoft JhengHei;
-                word-break:break-all;;
+                word-break:break-all;
+                
             }
 
         }
@@ -514,21 +573,33 @@
             margin-bottom: 20px;
             transform: translateX(12%);
             width: 80%;
+            padding-left:40px;
+            padding-top:20px;
             .teach-content{
                 width:800px;
-                margin-left: 48px;
+                //margin-left: 48px;
+            }
+            .introduce-label-position{
+                width: 100%;
+                display: inline-block;
+
+            }
+            .teach-btn-position-1{
+                width: 100%;
+                display: inline-block;
+                //margin-left:20px;
             }
             .teach-btn-position{
-                margin-top:0px;
-                margin-left:20px;
+                width: 30%;
+                display: inline-block;
+                padding-right: 10px;
+                //margin-left:20px;
             }
             .teach-btn{
                 width: 85px;
                 height: 40px;
                 border-radius: 20px;
-                margin-left: 20px;
-                margin-top: 15px;
-                margin-bottom: 8px;
+                
                 border:rgb(0, 68, 135) solid 2px;
                 background-color:#ffffff;
                 outline:none;
@@ -540,9 +611,7 @@
                 width: 150px;
                 height: 10px;
                 border-radius: 20px;
-                margin-left: 20px;
-                margin-top: 0px;
-                margin-bottom: 19px;
+                
                 border:0px;
                 background-color: transparent;
                 outline:none;
@@ -566,8 +635,8 @@
                 border:rgb(0, 68, 135) solid 2px;
                 background-color: rgb(0, 68, 135);
                 color: #FFFFFF;
-                margin-top: 20px;
-                margin-left: 40px;
+                //margin-top: 20px;
+                //margin-left: 40px;
                 font-weight:bold;
                 font-family:Microsoft JhengHei;
                 font-size: 20px;

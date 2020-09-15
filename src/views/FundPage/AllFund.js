@@ -484,9 +484,7 @@ class AllFund extends React.Component {
       //抓取淨值資料
       const url2 = "https://fundu.ddns.net:8090/getFundInfo";////////改url
   }
-  getNetWorth(){
-    
-  }
+  
 
   //處理filter、select value
   handleSelectChange = name2 => event =>{
@@ -790,7 +788,7 @@ class AllFund extends React.Component {
               { //這邊改比較基金按鈕
                 
                 //hidden:true,
-                icon: () =><Checkbox/>,
+                icon: () =><Checkbox color="primary"/>,
                 tooltip: 'Compare Fund',
 
                 onClick: (event, rowData) =>  {

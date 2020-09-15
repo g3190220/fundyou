@@ -6,6 +6,7 @@ import liff from '@line/liff';
 import Link_M from '@material-ui/core/Link';
 import HomeIcon from '@material-ui/icons/Home';
 
+
 // reactstrap components
 import {
   Button,
@@ -45,6 +46,7 @@ class LiffLogin extends React.Component {
     this.keyPress = this.keyPress.bind(this);
     this.setLineID=this.setLineID.bind(this);
     this.goto=this.goto.bind(this);
+    this.testpath=this.testpath.bind(this);
   }
   // componentDidMount() { 
   //   let token = (this.props.location.search.split('='))[1];
@@ -83,7 +85,7 @@ class LiffLogin extends React.Component {
             })
           }
         })
-      }
+  }
 
   
 
@@ -143,7 +145,6 @@ class LiffLogin extends React.Component {
               }
             })
             .then(()=>{
-              alert("連結成功！")
               liff.closeWindow();
             })
               
@@ -208,8 +209,15 @@ class LiffLogin extends React.Component {
  goto(){
   this.props.history.push({
     pathname: "/liff-register"
-})
+  })
  }
+
+ testpath(){
+  this.props.history.push({
+    pathname: "/line-allfund-page"
+  })
+ }
+ 
   render(){
     return (
         <div
@@ -254,6 +262,11 @@ class LiffLogin extends React.Component {
                   </Form>
                   <div className="go-to-register-btn-position">
                     <a className="go-to-register-btn" onClick={this.goto}>尚未註冊FUNDU會員？</a>
+                    
+                  </div>
+                  <div className="go-to-register-btn-position">
+                    
+                    <a className="go-to-register-btn" onClick={this.testpath}>link-all-fund？</a>
                   </div>
                 </Card>
               </Col>

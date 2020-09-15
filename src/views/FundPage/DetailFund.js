@@ -11,8 +11,16 @@ import isEmpty from "views/Function/isEmpty.js"
 import VerticalTabs from "views/FundPage/VerticalTab.js"
 import CheckLogin from "views/Function/CheckLogin.js"
 
+//處理對話框
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
+
 // reactstrap components
-import { Button, Card, Form, Input, Container, Row, Col} from "reactstrap";
+import { Button2, Card, Form, Input, Container, Row, Col} from "reactstrap";
 import { string } from "prop-types";
 
 //loading page
@@ -23,6 +31,10 @@ var performance_treynor = [];
 var performance_day = [];
 var risk_beta = [];
 var risk_SD = [];
+var fundid="";
+var tag1_id=0;
+var tag2_id=0;
+
 
 // core components
 class DetailFund extends React.Component{
@@ -60,6 +72,11 @@ class DetailFund extends React.Component{
       this.getTag=this.getTag.bind(this);
       this.handleChange=this.handleChange.bind(this);
       this.handleSubmit=this.handleSubmit.bind(this);
+      this.delete=this.delete.bind(this);
+      this.handleClickOpen=this.handleClickOpen.bind(this);
+      this.handleClose=this.handleClose.bind(this);
+      this.handleClickOpenAdd=this.handleClickOpenAdd.bind(this);
+      this.handleCloseAdd=this.handleCloseAdd.bind(this);
 
     }
     componentDidMount() {
@@ -67,6 +84,7 @@ class DetailFund extends React.Component{
         let fund_info=[];
         console.log(this.props.match.params.fundid.split('='));
         let id = (this.props.match.params.fundid.split('='))[1];
+        fundid=id;
         const url = "https://fundu.ddns.net:8090/getFundInfo";////////改url
         //console.log(data)
         fetch( url, {
@@ -268,8 +286,11 @@ class DetailFund extends React.Component{
         if(jsonData.StatusCode==200){
             var tag_info = [];
             try{
+                console.log(jsonData.tag_info)
                 tag_info=JSON.parse(jsonData.tag_info)
                 this.setState({tag1:tag_info[0].tagContent})
+                //this.setState({tag1_id:tag_info[0].tagID})
+                tag1_id=tag_info[0].tagID;
                 this.setState({showtag1:"visable"})
                 this.setState({colortag1:true})
                 console.log(tag_info.length)
@@ -319,6 +340,8 @@ class DetailFund extends React.Component{
             // }
             if(tag_info.length==2){
                 this.setState({tag2:tag_info[1].tagContent})
+                //this.setState({tag2_id:tag_info[1].tagID})
+                tag2_id=tag_info[1].tagID
                 this.setState({showtag2:"visable"})
                 this.setState({colortag2:true})
             }
@@ -639,6 +662,68 @@ class DetailFund extends React.Component{
         //this.setState({errors: errors});
     }
 
+ 
+
+    //處理對話框方法
+    handleClickOpen=(in_tagid)=>{
+        this.setState({tag_in_id:in_tagid});
+        this.setState({open: true,});
+    }
+  
+      handleClose(){
+        this.setState({
+          open: false
+        });
+      }
+
+      //處理對話框方法
+    handleClickOpenAdd(){
+        this.setState({open_add: true,});
+    }
+  
+      handleCloseAdd(){
+        this.setState({
+          open_add: false
+        });
+      }
+
+    //刪除TAG
+    delete = (in_tagid,in_fld022) => {
+            const url = "https://fundu.ddns.net:8090/DeleteTag";
+            fetch(url, {
+              method: 'POST',
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                    //取得全部fund
+                    member_id: load_cookies("member_id"),
+                    tag_id:in_tagid,
+                    fld022:in_fld022
+              })
+              
+        })
+      .then((response) => {return response.json();})
+      .then((jsonData) => { 
+          console.log(jsonData)
+        if(jsonData.StatusCode==200){
+          this.handleClose()
+          alert("刪除成功！")
+          //重新整理畫面s
+          //刷新頁面
+          this.setState();
+          window.location.reload(true);
+        }
+        else{
+          alert("error")
+        }
+      })
+    alert("刪除")
+    
+    }
+
+    
 
     render(){     //render的意義為何??(待查清) //猜想：render預設的渲染方式，網頁一開始執行的
         
@@ -743,37 +828,113 @@ class DetailFund extends React.Component{
             <Row>
                 <div className='sub-sub-detail'  id='info'>
                 <Row >
-                    <Col sm={10}> <label className='fund-name'>{this.state.fund_name}</label>  {/*從資料庫讀取基金的名字*/}</Col>
-                    <Col sm={2}>
-                        {/* <button className='Compare-btn'><a href='#page-compare'>去比較</a></button>*/}
-                        <input type="button" className={this.state.track_state==1 ? "followBtnTrue" : "followBtnFalse"} onClick={this.togglestate,this.CreateTrack} value={this.state.track_state==1 ? "√ 已追蹤" : "+ 追蹤"}></input> 
+                    <Col xs={7} md={9}> <label className='fund-name'>{this.state.fund_name}</label>  {/*從資料庫讀取基金的名字*/}</Col>
+                    <Col xs={5} md={3}>
+                        <div className='button-position'>
+                            <input type="button" className={this.state.track_state==1 ? "followBtnTrue" : "followBtnFalse"} onClick={this.togglestate,this.CreateTrack} value={this.state.track_state==1 ? "√ 已追蹤" : "+ 追蹤"}></input>
+                        </div> 
                     </Col>
                 </Row> 
                 <Row>
                     <div className='tag-position'>
-                        <label className='tag-label' style={{display: this.state.showtag3 ? 'inline' : 'none', color:"#444444"}}>{this.state.tag3}</label>
-                        <label className='tag-label' style={{display: this.state.showtag4 ? 'inline' : 'none',color:"#444444"}}>{this.state.tag4}</label>  
-                        <label className='tag-label' style={{display: this.state.showtag2 ? 'inline' : 'none', color:"#CD5C5C"}}>{this.state.tag2}</label>
-                        <label className='tag-label' style={{display: this.state.showtag1 ? 'inline' : 'none',color:"#CD5C5C"}}>{this.state.tag1}</label>
+                        <Row>
+                            <Col xs={12} md={12}>
+                                <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag3 ? 'inline' : 'none', color:"#444444"}}><a className="delete-tag" onClick={this.handleClickTAG} style={{cursor: 'pointer'}}>{this.state.tag3}</a></label></div>
+                                <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag4 ? 'inline' : 'none',color:"#444444"}}><a className="delete-tag" onClick={this.handleClickTAG} style={{cursor: 'pointer'}}>{this.state.tag4}</a></label></div>
+                                <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag2 ? 'inline' : 'none', color:"#CD5C5C"}}><a className="delete-tag"  onClick={()=>this.handleClickOpen(tag2_id,fundid)} style={{cursor: 'pointer'}}>{this.state.tag2}</a></label></div>
+                                <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag1 ? 'inline' : 'none',color:"#CD5C5C"}}><a className="delete-tag" onClick={()=>this.handleClickOpen(tag1_id,fundid)} style={{cursor: 'pointer'}}>{this.state.tag1}</a></label></div></Col>
+                        </Row> 
+                    <Dialog
+                        open={this.state.open}
+                        keepMounted
+                        onClose={this.handleClose}
+                        aria-labelledby="alert-dialog-slide-title"
+                        aria-describedby="alert-dialog-slide-description"
+                >
+                    <DialogTitle id="alert-dialog-slide-title">{"Confirm"}</DialogTitle>
+                    <DialogContent>
+                    <DialogContentText id="alert-dialog-slide-description">
+                    你想要刪除此TAG嗎？
+                    </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                    <Button onClick={this.handleClose} color="primary">
+                        取消
+                    </Button>
+                    <Button onClick={() => this.delete(this.state.tag_in_id,fundid)} color="primary" >
+                        是
+                    </Button>
+                    </DialogActions>
+                </Dialog>   
                     </div>
                 </Row>  
                 <Row >
-                    <label className={this.state.fund_net_CSS}>{this.state.new_net}</label> {/*從資料庫讀取基金的淨值*/}
-                    <label className='fund-currency'>{this.state.fund_currency}</label>
-                    <label className={this.state.fund_percentage_CSS}>{this.state.fund_percent}%​<p></p>{this.state.fund_gain}</label>
+                    <Col xs={12} md={{size: 5}}>
+                        <div className='fund-currency-position'>
+                            <label className={this.state.fund_net_CSS}>{this.state.new_net}<span className='fund-currency'>{this.state.fund_currency}</span></label>
+                        </div> {/*從資料庫讀取基金的淨值*/}
+                    </Col>
+                    <Col xs={12} md={{size: 5}}>
+                        <div className='fund-percentage-position'>
+                            <label className={this.state.fund_percentage_CSS}>{this.state.fund_percent}%​<p></p>{this.state.fund_gain}</label>
+                        </div>
+                    </Col>
                 </Row> 
                 <Row  className='fund-data'>
                     <span><label>績效：3月：</label><label>{this.state.History_ROI_3M}%</label><label>&nbsp;&nbsp;&nbsp;</label><label>6月：</label><label>{this.state.History_ROI_6M}%</label><label>&nbsp;&nbsp;&nbsp;</label><label>1年：</label><label>{this.state.History_ROI_12M}%</label></span>
                 </Row>
                 <Row className='fund-data'>
-                    <span><label> 成立日期：</label><label>{this.state.fund_startdate}</label><label>&nbsp;&nbsp;&nbsp;</label><label>基金規模：</label><label>{this.state.fund_currency} {this.state.fund_scale}</label></span>
+                    <span><label> 成立日期：</label><label>{this.state.fund_startdate}</label></span>
                 </Row>
+                <Row className='fund-data'>
+                    <span><label>基金規模：</label><label>{this.state.fund_currency} {this.state.fund_scale}</label></span>
+                </Row>
+                </div>
+            </Row>
+                        
+            <Row>
+                <div className='sub-sub-tag'>
+                <Row>
+                    <Col xs={6} md={6}><div className='input-tag-btn'><button className='tag-btn' onClick={this.handleClickOpenAdd} >新增自己的TAG➥</button></div></Col>
+                    {/* <Col xs={6} md={9}><div className='input-tag'><input onChange={this.handleChange('new_tag')} className='input-fieled' size="8" maxlength="8"></input></div></Col>        */}
+                    <Dialog
+                                open={this.state.open_add}
+                                keepMounted
+                                onClose={this.handleCloseAdd}
+                                aria-labelledby="alert-dialog-slide-title"
+                                aria-describedby="alert-dialog-slide-description"
+                        >
+                            <DialogTitle id="alert-dialog-slide-title">{"Confirm"}</DialogTitle>
+                            <DialogContent>
+                            <DialogContentText id="alert-dialog-slide-description">
+                            請輸入你想要新增的TAG
+                            </DialogContentText>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="tag_contnt"
+                                label="TAG內容"
+                                fullWidth
+                                onChange={this.handleChange('new_tag')} //更新新增內容
+                            />
+                            </DialogContent>
+                            <DialogActions>
+                            <Button onClick={this.handleCloseAdd} color="primary">
+                                取消
+                            </Button>
+                            <Button onClick={this.handleSubmit} color="primary" >
+                                是
+                            </Button>
+                            </DialogActions>
+                        </Dialog>
+                    <Col xs={6} md={6}><div className='input-tag-btn'></div><button className='tag-btn' onClick={this.handleClickTAG}>TAG評價➥</button></Col>
+                </Row>    
                 </div>
             </Row>
             <Row>
                 <div className='sub-sub-graphics'>
                 <Row>
-                    <label className='net-worth-label'>淨值走勢</label>
+                    <div className='sub-sub-graphics-title'><label className='net-worth-label'>淨值走勢</label></div>
                 </Row>
                 <Row>              
                     <div className='chart'>    {/*參考網址：https://reurl.cc/lVxRlv*/}
@@ -781,10 +942,17 @@ class DetailFund extends React.Component{
                     </div>
                 </Row>
                 <Row>
-                    <label className='net-worth-label'>單筆比較</label>
+                    
+                        <div className='sub-sub-graphics-title'><label className='net-worth-label'>單筆比較</label>
+                    
+                    
+                        <div className='sub-sub-graphics-btn'>
+                            <button id='performance-btn' onClick={this.handleClick1}>績效</button>
+                            <button id='risk-btn' onClick={this.handleClick2}>風險</button>
+                        </div>
+                        </div>
                 </Row>
-                    <button id='performance-btn' onClick={this.handleClick1}>績效</button>
-                    <button id='risk-btn' onClick={this.handleClick2}>風險</button>
+                
                 <Row>
                     <div className='chart' id='chartid'  ref='change'>
                         <ReactHighcharts config={config_performance}/>
@@ -792,46 +960,60 @@ class DetailFund extends React.Component{
                 </Row>
                 </div>              
             </Row>
-            
-            <Row>
-                <div className='sub-sub-tag'>
-                    <button className='tag-btn' onClick={this.handleSubmit} >新增TAG</button><div className='input-tag'><input onChange={this.handleChange('new_tag')} className='input-fieled' size="8" maxlength="8"></input></div>
-                    <button className='tag-btn-hidden' onClick={this.handleClickTAG}>去看看所有TAG➥</button>   
-                </div>
-            </Row>
+
             <Row>
                 <div className='sub-sub-basic-info'>               
                     <table className='fund-basic-info' border='2' cellpadding="4">
-                    <tr  width="30%">
-                        <th>基金名稱</th>
-                        <th>基金名稱（英文）</th>
-                        <th>基金統編</th> 
-                        <th>國際證券識別碼</th>
-                        <th>管理公司</th>
-                        <th>經理人</th>
-                        <th>基金規模</th>
-                        <th>風險評等</th>
-                        <th>計價幣別</th>
-                        <th>成立時間</th>
-                        <th>基金類別</th>
-                        <th height='300px'>目標</th>
-                    </tr>
-                    <tr> {/*從資料庫讀取*/}
-                        <td rowspan="2">{this.state.fund_name}</td>
-                        <td rowspan="2">{this.state.fund_EN_name}</td>
-                        <td rowspan="2">{this.state.fund_fld022}</td> 
-                        <td rowspan="2">{this.state.fund_ISINcode}</td>
-                        <td rowspan="2">{this.state.company_name}</td>
-                        <td rowspan="2">{this.state.manager_name}</td>
-                        <td rowspan="2">{this.state.fund_currency} {this.state.fund_scale}</td>
-                        <td>{this.state.fund_riskRank}</td>
-                        <td>{this.state.fund_currency}</td>
-                        <td>{this.state.fund_startdate}</td>
-                        <td>{this.state.fund_type}</td>
-                        <td height='300px'>{this.state.fund_Target}</td>
-                    </tr>
+                        <tr>
+                            <th>基金名稱</th>
+                            <td>{this.state.fund_name}</td>
+                        </tr>
+                        <tr>
+                            <th>基金名稱（英文）</th>
+                            <td>{this.state.fund_EN_name}</td>
+                        </tr>
+                        <tr>
+                            <th>基金統編</th>
+                            <td>{this.state.fund_fld022}</td>  
+                        </tr>
+                        <tr>
+                            <th>國際證券識別碼</th>
+                            <td>{this.state.fund_ISINcode}</td>
+                        </tr>
+                        <tr>
+                            <th>管理公司</th>
+                            <td>{this.state.company_name}</td>
+                        </tr>
+                        <tr>
+                            <th>經理人</th>
+                            <td>{this.state.manager_name}</td>
+                        </tr>
+                        <tr>
+                            <th>基金規模</th>
+                            <td>{this.state.fund_currency} {this.state.fund_scale}</td>
+                        </tr>
+                        <tr>
+                            <th>風險評等</th>
+                            <td>{this.state.fund_riskRank}</td>
+                        </tr>
+                        <tr>
+                            <th>計價幣別</th>
+                            <td>{this.state.fund_currency}</td>
+                        </tr>
+                        <tr>
+                            <th>成立時間</th>
+                            <td>{this.state.fund_startdate}</td>
+                        </tr>
+                        <tr>
+                            <th>基金類別</th>
+                            <td>{this.state.fund_type}</td>
+                        </tr>
+                        <tr>
+                            <th>目標</th>
+                            <td>{this.state.fund_Target}</td>
+                        </tr>
                     </table>
-                    </div>
+                </div>
             </Row>
             <Row>
                 <div className="sub-sub-fund-introduce">
@@ -845,14 +1027,20 @@ class DetailFund extends React.Component{
                     </div>
                 </Col>
             </Row> */}
-            <Row><label className='fund-introduce-label'>基金各指標含意</label></Row>
             <Row>
-                <div className='teach-btn-position'>
-                        <button className='teach-btn' onClick={()=>this.setState({teach1:true,teach2:false,teach3:false})}>淨值</button>
-                        <button className='teach-btn' onClick={()=>this.setState({teach2:true,teach1:false,teach3:false})}>績效</button>
-                        <button className='teach-btn' onClick={()=>this.setState({teach3:true,teach2:false,teach1:false})}>風險</button>
-                </div>
+                <Col md={4}><div className='introduce-label-position'><label className='fund-introduce-label'>基金各指標含意</label></div></Col>
+                <Col md={8}>
+                    <div className='teach-btn-position-1'>
+                        <div className='teach-btn-position'><button className='teach-btn' onClick={()=>this.setState({teach1:true,teach2:false,teach3:false})}>淨值</button></div>
+                        <div className='teach-btn-position'><button className='teach-btn' onClick={()=>this.setState({teach2:true,teach1:false,teach3:false})}>績效</button></div>
+                        <div className='teach-btn-position'><button className='teach-btn' onClick={()=>this.setState({teach3:true,teach2:false,teach1:false})}>風險</button></div>
+                    </div>
+                </Col>
+                
+                
+                
             </Row>
+            
             <Row>
                 <div className='teach-content' style={{display: this.state.teach1 ? 'inline' : 'none'}}>
                 <table className='fund-introduce-info'>

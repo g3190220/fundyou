@@ -61,7 +61,7 @@ function ExamplesNavbar() {
           >
            FUNDU
           </NavbarBrand>
-          <button
+          {/* <button
             aria-expanded={navbarCollapse}
             className={classnames("navbar-toggler navbar-toggler", {
               toggled: navbarCollapse
@@ -71,9 +71,9 @@ function ExamplesNavbar() {
             <span className="navbar-toggler-bar bar1" />
             <span className="navbar-toggler-bar bar2" />
             <span className="navbar-toggler-bar bar3" />
-          </button>
+          </button> */}
         </div>
-        <Collapse
+        {/* <Collapse
           className="justify-content-end"
           navbar
           isOpen={navbarCollapse}
@@ -81,7 +81,7 @@ function ExamplesNavbar() {
           <Nav navbar>
         
           </Nav>
-        </Collapse>
+        </Collapse> */}
       </Container>
     </Navbar>
   );
