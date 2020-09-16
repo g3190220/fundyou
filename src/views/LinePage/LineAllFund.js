@@ -53,6 +53,7 @@ import {withStyles} from '@material-ui/core/styles';
 import liff from '@line/liff';
 
 
+
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -473,93 +474,96 @@ class LineAllFund extends React.Component {
         .then((response) => {return response.json();})
         .then((jsonData) => { 
           if(jsonData.StatusCode==200){
-            console.log(jsonData);
+            //console.log(jsonData);
             fund_info=JSON.parse(jsonData.fund_info)
-            console.log(fund_info);
+            //console.log(fund_info);
 
             this.state.all_data=fund_info
-            this.setState({all_data:this.state.all_data,flag:true})
+            this.setState({all_data:this.state.all_data})
         }
           else{
           this.state.all_data=[]
           }
         })
-        // .then(()=>{
-        //   //獲取liff id
-        //   this.getLiffid()
-        // })
+        .then(()=>{
+          //獲取liff id
+          this.getLiffid()
+        })
       //抓取淨值資料
       //const url2 = "https://fundu.ddns.net:8090/getFundInfo";////////改url
   }
   //獲取liff id
-  // getLiffid(){
-  //   let liff_userid;
-  //   liff.init({
-  //     liffId: "1654887866-Ll5OVBq2" // Use own liffId
-  //   })
-  //   .then(() => {
-  //     if (liff.isLoggedIn()) {
-  //         liff.getProfile()
-  //         .then(profile => {
-  //           const userId = profile.userId
-  //           //取得liff_userid;
-  //           liff_userid=userId;
-  //         })
-  //         .then(()=>{this.setState({liff_userid:liff_userid,flag:true})})
-  //         .then(()=>{
-  //          //獲取liff id
-  //         this.ChangeLiffid()
-  //          })
-  //       }
-  //     else{
-  //       alert("取得失敗")
-  //     }
-  //   })
+  getLiffid(){
+    let liff_userid;
+    liff.init({
+      liffId: "1654887866-j2D8O5K7" // Use own liffId
+    })
+    .then(() => {
+      if (liff.isLoggedIn()) {
+          liff.getProfile()
+          .then(profile => {
+            const userId = profile.userId
+            //取得liff_userid;
+            liff_userid=userId;
+          })
+          .then(()=>{this.setState({liff_userid:liff_userid,flag:true})})
+          .then(()=>{
+           //獲取liff id
+           console.log("getLiffid()後")
+           console.log(this.state.liff_userid)
+            this.ChangeLiffid()
+           })
+        }
+      else{
+        alert("取得失敗")
+      }
+    })
+    //this.setState({liff_userid:"Uabcd7eb5beccfbac50a8434c2e4072fc",flag:true})
     
-  // }
+  }
   //檢查Liff有無連接，並回傳userid
-  // ChangeLiffid(){
-  //   let member_info=[];
-  //   const url = "https://fundu.ddns.net:8090/LineLogin";////////改url
-  //   //console.log(data)
-  //   fetch(url, {
-  //             method: 'POST',
-  //             headers: {
-  //                 'Accept': 'application/json',
-  //                 'Content-Type': 'application/json',
-  //             },
-  //             body: JSON.stringify({
-  //                   //取得全部fund
-  //                   lineid: this.state.liff_userid,
-  //             })
+  ChangeLiffid(){
+    let member_info=[];
+    const url = "https://fundu.ddns.net:8090/LineLogin";////////改url
+    //console.log(data)
+    fetch(url, {
+              method: 'POST',
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                    //取得全部fund
+                    lineid: this.state.liff_userid,
+              })
               
-  //       })
-  //       .then((response) => {return response.json();})
-  //       .then((jsonData) => { 
-  //         console.log(jsonData)
-  //         if(jsonData.StatusCode==200){
-  //           member_info=JSON.parse(jsonData.member_info)
-  //           //取得系統id了
-  //           this.state.member_id=member_info.member_id
-  //           alert(this.state.member_id)
+        })
+        .then((response) => {return response.json();})
+        .then((jsonData) => { 
+          //console.log(jsonData)
+          if(jsonData.StatusCode==200){
+            member_info=JSON.parse(jsonData.member_info)
+            //取得系統id了
+            this.state.member_id=member_info.member_id
+            //alert(this.state.member_id)
             
-  //         }
-  //         else{
-  //           alert("您尚未與系統連結，無法使用此功能。即將跳轉至連結頁面！")
-  //           this.props.history.push({
-  //             pathname: "/liff-linking"
-  //           })
+          }
+          else{
+            alert("您尚未與系統連結，無法使用此功能。即將跳轉至連結頁面！")
+            this.props.history.push({
+              pathname: "/liff-linking"
+            })
           
-  //         }
-  //       })
+          }
+        })
 
-  // }
+  }
   //處理filter、select value
   handleSelectChange = name2 => event =>{
     this.setState({
       [name2]: event.target.value,
     }, function () {
-    console.log(this.state.fundtype);
+    //console.log(this.state.fundtype);
     this.state.filter_content=true
     this.setState({filter_content:this.state.filter_content})
     this.filterShow()
@@ -594,12 +598,12 @@ class LineAllFund extends React.Component {
         .then((response) => {return response.json();})
         .then((jsonData) => {
           
-          console.log(jsonData)
+          //console.log(jsonData)
           if(jsonData.StatusCode==200){
             this.state.filter_content=false
             this.setState({filter_content:this.state.filter_content})
             //篩選無結果資料
-            console.log(jsonData.data[0])
+            //console.log(jsonData.data[0])
             fund_info=JSON.parse(jsonData.data) 
             //alert("成功取得！");
             this.state.all_data=fund_info;
@@ -772,10 +776,12 @@ class LineAllFund extends React.Component {
                 //hidden:true,
                 icon: () => <SearchIcon color="action" />,
                 tooltip: 'SEEFUND',
-                onClick: (event, rowData) =>  this.props.history.push({
+                onClick: (event, rowData) =>  
+                this.props.history.push({
                
                   pathname: '/line-detailfund/fundid='+rowData.Fund_fld022,
-                  state: { fundid: rowData.Fund_fld022 }
+                  state: { member_ID: this.state.member_id }
+                  //state: { member_ID: 4 }
                   
                 })
                
@@ -805,6 +811,7 @@ class LineAllFund extends React.Component {
     classes: PropTypes.object.isRequired,
   };
   export default withStyles(styles)(LineAllFund);
+  //export default withRouter(connect()(withStyles(styles)(LineAllFund)))
   //export default AllFund;
 
   //如果頁面(html)不變，那就是透過state 跟 props 來做更新

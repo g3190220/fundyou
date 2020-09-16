@@ -121,15 +121,16 @@ class LiffLogin extends React.Component {
         })
         .then((response) => {console.log(response);return response.json();})
         .then((jsonData) => {
-          alert("成功登入")
           console.log(jsonData)
           if(jsonData.StatusCode==200){
+            alert("成功登入")
             member_info=JSON.parse(jsonData.member_info)
             nounce=member_info.member_nonce
             liff.init({
               liffId: "1654887866-WEYVrLMQ" // Use own liffId
             })
             .then(() => {
+              alert("進來了")
               if (liff.isLoggedIn()) {
                   liff.getProfile()
                   .then(profile => {
@@ -144,9 +145,9 @@ class LiffLogin extends React.Component {
                 alert("取得失敗")
               }
             })
-            .then(()=>{
-              liff.closeWindow();
-            })
+            // .then(()=>{
+            //   liff.closeWindow();
+            // })
               
             .catch((err) => {
               // Error happens during initialization

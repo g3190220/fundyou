@@ -11,8 +11,16 @@ import isEmpty from "views/Function/isEmpty.js"
 import VerticalTabs from "views/FundPage/VerticalTab.js"
 import CheckLogin from "views/Function/CheckLogin.js"
 
+//處理對話框
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
+
 // reactstrap components
-import { Button, Card, Form, Input, Container, Row, Col} from "reactstrap";
+import { Button2, Card, Form, Input, Container, Row, Col} from "reactstrap";
 import { string } from "prop-types";
 
 //loading page
@@ -29,6 +37,9 @@ var risk_SD = [];
 var liff_userid="";
 var member_id="";
 var id ="";
+var fundid="";
+var tag1_id=0;
+var tag2_id=0;
 
 // core components
 class LineDetailFund extends React.Component{
@@ -39,8 +50,8 @@ class LineDetailFund extends React.Component{
 
     constructor(props) { //待搞懂
         super(props)
-        this.getLiffid = this.getLiffid.bind(this);
-        this.ChangeLiffid=this.ChangeLiffid.bind(this);
+        //this.getLiffid = this.getLiffid.bind(this);
+        //this.ChangeLiffid=this.ChangeLiffid.bind(this);
         this.state = {
           //fields: {},
         errors: {},
@@ -70,11 +81,17 @@ class LineDetailFund extends React.Component{
       this.getAllData=this.getAllData.bind(this);
       this.getnet=this.getnet.bind(this);
       this.getROI=this.getROI.bind(this);
+      this.handleSubmit=this.handleSubmit.bind(this);
+      this.delete=this.delete.bind(this);
+      this.handleClickOpen=this.handleClickOpen.bind(this);
+      this.handleClose=this.handleClose.bind(this);
+      this.handleClickOpenAdd=this.handleClickOpenAdd.bind(this);
+      this.handleCloseAdd=this.handleCloseAdd.bind(this);
+      
 
     }
     componentDidMount() {
-        //先確認有無連結，並取得member_id
-        this.getLiffid()
+        this.getAllData();
     }
     //處理setState的方法
     handleChange = name => event =>{
@@ -87,7 +104,8 @@ class LineDetailFund extends React.Component{
         //alert("開始取得基金資料")
         //alert(member_id)
         let fund_info=[];
-        console.log(this.props.location.state.fundid)
+        console.log("getAllData()")
+        console.log(this.props)
         console.log(this.props.location.pathname)
         console.log(this.props.location.pathname.split('='));
         id = (this.props.location.pathname.split('='))[1];
@@ -135,12 +153,14 @@ class LineDetailFund extends React.Component{
                 });
             }
             })
-            .then(() => {this.trackstate();})
+            .then(()=>this.getLiffid())
+           
 
     }
 
     trackstate(){    //看此user有沒有追蹤過此筆基金，並改變追蹤狀態
-        
+        console.log(this.state.member_ID)
+        console.log(id)
         let fund_info=[];
         const url = "https://fundu.ddns.net:8090/getTrack";
         fetch(url, {
@@ -269,6 +289,7 @@ class LineDetailFund extends React.Component{
 
     //取得會員自己創建之TAG，顯示首頁(若沒有TAG，就顯示熱門的)
     getMyTag(){
+        let id = (this.props.match.params.fundid.split('='))[1];
         const url = "https://fundu.ddns.net:8090/getTag";
         fetch(url, {
         method: 'POST',
@@ -278,7 +299,7 @@ class LineDetailFund extends React.Component{
             },
         body: JSON.stringify({
                 //取得全部fund
-                member_id: member_id,
+                member_id:  member_id,
                 tag_id:-1,
                 fld022:id
         })
@@ -286,32 +307,115 @@ class LineDetailFund extends React.Component{
         })
         .then((response) => {return response.json();})
         .then((jsonData) => { 
-            console.log("getMyTag()")
-            console.log(jsonData)
-            if(jsonData.StatusCode==200){
-                var tag_info = [];
-                try{
-                    tag_info=JSON.parse(jsonData.tag_info)
-                    this.setState({tag1:tag_info[0].tagContent})
-                    this.setState({showtag1:"visable"})
-                    this.setState({colortag1:true})
+        if(jsonData.StatusCode==200){
+            var tag_info = [];
+            try{
+                console.log(jsonData.tag_info)
+                tag_info=JSON.parse(jsonData.tag_info)
+                this.setState({tag1:tag_info[0].tagContent})
+                //this.setState({tag1_id:tag_info[0].tagID})
+                tag1_id=tag_info[0].tagID;
+                this.setState({showtag1:"visable"})
+                this.setState({colortag1:true})
+                console.log(tag_info.length)
+            //如果只有一個自創TAG
+            // if(tag_info.length==1){
+            //         const url = "https://fundu.ddns.net:8090/getTag";
+            //         fetch(url, {
+            //         method: 'POST',
+            //         headers: {
+            //             'Accept': 'application/json',
+            //             'Content-Type': 'application/json',
+            //         },
+            //         body: JSON.stringify({
+            //                 //取得全部fund
+            //                 member_id: -1,
+            //                 tag_id:-1,
+            //                 fld022:id,
+            //         })
                     
-                    console.log(tag_info.length)
-                    if(tag_info.length==2){
-                        this.setState({tag2:tag_info[1].tagContent})
-                        this.setState({showtag2:"visable"})
-                        this.setState({colortag2:true})
-                    }
-                }
-                
-                catch (d){
-                    console.log("一個自己創建的tag都沒有")
-                }
+            //         })
+            //         .then((response) => {return response.json();})
+            //         .then((jsonData) => { 
+            //         if(jsonData.StatusCode==200){
+            //                 var info = [];
+            //                 var j=0;
+            //                 var _break=true;
+            //                 for(var i = 0; i < jsonData.tag_info.length; i++){
+            //                     info.push(JSON.parse(jsonData.tag_info[i]))
+            //                 }
+            //                 console.log()
+            //                 do {
+            //                     if(info[j].memberID!=member_id){
+            //                         this.setState({tag2:info[j].tagContent})
+            //                         this.setState({showtag2:"visable"})
+            //                         this.setState({colortag2:false})//另外一個非自己建立的TAG
+            //                         _break=false;
+            //                     }
+            //                     j++;
+            //                  } while (j<info.length&&_break==true);
+                                
+                        
+            //             }
+            //             else{ //statuscode=1000 >>沒有tag
+            //                 console.log("no tag")
+            //                 }
+            //         })
+            // }
+            if(tag_info.length==2){
+                this.setState({tag2:tag_info[1].tagContent})
+                //this.setState({tag2_id:tag_info[1].tagID})
+                tag2_id=tag_info[1].tagID
+                this.setState({showtag2:"visable"})
+                this.setState({colortag2:true})
             }
+            }
+            
+            catch (d){
+                console.log("一個自己創建的tag都沒有")
+                // let id = (this.props.match.params.fundid.split('='))[1];
+                // const url = "https://fundu.ddns.net:8090/getTag";
+                // fetch(url, {
+                // method: 'POST',
+                // headers: {
+                //     'Accept': 'application/json',
+                //     'Content-Type': 'application/json',
+                // },
+                // body: JSON.stringify({
+                //         //取得全部fund
+                //         member_id: -2,
+                //         tag_id:-2,
+                //         fld022:id,
+                // })
+                
+                // })
+                // .then((response) => {return response.json();})
+                // .then((jsonData) => { 
+                //     if(jsonData.StatusCode==200){
+                //         var info = [];
+                //         var count=0;
+                //         for(var i = 0; i < jsonData.tag_info.length; i++){
+                //             info.push(JSON.parse(jsonData.tag_info[i]));
+                //             count=i+1; 
+                //             var string =`tag${count}`;
+                //             var showstring = `show${string}`
+                //             var showcolor = `color${string}`
+                //             console.log("showstring:",showstring)
+                //             this.setState({[string]:info[i].tagContent})
+                //             this.setState({[showstring]:"visable"})
+                //             this.setState({[showcolor]:false})
+                //         }
+                    
+                //     }
+                //     else{ //statuscode=1000 >>沒有tag
+                //         console.log("no tag")
+                //         }
+                // })
+            }
+        }
         })
         .then(() => { this.getnet();})
-        
-    }
+}
 
     getnet(){
         let fund_net=[];
@@ -416,31 +520,150 @@ class LineDetailFund extends React.Component{
             })
     }
 
+     //新增TAG功能
+     handleSubmit(){
+        let errors = {}; 
+        //取消DOM的預設功能
+        window.event.preventDefault();
+        if(!isEmpty(this.state.new_tag)){
+        let fld022 = (this.props.match.params.fundid.split('='))[1];
+        const url = "https://fundu.ddns.net:8090/GenerateTag";
+        fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                        member_id:  member_id,
+                        fld022: fld022,
+                        content:this.state.new_tag,
+                })
+                
+            
+            })
+        .then((response) => {return response.json();})
+        .then((jsonData) => {
+            if(jsonData.StatusCode==200){
+                console.log(jsonData)
+                alert("新增成功")
+                //重新整理畫面,刷新頁面
+                this.setState();
+                window.location.reload(true);
+            }
+            else{
+                alert("您的TAG已達上限，請先至個人TAG管理頁面做刪除，才能再做新增！")
+                console.log("handleSubmit_error")}   
+        })}
+        else {
+            // errors["tag_new_is_errors"] = true;
+            // errors["tag_new"]="TAG內容不能為空白"
+            alert("TAG內容不能為空白")
+        }
+        //this.setState({errors: errors});
+    }
 
+    //處理對話框方法
+    handleClickOpen=(in_tagid)=>{
+        
+        this.setState({tag_in_id:in_tagid});
+        this.setState({open: true,});
+    }
+  
+      handleClose(){
+        this.setState({
+          open: false
+        });
+      }
+
+      //處理對話框方法
+    handleClickOpenAdd(){
+        this.setState({open_add: true,});
+    }
+  
+      handleCloseAdd(){
+        this.setState({
+          open_add: false
+        });
+      }
+
+    //刪除TAG
+    delete = (in_tagid,in_fld022) => {
+            //alert(this.props.location.state.member_ID)
+            //alert(in_tagid)
+            //alert(in_fld022)
+            const url = "https://fundu.ddns.net:8090/DeleteTag";
+            fetch(url, {
+              method: 'POST',
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                    //取得全部fund
+                    member_id: member_id,
+                    tag_id:in_tagid,
+                    fld022:in_fld022
+              })
+              
+        })
+      .then((response) => {return response.json();})
+      .then((jsonData) => { 
+        if(jsonData.StatusCode==200){
+            console.log("delete 200")
+            console.log(jsonData)
+          this.handleClose()
+          alert("刪除成功！")
+          //重新整理畫面s
+          //刷新頁面
+          this.setState();
+          window.location.reload(true);
+        }
+        else{
+          alert("error")
+        }
+      })
+    alert("刪除")
+    
+    }
 
     //獲取liff id
     getLiffid(){
-    // liff.init({
-    //   liffId: "1654887866-eVrD8JaW" // Use own liffId
-    // })
-    // .then(() => {
-    //   if (liff.isLoggedIn()) {
-    //       liff.getProfile()
-    //       .then(profile => {
-    //         let userId = profile.userId;
-    //         liff_userid = userId;
-    //       })
-    //       .then(()=>{
-    //           this.ChangeLiffid(liff_userid)
-              
-    //         })
-          
-    //     }
-    //   else{
-    //     alert("取得失敗")
-    //   }
-    // })
-    this.ChangeLiffid("Uabcd7eb5beccfbac50a8434c2e4072fc")
+        console.log("getLiffid()start")
+        console.log(liff.getVersion())
+        liff.ready.then(() => {
+            liff.closeWindow()
+        })
+        liff.init({
+            liffId: "1654887866-eVrD8JaW" // Use own liffId   
+        })
+        .then(() => {
+            alert(liff.isLoggedIn())
+        if (liff.isLoggedIn()) {
+            alert(liff.getProfile)
+            liff.getProfile()
+            .then(profile => {
+                let userId = profile.userId;
+                liff_userid = userId;
+                console.log("getLiffid() end")
+                console.log(liff_userid)
+            })
+            .then(()=>{
+                this.ChangeLiffid(liff_userid)
+            })
+
+            
+            }
+        else{
+            alert("取得失敗")
+        }
+        })
+        .catch((err) => {
+            // Error happens during initialization
+            console.log(err.code, err.message);
+          });
+        //this.ChangeLiffid("Uabcd7eb5beccfbac50a8434c2e4072fc")
+
     
     
     }
@@ -465,26 +688,26 @@ class LineDetailFund extends React.Component{
             .then((response) => {return response.json();})
             .then((jsonData) => { 
             console.log(jsonData)
-            if(jsonData.StatusCode==200){
-                member_info=JSON.parse(jsonData.member_info)
-                //取得系統id了
-                //this.state.member_id=member_info.member_id
-                member_id=member_info.member_id
+                if(jsonData.StatusCode==200){
+                    member_info=JSON.parse(jsonData.member_info)
+                    //取得系統id了
+                    //this.state.member_id=member_info.member_id
+                    member_id=member_info.member_id
+                    console.log(member_id)
+                    
                 
-               
-            }
-            else{
-                alert("您尚未與系統連結，無法使用此功能。即將跳轉至連結頁面！")
-                this.props.history.push({
-                    pathname: "/liff-linking"
-                })
-            
-            }
+                }
+                else{
+                    alert("您尚未與系統連結，無法使用此功能。即將跳轉至連結頁面！")
+                    this.props.history.push({
+                        pathname: "/liff-linking"
+                    })
+                
+                }
             })
             .then(() => { 
-                //alert("取得member-id")
                 console.log(member_id)
-                this.getAllData();
+                this.trackstate()
             });
 
     }
@@ -602,11 +825,33 @@ class LineDetailFund extends React.Component{
                     <div className='tag-position'>
                         <Row>
                             <Col xs={12} md={12}>
-                                <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag3 ? 'inline' : 'none', color:"#444444"}}>{this.state.tag3}</label></div>
-                                <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag4 ? 'inline' : 'none',color:"#444444"}}>{this.state.tag4}</label></div>
-                                <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag2 ? 'inline' : 'none', color:"#CD5C5C"}}>{this.state.tag2}</label></div>
-                                <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag1 ? 'inline' : 'none',color:"#CD5C5C"}}>{this.state.tag1}</label></div></Col>
-                        </Row>    
+                            <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag3 ? 'inline' : 'none', color:"#444444"}}><a className="delete-tag" >{this.state.tag3}</a></label></div>
+                                <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag4 ? 'inline' : 'none',color:"#444444"}}><a className="delete-tag" >{this.state.tag4}</a></label></div>
+                                <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag2 ? 'inline' : 'none', color:"#CD5C5C"}}><a className="delete-tag"  onClick={()=>this.handleClickOpen(tag2_id,fundid)} style={{cursor: 'pointer'}}>{this.state.tag2}</a></label></div>
+                                <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag1 ? 'inline' : 'none',color:"#CD5C5C"}}><a className="delete-tag" onClick={()=>this.handleClickOpen(tag1_id,fundid)} style={{cursor: 'pointer'}}>{this.state.tag1}</a></label></div></Col>
+                        </Row>  
+                        <Dialog
+                        open={this.state.open}
+                        keepMounted
+                        onClose={this.handleClose}
+                        aria-labelledby="alert-dialog-slide-title"
+                        aria-describedby="alert-dialog-slide-description"
+                >
+                    <DialogTitle id="alert-dialog-slide-title">{"Confirm"}</DialogTitle>
+                    <DialogContent>
+                    <DialogContentText id="alert-dialog-slide-description">
+                    你想要刪除此TAG嗎？
+                    </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                    <Button onClick={this.handleClose} color="primary">
+                        取消
+                    </Button>
+                    <Button onClick={() => this.delete(this.state.tag_in_id,fundid)} color="primary" >
+                        是
+                    </Button>
+                    </DialogActions>
+                </Dialog>     
                     </div>
                 </Row>  
                 <Row >
@@ -632,6 +877,45 @@ class LineDetailFund extends React.Component{
                 </Row>
                 </div>
             </Row>
+            <Row>
+                <div className='sub-sub-tag'>
+                <Row>
+                    <Col xs={12} md={12}><div className='input-tag-btn'><button className='tag-btn' onClick={this.handleClickOpenAdd} >新增自己的TAG➥</button></div></Col>
+                    {/* <Col xs={6} md={9}><div className='input-tag'><input onChange={this.handleChange('new_tag')} className='input-fieled' size="8" maxlength="8"></input></div></Col>        */}
+                    <Dialog
+                                open={this.state.open_add}
+                                keepMounted
+                                onClose={this.handleCloseAdd}
+                                aria-labelledby="alert-dialog-slide-title"
+                                aria-describedby="alert-dialog-slide-description"
+                        >
+                            <DialogTitle id="alert-dialog-slide-title">{"Confirm"}</DialogTitle>
+                            <DialogContent>
+                            <DialogContentText id="alert-dialog-slide-description">
+                            請輸入你想要新增的TAG
+                            </DialogContentText>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="tag_contnt"
+                                label="TAG內容"
+                                fullWidth
+                                onChange={this.handleChange('new_tag')} //更新新增內容
+                            />
+                            </DialogContent>
+                            <DialogActions>
+                            <Button onClick={this.handleCloseAdd} color="primary">
+                                取消
+                            </Button>
+                            <Button onClick={this.handleSubmit} color="primary" >
+                                是
+                            </Button>
+                            </DialogActions>
+                        </Dialog>
+                </Row>    
+                </div>
+            </Row>
+            <Row></Row>
 
             <Row>
                 <div className='sub-sub-basic-info'>               
@@ -696,6 +980,8 @@ class LineDetailFund extends React.Component{
 
 }    
 export default LineDetailFund;
+//export default withRouter(LineDetailFund);
+
 
 function chart_performance() {  //顯示績效
 

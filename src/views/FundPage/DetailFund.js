@@ -651,7 +651,7 @@ class DetailFund extends React.Component{
                 window.location.reload(true);
             }
             else{
-                alert("您的TAG已達上限，請先至個人TAG管理頁面做刪除，才能再做新增！")
+                alert("您的TAG已達上限2筆，請先將TAG做刪除，才能再做新增！")
                 console.log("handleSubmit_error")}   
         })}
         else {
