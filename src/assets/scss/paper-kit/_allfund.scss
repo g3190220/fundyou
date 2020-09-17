@@ -227,7 +227,7 @@
                 border-radius: 20px;
                 border:rgb(0, 68, 135) solid 2px;
                 background-color:rgb(0, 68, 135);
-                //margin-top: 30px;
+                margin-top: 5px;
                 //margin-left: 15px;
                 outline:none;
                 color:  #F8EDEB;
@@ -242,8 +242,7 @@
                 border-radius: 20px;
                 border:rgb(0, 68, 135) solid 2px;
                 background-color:rgb(196, 215, 233);
-                margin-top: 30px;
-                margin-left: 15px;
+                margin-top: 5px;
                 outline:none;
                 color:  rgb(0, 68, 135);
                 font-weight:bold;
@@ -621,9 +620,14 @@
                 padding-top: 0px
             }
             .teach-btn:hover{
-                background-color: #FFFFFF;
-                color: rgb(0, 68, 135);
+                background-color:rgb(0, 68, 135);
+                color: #ffffff;
             }
+            .teach-btn:focus{
+                background-color:rgb(0, 68, 135);
+                color: #ffffff;
+            }
+
             .teach-btn a{
                 color: inherit;
             }
@@ -648,7 +652,7 @@
                 //border: 2px #F8EDEB solid;
                 margin:0 auto;
                 margin-top: 10px;
-                margin-bottom: 30px;
+                margin-bottom: 20px;
                 margin-left: 10px;
                 margin-right: 10px;
                 font-family:Microsoft JhengHei;

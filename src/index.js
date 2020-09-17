@@ -31,6 +31,7 @@ import LineAllFundPage from "views/LinePage/LineAllFund.js";
 import LiffLogin from "views/LinePage/LiffLogin.js";
 import LiffRegister from "views/LinePage/LiffRegister.js";
 import LineDetailFund from "views/LinePage/LineDetailFund.js";
+import LiffMyFund from "views/LinePage/LiffMyFund.js";
 
 
 // others
@@ -126,6 +127,10 @@ ReactDOM.render(
       <Route
         path="/line-detailfund/:fundid"//LineBot-Liff基金詳細頁面
         render={props => <LineDetailFund {...props} />} 
+      />
+      <Route
+        path="/liff-page-myfund"//LineBot-Liff追蹤基金頁面
+        render={props => <LiffMyFund {...props} />} 
       />
       
 

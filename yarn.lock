@@ -1629,7 +1629,7 @@
     body-parser "^1.19.0"
     file-type "^7.7.1"
 
-"@line/liff@^2.4.0":
+"@line/liff@^2.3.2":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@line/liff/-/liff-2.4.0.tgz#b3f841e8ee390c940e0d937cdb62014214154bcf"
   integrity sha512-krX4kEPDQajz9dvLvnzl8Hfo4m3RYIBO9MWOCytVn6xdEOMGhojwv4SCt7TDke/XPstgO5ft7gwi9le0Afs2CA==

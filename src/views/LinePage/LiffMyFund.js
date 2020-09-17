@@ -43,6 +43,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
+//liff套件
+import liff from '@line/liff';
+
+var liff_userid="";
+var member_id="";
 
 
 const tableIcons = {
@@ -107,7 +112,7 @@ const tableIcons = {
 
 
   
-class PageMyFund extends React.Component{
+class LiffMyFund extends React.Component{
     state = {
     }
     constructor(props) {
@@ -119,6 +124,9 @@ class PageMyFund extends React.Component{
         this.CreateMemo=this.CreateMemo.bind(this);
         this.getMemo=this.getMemo.bind(this);
         this.handleChange=this.handleChange.bind(this);
+        this.getLiffid = this.getLiffid.bind(this);
+        this.ChangeLiffid=this.ChangeLiffid.bind(this);
+
 
         console.log(props)
         this.state = {
@@ -171,6 +179,7 @@ class PageMyFund extends React.Component{
   
     componentDidMount() {
       window.scrollTo(0, 0);  //頁面置頂
+      this.getLiffid();
       this.getTrackData();
     }
 
@@ -183,7 +192,7 @@ class PageMyFund extends React.Component{
               'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-              userid: load_cookies("member_id"),
+              userid: member_id,
               fld022: "all",
           })
       })
@@ -220,6 +229,11 @@ class PageMyFund extends React.Component{
           this.state.all_data=[]
         }
       })
+      .then(()=>{
+        //獲取liff id
+        this.getLiffid()
+      })
+
     }
       
 
@@ -243,7 +257,7 @@ class PageMyFund extends React.Component{
         },
         body: JSON.stringify({
             content: this.state.new_content,
-            userid: load_cookies("member_id"),
+            userid: member_id,
             fld022: this.state.fund_fld022_track,
         })
         
@@ -274,7 +288,7 @@ class PageMyFund extends React.Component{
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            userid: load_cookies("member_id"),
+            userid: member_id,
             fld022: fld022,
         })
         
@@ -309,6 +323,72 @@ class PageMyFund extends React.Component{
       })
       .then(()=>{this.handleClickOpen()})
     }
+
+
+  //獲取liff id
+  getLiffid(){
+    let liff_userid;
+    liff.init({
+      liffId: "1654887866-0ew4RbOV" // Use own liffId
+    })
+    .then(() => {
+      if (liff.isLoggedIn()) {
+          liff.getProfile()
+          .then(profile => {
+            const userId = profile.userId
+            //取得liff_userid;
+            liff_userid=userId;
+          })
+          .then(()=>{this.setState({liff_userid:liff_userid,flag:true})})
+          .then(()=>{
+           //獲取liff id
+           console.log("getLiffid()後")
+           console.log(this.state.liff_userid)
+            this.ChangeLiffid()
+           })
+        }
+      else{
+        alert("取得失敗")
+      }
+    })
+    
+  }
+  //檢查Liff有無連接，並回傳userid
+  ChangeLiffid(){
+    let member_info=[];
+    const url = "https://fundu.ddns.net:8090/LineLogin";////////改url
+    //console.log(data)
+    fetch(url, {
+              method: 'POST',
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                    //取得全部fund
+                    lineid: this.state.liff_userid,
+              })
+              
+        })
+        .then((response) => {return response.json();})
+        .then((jsonData) => { 
+          //console.log(jsonData)
+          if(jsonData.StatusCode==200){
+            member_info=JSON.parse(jsonData.member_info)
+            //取得系統id了
+            this.state.member_id=member_info.member_id
+            //alert(this.state.member_id)
+            
+          }
+          else{
+            alert("您尚未與系統連結，無法使用此功能。請先登入！")
+            liff.closeWindow();
+          
+          }
+        })
+
+  }
+
 
 
     
@@ -452,8 +532,8 @@ class PageMyFund extends React.Component{
     }
     }
 
-    PageMyFund.propTypes = {
+    LiffMyFund.propTypes = {
       classes: PropTypes.object.isRequired,
     };
-    export default withStyles(styles)(PageMyFund);
+    export default withStyles(styles)(LiffMyFund);
     //export default PageMyFund;
