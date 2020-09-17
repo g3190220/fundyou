@@ -486,10 +486,10 @@ class LineAllFund extends React.Component {
           this.state.all_data=[]
           }
         })
-        // .then(()=>{
-        //   //獲取liff id
-        //   this.getLiffid()
-        // })
+        .then(()=>{
+          //獲取liff id
+          this.getLiffid()
+        })
       //抓取淨值資料
       //const url2 = "https://fundu.ddns.net:8090/getFundInfo";////////改url
   }

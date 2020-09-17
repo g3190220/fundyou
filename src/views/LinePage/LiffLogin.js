@@ -125,14 +125,12 @@ class LiffLogin extends React.Component {
     
     //取消DOM的預設功能
     window.event.preventDefault();
-  
+    console.log("click into handleSubmit")
     if(!isEmpty(this.state.email) && !isEmpty(this.state.password))
     { 
-       
+        console.log("準備fetch")
         this.state.errors = {};
-        //const proxyurl = "https://cors-anywhere.herokuapp.com/";
         const url = "https://fundu.ddns.net:8090/Signin";
-        //console.log(data)
         fetch( url, {
               method: 'POST',
               headers: {
@@ -164,7 +162,7 @@ class LiffLogin extends React.Component {
             this.state.errors["password_is_errors"] = true;
 
             this.setState({errors: this.state.errors});
-            console.log(this.state.errors);
+            //console.log(this.state.errors);
             
           }
           else{
