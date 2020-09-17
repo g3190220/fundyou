@@ -209,10 +209,7 @@ class PagePig extends React.Component{
                 <div className="card-content">基金推薦</div>
                 <div className="card-content">基金試算器</div>
             </Row>
-<<<<<<< HEAD
-=======
             
->>>>>>> 424e2471f1dc7482780f5ca771079176e09d63fe
             <Row>
                 <div className="fund-recommendation">基金推薦</div>
             </Row>

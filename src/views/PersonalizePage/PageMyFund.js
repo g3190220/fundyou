@@ -378,7 +378,7 @@ class PageMyFund extends React.Component{
                     })
                   },
                   {
-                    icon: () => <NotesIcon color="action" />,
+                    icon: () => <BorderColorIcon color="action" />,
                     tooltip: 'MEMO' ,
                     onClick: (event, rowData) => {
                       this.getMemo(rowData.fund_fld022_track,rowData.Fund_CH_Name)

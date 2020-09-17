@@ -2,9 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button, Card } from 'reactstrap';
-import PersonalizeMenu from "views/PersonalizePage/PersonalizePage.js"; //左側選單
 import MaterialTable from 'material-table'; //基金表格
-import { load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
 
 import isEmpty from 'views/Function/isEmpty.js'
 
@@ -179,8 +177,8 @@ class LiffMyFund extends React.Component{
   
     componentDidMount() {
       window.scrollTo(0, 0);  //頁面置頂
-      this.getLiffid();
-      this.getTrackData();
+      this.getLiffid()
+      
     }
 
     getTrackData(){  //取得追蹤基金
@@ -329,7 +327,7 @@ class LiffMyFund extends React.Component{
   getLiffid(){
     let liff_userid;
     liff.init({
-      liffId: "1654887866-0ew4RbOV" // Use own liffId
+      liffId: "1654887866-W1p36BZ4" // Use own liffId
     })
     .then(() => {
       if (liff.isLoggedIn()) {
@@ -376,8 +374,10 @@ class LiffMyFund extends React.Component{
           if(jsonData.StatusCode==200){
             member_info=JSON.parse(jsonData.member_info)
             //取得系統id了
-            this.state.member_id=member_info.member_id
+            member_id=member_info.member_id
             //alert(this.state.member_id)
+            console.log(member_id)
+            
             
           }
           else{
@@ -386,6 +386,7 @@ class LiffMyFund extends React.Component{
           
           }
         })
+        .then(()=>{this.getTrackData()})
 
   }
 
@@ -398,7 +399,6 @@ class LiffMyFund extends React.Component{
       
     return(
     <div className="card-personalize-myfund">
-    <PersonalizeMenu></PersonalizeMenu>
     <Container>
     <Row>
         <div className="card-personalize1">
@@ -458,7 +458,7 @@ class LiffMyFund extends React.Component{
                     })
                   },
                   {
-                    icon: () => <NotesIcon color="action" />,
+                    icon: () => <BorderColorIcon color="action" />,
                     tooltip: 'MEMO' ,
                     onClick: (event, rowData) => {
                       this.getMemo(rowData.fund_fld022_track,rowData.Fund_CH_Name)

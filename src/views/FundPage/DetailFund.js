@@ -10,6 +10,13 @@ import { TextField } from "@material-ui/core";
 import isEmpty from "views/Function/isEmpty.js"
 import VerticalTabs from "views/FundPage/VerticalTab.js"
 import CheckLogin from "views/Function/CheckLogin.js"
+import BorderColorIcon from '@material-ui/icons/BorderColor';
+
+//覆寫CSS
+import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
+import { forwardRef } from 'react';
+
 
 //處理對話框
 import Dialog from '@material-ui/core/Dialog';
@@ -34,6 +41,45 @@ var risk_SD = [];
 var fundid="";
 var tag1_id=0;
 var tag2_id=0;
+
+const styles = () => ({
+    customDialogTitle: {
+      backgroundColor: "#f8f5c4",
+      '& h2': {
+        fontFamily:"Microsoft JhengHei",
+        fontWeight: 900,
+        fontSize:25,
+        // backgroundColor: "#f8f5c4"
+      },
+    },
+    customDialogContent:{
+      backgroundColor: "#f8f5c4",
+      '& p': {
+        fontFamily:"Microsoft JhengHei",
+        fontWeight: 600,
+        fontSize:18,
+        color: "#4d4d4d",
+      }
+
+    },
+    customDialogActions:{
+      backgroundColor: "#f8f5c4",
+      '& button': {
+        backgroundColor: "#bba57d",
+        borderColor: "#bba57d",
+      },
+    },
+    customTable: {
+      "& .MuiPaper-elevation2": {
+        color: "rgba(0, 0, 0, 0.87)",
+        transition: "box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+        backgroundColor: "#fff",
+        width: "100%",
+        fontFamily:"微軟正黑體",
+      }
+      
+    }
+});
 
 
 // core components
@@ -215,6 +261,94 @@ class DetailFund extends React.Component{
         })
         //.then(()=>{this.setState();window.location.reload(true);})  //更新狀態後重新整理頁面
     }
+
+    CreateMemo(){
+        const url = "https://fundu.ddns.net:8090/Memo";
+        fetch(url, {
+          method: 'POST',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              content: this.state.new_content,
+              userid: load_cookies("member_id"),
+              fld022: this.state.fund_fld022_track,
+          })
+          
+        })
+        .then((response) => {return response.json();})
+        .then((jsonData) => {
+          console.log(jsonData)
+          if(jsonData.StatusCode==200){
+            alert("成功更新備忘錄！")
+            window.location.reload(true)  //更新狀態後重新整理頁面
+          }
+          else{
+            alert("error")
+          }
+        })
+  
+      }
+  
+
+    getMemo(fld022,chname){
+        const url = "https://fundu.ddns.net:8090/getMemo";
+        console.log(fld022)
+        console.log(chname)
+        fetch(url, {
+          method: 'POST',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              userid: load_cookies("member_id"),
+              fld022: fld022,
+          })
+          
+        })
+        .then((response) => {return response.json();})
+        .then((jsonData) => {
+          console.log(jsonData)
+          if(jsonData.StatusCode==200){
+            var memo_info=[];
+            
+            //memo_info=JSON.parse(jsonData.info)
+            for(var i = 0; i < jsonData.info.length; i++){
+                memo_info.push(JSON.parse(jsonData.info[i]))
+            }
+            if(isEmpty(memo_info[0][0].content)){
+              this.setState({original_content:"您尚未新增備忘錄！"})
+            }
+            else{
+              this.setState({original_content:memo_info[0][0].content})
+            }
+           
+           this.setState({fund_fld022_track:fld022})
+           this.setState({chname:chname})
+            
+  
+          }
+          else{
+            this.setState({original_content:"您尚未新增備忘錄！"})
+            this.setState({fund_fld022_track:fld022})
+            this.setState({chname:chname})
+          }
+        })
+        .then(()=>{this.handleClickOpenMemo()})
+    }
+
+    handleClickOpenMemo(){
+        this.setState({
+          openMemo: true
+        });
+      }
+    handleCloseMemo(){
+        this.setState({
+          openMemo: false
+        });
+      }
 
     getTag(){
         let id = (this.props.match.params.fundid.split('='))[1];
@@ -726,7 +860,8 @@ class DetailFund extends React.Component{
     
 
     render(){     //render的意義為何??(待查清) //猜想：render預設的渲染方式，網頁一開始執行的
-        
+        const {classes} = this.props;
+
         var config_net = {
 
             chart : {
@@ -828,7 +963,57 @@ class DetailFund extends React.Component{
             <Row>
                 <div className='sub-sub-detail'  id='info'>
                 <Row >
-                    <Col xs={7} md={9}> <label className='fund-name'>{this.state.fund_name}</label>  {/*從資料庫讀取基金的名字*/}</Col>
+                    <Col xs={7} md={9}> <label className='fund-name'>{this.state.fund_name}</label>  {/*從資料庫讀取基金的名字*/}
+                    <BorderColorIcon onClick={(event, rowData) => this.getMemo(rowData.fund_fld022_track)}/>
+                    </Col>
+
+                <div className="memo_content">
+                  <Dialog   
+                    open={this.state.openMemo} 
+                    keepMounted
+                    onClose={this.handleCloseMemo} 
+                    aria-labelledby="form-dialog-title"
+                    fullWidth={true}
+                    maxWidth={'xs'}
+                    classes={{root: classes.customDialog}}
+                   >
+                     
+                    <DialogTitle 
+                      id="form-dialog-title" 
+                      classes={{root: classes.customDialogTitle}}
+                    >
+                      <BorderColorIcon></BorderColorIcon>{this.state.chname}
+                      <hr className="hr"></hr>
+                      </DialogTitle>
+                      
+                    <DialogContent classes={{root: classes.customDialogContent}}>
+                      <DialogContentText >
+                          {this.state.original_content}
+                      </DialogContentText>
+                      <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="請輸入備忘錄內容"
+                        multiline
+                        rowsMax={4}
+                        type="string"
+                        // defaultValue={this.state.content}
+                        onChange={this.handleChange('new_content')} //更新新增內容
+                        fullWidth
+                      />
+                    </DialogContent>
+                    <DialogActions classes={{root: classes.customDialogActions}}>
+                      <Button onClick={this.handleCloseMemo} color="primary">
+                        Cancel
+                      </Button>
+                      <Button onClick={this.CreateMemo} color="primary">
+                        Save
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+                </div>
+
                     <Col xs={5} md={3}>
                         <div className='button-position'>
                             <input type="button" className={this.state.track_state==1 ? "followBtnTrue" : "followBtnFalse"} onClick={this.togglestate,this.CreateTrack} value={this.state.track_state==1 ? "√ 已追蹤" : "+ 追蹤"}></input>
@@ -1085,8 +1270,13 @@ class DetailFund extends React.Component{
             </div>
         )};
 
-}    
-export default DetailFund;
+}
+DetailFund.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+export default withStyles(styles)(DetailFund);
+
+// export default DetailFund;
 
 function chart_performance() {  //顯示績效
 
