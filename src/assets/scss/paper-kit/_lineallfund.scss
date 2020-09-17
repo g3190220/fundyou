@@ -1,4 +1,4 @@
-.allfund-menu{
+.lineallfund-menu{
     background-color:#f6f6f6;
     //min-height: 1000px;
     min-height:100%;
@@ -227,7 +227,7 @@
                 border-radius: 20px;
                 border:rgb(0, 68, 135) solid 2px;
                 background-color:rgb(0, 68, 135);
-                margin-top: 5px;
+                //margin-top: 30px;
                 //margin-left: 15px;
                 outline:none;
                 color:  #F8EDEB;
@@ -242,7 +242,8 @@
                 border-radius: 20px;
                 border:rgb(0, 68, 135) solid 2px;
                 background-color:rgb(196, 215, 233);
-                margin-top: 5px;
+                margin-top: 30px;
+                margin-left: 15px;
                 outline:none;
                 color:  rgb(0, 68, 135);
                 font-weight:bold;
@@ -263,7 +264,7 @@
                 margin-bottom: -8px;
             }
             .fund-value-green{
-                color: #208306;
+                color: #00ff00;
                 font-size: 50px;
                 //margin-left: 120px;
                 font-weight:bold;
@@ -291,7 +292,7 @@
             }
             .fund-percentage-green{
                 width:100%;
-                color:#208306;
+                color: #00ff00;
                 font-size: 15px;
                 //margin-left: 30px;
                 margin-top: 12px;
@@ -620,14 +621,9 @@
                 padding-top: 0px
             }
             .teach-btn:hover{
-                background-color:rgb(0, 68, 135);
-                color: #ffffff;
+                background-color: #FFFFFF;
+                color: rgb(0, 68, 135);
             }
-            .teach-btn:focus{
-                background-color:rgb(0, 68, 135);
-                color: #ffffff;
-            }
-
             .teach-btn a{
                 color: inherit;
             }
@@ -652,7 +648,7 @@
                 //border: 2px #F8EDEB solid;
                 margin:0 auto;
                 margin-top: 10px;
-                margin-bottom: 20px;
+                margin-bottom: 30px;
                 margin-left: 10px;
                 margin-right: 10px;
                 font-family:Microsoft JhengHei;

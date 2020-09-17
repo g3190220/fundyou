@@ -22,9 +22,9 @@ function DemoFooter() {
             <h4>LINE bot</h4>
             <img src={lineQR} alt="Background" className="lineQR"/>
           </div>
-          <div className="warning">
+          {/* <div className="warning">
             <h4>投資一定有風險，基金投資有賺有賠，申購前應詳閱公開說明書。</h4>
-          </div>
+          </div> */}
         </Row>
       </Container>
     </footer>

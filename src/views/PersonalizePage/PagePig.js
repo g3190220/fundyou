@@ -76,11 +76,21 @@ class PagePig extends React.Component{
           selected:1
       }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.gototop=this.gototop.bind(this);
+    this.gotocaculate=this.gotocaculate.bind(this);
     }
 
     componentDidMount() {
         window.scrollTo(0, 0);  //頁面置頂
         this.getresult();
+    }
+    //
+    gototop(){
+        window.scrollTo(0, 0); 
+    }
+    
+    gotocaculate(){
+        window.scrollTo(100, 0); 
     }
   
     //點擊去頁面
@@ -196,7 +206,13 @@ class PagePig extends React.Component{
         <div className="card-personalize1">
             <Row>
                 <div className="card-personalize1-title">豬豬小助理</div>
+                <div className="card-content">基金推薦</div>
+                <div className="card-content">基金試算器</div>
             </Row>
+<<<<<<< HEAD
+=======
+            
+>>>>>>> 424e2471f1dc7482780f5ca771079176e09d63fe
             <Row>
                 <div className="fund-recommendation">基金推薦</div>
             </Row>
