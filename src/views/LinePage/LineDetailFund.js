@@ -35,7 +35,7 @@ var performance_day = [];
 var risk_beta = [];
 var risk_SD = [];
 var liff_userid="";
-var member_id="";
+var member_ID=4;
 var id ="";
 var fundid="";
 var tag1_id=0;
@@ -131,7 +131,8 @@ class LineDetailFund extends React.Component{
         console.log(this.props)
         console.log(this.props.location.pathname)
         console.log(this.props.location.pathname.split('='));
-        id = (this.props.location.pathname.split('='))[1];
+        //id = (this.props.location.pathname.split('='))[1];
+        id="971976";
         //id = this.props.location.state.fundid;
         console.log(id)
         const url = "https://fundu.ddns.net:8090/getFundInfo";////////改url
@@ -181,8 +182,8 @@ class LineDetailFund extends React.Component{
     }
 
     trackstate(){    //看此user有沒有追蹤過此筆基金，並改變追蹤狀態
-        console.log(this.state.member_ID)
-        console.log(id)
+        //console.log(this.state.member_ID)
+        //console.log(id)
         let fund_info=[];
         const url = "https://fundu.ddns.net:8090/getTrack";
         fetch(url, {
@@ -192,7 +193,8 @@ class LineDetailFund extends React.Component{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                userid: this.props.location.state.member_ID,
+                //userid: this.props.location.state.member_ID,
+                userid: member_ID,
                 fld022: id,
             })
         })
@@ -245,7 +247,8 @@ class LineDetailFund extends React.Component{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                userid: this.props.location.state.member_ID,
+                //userid: this.props.location.state.member_ID,
+                userid: member_ID,
                 fld022: id,
             })
         })
@@ -322,7 +325,8 @@ class LineDetailFund extends React.Component{
             },
         body: JSON.stringify({
                 //取得全部fund
-                member_id: this.props.location.state.member_ID,
+                //member_id: this.props.location.state.member_ID,
+                member_id: member_ID,
                 tag_id:-1,
                 fld022:id
         })
@@ -558,7 +562,8 @@ class LineDetailFund extends React.Component{
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                        member_id: this.props.location.state.member_ID,
+                        //member_id: this.props.location.state.member_ID,
+                        member_id: member_ID,
                         fld022: fld022,
                         content:this.state.new_tag,
                 })
@@ -624,7 +629,8 @@ class LineDetailFund extends React.Component{
               },
               body: JSON.stringify({
                     //取得全部fund
-                    member_id: this.props.location.state.member_ID,
+                    //member_id: this.props.location.state.member_ID,
+                    member_id:member_ID,
                     tag_id:in_tagid,
                     fld022:in_fld022
               })
@@ -825,19 +831,24 @@ class LineDetailFund extends React.Component{
             {
             !this.state.initial ? (<LoadingIndicator></LoadingIndicator>): 
             (
-            <div className='allfund-menu'>
+            <div className='lineallfund-menu'>
             <Container>
             <div className='sub-menu' id='ino_parent'>
             <Row>
                 <div className='sub-sub-detail'  id='info'>
                 <Row >
-                    <Col xs={7} md={9}> <label className='fund-name'>{this.state.fund_name}</label>  {/*從資料庫讀取基金的名字*/}</Col>
-                    <Col xs={5} md={3}>
-                        <div className='button-position'>
-                            <input type="button" className={this.state.track_state==1 ? "followBtnTrue" : "followBtnFalse"} onClick={this.togglestate,this.CreateTrack} value={this.state.track_state==1 ? "√ 已追蹤" : "+ 追蹤"}></input>
-                        </div> 
+                    <Col xs={12} md={9}><label className='fund-name'>{this.state.fund_name}</label></Col>  {/*從資料庫讀取基金的名字*/}
+                    <Col xs={12} md={3}>
+                    <div className='button-position'>
+                        <input type="button" className={this.state.track_state==1 ? "followBtnTrue" : "followBtnFalse"} onClick={this.togglestate,this.CreateTrack} value={this.state.track_state==1 ? "√ 已追蹤" : "+ 追蹤"}></input>
+                    </div> 
                     </Col>
                 </Row> 
+                {/* <Row>
+                    <div className='button-position'>
+                        <input type="button" className={this.state.track_state==1 ? "followBtnTrue" : "followBtnFalse"} onClick={this.togglestate,this.CreateTrack} value={this.state.track_state==1 ? "√ 已追蹤" : "+ 追蹤"}></input>
+                    </div> 
+                </Row> */}
                 <Row>
                     <div className='tag-position'>
                         <Row>
@@ -871,27 +882,30 @@ class LineDetailFund extends React.Component{
                 </Dialog>     
                     </div>
                 </Row>  
-                <Row >
-                    <Col xs={12} md={{size: 5}}>
-                        <div className='fund-currency-position'>
-                            <label className={this.state.fund_net_CSS}>{this.state.new_net}<span className='fund-currency'>{this.state.fund_currency}</span></label>
-                        </div> {/*從資料庫讀取基金的淨值*/}
-                    </Col>
-                    <Col xs={12} md={{size: 5}}>
-                        <div className='fund-percentage-position'>
-                            <label className={this.state.fund_percentage_CSS}>{this.state.fund_percent}%​<p></p>{this.state.fund_gain}</label>
-                        </div>
-                    </Col>
-                </Row> 
-                <Row  className='fund-data'>
-                    <span><label>績效：3月：</label><label>{this.state.History_ROI_3M}%</label><label>&nbsp;&nbsp;&nbsp;</label><label>6月：</label><label>{this.state.History_ROI_6M}%</label><label>&nbsp;&nbsp;&nbsp;</label><label>1年：</label><label>{this.state.History_ROI_12M}%</label></span>
-                </Row>
-                <Row className='fund-data'>
-                    <span><label> 成立日期：</label><label>{this.state.fund_startdate}</label></span>
-                </Row>
-                <Row className='fund-data'>
+                <div className="detatil-background">
+                    <Row >
+                    
+                        <Col xs={12} md={{size: 5}}>
+                            <div className='fund-currency-position'>
+                                <label className={this.state.fund_net_CSS}>{this.state.new_net}<span className='fund-currency'>{this.state.fund_currency}</span></label>
+                            </div> {/*從資料庫讀取基金的淨值*/}
+                        </Col>
+                        <Col xs={12} md={{size: 5}}>
+                            <div className='fund-percentage-position'>
+                                <label className={this.state.fund_percentage_CSS}>{this.state.fund_percent}%​<p></p>{this.state.fund_gain}</label>
+                            </div>
+                        </Col>
+                    </Row> 
+                    <Row  className='fund-data'>
+                        <span><label>績效：3月：</label><label>{this.state.History_ROI_3M}%</label><label>&nbsp;&nbsp;&nbsp;</label><label>6月：</label><label>{this.state.History_ROI_6M}%</label><label>&nbsp;&nbsp;&nbsp;</label><label>1年：</label><label>{this.state.History_ROI_12M}%</label></span>
+                    </Row>
+                    <Row className='fund-data'>
+                        <span><label> 成立日期：</label><label>{this.state.fund_startdate}</label></span>
+                    </Row>
+                    <Row className='fund-data'>
                     <span><label>基金規模：</label><label>{this.state.fund_currency} {this.state.fund_scale}</label></span>
                 </Row>
+                </div>
                 </div>
             </Row>
             <Row>

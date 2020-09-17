@@ -79,11 +79,21 @@ class PagePig extends React.Component{
           selected:1
       }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.gototop=this.gototop.bind(this);
+    this.gotocaculate=this.gotocaculate.bind(this);
     }
 
     componentDidMount() {
         window.scrollTo(0, 0);  //頁面置頂
         this.getresult();
+    }
+    //
+    gototop(){
+        window.scrollTo(0, 0); 
+    }
+    
+    gotocaculate(){
+        window.scrollTo(100, 0); 
     }
   
     //點擊去頁面
@@ -192,23 +202,10 @@ class PagePig extends React.Component{
         <div className="card-personalize1">
             <Row>
                 <div className="card-personalize1-title">豬豬小助理</div>
+                <div className="card-content">基金推薦</div>
+                <div className="card-content">基金試算器</div>
             </Row>
-            <Row>
-                <Col sm={3}>
-                    <div className="dollor-cost-average">基金試算器</div>
-                </Col>
-
-                <Col sm={7}>
-                    <div className='button-center'>
-                    <button className='tag-btn'  onClick={()=>this.Change_rank(1)}>單筆投資</button>
-                    {/* <button className='tag-btn'  onClick={()=>this.Change_rank(2)}>每月定期定額</button> */}
-                    <button className='tag-btn'  onClick={()=>this.Change_rank(3)}>每年定期定額</button>
-                    </div>
-                </Col>
-            </Row>
-            <Row>
-                {this.state.selected==1?(<Caculate></Caculate>):(this.state.selected==3?(<Caculate2></Caculate2>):(<Caculate3></Caculate3>))}
-            </Row>
+            
             <Row>
                 <div className="fund-recommendation">基金推薦</div>
             </Row>
@@ -278,6 +275,22 @@ class PagePig extends React.Component{
                         }}
                         />
                 </div>
+            </Row>
+            <Row>
+                <Col sm={3}>
+                    <div className="dollor-cost-average">基金試算器</div>
+                </Col>
+
+                <Col sm={7}>
+                    <div className='button-center'>
+                    <button className='tag-btn'  onClick={()=>this.Change_rank(1)}>單筆投資</button>
+                    {/* <button className='tag-btn'  onClick={()=>this.Change_rank(2)}>每月定期定額</button> */}
+                    <button className='tag-btn'  onClick={()=>this.Change_rank(3)}>每年定期定額</button>
+                    </div>
+                </Col>
+            </Row>
+            <Row>
+                {this.state.selected==1?(<Caculate></Caculate>):(this.state.selected==3?(<Caculate2></Caculate2>):(<Caculate3></Caculate3>))}
             </Row>
         </div>
     </Row>     

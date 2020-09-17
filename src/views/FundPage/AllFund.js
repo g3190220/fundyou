@@ -26,6 +26,7 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 import FindInPageIcon from '@material-ui/icons/PageviewOutlined';
 import Checkbox from '@material-ui/core/Checkbox';
 import SearchIcon from '@material-ui/icons/Search';
+import CheckLogin from 'views/Function/Check_Login.js'
 
 // reactstrap components
 import { Button, Card, Form, Input, Container, Row, Col} from "reactstrap";
@@ -414,6 +415,7 @@ class AllFund extends React.Component {
       //this.handleSelectChange = this.handleSelectChange.bind(this);
       this.filterShow=this.filterShow.bind(this);
       //this.scroll=this.scroll.bind(this);
+      //this.Check=this.Check.bind(this);
       this.state = {
         fund_id1:'',
         fund_id2:'',
@@ -448,7 +450,38 @@ class AllFund extends React.Component {
       //console.log(this.state) 
   }
   componentDidMount() {
-    this.getAllFundData();
+    this.CheckLogin()
+  }
+
+  //Check Login
+  CheckLogin(){
+    const url = "https://fundu.ddns.net:8090/check_LoginStatus";////////改url
+    //console.log(data)
+    fetch(url, {
+              method: 'POST',
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                    userid: load_cookies("member_id"),
+                    userSession:load_cookies("member_session")
+              })
+              
+        
+        })
+        .then((response) => {return response.json();})
+        .then((jsonData) => {
+          if(jsonData.StatusCode==200){
+            
+            this.getAllFundData();
+          }
+          else{
+            alert("請重新正常登入！")
+          setTimeout(() => this.props.history.push("/index"),1500)
+          }
+        })
+        
   }
   getAllFundData(){
     let fund_info=[];
@@ -484,6 +517,7 @@ class AllFund extends React.Component {
       //抓取淨值資料
       const url2 = "https://fundu.ddns.net:8090/getFundInfo";////////改url
   }
+
   
 
   //處理filter、select value
@@ -641,7 +675,7 @@ class AllFund extends React.Component {
               <label className='search-font'>條件篩選基金</label>{!this.state.filter_content ? (<span></span>):(<LoadingIndicator_small></LoadingIndicator_small>)}
             </div>
         <Row>
-        <Col sm>
+        <Col xs={4} sm>
             <TextField
                 id="currency"
                 label="請選擇 貨幣"
@@ -659,7 +693,7 @@ class AllFund extends React.Component {
             ))}
             </TextField>
           </Col>
-            <Col sm>
+            <Col xs={4} sm>
             <TextField
                 id="agent"
                 label="請選擇 公司"
@@ -677,7 +711,7 @@ class AllFund extends React.Component {
             ))}
             </TextField>
             </Col>
-            <Col sm>
+            <Col xs={4} sm>
             <TextField
                 id="fundtype"
                 label="請選擇 種類"
@@ -695,7 +729,7 @@ class AllFund extends React.Component {
             ))}
             </TextField>
             </Col>
-            <Col sm>
+            <Col xs={4} sm>
             <TextField
                 id="roi3M"
                 label="請選擇 三個月報酬區間"
@@ -713,7 +747,7 @@ class AllFund extends React.Component {
             ))}
             </TextField>
             </Col>
-            <Col sm>
+            <Col xs={4} sm>
             <TextField
                 id="RR"
                 label="請選擇 RR風險"
