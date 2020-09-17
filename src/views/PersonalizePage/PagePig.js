@@ -63,18 +63,15 @@ class PagePig extends React.Component{
         this.state = {
           //fields: {},
           errors: {},
-          recommendation_text:'至性格分析頁面完成性格分析問券即可取得個人化的基金投資推薦。',
+          recommendation_text:'您尚未做過性格分析測驗，此推薦僅依據績效預測排名。如需個人化推薦，請至性格分析頁面完成性格分析問券即可取得個人化的基金投資推薦。',
           is_recommendation:false, //預設未做過性格分析測驗
+          method:'',
+          roi:'',
           columns:[
-            {title: '基金統編', field: 'Fund_fld022' },
-            {title: '基金名稱', field: 'Fund_CH_Name' },
-            {title: '幣別',field: 'Fund_Currency'},
-            {title: '基金類型',field: 'Fund_Type'},
-            {title: '最新淨值',field: 'History_NetWorth'},
-            {title: '漲跌(%)',field: 'Ups_and_Downs'},
-            {title: '累積報酬(%)',field: 'History_ROI_YB'},
-            {title: '三個月報酬(%)',field: 'History_ROI_3M'},
-            {title: '最新日期',field: 'Last_Update'},
+            {title: '基金統編', field: '3' },
+            {title: '基金名稱',field: '0'},
+            {title: '風險指標（標準差）',field: '1'},
+            {title: '預期報酬',field: '2'},
           ],
           selected:1
       }
@@ -107,39 +104,6 @@ class PagePig extends React.Component{
         }
     }
 
-    getAllFundData(){
-        let fund_info=[];
-        //除淨值的資料
-        const url = "https://fundu.ddns.net:8090/getFundInfo";////////改url
-        //console.log(data)
-        fetch(url, {
-                  method: 'POST',
-                  headers: {
-                      'Accept': 'application/json',
-                      'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                        //取得全部fund
-                        fld022: -1,
-                  })
-                  
-            })
-            .then((response) => {return response.json();})
-            .then((jsonData) => { 
-              if(jsonData.StatusCode==200){
-                console.log(jsonData);
-                fund_info=JSON.parse(jsonData.fund_info)
-                console.log(fund_info);
-    
-                this.state.all_data=fund_info
-                this.setState({all_data:this.state.all_data,flag:true})
-            }
-              else{
-              this.state.all_data=[]
-              }
-            })
-    }
-
       //---------取得性格分析結果------------------------------------------
       getresult(){
         //若使用者做過性格分析，則會改變為不同的注釋，告知使用者期基金推薦是透過AI及性格分析的結為做為推薦基準
@@ -165,22 +129,62 @@ class PagePig extends React.Component{
                 data=JSON.parse(jsonData.info)
                 if(jsonData.StatusCode==200){
                     
-                    console.log(data[0])
+                    //console.log(data[0].Member_characteristic)
     
                     //更新state並獲得以下資料
                     this.setState((state, props) => {
                         return {counter: state.counter + props.step,
+                                method:data[0].Member_characteristic,
+                                roi:data[0].Member_exceptedreturn,
                                 recommendation_text:'本系統透過性格分析測驗以及AI預測基金的結果提供使用者最適配的基金。',
                                 };
                     });
                 }
             }
-            catch(e){
+            catch(e){ //若是沒有做過性格分析測驗則只給純預測淨值排名
             }
-            })  
+            })
+            .then(() => { this.getFundData();})
             
-            this.getAllFundData();
+            
       }
+      //-------------------------------------------------------------------
+
+      //------------取得推薦基金--------------------------------------------
+      getFundData(){
+        console.log('123'+this.state.method)
+        let fund_info=[];
+        const url = "https://fundu.ddns.net:8090/fundrecommendation";
+
+        fetch(url, {
+                  method: 'POST',
+                  headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                        risk:this.state.method, //風險分級
+                        roi:this.state.roi      //預期報酬
+                  })
+                  
+            })
+            .then((response) => {return response.json();})
+            .then((jsonData) => { 
+              if(jsonData.StatusCode==200){
+
+                console.log('取得推薦')
+                fund_info=jsonData.recommendation;
+                console.log(fund_info);
+    
+                this.state.all_data=fund_info
+                this.setState({all_data:this.state.all_data,flag:true})
+            }
+              else{
+              this.state.all_data=[]
+              }
+            })
+    }
+    //-------------------------------------------------------------------
 
     render(){
     
@@ -194,26 +198,10 @@ class PagePig extends React.Component{
                 <div className="card-personalize1-title">豬豬小助理</div>
             </Row>
             <Row>
-                <Col sm={3}>
-                    <div className="dollor-cost-average">基金試算器</div>
-                </Col>
-
-                <Col sm={7}>
-                    <div className='button-center'>
-                    <button className='tag-btn'  onClick={()=>this.Change_rank(1)}>單筆投資</button>
-                    {/* <button className='tag-btn'  onClick={()=>this.Change_rank(2)}>每月定期定額</button> */}
-                    <button className='tag-btn'  onClick={()=>this.Change_rank(3)}>每年定期定額</button>
-                    </div>
-                </Col>
-            </Row>
-            <Row>
-                {this.state.selected==1?(<Caculate></Caculate>):(this.state.selected==3?(<Caculate2></Caculate2>):(<Caculate3></Caculate3>))}
-            </Row>
-            <Row>
                 <div className="fund-recommendation">基金推薦</div>
             </Row>
             <Row>
-                <span className='sub-fund-recommendation'>本系統透過性格分析測驗以及AI預測基金的結果提供使用者最適配的基金。</span>
+                <span className='sub-fund-recommendation'>{this.state.recommendation_text}</span>
             </Row>
             <Row>
                 <div className='recommendation-div'> 
@@ -229,8 +217,8 @@ class PagePig extends React.Component{
                         headerStyle: {
                             backgroundColor: '#004487',
                             color: '#f6f6f6',
-                            width: 140,
-                            maxWidth: 140,
+                            width: 280,
+                            maxWidth: 500,
                             whiteSpace:'nowrap',
                             position: 'sticky', 
                             top: 0,
@@ -243,8 +231,8 @@ class PagePig extends React.Component{
                         // toolbar: false, //隱藏標題和搜尋欄
 
                         cellStyle:{ 
-                            width: 140,
-                            maxWidth: 140,
+                            width: 280,
+                            maxWidth: 500,
                             wordWrap:'break-word',
                             backgroundColor: '#f6f6f6',
                             color: '#000000',
@@ -266,8 +254,8 @@ class PagePig extends React.Component{
                             icon: () => <SearchIcon color="action" />,
                             tooltip: 'SEEFUND',
                             onClick: (event, rowData) =>  this.props.history.push({
-                            pathname: '/detailfund-page/fundid='+rowData.fund_fld022_track,
-                            })
+                            pathname: '/detailfund-page/fundid='+rowData[3], //rowData後接field的名字
+                            }) 
                         },    
                         ]}
                         
@@ -278,6 +266,22 @@ class PagePig extends React.Component{
                         }}
                         />
                 </div>
+            </Row>
+            <Row>
+                <Col sm={3}>
+                    <div className="dollor-cost-average">基金試算器</div>
+                </Col>
+
+                <Col sm={7}>
+                    <div className='button-center'>
+                    <button className='tag-btn'  onClick={()=>this.Change_rank(1)}>單筆投資</button>
+                    {/* <button className='tag-btn'  onClick={()=>this.Change_rank(2)}>每月定期定額</button> */}
+                    <button className='tag-btn'  onClick={()=>this.Change_rank(3)}>每年定期定額</button>
+                    </div>
+                </Col>
+            </Row>
+            <Row>
+                {this.state.selected==1?(<Caculate></Caculate>):(this.state.selected==3?(<Caculate2></Caculate2>):(<Caculate3></Caculate3>))}
             </Row>
         </div>
     </Row>     
