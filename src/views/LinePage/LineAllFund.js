@@ -473,22 +473,23 @@ class LineAllFund extends React.Component {
         })
         .then((response) => {return response.json();})
         .then((jsonData) => { 
+          console.log(jsonData);
           if(jsonData.StatusCode==200){
-            //console.log(jsonData);
+            
             fund_info=JSON.parse(jsonData.fund_info)
             //console.log(fund_info);
 
             this.state.all_data=fund_info
-            this.setState({all_data:this.state.all_data})
+            this.setState({all_data:this.state.all_data,flag:true})
         }
           else{
           this.state.all_data=[]
           }
         })
-        .then(()=>{
-          //獲取liff id
-          this.getLiffid()
-        })
+        // .then(()=>{
+        //   //獲取liff id
+        //   this.getLiffid()
+        // })
       //抓取淨值資料
       //const url2 = "https://fundu.ddns.net:8090/getFundInfo";////////改url
   }
@@ -496,7 +497,7 @@ class LineAllFund extends React.Component {
   getLiffid(){
     let liff_userid;
     liff.init({
-      liffId: "1654887866-j2D8O5K7" // Use own liffId
+      liffId: "1654887866-jyPbgRmD" // Use own liffId
     })
     .then(() => {
       if (liff.isLoggedIn()) {
@@ -549,10 +550,8 @@ class LineAllFund extends React.Component {
             
           }
           else{
-            alert("您尚未與系統連結，無法使用此功能。即將跳轉至連結頁面！")
-            this.props.history.push({
-              pathname: "/liff-linking"
-            })
+            alert("您尚未與系統連結，無法使用此功能。請先登入！")
+            liff.closeWindow();
           
           }
         })

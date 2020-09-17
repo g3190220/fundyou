@@ -87,6 +87,8 @@ class LineDetailFund extends React.Component{
       this.handleClose=this.handleClose.bind(this);
       this.handleClickOpenAdd=this.handleClickOpenAdd.bind(this);
       this.handleCloseAdd=this.handleCloseAdd.bind(this);
+      this.successCallback=this.successCallback.bind(this);
+      this.errorCallback=this.errorCallback.bind(this);
       
 
     }
@@ -631,42 +633,72 @@ class LineDetailFund extends React.Component{
     getLiffid(){
         console.log("getLiffid()start")
         console.log(liff.getVersion())
-        liff.ready.then(() => {
-            liff.closeWindow()
-        })
-        liff.init({
-            liffId: "1654887866-eVrD8JaW" // Use own liffId   
-        })
-        .then(() => {
-            alert(liff.isLoggedIn())
-        if (liff.isLoggedIn()) {
-            alert(liff.getProfile)
-            liff.getProfile()
-            .then(profile => {
-                let userId = profile.userId;
-                liff_userid = userId;
-                console.log("getLiffid() end")
-                console.log(liff_userid)
-            })
-            .then(()=>{
-                this.ChangeLiffid(liff_userid)
-            })
+        console.log(liff.getLineVersion())
+        // liff.ready.then(() => {
+        //     liff.closeWindow()
+        // })
+    //     liff
+    //     .init({
+    //         liffId: "1654887866-jyPbgRmD" // Use own liffId   
+    //     })
+    //     .then(() => {
+    //         alert(liff.isLoggedIn())
+    //         if (liff.isLoggedIn()) {
+    //             alert(liff.getProfile)
+    //             liff.getProfile()
+    //             .then(profile => {
+    //                 let userId = profile.userId;
+    //                 liff_userid = userId;
+    //                 console.log("getLiffid() end")
+    //                 console.log(liff_userid)
+    //             })
+    //             .then(()=>{
+    //                 this.ChangeLiffid(liff_userid)
+    //             })
 
-            
-            }
-        else{
-            alert("取得失敗")
-        }
-        })
-        .catch((err) => {
-            // Error happens during initialization
-            console.log(err.code, err.message);
-          });
-        //this.ChangeLiffid("Uabcd7eb5beccfbac50a8434c2e4072fc")
+                
+    //             }
+    //         else{
+    //             alert("取得失敗")
+    //         }
+    //         })
+    //     .catch((err) => {
+    //         // Error happens during initialization
+    //         console.log(err.code, err.message);
+    //       });
+    //     //this.ChangeLiffid("Uabcd7eb5beccfbac50a8434c2e4072fc")
 
     
-    
+    liff.init({ liffId: "1654887866-jyPbgRmD" }, this.successCallback, this.errorCallback);
+    //console.log(successCallback)
+    //console.log(errorCallback)
     }
+    successCallback(){
+        alert("成功")
+        alert(liff.isLoggedIn())
+            if (!liff.isLoggedIn()) {
+                liff.login({ redirectUri: "https://fundu.ddns.net/line-allfund-page" });
+            }
+            else{
+                alert(liff.getProfile)
+                liff.getProfile()
+                .then(profile => {
+                    let userId = profile.userId;
+                    liff_userid = userId;
+                    console.log("getLiffid() end")
+                    console.log(liff_userid)
+                })
+                .then(()=>{
+                    this.ChangeLiffid(liff_userid)
+                })
+            }
+
+    }
+    errorCallback(){
+        alert("失敗")
+
+    }
+    
     //檢查Liff有無連接，並回傳userid
     ChangeLiffid(in_liff_userid){
         //alert("start ChangeLiffid")

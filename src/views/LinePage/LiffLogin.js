@@ -30,6 +30,8 @@ import {
   withRouter
   } from "react-router-dom";
 
+var nounce="";
+var liff_userid="";
 
 class LiffLogin extends React.Component {
   state = {
@@ -45,6 +47,7 @@ class LiffLogin extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.keyPress = this.keyPress.bind(this);
     this.setLineID=this.setLineID.bind(this);
+    this.getLiff=this.getLiff.bind(this);
     this.goto=this.goto.bind(this);
     this.testpath=this.testpath.bind(this);
   }
@@ -55,6 +58,7 @@ class LiffLogin extends React.Component {
 
   //存取liff-userid至資料庫
   setLineID(nounce,liff_userid){
+    alert("start setLineID")
     const url = "https://fundu.ddns.net:8090/setLineID";
         //console.log(data)
     fetch( url, {
@@ -72,30 +76,53 @@ class LiffLogin extends React.Component {
         })
         .then((response) => {console.log(response);return response.json();})
         .then((jsonData) => {
-          alert("成功登入")
+          
           console.log(jsonData)
           if(jsonData.StatusCode==200){
-            alert("開始liff.init")
-            liff.init({
-              liffId: "1654887866-WEYVrLMQ" // Use own liffId
-            })
-            .then(() => {
-              alert("closeWindow()")
-              liff.closeWindow()
-            })
+            alert("成功setLineID")
           }
         })
   }
 
+  getLiff(){
+    alert("start getLiff()")
+    //就卡在這裡，出現預期錯誤
+    liff.init({
+      liffId: "1654887866-baMpN6YA" // Use own liffId
+    })
+    .then(() => {
+        alert("進來liff.init了")
+        if (liff.isLoggedIn()) {
+            liff.getProfile()
+            .then(profile => {
+              const userId = profile.userId
+              //取得liff_userid;
+              liff_userid=userId;
+              alert("連結成功,取得liff_userid！")
+            })
+            .then(()=>{this.setLineID(nounce,liff_userid)})
+          }
+        else{
+          alert("取得失敗")
+        }
+    })
+    // .then(()=>{
+    //   liff.closeWindow();
+    // })
+    .catch((err) => {
+      // Error happens during initialization
+      console.log(err.code, err.message);
+    }); 
+  }
   
 
   handleSubmit(){
     let errors = {}; 
     let member_info=[];
-    let nounce="";
-    let token = (this.props.location.search.split('='))[1];
-    console.log(token)
-    let liff_userid;
+    
+    //let token = (this.props.location.search.split('='))[1];
+    //console.log(token)
+    
     //取消DOM的預設功能
     window.event.preventDefault();
   
@@ -126,33 +153,8 @@ class LiffLogin extends React.Component {
             alert("成功登入")
             member_info=JSON.parse(jsonData.member_info)
             nounce=member_info.member_nonce
-            liff.init({
-              liffId: "1654887866-WEYVrLMQ" // Use own liffId
-            })
-            .then(() => {
-              alert("進來了")
-              if (liff.isLoggedIn()) {
-                  liff.getProfile()
-                  .then(profile => {
-                    const userId = profile.userId
-                    //取得liff_userid;
-                    liff_userid=userId;
-                    alert("連結成功！")
-                  })
-                  .then(()=>{this.setLineID(nounce,liff_userid)})
-                }
-              else{
-                alert("取得失敗")
-              }
-            })
-            // .then(()=>{
-            //   liff.closeWindow();
-            // })
-              
-            .catch((err) => {
-              // Error happens during initialization
-              console.log(err.code, err.message);
-            }); 
+            this.getLiff();
+
           }
           else if(jsonData.StatusCode==1000){
             this.state.errors["message"] = "帳號或密碼錯誤！";
@@ -166,12 +168,12 @@ class LiffLogin extends React.Component {
             
           }
           else{
-            alert("帳號密碼錯誤！")
+            alert("不明error!")
           }
     })
-    .catch(error => {
-      console.log(error);
-    });
+        .catch(error => {
+          console.log(error);
+        });
         
         
     }
