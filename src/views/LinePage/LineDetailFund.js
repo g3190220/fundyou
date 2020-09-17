@@ -87,13 +87,34 @@ class LineDetailFund extends React.Component{
       this.handleClose=this.handleClose.bind(this);
       this.handleClickOpenAdd=this.handleClickOpenAdd.bind(this);
       this.handleCloseAdd=this.handleCloseAdd.bind(this);
-      //this.successCallback=this.successCallback.bind(this);
-      //this.errorCallback=this.errorCallback.bind(this);
       
 
     }
     componentDidMount() {
+        console.log("start getLiffid")
         this.getAllData();
+       
+        // liff.init({
+        //     liffId: "1654887866-eVrD8JaW" // Use own liffId
+        // })
+        // .then(() => {
+        //     if (liff.isLoggedIn()) {
+        //         liff.getProfile()
+        //         .then(profile => {
+        //             let userId = profile.userId;
+        //             liff_userid = userId;
+        //             console.log("getLiffid() end")
+        //             console.log(liff_userid)
+        //         })
+        //         .then(()=>{
+        //             this.ChangeLiffid(liff_userid)
+        //         })
+                
+        //         }
+        //     else{
+        //         alert("取得失敗")
+        //     }
+        //     })
     }
     //處理setState的方法
     handleChange = name => event =>{
@@ -155,8 +176,7 @@ class LineDetailFund extends React.Component{
                 });
             }
             })
-            .then(()=>this.getLiffid())
-           
+            .then(()=>{this.trackstate();})
 
     }
 
@@ -172,7 +192,7 @@ class LineDetailFund extends React.Component{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                userid: member_id,
+                userid: this.props.location.state.member_ID,
                 fld022: id,
             })
         })
@@ -225,7 +245,7 @@ class LineDetailFund extends React.Component{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                userid: member_id,
+                userid: this.props.location.state.member_ID,
                 fld022: id,
             })
         })
@@ -291,6 +311,7 @@ class LineDetailFund extends React.Component{
 
     //取得會員自己創建之TAG，顯示首頁(若沒有TAG，就顯示熱門的)
     getMyTag(){
+        //let member_id=load_cookies("member_id")
         let id = (this.props.match.params.fundid.split('='))[1];
         const url = "https://fundu.ddns.net:8090/getTag";
         fetch(url, {
@@ -301,7 +322,7 @@ class LineDetailFund extends React.Component{
             },
         body: JSON.stringify({
                 //取得全部fund
-                member_id:  member_id,
+                member_id: this.props.location.state.member_ID,
                 tag_id:-1,
                 fld022:id
         })
@@ -537,7 +558,7 @@ class LineDetailFund extends React.Component{
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                        member_id:  member_id,
+                        member_id: this.props.location.state.member_ID,
                         fld022: fld022,
                         content:this.state.new_tag,
                 })
@@ -603,7 +624,7 @@ class LineDetailFund extends React.Component{
               },
               body: JSON.stringify({
                     //取得全部fund
-                    member_id: member_id,
+                    member_id: this.props.location.state.member_ID,
                     tag_id:in_tagid,
                     fld022:in_fld022
               })
@@ -630,116 +651,83 @@ class LineDetailFund extends React.Component{
     }
 
     //獲取liff id
-    getLiffid(){
-        console.log("getLiffid()start")
-        console.log(liff.getVersion())
-        console.log(liff.getLineVersion())
-        liff
-        .init({
-            liffId: "1654887866-eVrD8JaW" // Use own liffId   
-        })
-        .then(() => {
-            alert(liff.isLoggedIn())
-            if (liff.isLoggedIn()) {
-                alert(liff.getProfile)
-                liff.getProfile()
-                .then(profile => {
-                    let userId = profile.userId;
-                    liff_userid = userId;
-                    console.log("getLiffid() end")
-                    console.log(liff_userid)
-                })
-                .then(()=>{
-                    this.ChangeLiffid(liff_userid)
-                })
-
-                
-                }
-            else{
-                alert("取得失敗")
-            }
-            })
-        .catch((err) => {
-            // Error happens during initialization
-            console.log(err.code, err.message);
-          });
-        //this.ChangeLiffid("Uabcd7eb5beccfbac50a8434c2e4072fc")
-
-    
-    //liff.init({ liffId: "1654887866-eVrD8JaW" }, this.successCallback, this.errorCallback);
-    //console.log(successCallback)
-    //console.log(errorCallback)
-    }
-    // successCallback(){
-    //     alert("成功")
-    //     alert(liff.isLoggedIn())
-    //         if (!liff.isLoggedIn()) {
-    //             liff.login({ redirectUri: "https://fundu.ddns.net/line-allfund-page" });
+    // getLiffid(){
+    //     alert("hi-getliffid")
+    //     console.log(this.props.location.state)
+    //     console.log(this.props.location.state.member_ID)
+    //     liff.init({
+    //         liffId: "1654887866-eVrD8JaW" // Use own liffId
+        
+    //     })
+    //     .then(() => {
+    //     if (liff.isLoggedIn()) {
+    //         liff.getProfile()
+    //         .then(profile => {
+    //             let userId = profile.userId;
+    //             liff_userid = userId;
+    //             console.log("getLiffid() end")
+    //             console.log(liff_userid)
+    //         })
+    //         .then(()=>{
+    //             this.ChangeLiffid(liff_userid)
+    //         })
+            
     //         }
-    //         else{
-    //             alert(liff.getProfile)
-    //             liff.getProfile()
-    //             .then(profile => {
-    //                 let userId = profile.userId;
-    //                 liff_userid = userId;
-    //                 console.log("getLiffid() end")
-    //                 console.log(liff_userid)
-    //             })
-    //             .then(()=>{
-    //                 this.ChangeLiffid(liff_userid)
-    //             })
-    //         }
-
-    // }
-    // errorCallback(){
-    //     alert("失敗")
-
-    // }
+    //     else{
+    //         alert("取得失敗")
+    //     }
+    //     })
+    //this.ChangeLiffid("Uabcd7eb5beccfbac50a8434c2e4072fc")
     
+    
+    // }
     //檢查Liff有無連接，並回傳userid
-    ChangeLiffid(in_liff_userid){
-        //alert("start ChangeLiffid")
-        let member_info=[];
-        const url = "https://fundu.ddns.net:8090/LineLogin";////////改url
-        //console.log(data)
-        fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                        //取得全部fund
-                        lineid: in_liff_userid,
-                })
+    // ChangeLiffid(in_liff_userid){
+    //     //alert("start ChangeLiffid")
+    //     let member_info=[];
+    //     const url = "https://fundu.ddns.net:8090/LineLogin";////////改url
+    //     //console.log(data)
+    //     fetch(url, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Accept': 'application/json',
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify({
+    //                     //取得全部fund
+    //                     lineid: in_liff_userid,
+    //             })
                 
-            })
-            .then((response) => {return response.json();})
-            .then((jsonData) => { 
-            console.log(jsonData)
-                if(jsonData.StatusCode==200){
-                    member_info=JSON.parse(jsonData.member_info)
-                    //取得系統id了
-                    //this.state.member_id=member_info.member_id
-                    member_id=member_info.member_id
-                    console.log(member_id)
+    //         })
+    //         .then((response) => {return response.json();})
+    //         .then((jsonData) => { 
+    //         console.log(jsonData)
+    //             if(jsonData.StatusCode==200){
+    //                 alert("before parse")
+    //                 alert(jsonData.member_info)
+    //                 member_info=JSON.parse(jsonData.member_info)
+    //                 alert(member_info.member_id)
+    //                 //取得系統id了
+    //                 //this.state.member_id=member_info.member_id
+    //                 member_id=member_info.member_id
                     
                 
-                }
-                else{
-                    alert("您尚未與系統連結，無法使用此功能。即將跳轉至連結頁面！")
-                    this.props.history.push({
-                        pathname: "/liff-linking"
-                    })
+    //             }
+    //             else{
+    //                 alert("您尚未與系統連結，無法使用此功能。即將跳轉至連結頁面！")
+    //                 this.props.history.push({
+    //                     pathname: "/liff-linking"
+    //                 })
                 
-                }
-            })
-            .then(() => { 
-                console.log(member_id)
-                this.trackstate()
-            });
+    //             }
+    //         })
+    //         .then(() => { 
+    //             alert("取得member-id")
+    //             console.log(member_id)
+    //             this.getAllData();
+    //         });
 
-    }
+    // }
     
 
     render(){     //render的意義為何??(待查清) //猜想：render預設的渲染方式，網頁一開始執行的
