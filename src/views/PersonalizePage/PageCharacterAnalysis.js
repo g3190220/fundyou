@@ -24,7 +24,7 @@ class PageCharacterAnalysis extends React.Component{
           description_1:'完成測驗即可獲得投資性格相關資訊',
           description_2:'無',
           texts:'您尚未做過性格測驗，點選上方的前往性格測驗按鈕完成問卷！',
-          errors: {}
+          errors: {},
       }
     this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -58,15 +58,19 @@ class PageCharacterAnalysis extends React.Component{
                     let description = [];
                     if(data[0].Member_characteristic =='保守型'){
                         description = ["保守型投資人對風險的承受力較低，期待投資能夠盡量保本並有穩定的回報。建議選擇風險波動度較小的產品。","債券型、有固定配息的收益型債券基金、組合式基金"]
+                        this.setState({img:"../../assets/img/1.jpg"})
                     }
                     else if(data[0].Member_characteristic =='穩健型'){
                         description = ["穩健型投資人願意為了累積財富而適當承受風險。在做決策時會審慎評估其可能隱含的損失，並在風險合理的情況下去追求中等的獲利與報酬。",'平衡型、區域型基金']
+                        this.setState({img:"../../assets/img/2.jpg"})
                     }
                     else if(data[0].Member_characteristic =='成長型'){
                         description = ["成長型投資人願意承受部分風險，追求資產能有成長的機會。通常願意嘗試新鮮的事物，在資產配置中可將基金列為資產成長主力。",'平衡型、區域型、全球股票型基金']
+                        this.setState({img:"../../assets/img/3.jpg"})
                     }
                     else if(data[0].Member_characteristic =='積極型'){
                         description = ["積極型投資人以追求資本利得為目標，願意利用風險較高或是新推出的金融商品作為投資工具，來獲得高報酬。","單一國家股票型、產業股票型基金"]
+                        this.setState({img:"../../assets/img/4.jpg"})
                     }
     
                     //更新state並獲得以下資料
@@ -137,56 +141,11 @@ class PageCharacterAnalysis extends React.Component{
                     </div>
                     </Col>
                     <Col>
-                    <div className="result-chart"><Result></Result></div>
+                    <div className="result-chart"><img src="assets/img/4.jpg"></img></div>
                     </Col>
                 </Row>
             </div>
             </Row>
-            {/* <div className="result-2">
-                <div className="game-result-title-2">
-                    <span style={{fontWeight:"bold"}}>根據測驗結果，您屬於：</span>
-                    <span style={{fontWeight:"bold"}}>穩健型投資人</span><br/>
-                    <div className="result-chart"><Result></Result></div>
-                </div>
-                <div className="result-content-2">
-                    <span style={{fontWeight:"bold"}}>
-                        穩健型投資人願意為了累積財富而適當承受風險。在做決策時會審慎評估其可能隱含的損失，並在風險合理的情況下去追求中等的獲利與報酬。
-                    </span><br/><br/>
-                    <span style={{fontWeight:"bold"}}>適合的基金類型：</span><br/>
-                    <span style={{fontWeight:"bold"}}>平衡型、區域型基金</span><br/>
-                </div>
-            </div>
-
-            <div className="result-3">
-                <div className="game-result-title-3">
-                    <span style={{fontWeight:"bold"}}>根據測驗結果，您屬於：</span>
-                    <span style={{fontWeight:"bold"}}>成長型投資人</span><br/>
-                    <div className="result-chart"><Result></Result></div>
-                </div>
-                <div className="result-content-3">
-                    <span style={{fontWeight:"bold"}}>
-                        成長型投資人願意承受部分風險，追求資產能有成長的機會。通常願意嘗試新鮮的事物，在資產配置中可將基金列為資產成長主力。
-                    </span><br/><br/>
-                    <span style={{fontWeight:"bold"}}>適合的基金類型：</span><br/>
-                    <span style={{fontWeight:"bold"}}>平衡型、區域型、全球股票型基金</span><br/>
-                </div>
-            </div>
-
-            <div className="result-4">
-                <div className="game-result-title-4">
-                    <span style={{fontWeight:"bold"}}>根據測驗結果，您屬於：</span>
-                    <span style={{fontWeight:"bold"}}>積極型投資人</span><br/>
-                    <div className="result-chart"><Result></Result></div>
-                </div>
-                <div className="result-content-4">
-                    <span style={{fontWeight:"bold"}}>
-                        積極型投資人以追求資本利得為目標，願意利用風險較高或是新推出的金融商品作為投資工具，來獲得高報酬。
-                    </span><br/><br/>
-                    <span style={{fontWeight:"bold"}}>適合的基金類型：</span><br/>
-                    <span style={{fontWeight:"bold"}}>單一國家股票型、產業股票型基金</span><br/>
-                </div>
-            </div> */}
-
         </div>
         </Row>
         </div>

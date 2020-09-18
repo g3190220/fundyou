@@ -35,7 +35,7 @@ var performance_day = [];
 var risk_beta = [];
 var risk_SD = [];
 var liff_userid="";
-var member_ID=4;
+var member_ID="";
 var id ="";
 var fundid="";
 var tag1_id=0;
@@ -124,15 +124,16 @@ class LineDetailFund extends React.Component{
     })}
 
     getAllData(){
-        //alert("開始取得基金資料")
+
+        alert(this.props.location.state.member_ID)
         //alert(member_id)
         let fund_info=[];
         console.log("getAllData()")
-        console.log(this.props)
-        console.log(this.props.location.pathname)
-        console.log(this.props.location.pathname.split('='));
-        //id = (this.props.location.pathname.split('='))[1];
-        id="971976";
+        //console.log(this.props)
+        //console.log(this.props.location.pathname)
+        //console.log(this.props.location.pathname.split('='));
+        id = (this.props.location.pathname.split('='))[1];
+        //id="971976";
         //id = this.props.location.state.fundid;
         console.log(id)
         const url = "https://fundu.ddns.net:8090/getFundInfo";////////改url
@@ -193,8 +194,8 @@ class LineDetailFund extends React.Component{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                //userid: this.props.location.state.member_ID,
-                userid: member_ID,
+                userid: this.props.location.state.member_ID,
+                //userid: member_ID,
                 fld022: id,
             })
         })
@@ -247,8 +248,8 @@ class LineDetailFund extends React.Component{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                //userid: this.props.location.state.member_ID,
-                userid: member_ID,
+                userid: this.props.location.state.member_ID,
+                //userid: member_ID,
                 fld022: id,
             })
         })
@@ -325,8 +326,8 @@ class LineDetailFund extends React.Component{
             },
         body: JSON.stringify({
                 //取得全部fund
-                //member_id: this.props.location.state.member_ID,
-                member_id: member_ID,
+                member_id: this.props.location.state.member_ID,
+                //member_id: member_ID,
                 tag_id:-1,
                 fld022:id
         })
@@ -562,8 +563,8 @@ class LineDetailFund extends React.Component{
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                        //member_id: this.props.location.state.member_ID,
-                        member_id: member_ID,
+                        member_id: this.props.location.state.member_ID,
+                        //member_id: member_ID,
                         fld022: fld022,
                         content:this.state.new_tag,
                 })
@@ -629,8 +630,8 @@ class LineDetailFund extends React.Component{
               },
               body: JSON.stringify({
                     //取得全部fund
-                    //member_id: this.props.location.state.member_ID,
-                    member_id:member_ID,
+                    member_id: this.props.location.state.member_ID,
+                    //member_id:member_ID,
                     tag_id:in_tagid,
                     fld022:in_fld022
               })
@@ -831,7 +832,7 @@ class LineDetailFund extends React.Component{
             {
             !this.state.initial ? (<LoadingIndicator></LoadingIndicator>): 
             (
-            <div className='lineallfund-menu'>
+            <div className='allfund-menu'>
             <Container>
             <div className='sub-menu' id='ino_parent'>
             <Row>
