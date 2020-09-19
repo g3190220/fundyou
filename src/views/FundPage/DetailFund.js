@@ -393,7 +393,7 @@ class DetailFund extends React.Component{
         .then(() => { this.getnet();})
 }
 
-
+    //--------------------讀取基金淨值------------------------------------------
     getnet(){
         let fund_net=[];
         let id = (this.props.match.params.fundid.split('='))[1];
@@ -461,6 +461,7 @@ class DetailFund extends React.Component{
             .then(() => { this.getROI();})
     }
 
+    //--------------------讀取基金ROI------------------------------------------
     getROI(){
         let fund_return=[];
         let id = (this.props.match.params.fundid.split('='))[1];
@@ -499,6 +500,7 @@ class DetailFund extends React.Component{
             .then(() => {this.netgraph();})
     }
 
+    //--------------------讀取基金每日淨值以畫圖形------------------------------------------
     netgraph(){
         let fund_net=[];
         let net=[];
@@ -546,6 +548,7 @@ class DetailFund extends React.Component{
 
     }
 
+    //--------------------讀取基金績效表現，畫圖形------------------------------------------
     performancegraph(){
         let fund_performance=[];
         let sharpe=[];

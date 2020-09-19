@@ -208,11 +208,7 @@ class PagePig extends React.Component{
                 <div className="card-personalize1-title">豬豬小助理</div>
                 <div className="card-content">基金推薦</div>
                 <div className="card-content">基金試算器</div>
-            </Row>
-<<<<<<< HEAD
-=======
-            
->>>>>>> 424e2471f1dc7482780f5ca771079176e09d63fe
+            </Row>          
             <Row>
                 <div className="fund-recommendation">基金推薦</div>
             </Row>
@@ -243,9 +239,6 @@ class PagePig extends React.Component{
                             fontWeight: '800',
                             fontSize: 16
                         },
-
-                        // toolbar: false, //隱藏標題和搜尋欄
-
                         cellStyle:{ 
                             width: 280,
                             maxWidth: 500,

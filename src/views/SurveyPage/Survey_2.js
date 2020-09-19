@@ -32,11 +32,12 @@ class Surveys extends React.Component {
     //-------------------下一頁------------------------------
     handlesummit(){
 
-        if(isNaN(this.state.Single) || (this.state.Single==null)){ //判斷輸入的投資金額是否為數字
-            alert('請輸入數字！');
-        }
-        else{
-            if((this.state.factor!='')&&(this.state.purpose!='')&&(this.state.time!='')&&(this.state.method!='')){
+        if((this.state.factor!='')&&(this.state.purpose!='')&&(this.state.time!='')&&(this.state.method!='')){ //確定是否選項皆填選
+
+            if(isNaN(this.state.Single) || (this.state.Single==null)){ //判斷輸入的投資金額是否為數字
+                alert('請輸入數字！');
+            }
+            else{
                 const member_id=load_cookies("member_id");
                 // const path=`/page-survey-3/id=${member_id}`
                 const path=`/page-survey-3`
@@ -73,9 +74,9 @@ class Surveys extends React.Component {
                     pathname: path 
                 })
             }
-            else{
-                alert('請完全填選後再按下一頁！')
-            }
+        }
+        else{
+            alert('請完全填選後再按下一頁！')
         }
 
     }
@@ -89,7 +90,7 @@ class Surveys extends React.Component {
         })
     }
     
-    //---------------取得點選的值--------------------------
+    //---------------取得點選問券題目的值--------------------------
     handleChange = (event) => {
         //**event.target.name-->取得點擊的RadioGroup的name
         //**event.target.value-->取得點擊的值
