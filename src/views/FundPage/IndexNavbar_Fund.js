@@ -9,11 +9,6 @@ import { logout_deletecookie,load_cookies } from 'views/Function/Cookie_function
 //個人icon
 import FaceIcon from '@material-ui/icons/Face';
 
-//意見反饋
-import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
-import TextField from '@material-ui/core/TextField';
-
-
 //處理登出y
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -83,17 +78,6 @@ function IndexNavbar() {
     setOpen(false);
   };
 
-  //意見對話框
-  const [open2, setOpen2] = React.useState(false);
-
-  const handleClickOpen2 = () => {
-    setOpen2(true);
-  };
-
-  const handleClose2 = () => {
-    setOpen2(false);
-  };
-  
 
   const member_id=load_cookies("member_id")
   const member_session=load_cookies("member_session")
@@ -120,7 +104,7 @@ function IndexNavbar() {
             data-placement="bottom"
             to={path_all_fund}
           
-            title="FUNDU"
+            title="Coded by Creative Tim"
             tag={Link}
           >
            FUNDU
@@ -129,7 +113,7 @@ function IndexNavbar() {
             data-placement="bottom"
             to={path}
           
-            title="個人專區"
+            title="Coded by Creative Tim"
             tag={Link}
           >
            <FaceIcon></FaceIcon>個人專區
@@ -157,53 +141,6 @@ function IndexNavbar() {
           isOpen={navbarCollapse}
         >
         <Nav navbar>
-
-        <NavItem>
-          <Button color="action" onClick={handleClickOpen2}>
-              意見反饋
-          </Button>
-        </NavItem>
-        <Dialog 
-          open={open2} 
-          keepMounted
-          onClose={handleClose2} 
-          aria-labelledby="form-dialog-title"
-          fullWidth={true}
-          maxWidth={'xs'}
-        >
-            
-        <DialogTitle >
-          意見反饋
-          <hr className="hr"></hr>
-          </DialogTitle>
-            
-          <DialogContent>
-            <DialogContentText >
-              若您在FUNDU上遇到問題，請填寫意見反饋。FUNDU會將您的寶貴建議予以檢討與改善。
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="請輸入欲回報之意見"
-              multiline
-              rowsMax={3}
-              type="string"
-              fullWidth
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose2} color="primary">
-              取消
-            </Button>
-            <Button onClick={handleClose2} color="primary">
-              送出
-            </Button>
-          </DialogActions>
-        </Dialog>
-
-
-
             
         <NavItem>
           <Button color="secondary" onClick={handleClickOpen}>

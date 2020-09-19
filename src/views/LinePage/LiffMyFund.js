@@ -454,7 +454,7 @@ class LiffMyFund extends React.Component{
                     icon: () => <SearchIcon color="action" />,
                     tooltip: 'SEEFUND',
                     onClick: (event, rowData) =>  this.props.history.push({
-                      pathname: '/line-detailfund/fundid='+rowData.fund_fld022_track,
+                      pathname: '/detailfund-page/fundid='+rowData.fund_fld022_track,
                     })
                   },
                   {

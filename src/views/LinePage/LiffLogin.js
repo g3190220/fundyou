@@ -79,7 +79,9 @@ class LiffLogin extends React.Component {
           
           console.log(jsonData)
           if(jsonData.StatusCode==200){
-            alert("成功setLineID")
+            console.log("成功setLineID")
+            //關閉Line liff
+            liff.closeWindow();
           }
         })
   }
@@ -98,7 +100,7 @@ class LiffLogin extends React.Component {
               const userId = profile.userId
               //取得liff_userid;
               liff_userid=userId;
-              alert("連結成功,取得liff_userid！")
+              console.log("連結成功,取得liff_userid！")
             })
             .then(()=>{this.setLineID(nounce,liff_userid)})
           }
@@ -148,7 +150,7 @@ class LiffLogin extends React.Component {
         .then((jsonData) => {
           console.log(jsonData)
           if(jsonData.StatusCode==200){
-            alert("成功登入")
+            alert("成功連結")
             member_info=JSON.parse(jsonData.member_info)
             nounce=member_info.member_nonce
             this.getLiff();
@@ -265,10 +267,10 @@ class LiffLogin extends React.Component {
                     <a className="go-to-register-btn" onClick={this.goto}>尚未註冊FUNDU會員？</a>
                     
                   </div>
-                  <div className="go-to-register-btn-position">
+                  {/* <div className="go-to-register-btn-position">
                     
                     <a className="go-to-register-btn" onClick={this.testpath}>link-all-fund？</a>
-                  </div>
+                  </div> */}
                 </Card>
               </Col>
             </Row>

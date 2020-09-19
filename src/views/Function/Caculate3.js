@@ -157,8 +157,8 @@ class Caculate3 extends React.Component{
                         <div className="little-radio-large">
                         <FormControl component="fieldset">
                             <RadioGroup aria-label="gender" name="gender1" value={this.state.selected} onChange={this.handleChange} row>
-                                <FormControlLabel value="1" control={<Radio color="primary" />} label="每月投資金額" />
-                                <FormControlLabel value="4" control={<Radio color="primary" />} label="投資期間" />
+                                <FormControlLabel value="1" control={<Radio />} label="每月投資金額" />
+                                <FormControlLabel value="4" control={<Radio />} label="投資期間" />
                                 {/* <FormControlLabel value="2" control={<Radio />} label="目標投資月報酬率" /> */}
                                 <FormControlLabel value="3" control={<Radio />} label="期末金額" />
                             </RadioGroup>

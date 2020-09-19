@@ -78,7 +78,7 @@ class OneComparePage extends React.Component{
                         margin="normal"
                         variant="outlined"
                         className='comparefund-bar'    
-                        color="primary"                
+                        color="secondary"                
                     />
                     <TextField
                         id="fund_2"
@@ -88,7 +88,7 @@ class OneComparePage extends React.Component{
                         margin="normal"
                         variant="outlined"
                         className='comparefund-bar'    
-                        color="primary"                                                  
+                        color="secondary"                                                   
                     />
                     <TextField
                         id="fund_3"
@@ -98,7 +98,7 @@ class OneComparePage extends React.Component{
                         margin="normal"
                         variant="outlined"
                         className='comparefund-bar'    
-                        color="primary"                                                   
+                        color="secondary"                                                   
                     />
                     <button className='compare-btn' onClick={this.handleClicksubmit}>去比較</button>
                     
