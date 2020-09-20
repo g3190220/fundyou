@@ -641,7 +641,7 @@ class LineAllFund extends React.Component {
         <Col xs={4} sm>
             <TextField
                 id="currency"
-                label="請選擇 貨幣"
+                label="貨幣"
                 select
                 value={this.state.currency}
                 margin="normal"
@@ -659,7 +659,7 @@ class LineAllFund extends React.Component {
             <Col xs={4} sm>
             <TextField
                 id="agent"
-                label="請選擇 公司"
+                label="公司"
                 select
                 value={this.state.agent}
                 margin="normal"
@@ -677,7 +677,7 @@ class LineAllFund extends React.Component {
             <Col xs={4} sm>
             <TextField
                 id="fundtype"
-                label="請選擇 種類"
+                label="種類"
                 select
                 value={this.state.fundtype}
                 margin="normal"
@@ -695,7 +695,7 @@ class LineAllFund extends React.Component {
             <Col xs={4} sm>
             <TextField
                 id="roi3M"
-                label="請選擇 三個月報酬區間"
+                label="三個月報酬區間"
                 select
                 value={this.state.roi3M}
                 margin="normal"
@@ -713,7 +713,7 @@ class LineAllFund extends React.Component {
             <Col xs={4} sm>
             <TextField
                 id="RR"
-                label="請選擇 RR風險"
+                label="RR風險"
                 select
                 value={this.state.RR}
                 margin="normal"
