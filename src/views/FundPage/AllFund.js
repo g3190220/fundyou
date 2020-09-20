@@ -598,32 +598,33 @@ class AllFund extends React.Component {
   }
   
   cancelhandleselect(fund_id){  //取消勾選比較基金
-    console.log(fund_id)
-    console.log(this.state.fund_id1)
-    this.state.counters--;
-    if(fund_id== this.state.fund_id1){
-      this.setState((state, props) => {
-        return {fund_id1:this.state.fund_id2,
-                fund_id2:this.state.fund_id3,
-                fund_id3:'',
-
-        };
-    });
-    console.log('取消勾選')
-    }
-    else if(fund_id == this.state.fund_id2){
-      this.setState((state, props) => {
-        return {fund_id2:this.state.fund_id3,
-                fund_id3:'',
-        };
-    }); 
-    }
-    else if(fund_id == this.state.fund_id3){
-      this.setState((state, props) => {
-        return {fund_id3:'',
-        };
-    });
-    }
+      console.log(fund_id)
+      
+      if(fund_id == this.state.fund_id1){
+        this.state.counters--;
+        this.setState((state, props) => {
+          return {fund_id1:this.state.fund_id2,
+                  fund_id2:this.state.fund_id3,
+                  fund_id3:'',
+  
+          };
+      });
+      }
+      else if(fund_id == this.state.fund_id2){
+        this.state.counters--;
+        this.setState((state, props) => {
+          return {fund_id2:this.state.fund_id3,
+                  fund_id3:'',
+          };
+      }); 
+      }
+      else if(fund_id == this.state.fund_id3){
+        this.state.counters--;
+        this.setState((state, props) => {
+          return {fund_id3:'',
+          };
+      });
+      }
   }
   //切到下一頁，頁面
   scroll(){
@@ -651,7 +652,7 @@ class AllFund extends React.Component {
 
     this.state.counters++;
   }
-  
+
   render() {
     const {classes} = this.props;
       return (
@@ -822,22 +823,27 @@ class AllFund extends React.Component {
               { //這邊改比較基金按鈕
                 
                 //hidden:true,
-                icon: () =><Checkbox color="primary"/>,
+                icon: () =><Checkbox color="primary" id = 'compare_checkbox' />,
                 tooltip: 'Compare Fund',
+                
 
                 onClick: (event, rowData) =>  {
-                     if(event.target.checked && this.state.counters < 3){  //確認是否為**勾選**而非取消勾選
-                        this.handleselect(rowData.Fund_fld022);
-                     }
-                     else{
-                        if(event.target.checked){
-                          event.target.checked = false; //選取個數超過最大限制，因此就算選擇了也不會打勾
-                          this.handleselect(rowData.Fund_fld022);
+                    if(event.target.id == 'compare_checkbox'){
+                        if(event.target.checked && this.state.counters < 3){  //確認是否為**勾選**而非取消勾選
+                            this.handleselect(rowData.Fund_fld022);
+                            console.log('有點到')
                         }
-                        else{  //取消點選
-                          this.cancelhandleselect(rowData.Fund_fld022);
-                        }    
-                     }
+                        else{
+                            if(event.target.checked){
+                              event.target.checked = false; //選取個數超過最大限制，因此就算選擇了也不會打勾
+                              this.handleselect(rowData.Fund_fld022);
+                              console.log('沒點到')
+                            }
+                            else{  //取消點選
+                                this.cancelhandleselect(rowData.Fund_fld022);
+                            }    
+                        }
+                    }
                   },
               }  
             ]}
