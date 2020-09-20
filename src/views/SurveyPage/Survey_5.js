@@ -9,6 +9,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import { Button, Card, Form, Input, Container, Row, Col} from "reactstrap";
 import TextField from '@material-ui/core/TextField';
 import { load_cookies, survey_answer } from 'views/Function/Cookie_function.js' // 引入cookies
+import liff from '@line/liff';
 
 class Surveys extends React.Component {
     constructor(props) {
@@ -91,6 +92,9 @@ class Surveys extends React.Component {
                 //console.log(this)
                 console.log(jsonData)
                 if(jsonData.StatusCode==200){
+                    alert("更改成功！")
+                    //關閉Line liff
+                    liff.closeWindow();
                 }
                 })
     }

@@ -183,8 +183,8 @@ class LineDetailFund extends React.Component{
     }
 
     trackstate(){    //看此user有沒有追蹤過此筆基金，並改變追蹤狀態
-        //console.log(this.state.member_ID)
-        //console.log(id)
+        console.log(this.state.member_ID)
+        console.log(id)
         id = (this.props.location.pathname.split('='))[1];
         let fund_info=[];
         const url = "https://fundu.ddns.net:8090/getTrack";
@@ -242,7 +242,8 @@ class LineDetailFund extends React.Component{
     CreateTrack(){  //建立追蹤基金
         const url = "https://fundu.ddns.net:8090/CreateTrack";
         id = (this.props.location.pathname.split('='))[1];
-        //console.log(data)
+        console.log(id)
+        console.log(this.props.location.state.member_ID)
         fetch(url, {
             method: 'POST',
             headers: {

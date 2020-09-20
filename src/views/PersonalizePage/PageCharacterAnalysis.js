@@ -11,13 +11,16 @@ import { logout_deletecookie,load_cookies } from 'views/Function/Cookie_function
 import { PieChart, Pie, Sector } from 'recharts';
 // import FcBusinessman from "react-icons/fc";
 
-import p1 from '../../assets/img/1.jpg';
-import p2 from '../../assets/img/2.jpg';
-import p3 from '../../assets/img/3.jpg';
-import p4 from '../../assets/img/4.jpg';
+import p1 from '../../assets/img/1.png';
+import p2 from '../../assets/img/2.png';
+import p3 from '../../assets/img/3.png';
+import p4 from '../../assets/img/4.png';
+import p5 from '../../assets/img/5.png';
 
 //loading page
 import LoadingIndicator from "views/Function/LoadingIndicator.js";
+
+var select;
 
 
 
@@ -68,19 +71,21 @@ class PageCharacterAnalysis extends React.Component{
                     let description = [];
                     if(data[0].Member_characteristic =='保守型'){
                         description = ["保守型投資人對風險的承受力較低，期待投資能夠盡量保本並有穩定的回報。建議選擇風險波動度較小的產品。","債券型、有固定配息的收益型債券基金、組合式基金"]
-                        this.setState({img:"assets/img/1.jpg"})
+                        select=p1;
                     }
                     else if(data[0].Member_characteristic =='穩健型'){
                         description = ["穩健型投資人願意為了累積財富而適當承受風險。在做決策時會審慎評估其可能隱含的損失，並在風險合理的情況下去追求中等的獲利與報酬。",'平衡型、區域型基金']
-                        this.setState({img:"assets/img/2.jpg"})
+                        select=p2;
                     }
                     else if(data[0].Member_characteristic =='成長型'){
                         description = ["成長型投資人願意承受部分風險，追求資產能有成長的機會。通常願意嘗試新鮮的事物，在資產配置中可將基金列為資產成長主力。",'平衡型、區域型、全球股票型基金']
                         this.setState({img:"assets/img/3.jpg"})
+                        select=p3;
                     }
                     else if(data[0].Member_characteristic =='積極型'){
                         description = ["積極型投資人以追求資本利得為目標，願意利用風險較高或是新推出的金融商品作為投資工具，來獲得高報酬。","單一國家股票型、產業股票型基金"]
                         this.setState({img:"assets/img/4.jpg"})
+                        select=p4;
                     }
     
                     //更新state並獲得以下資料
@@ -96,9 +101,15 @@ class PageCharacterAnalysis extends React.Component{
                     })
                    
                 }
+                else{
+                    select=p5;
+                    this.setState({flag:true})
+                }
 
             }
             catch(e){
+                select=p5;
+                this.setState({flag:true})
 
             }
 
@@ -157,7 +168,7 @@ class PageCharacterAnalysis extends React.Component{
                     </div>
                     </Col>
                     <Col>
-                        <div className="result-chart"><img src={p1} width="50%" height='50%' style={{border: '2px solid gray',borderRadius: '10px'}}></img></div>
+                        <div className="result-chart"><img src={select} width="50%" height='50%' ></img></div>
                     </Col>
                 </Row>
             </div>

@@ -119,6 +119,7 @@ class PageMyFund extends React.Component{
         this.CreateMemo=this.CreateMemo.bind(this);
         this.getMemo=this.getMemo.bind(this);
         this.handleChange=this.handleChange.bind(this);
+        this.all_fund_data = this.all_fund_data.bind(this);
 
         console.log(props)
         this.state = {
@@ -149,6 +150,36 @@ class PageMyFund extends React.Component{
       }
       
     }
+
+    //轉變FUND 資料
+  all_fund_data(fund_info){
+    let fund_info_href=[]
+    for(var i=0;i<Object.keys(fund_info).length;i++){
+              let updown_color = 'red'
+              let yb_color = 'red'
+              let M_color = 'red'
+              if (fund_info[i].Ups_and_Downs < 0)
+                  updown_color='green'
+              if (fund_info[i].History_ROI_YB < 0)
+                  yb_color='green'
+              if (fund_info[i].History_ROI_3M < 0)
+                  M_color='green'
+            fund_info_href.push(
+              {'fund_fld022_track':fund_info[i].fund_fld022_track,
+                'Fund_CH_Name':<a style={{color:'black',fontWeight:'500'}} href={'/detailfund-page/fundid=' + fund_info[i].fund_fld022_track}>{fund_info[i].Fund_CH_Name}</a>,
+                'Fund_fld022':fund_info[i].Fund_fld022,
+                'Fund_Zone':fund_info[i].Fund_Zone,
+                'Fund_Currency':fund_info[i].Fund_Currency,
+                'Fund_Type':fund_info[i].Fund_Type,
+                'History_ROI_YB':<font color={yb_color}>{fund_info[i].History_ROI_YB}</font>,
+                'History_ROI_3M':<font color={M_color}>{fund_info[i].History_ROI_3M}</font>,
+                'fund_track_date':fund_info[i].fund_track_date,
+                'History_NetWorth':fund_info[i].History_NetWorth,
+                'Ups_and_Downs':<font color={updown_color}>{fund_info[i].Ups_and_Downs}</font>
+                });
+            };
+        return fund_info_href
+  }
 
     //處理setState的方法
     handleChange = name => event =>{
@@ -208,7 +239,7 @@ class PageMyFund extends React.Component{
                 }
               }
               console.log(info)
-              this.state.all_data=info
+              this.state.all_data=this.all_fund_data(info)
               this.setState({all_data:this.state.all_data,flag:true})
               console.log(this.state.all_data)
           }
@@ -369,14 +400,14 @@ class PageMyFund extends React.Component{
                 
                 }}
                 actions={[
-                  { 
-                    //hidden:true,
-                    icon: () => <SearchIcon color="action" />,
-                    tooltip: 'SEEFUND',
-                    onClick: (event, rowData) =>  this.props.history.push({
-                      pathname: '/detailfund-page/fundid='+rowData.fund_fld022_track,
-                    })
-                  },
+                  // { 
+                  //   //hidden:true,
+                  //   icon: () => <SearchIcon color="action" />,
+                  //   tooltip: 'SEEFUND',
+                  //   onClick: (event, rowData) =>  this.props.history.push({
+                  //     pathname: '/detailfund-page/fundid='+rowData.fund_fld022_track,
+                  //   })
+                  // },
                   {
                     icon: () => <BorderColorIcon color="action" />,
                     tooltip: 'MEMO' ,
