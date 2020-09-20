@@ -33,6 +33,7 @@ class PageCharacterAnalysis extends React.Component{
           description_1:'完成測驗即可獲得投資性格相關資訊',
           description_2:'無',
           texts:'您尚未做過性格測驗，點選上方的前往性格測驗按鈕完成問卷！',
+          grade:0,
           errors: {},
           flag:false,
       }

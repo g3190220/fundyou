@@ -214,18 +214,11 @@ class PagePig extends React.Component{
     <Row>       
         <div className="card-personalize1">
             <Row>
-<<<<<<< HEAD
-                <div className="card-personalize1-title">豬豬小助理</div>
-                <div className="card-content">基金推薦</div>
-                <div className="card-content">基金試算器</div>
-            </Row>          
-=======
                 <Col><div className="card-personalize1-title">豬豬小助理</div></Col>
                 {/* <Col><div className="card-personalize1-title">基金推薦</div></Col>
                 <Col><div className="card-personalize1-title">基金試算器</div></Col> */}
             </Row>
             
->>>>>>> 441345e31fe8d03804bc1691897c4f077d62899d
             <Row>
                 <div className="fund-recommendation">基金推薦</div>
             </Row>
