@@ -32,6 +32,11 @@ import LiffLogin from "views/LinePage/LiffLogin.js";
 import LiffRegister from "views/LinePage/LiffRegister.js";
 import LineDetailFund from "views/LinePage/LineDetailFund.js";
 import LiffMyFund from "views/LinePage/LiffMyFund.js";
+import LineSurvey from "views/LinePage/LineSurvey.js";
+import LineSurvey2 from "views/LinePage/LineSurvey_2.js";
+import LineSurvey3 from "views/LinePage/LineSurvey_3.js";
+import LineSurvey4 from "views/LinePage/LineSurvey_4.js";
+import LineSurvey5 from "views/LinePage/LineSurvey_5.js";
 
 
 // others
@@ -131,6 +136,26 @@ ReactDOM.render(
       <Route
         path="/liff-page-myfund"//LineBot-Liff追蹤基金頁面
         render={props => <LiffMyFund {...props} />} 
+      />
+       <Route
+        path="/liff-survey"//LineBot-Liff問卷頁面
+        render={props => <LineSurvey {...props} />} 
+      />
+      <Route
+        path="/liff-survey2"//LineBot-Liff問卷頁面
+        render={props => <LineSurvey2 {...props} />} 
+      />
+      <Route
+        path="/liff-survey3"//LineBot-Liff問卷頁面
+        render={props => <LineSurvey3 {...props} />} 
+      />
+      <Route
+        path="/liff-survey4"//LineBot-Liff問卷頁面
+        render={props => <LineSurvey4 {...props} />} 
+      />
+       <Route
+        path="/liff-survey5"//LineBot-Liff問卷頁面
+        render={props => <LineSurvey5 {...props} />} 
       />
       
 

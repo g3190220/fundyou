@@ -804,11 +804,11 @@ class DetailFund extends React.Component{
         this.setState({open: true,});
     }
   
-      handleClose(){
+    handleClose(){
         this.setState({
           open: false
         });
-      }
+    }
 
       //處理對話框方法
     handleClickOpenAdd(){
@@ -844,7 +844,7 @@ class DetailFund extends React.Component{
         if(jsonData.StatusCode==200){
           this.handleClose()
           alert("刪除成功！")
-          //重新整理畫面s
+          //重新整理畫面
           //刷新頁面
           this.setState();
           window.location.reload(true);
@@ -853,7 +853,6 @@ class DetailFund extends React.Component{
           alert("error")
         }
       })
-    alert("刪除")
     
     }
 

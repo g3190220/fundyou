@@ -37,7 +37,6 @@ var risk_SD = [];
 var liff_userid="";
 var member_ID="";
 var id ="";
-var fundid="";
 var tag1_id=0;
 var tag2_id=0;
 
@@ -67,6 +66,7 @@ class LineDetailFund extends React.Component{
         teach1:true,
         teach2:false,
         teach3:false,
+        fundid:(this.props.match.params.fundid.split('='))[1],
       };
       
       this.handleClick1 = chart_performance.bind(this); //綁定事件，參考：https://reurl.cc/pdkgQ8
@@ -125,7 +125,7 @@ class LineDetailFund extends React.Component{
 
     getAllData(){
 
-        alert(this.props.location.state.member_ID)
+        console.log(this.props.location.state.member_ID)
         //alert(member_id)
         let fund_info=[];
         console.log("getAllData()")
@@ -185,6 +185,7 @@ class LineDetailFund extends React.Component{
     trackstate(){    //看此user有沒有追蹤過此筆基金，並改變追蹤狀態
         //console.log(this.state.member_ID)
         //console.log(id)
+        id = (this.props.location.pathname.split('='))[1];
         let fund_info=[];
         const url = "https://fundu.ddns.net:8090/getTrack";
         fetch(url, {
@@ -240,6 +241,7 @@ class LineDetailFund extends React.Component{
 
     CreateTrack(){  //建立追蹤基金
         const url = "https://fundu.ddns.net:8090/CreateTrack";
+        id = (this.props.location.pathname.split('='))[1];
         //console.log(data)
         fetch(url, {
             method: 'POST',
@@ -653,7 +655,6 @@ class LineDetailFund extends React.Component{
           alert("error")
         }
       })
-    alert("刪除")
     
     }
 
@@ -856,8 +857,8 @@ class LineDetailFund extends React.Component{
                             <Col xs={12} md={12}>
                             <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag3 ? 'inline' : 'none', color:"#444444"}}><a className="delete-tag" >{this.state.tag3}</a></label></div>
                                 <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag4 ? 'inline' : 'none',color:"#444444"}}><a className="delete-tag" >{this.state.tag4}</a></label></div>
-                                <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag2 ? 'inline' : 'none', color:"#CD5C5C"}}><a className="delete-tag"  onClick={()=>this.handleClickOpen(tag2_id,fundid)} style={{cursor: 'pointer'}}>{this.state.tag2}</a></label></div>
-                                <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag1 ? 'inline' : 'none',color:"#CD5C5C"}}><a className="delete-tag" onClick={()=>this.handleClickOpen(tag1_id,fundid)} style={{cursor: 'pointer'}}>{this.state.tag1}</a></label></div></Col>
+                                <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag2 ? 'inline' : 'none', color:"#CD5C5C"}}><a className="delete-tag"  onClick={()=>this.handleClickOpen(tag2_id,this.state.fundid)} style={{cursor: 'pointer'}}>{this.state.tag2}</a></label></div>
+                                <div className='tag-label-position'><label className='tag-label' style={{display: this.state.showtag1 ? 'inline' : 'none',color:"#CD5C5C"}}><a className="delete-tag" onClick={()=>this.handleClickOpen(tag1_id,this.state.fundid)} style={{cursor: 'pointer'}}>{this.state.tag1}</a></label></div></Col>
                         </Row>  
                         <Dialog
                         open={this.state.open}
@@ -876,7 +877,7 @@ class LineDetailFund extends React.Component{
                     <Button onClick={this.handleClose} color="primary">
                         取消
                     </Button>
-                    <Button onClick={() => this.delete(this.state.tag_in_id,fundid)} color="primary" >
+                    <Button onClick={() => this.delete(this.state.tag_in_id,this.state.fundid)} color="primary" >
                         是
                     </Button>
                     </DialogActions>

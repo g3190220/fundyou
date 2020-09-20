@@ -9,6 +9,11 @@ import FormLabel from '@material-ui/core/FormLabel';
 import { Button, Card, Form, Input, Container, Row, Col} from "reactstrap";
 import { load_cookies,survey_score } from 'views/Function/Cookie_function.js' // 引入cookies
 
+//liff套件
+import liff from '@line/liff';
+
+var member_id="";
+
 class Surveys extends React.Component {
     constructor(props) {
         super(props);
@@ -21,13 +26,90 @@ class Surveys extends React.Component {
         };
 
         this.handlesummit = this.handlesummit.bind(this)
+        
+        this.getLiffid = this.getLiffid.bind(this);
+        this.ChangeLiffid=this.ChangeLiffid.bind(this);
       }
+    
+    componentDidMount() {
+        this.getLiffid()
+        
+    }
+
+    //獲取liff id
+    getLiffid(){
+        let liff_userid;
+        liff.init({
+        liffId: "1654887866-BeAzZ7ov" // Use own liffId
+        })
+        .then(() => {
+        if (liff.isLoggedIn()) {
+            liff.getProfile()
+            .then(profile => {
+                const userId = profile.userId
+                //取得liff_userid;
+                liff_userid=userId;
+            })
+            .then(()=>{this.setState({liff_userid:liff_userid,flag:true})})
+            .then(()=>{
+            //獲取liff id
+            console.log("getLiffid()後")
+            console.log(this.state.liff_userid)
+                this.ChangeLiffid()
+            })
+            }
+        else{
+            alert("取得失敗")
+        }
+        })
+        
+    }
+    //檢查Liff有無連接，並回傳userid
+    ChangeLiffid(){
+        let member_info=[];
+        const url = "https://fundu.ddns.net:8090/LineLogin";////////改url
+        //console.log(data)
+        fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                        //取得全部fund
+                        lineid: this.state.liff_userid,
+                })
+                
+            })
+            .then((response) => {return response.json();})
+            .then((jsonData) => { 
+            //console.log(jsonData)
+            if(jsonData.StatusCode==200){
+                member_info=JSON.parse(jsonData.member_info)
+                //取得系統id了
+                member_id=member_info.member_id
+                //alert(this.state.member_id)
+                console.log(member_id)
+                
+                
+            }
+            else{
+                alert("您尚未與系統連結，無法使用此功能。請先登入！")
+                liff.closeWindow();
+            
+            }
+            })
+            .then(()=>{this.getTrackData()})
+
+    }
+  
+    
     //-----------------下一頁--------------------------------
     handlesummit(){
         if((this.state.age!='')&&(this.state.job!='')&&(this.state.income!='')&&(this.state.education!='')){
             const member_id=load_cookies("member_id");
             // const path=`/page-survey-2/id=${member_id}`
-            const path=`/page-survey-2`
+            const path=`/liff-survey2`
 
             //將此頁的分數紀錄到cookie，每個頁面分開計算最後再加總，避免使用者回到上一頁計算重複的問題。
             let arr = []
@@ -35,7 +117,8 @@ class Surveys extends React.Component {
             survey_score(arr)
 
             this.props.history.push({
-                pathname: path 
+                pathname: path,
+                state: { member_ID: member_id }
             })
         }
         else{

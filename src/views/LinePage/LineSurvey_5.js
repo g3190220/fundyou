@@ -72,7 +72,8 @@ class Surveys extends React.Component {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        memberID: load_cookies("member_id"),
+                        //memberID: load_cookies("member_id"),
+                        memberID: this.props.location.state.member_ID,
                         exceptedreturn: 100,
                         characteristic:result,
                         score: total,
@@ -90,7 +91,7 @@ class Surveys extends React.Component {
     handleprevious(){
         const member_id=load_cookies("member_id");
         // const path=`/page-survey-4/id=${member_id}`
-        const path=`/page-survey-4`
+        const path=`/liff-survey4`
         this.props.history.push({
             pathname: path 
         })
