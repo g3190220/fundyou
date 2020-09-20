@@ -42,6 +42,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import logout from "views/Function/logout.js";
 
+//意見反饋
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
+import TextField from '@material-ui/core/TextField';
 
 import {
   BrowserRouter as Router,
@@ -74,6 +77,8 @@ class PersonalizePage extends React.Component {
       this.onSetSidebarDocked = this.onSetSidebarDocked.bind(this);
       this.handleClickOpen=this.handleClickOpen.bind(this);
       this.handleClose=this.handleClose.bind(this);
+      this.handleClickOpen2=this.handleClickOpen2.bind(this);
+      this.handleClose2=this.handleClose2.bind(this);
       this.state = {
         //fields: {},
         errors: {},
@@ -81,6 +86,7 @@ class PersonalizePage extends React.Component {
         sidebarOpen: false,
         open:false, 
         setOpen:false,
+        open2:false,
     }}
 
     // componentDidMount() {
@@ -192,6 +198,18 @@ class PersonalizePage extends React.Component {
   handleClose(){
     this.setState({open:false})
   };
+  //意見反饋視窗
+  handleClickOpen2(){
+    this.setState({
+      open2: true
+    });
+  }
+
+  handleClose2(){
+    this.setState({
+      open2: false
+    });
+  }
   
 
   render(){
@@ -269,6 +287,49 @@ class PersonalizePage extends React.Component {
                 </Button>
                 <Button onClick={(e)=>logout(e)} color="primary" >
                   是
+                </Button>
+              </DialogActions>
+            </Dialog>
+            <div className='logout-btn-position'>
+                <button type="button" class="list-btn"  onClick={this.handleClickOpen2}>
+                    <div className="face-icon"><EmojiPeopleIcon></EmojiPeopleIcon><div className="list-btn-content">意 見 反 饋</div></div>
+                </button>
+            </div>
+            <Dialog 
+              open={this.state.open2} 
+              keepMounted
+              onClose={this.handleClose2} 
+              aria-labelledby="form-dialog-title"
+              fullWidth={true}
+              maxWidth={'xs'}
+            >
+                
+            <DialogTitle >
+              意見反饋
+              <hr className="hr"></hr>
+              </DialogTitle>
+                
+              <DialogContent>
+                <DialogContentText >
+                  若您在FUNDU上遇到問題，請填寫意見反饋。FUNDU會將您的寶貴建議予以檢討與改善。
+                </DialogContentText>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  label="請輸入欲回報之意見"
+                  multiline
+                  rowsMax={3}
+                  type="string"
+                  fullWidth
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleClose2} color="primary">
+                  取消
+                </Button>
+                <Button onClick={this.handleClose2} color="primary">
+                  送出
                 </Button>
               </DialogActions>
             </Dialog>

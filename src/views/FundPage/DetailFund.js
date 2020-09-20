@@ -114,6 +114,10 @@ class DetailFund extends React.Component{
       this.trackstate = this.trackstate.bind(this); //追蹤基金事件(綁定track按鈕)
       this.togglestate = this.togglestate.bind(this);
       this.CreateTrack = this.CreateTrack.bind(this);
+      this.CreateMemo = this.CreateMemo.bind(this);
+      this.getMemo = this.getMemo.bind(this);
+      this.handleClickOpenMemo = this.handleClickOpenMemo.bind(this);
+      this.handleCloseMemo = this.handleCloseMemo.bind(this);
       this.getMyTag=this.getMyTag.bind(this);
       this.getTag=this.getTag.bind(this);
       this.handleChange=this.handleChange.bind(this);
@@ -263,6 +267,7 @@ class DetailFund extends React.Component{
     }
 
     CreateMemo(){
+        let id = (this.props.match.params.fundid.split('='))[1]; //抓現在頁面的id
         const url = "https://fundu.ddns.net:8090/Memo";
         fetch(url, {
           method: 'POST',
@@ -273,7 +278,8 @@ class DetailFund extends React.Component{
           body: JSON.stringify({
               content: this.state.new_content,
               userid: load_cookies("member_id"),
-              fld022: this.state.fund_fld022_track,
+              fld022: id,
+            //   fld022: this.state.fund_fld022_track,
           })
           
         })
@@ -304,7 +310,8 @@ class DetailFund extends React.Component{
           },
           body: JSON.stringify({
               userid: load_cookies("member_id"),
-              fld022: fld022,
+              fld022: this.state.fund_fld022_track,
+            //   fld022: fld022,
           })
           
         })
@@ -349,7 +356,6 @@ class DetailFund extends React.Component{
           openMemo: false
         });
       }
-
     getTag(){
         let id = (this.props.match.params.fundid.split('='))[1];
         const url = "https://fundu.ddns.net:8090/getTag";
@@ -962,8 +968,9 @@ class DetailFund extends React.Component{
             <Row>
                 <div className='sub-sub-detail'  id='info'>
                 <Row >
-                    <Col xs={7} md={9}> <label className='fund-name'>{this.state.fund_name}</label>  {/*從資料庫讀取基金的名字*/}
-                    <BorderColorIcon onClick={(event, rowData) => this.getMemo(rowData.fund_fld022_track)}/>
+                    <Col xs={7} md={9}> <label className='fund-name'>{this.state.fund_name}
+                    <BorderColorIcon className="memo" onClick={this.getMemo}/>
+                    </label>  {/*從資料庫讀取基金的名字*/}
                     </Col>
 
                 <div className="memo_content">
@@ -981,7 +988,7 @@ class DetailFund extends React.Component{
                       id="form-dialog-title" 
                       classes={{root: classes.customDialogTitle}}
                     >
-                      <BorderColorIcon></BorderColorIcon>{this.state.chname}
+                      <BorderColorIcon></BorderColorIcon>{this.state.fund_name}
                       <hr className="hr"></hr>
                       </DialogTitle>
                       
