@@ -87,13 +87,31 @@ class PagePig extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.gototop=this.gototop.bind(this);
     this.gotocaculate=this.gotocaculate.bind(this);
+    this.all_fund_data=this.all_fund_data.bind(this);
     }
 
     componentDidMount() {
         window.scrollTo(0, 0);  //頁面置頂
         this.getresult();
     }
-    //
+    //轉變FUND 資料
+    all_fund_data(fund_info){
+        console.log("all_fund_data")
+        console.log(fund_info)
+        let fund_info_href=[]
+        for(var i=0;i<Object.keys(fund_info).length;i++){
+                fund_info_href.push(
+                {
+                    '3':fund_info[i][3],
+                    '0':<a style={{color:'black',fontWeight:'500'}} href={'/detailfund-page/fundid=' + fund_info[i][3]}>{fund_info[i][0]}</a>,
+                    '1':fund_info[i][1],
+                    '2':fund_info[i][2],
+        
+                    });
+                };
+            console.log(fund_info_href)
+            return fund_info_href
+    }
     gototop(){
         window.scrollTo(0, 0); 
     }
@@ -195,7 +213,7 @@ class PagePig extends React.Component{
                 fund_info=jsonData.recommendation;
                 console.log(fund_info);
     
-                this.state.all_data=fund_info
+                this.state.all_data=this.all_fund_data(fund_info)
                 this.setState({all_data:this.state.all_data,flag:true})
             }
               else{
@@ -277,22 +295,22 @@ class PagePig extends React.Component{
                         actionsColumnIndex: 0,
                         
                         }}
-                        actions={[
-                        { 
-                            //hidden:true,
-                            icon: () => <SearchIcon color="action" />,
-                            tooltip: 'SEEFUND',
-                            onClick: (event, rowData) =>  this.props.history.push({
-                            pathname: '/detailfund-page/fundid='+rowData[3], //rowData後接field的名字
-                            }) 
-                        },    
-                        ]}
+                        // actions={[
+                        // { 
+                        //     //hidden:true,
+                        //     icon: () => <SearchIcon color="action" />,
+                        //     tooltip: 'SEEFUND',
+                        //     onClick: (event, rowData) =>  this.props.history.push({
+                        //     pathname: '/detailfund-page/fundid='+rowData[3], //rowData後接field的名字
+                        //     }) 
+                        // },    
+                        // ]}
                         
-                        localization={{
-                            header: {
-                            actions: ''
-                        }
-                        }}
+                        // localization={{
+                        //     header: {
+                        //     actions: ''
+                        // }
+                        // }}
                         />
                 </MuiThemeProvider>
                 </div>

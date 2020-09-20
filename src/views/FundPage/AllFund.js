@@ -412,7 +412,7 @@ class AllFund extends React.Component {
   constructor(props) {
       super(props)
       this.getAllFundData=this.getAllFundData.bind(this);
-      //this.handleSelectChange = this.handleSelectChange.bind(this);
+      this.all_fund_data = this.all_fund_data.bind(this);
       this.filterShow=this.filterShow.bind(this);
       //this.scroll=this.scroll.bind(this);
       //this.Check=this.Check.bind(this);
@@ -451,6 +451,36 @@ class AllFund extends React.Component {
   }
   componentDidMount() {
     this.CheckLogin()
+  }
+  
+  //轉變FUND 資料
+  all_fund_data(fund_info){
+    let fund_info_href=[]
+    for(var i=0;i<Object.keys(fund_info).length;i++){
+              let updown_color = 'red'
+              let yb_color = 'red'
+              let M_color = 'red'
+              if (fund_info[i].Ups_and_Downs < 0)
+                  updown_color='green'
+              if (fund_info[i].History_ROI_YB < 0)
+                  yb_color='green'
+              if (fund_info[i].History_ROI_3M < 0)
+                  M_color='green'
+            fund_info_href.push(
+              {'FundID':fund_info[i].FundID,
+                'Fund_CH_Name':<a style={{color:'black',fontWeight:'500'}} href={'/detailfund-page/fundid=' + fund_info[i].Fund_fld022}>{fund_info[i].Fund_CH_Name}</a>,
+                'Fund_fld022':fund_info[i].Fund_fld022,
+                'Fund_Zone':fund_info[i].Fund_Zone,
+                'Fund_Currency':fund_info[i].Fund_Currency,
+                'Fund_Type':fund_info[i].Fund_Type,
+                'History_ROI_YB':<font color={yb_color}>{fund_info[i].History_ROI_YB}</font>,
+                'History_ROI_3M':<font color={M_color}>{fund_info[i].History_ROI_3M}</font>,
+                'Last_Update':fund_info[i].Last_Update,
+                'History_NetWorth':fund_info[i].History_NetWorth,
+                'Ups_and_Downs':<font color={updown_color}>{fund_info[i].Ups_and_Downs}</font>
+                });
+            };
+        return fund_info_href
   }
 
   //Check Login
@@ -507,7 +537,7 @@ class AllFund extends React.Component {
             fund_info=JSON.parse(jsonData.fund_info)
             console.log(fund_info);
 
-            this.state.all_data=fund_info
+            this.state.all_data=this.all_fund_data(fund_info)
             this.setState({all_data:this.state.all_data,flag:true})
         }
           else{
@@ -808,18 +838,18 @@ class AllFund extends React.Component {
               maxBodyHeight: '420px'
             }}
             actions={[
-              { 
+              // { 
                 
-                //hidden:true,
-                icon: () => <SearchIcon color="action" />,
-                tooltip: 'SEEFUND',
-                onClick: (event, rowData) =>  this.props.history.push({
+              //   //hidden:true,
+              //   icon: () => <SearchIcon color="action" />,
+              //   tooltip: 'SEEFUND',
+              //   onClick: (event, rowData) =>  this.props.history.push({
                
-                pathname: '/detailfund-page/fundid='+rowData.Fund_fld022,
+              //   pathname: '/detailfund-page/fundid='+rowData.Fund_fld022,
                   
-                })
+              //   })
                
-              },
+              // },
               { //這邊改比較基金按鈕
                 
                 //hidden:true,

@@ -29,6 +29,11 @@ class Surveys extends React.Component {
         this.handleprevious = this.handleprevious.bind(this)
         this.valueChange = this.valueChange(this)
       }
+
+    componentDidMount() {
+        window.scrollTo(0, 0);  //頁面置頂
+        
+    }
     //-------------------下一頁------------------------------
     handlesummit(){
 

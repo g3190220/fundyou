@@ -104,6 +104,11 @@ class Surveys extends React.Component {
             }
 
     }
+    componentDidMount() {
+        window.scrollTo(0, 0);  //頁面置頂
+        
+    }
+
         //-------------------上一頁------------------------------
     handleprevious(){
         const member_id=load_cookies("member_id");

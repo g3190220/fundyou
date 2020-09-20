@@ -32,6 +32,7 @@ class Surveys extends React.Component {
       }
     
     componentDidMount() {
+        window.scrollTo(0, 0);  //頁面置頂
         this.getLiffid()
         
     }
