@@ -198,7 +198,7 @@ class PersonalizePage extends React.Component {
   handleClose(){
     this.setState({open:false})
   };
-  
+  //意見反饋視窗
   handleClickOpen2(){
     this.setState({
       open2: true
@@ -210,7 +210,7 @@ class PersonalizePage extends React.Component {
       open2: false
     });
   }
-
+  
 
   render(){
     const { classes } = this.props;
@@ -333,8 +333,6 @@ class PersonalizePage extends React.Component {
                 </Button>
               </DialogActions>
             </Dialog>
-
-
           </div>
         
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 import { Link } from "react-router-dom";
 // nodejs library that concatenates strings
 import classnames from "classnames";
@@ -12,7 +12,6 @@ import FaceIcon from '@material-ui/icons/Face';
 //意見反饋
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import TextField from '@material-ui/core/TextField';
-
 
 //處理登出y
 import Dialog from '@material-ui/core/Dialog';
@@ -83,17 +82,17 @@ function IndexNavbar() {
     setOpen(false);
   };
 
-  //意見對話框
-  const [open2, setOpen2] = React.useState(false);
+   //意見對話框
+   const [open2, setOpen2] = React.useState(false);
 
-  const handleClickOpen2 = () => {
-    setOpen2(true);
-  };
+   const handleClickOpen2 = () => {
+     setOpen2(true);
+   };
+ 
+   const handleClose2 = () => {
+     setOpen2(false);
+   };
 
-  const handleClose2 = () => {
-    setOpen2(false);
-  };
-  
 
   const member_id=load_cookies("member_id")
   const member_session=load_cookies("member_session")
@@ -157,7 +156,7 @@ function IndexNavbar() {
           isOpen={navbarCollapse}
         >
         <Nav navbar>
-
+            
         <NavItem>
           <Button color="action" onClick={handleClickOpen2}>
               意見反饋
@@ -203,8 +202,6 @@ function IndexNavbar() {
         </Dialog>
 
 
-
-            
         <NavItem>
           <Button color="secondary" onClick={handleClickOpen}>
           LOGOUT

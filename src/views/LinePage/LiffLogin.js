@@ -58,7 +58,7 @@ class LiffLogin extends React.Component {
 
   //存取liff-userid至資料庫
   setLineID(nounce,liff_userid){
-    alert("start setLineID")
+    console.log("start setLineID")
     const url = "https://fundu.ddns.net:8090/setLineID";
         //console.log(data)
     fetch( url, {
@@ -79,26 +79,28 @@ class LiffLogin extends React.Component {
           
           console.log(jsonData)
           if(jsonData.StatusCode==200){
-            alert("成功setLineID")
+            alert("成功連結！")
+            //關閉Line liff
+            liff.closeWindow();
           }
         })
   }
 
   getLiff(){
-    alert("start getLiff()")
+    console.log("start getLiff()")
     //就卡在這裡，出現預期錯誤
     liff.init({
       liffId: "1654887866-baMpN6YA" // Use own liffId
     })
     .then(() => {
-        alert("進來liff.init了")
+      console.log("進來liff.init了")
         if (liff.isLoggedIn()) {
             liff.getProfile()
             .then(profile => {
               const userId = profile.userId
               //取得liff_userid;
               liff_userid=userId;
-              alert("連結成功,取得liff_userid！")
+              console.log("連結成功,取得liff_userid！")
             })
             .then(()=>{this.setLineID(nounce,liff_userid)})
           }
@@ -148,7 +150,7 @@ class LiffLogin extends React.Component {
         .then((jsonData) => {
           console.log(jsonData)
           if(jsonData.StatusCode==200){
-            alert("成功登入")
+            alert("帳號密碼正確！")
             member_info=JSON.parse(jsonData.member_info)
             nounce=member_info.member_nonce
             this.getLiff();
@@ -265,10 +267,10 @@ class LiffLogin extends React.Component {
                     <a className="go-to-register-btn" onClick={this.goto}>尚未註冊FUNDU會員？</a>
                     
                   </div>
-                  <div className="go-to-register-btn-position">
+                  {/* <div className="go-to-register-btn-position">
                     
                     <a className="go-to-register-btn" onClick={this.testpath}>link-all-fund？</a>
-                  </div>
+                  </div> */}
                 </Card>
               </Col>
             </Row>

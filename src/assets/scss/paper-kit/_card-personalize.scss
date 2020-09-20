@@ -429,7 +429,7 @@
         font-family: "微軟正黑體";
         font-weight:800;
         color:#1a5da0;
-        font-size:20px;
+        font-size:13px;
         z-index:1;
 
       }
@@ -629,6 +629,26 @@
       padding:5px;
       margin-left:20px;
     }
+    & .card-personalize1-title2-1{
+      font-family: "微軟正黑體";
+      font-weight:800;
+      color:#971414;
+      font-size:28px;
+      z-index:1;
+      padding:5px;
+      margin-left:20px;
+      display: inline-block;
+    }
+    & .card-personalize1-title2-2{
+      font-family: "微軟正黑體";
+      font-weight:800;
+      color:#971414;
+      font-size:28px;
+      z-index:1;
+      padding:5px;
+      margin-left:20px;
+      display: inline-block;
+    }
     & .forgot {
       text-align: center;
     }
@@ -661,9 +681,8 @@
       padding-top: 35px;
     }
     & .result-chart {
-      font-size: 18px;
-      font-weight: 600;
-      margin-left: 10px;
+      text-align: center;
+      padding-bottom:20px;
     }
 
     
@@ -704,8 +723,8 @@
       color: #347cc4;
       font-size: 26px;
       z-index:1;
-      text-align: center;
-      margin-left: 80px;
+      text-align: left;
+      margin-left: 50px;
       margin-top:15px;
       left:50%;
     }
@@ -716,7 +735,7 @@
       font-size: 26px;
       z-index:1;
       text-align: center;
-      margin-left: 130px;
+      margin-left: 63px;
       margin-top:15px;
       left:50%;
     }
@@ -724,10 +743,11 @@
       font-family: "微軟正黑體";
       font-weight:600;
       color: #000000;
-      font-size: 15px;
+     // font-size: 15px;
+     font-size: 100%;
       z-index:1;
       text-align: center;
-      margin-left: 170px;
+      margin-left: 63px;
       margin-top:15px;
       left:50%;
     }
@@ -736,6 +756,7 @@
       margin-left: 0px;
       margin-top: 0px;
       z-index:1;
+      text-align: center;
     }
     & .tag-btn{
       width: 120px;
@@ -750,6 +771,7 @@
       color:  #FFF;
       font-weight:bold;
       font-family:Microsoft JhengHei;
+      display: inline-block;
     }
     & .tag-btn-hidden{
       width: 150px;
@@ -792,7 +814,7 @@
       padding: 30px 10px;
       // margin-left: 0px;
       margin-top: 10px;
-      margin-left: 50px;
+      margin-left: 40px;
       margin-bottom: 50px;
       position: relative;
       left: 50%;

@@ -39,7 +39,7 @@ class Surveys extends React.Component {
             if((this.state.factor!='')&&(this.state.purpose!='')&&(this.state.time!='')&&(this.state.method!='')){
                 const member_id=load_cookies("member_id");
                 // const path=`/page-survey-3/id=${member_id}`
-                const path=`/page-survey-3`
+                const path=`/liff-survey3`
 
                 //--------投資年份------------
                 let year = 0;
@@ -70,7 +70,8 @@ class Surveys extends React.Component {
                 console.log(money)
 
                 this.props.history.push({
-                    pathname: path 
+                    pathname: path,
+                    state: { member_ID: this.props.location.state.member_ID }
                 })
             }
             else{
@@ -83,7 +84,7 @@ class Surveys extends React.Component {
     handleprevious(){
         const member_id=load_cookies("member_id");
         // const path=`/page-survey/id=${member_id}`
-        const path=`/page-survey`
+        const path=`/liff-survey`
         this.props.history.push({
             pathname: path 
         })

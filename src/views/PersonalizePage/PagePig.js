@@ -32,6 +32,9 @@ import 'react-multi-carousel/lib/styles.css';
 
 import { load_cookies } from 'views/Function/Cookie_function.js' // 引入cookies
 
+//替代style
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -52,6 +55,12 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
     FindInPageIcon:forwardRef((props, ref) => <FindInPageIcon {...props} ref={ref} />)
   };
+
+  const THEME = createMuiTheme({
+    typography: {
+     "fontFamily": `"Microsoft JhengHei", "Helvetica", "Arial", sans-serif`,
+    },
+  });
 
 class PagePig extends React.Component{
     state = {
@@ -205,10 +214,18 @@ class PagePig extends React.Component{
     <Row>       
         <div className="card-personalize1">
             <Row>
+<<<<<<< HEAD
                 <div className="card-personalize1-title">豬豬小助理</div>
                 <div className="card-content">基金推薦</div>
                 <div className="card-content">基金試算器</div>
             </Row>          
+=======
+                <Col><div className="card-personalize1-title">豬豬小助理</div></Col>
+                {/* <Col><div className="card-personalize1-title">基金推薦</div></Col>
+                <Col><div className="card-personalize1-title">基金試算器</div></Col> */}
+            </Row>
+            
+>>>>>>> 441345e31fe8d03804bc1691897c4f077d62899d
             <Row>
                 <div className="fund-recommendation">基金推薦</div>
             </Row>
@@ -217,6 +234,7 @@ class PagePig extends React.Component{
             </Row>
             <Row>
                 <div className='recommendation-div'> 
+                <MuiThemeProvider theme={THEME}>
                     <MaterialTable
                         icons={tableIcons}
                         title=""
@@ -229,26 +247,35 @@ class PagePig extends React.Component{
                         headerStyle: {
                             backgroundColor: '#004487',
                             color: '#f6f6f6',
-                            width: 280,
-                            maxWidth: 500,
+                            width: 223,
+                            maxWidth: 223,
+                            // width:200,
+                            // maxWidth: 200,
                             whiteSpace:'nowrap',
                             position: 'sticky', 
                             top: 0,
                             padding: 10 ,
                             fontFamily: '微軟正黑體',
                             fontWeight: '800',
-                            fontSize: 16
+                            fontSize: 16,
+                            textAlign:'center',
                         },
+
+                        // toolbar: false, //隱藏標題和搜尋欄
+
                         cellStyle:{ 
-                            width: 280,
-                            maxWidth: 500,
+                            width: 223,
+                            maxWidth: 223,
+                            // width:200,
+                            // maxWidth: 200,
                             wordWrap:'break-word',
                             backgroundColor: '#f6f6f6',
                             color: '#000000',
                             fontFamily: '微軟正黑體',
                             fontWeight: '700',
                             fontSize: 15,
-                            padding: 10
+                            padding: 10,
+                            textAlign:'center',
                         },
                         actionsCellStyle: {
                             backgroundColor: '#f6f6f6',
@@ -274,14 +301,15 @@ class PagePig extends React.Component{
                         }
                         }}
                         />
+                </MuiThemeProvider>
                 </div>
             </Row>
             <Row>
-                <Col sm={3}>
+                <Col xs={12} sm={6}>
                     <div className="dollor-cost-average">基金試算器</div>
                 </Col>
 
-                <Col sm={7}>
+                <Col xs={12} sm={6}>
                     <div className='button-center'>
                     <button className='tag-btn'  onClick={()=>this.Change_rank(1)}>單筆投資</button>
                     {/* <button className='tag-btn'  onClick={()=>this.Change_rank(2)}>每月定期定額</button> */}

@@ -356,7 +356,6 @@ class DetailFund extends React.Component{
           openMemo: false
         });
       }
-
     getTag(){
         let id = (this.props.match.params.fundid.split('='))[1];
         const url = "https://fundu.ddns.net:8090/getTag";
@@ -534,7 +533,7 @@ class DetailFund extends React.Component{
         .then(() => { this.getnet();})
 }
 
-    //--------------------讀取基金淨值------------------------------------------
+
     getnet(){
         let fund_net=[];
         let id = (this.props.match.params.fundid.split('='))[1];
@@ -602,7 +601,6 @@ class DetailFund extends React.Component{
             .then(() => { this.getROI();})
     }
 
-    //--------------------讀取基金ROI------------------------------------------
     getROI(){
         let fund_return=[];
         let id = (this.props.match.params.fundid.split('='))[1];
@@ -641,7 +639,6 @@ class DetailFund extends React.Component{
             .then(() => {this.netgraph();})
     }
 
-    //--------------------讀取基金每日淨值以畫圖形------------------------------------------
     netgraph(){
         let fund_net=[];
         let net=[];
@@ -689,7 +686,6 @@ class DetailFund extends React.Component{
 
     }
 
-    //--------------------讀取基金績效表現，畫圖形------------------------------------------
     performancegraph(){
         let fund_performance=[];
         let sharpe=[];
@@ -814,11 +810,11 @@ class DetailFund extends React.Component{
         this.setState({open: true,});
     }
   
-      handleClose(){
+    handleClose(){
         this.setState({
           open: false
         });
-      }
+    }
 
       //處理對話框方法
     handleClickOpenAdd(){
@@ -854,7 +850,7 @@ class DetailFund extends React.Component{
         if(jsonData.StatusCode==200){
           this.handleClose()
           alert("刪除成功！")
-          //重新整理畫面s
+          //重新整理畫面
           //刷新頁面
           this.setState();
           window.location.reload(true);
@@ -863,7 +859,6 @@ class DetailFund extends React.Component{
           alert("error")
         }
       })
-    alert("刪除")
     
     }
 
@@ -973,9 +968,9 @@ class DetailFund extends React.Component{
             <Row>
                 <div className='sub-sub-detail'  id='info'>
                 <Row >
-                    <Col xs={7} md={9}> 
-                    <label className='fund-name'>{this.state.fund_name}</label>  {/*從資料庫讀取基金的名字*/}
+                    <Col xs={7} md={9}> <label className='fund-name'>{this.state.fund_name}
                     <BorderColorIcon className="memo" onClick={this.getMemo}/>
+                    </label>  {/*從資料庫讀取基金的名字*/}
                     </Col>
 
                 <div className="memo_content">
